@@ -16,12 +16,13 @@ class CreateGymTable extends Migration
         Schema::create('gym', function (Blueprint $table) {
             $table->id();
             $table->string('gym_name');
-            $table->string('gym_img')->nullable();
-            $table->string('gym_address');
-            $table->string('description')->nullable();
-            $table->string('videos')->nullable();
-            $table->integer('gym_ownner_id');
-            $table->timestamps('added_on');
+            $table->string('gym_address_1');
+            $table->string('gym_address_2');
+            $table->string('city');
+            $table->string('country');
+            $table->string('website');
+            $table->bigInteger('gym_ownner_id');
+            $table->timestamps();
         });
     }
 

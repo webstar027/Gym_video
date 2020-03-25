@@ -19,6 +19,7 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/main.css')}}">
+    <script src="{{ asset('js/jquery.min.js')}}"></script>
     <!-- Styles -->
     <style>
         html,
@@ -89,7 +90,7 @@
         @if (Route::has('login'))
         <!-- <div class="top-right links">
             @auth
-            <a href="{{ url('/home') }}">Home</a>
+            <a href="{{ url('/admin') }}">Dashboard</a>
             @else
             <a href="{{ route('login') }}">Login</a>
 
@@ -138,9 +139,6 @@
                         </li>
                         @endif
                         @else
-                        <li class="nav-item">
-                            <a href="/home" class="nav-link">Dashboard</a>
-                        </li>
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -148,6 +146,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a href="/admin" class="dropdown-item">{{__('Dashboard')}}</a>
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
