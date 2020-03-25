@@ -171,14 +171,13 @@
             </div>
             <div class="simpleslide100-item bg-img1" style="background-image: url({{asset('images/gym-3.jpg')}});">
             </div>
-        </div>
-
-        <div class="size1 overlay1">
-            <!--  -->
-            <div class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
-                <h3 class="l1-txt1 txt-center p-b-25">
-                    GYM VIDEO
-                </h3>
+            <div class="size1 overlay1">
+                <!--  -->
+                <div class="size1 flex-col-c-m p-l-15 p-r-15 p-t-50 p-b-50">
+                    <h3 class="l1-txt1 txt-center p-b-25">
+                        GYM VIDEO
+                    </h3>
+                </div>
             </div>
         </div>
 </body>
