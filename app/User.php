@@ -37,4 +37,14 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->hasOne('App\role', 'foreign_key');
+    }
+
+    public function gyms()
+    {
+        return $this->belongToMany('App\Gym');
+    }
 }

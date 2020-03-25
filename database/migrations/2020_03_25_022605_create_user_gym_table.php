@@ -13,7 +13,7 @@ class CreateUserGymTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_gym', function (Blueprint $table) {
+        Schema::create('gym_user', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id');
             $table->bigInteger('gym_id');
@@ -29,6 +29,6 @@ class CreateUserGymTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_gym');
+        Schema::dropIfExists('gym_user');
     }
 }
