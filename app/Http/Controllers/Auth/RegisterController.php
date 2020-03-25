@@ -49,14 +49,34 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
-            'first_name'=>['required','string'],
-            'last_name'=>['required','string'],
-            'role_id'=>['required','integer'],
-            'name' => ['required', 'string', 'max:255','min:6', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        if($data['role_id'] == 1){
+            return Validator::make($data, [
+                'first_name'=>['required','string'],
+                'last_name'=>['required','string'],
+                'role_id'=>['required','integer'],
+                'name' => ['required', 'string', 'max:255','min:6', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }
+        elseif($data['role_id'] == 2){
+            return Validator::make($data, [
+                'first_name'=>['required','string'],
+                'last_name'=>['required','string'],
+                'role_id'=>['required','bigInteger'],
+                'name' => ['required', 'string', 'max:255','min:6', 'unique:users'],
+                'email' => ['required', 'String', 'email', 'max:255', 'unique:users'],
+                'gym_name' => ['required','string'],
+                'gym_address_1' => ['required','string'],
+                'city' => ['required','string'],
+                'state_province' => ['required','string'],
+                'country' => ['required','string'],
+                'zip_code' => ['required','string'],
+                'wensite' => ['required','string'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+        }
+        
     }
 
     /**
@@ -67,13 +87,27 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'first_name'=>$data['first_name'],
-            'last_name'=>$data['last_name'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'role_id' => $data['role_id'],
-            'password' => Hash::make($data['password']),
-        ]);
+            $user = User::create([
+                'first_name'=>$data['first_name'],
+                'last_name'=>$data['last_name'],
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'role_id' => $data['role_id'],
+                'password' => Hash::make($data['password']),
+            ]);
+            $userid = $data->save()->id;
+            $gym = '';
+        if($data['role_id'] == 2){
+            $gym = gym::create([
+                'gym_ownner_id' => $userid,
+                'gym_name' => $data['gym_name'],
+                'gym_address_1' => $data['gym_address_1'],
+                'gym_address_2' => $data['gym_address_2'],
+                'city' => $data['city'],
+                'state_province' => $data['state_province'],
+                'country' => $data['country'],
+            ]);
+        }
+        return $user 
     }
 }
