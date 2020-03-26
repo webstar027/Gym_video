@@ -22,3 +22,20 @@ Auth::routes(['verify' => true]);
 
 Route::get('/admin', 'HomeController@index')->name('admin');
 
+Route::get('/gymowner', 'HomeController@gymowner')->name('gymowner');
+Route::get('/student', 'HomeController@student')->name('student');
+Route::get('/aboutus', 'HomeController@about')->name('aboutus');
+Route::get('/pricing', 'HomeController@pricing')->name('pricing');
+
+// gymowner
+Route::get('/account/gymowner', 'AccountController@gymowner');
+Route::get('/account/members', 'AccountController@members');
+Route::get('/gym/myvideos/{gymid}', 'VideoController@videos');
+Route::get('/gym/video/{id}', 'VideoController@add');
+
+// student
+Route::get('/account/student', 'AccountController@student');
+Route::get('/account/gyms', 'AccountController@gymlist');
+Route::get('/gym/search', 'GymController@search');
+Route::get('/video/search', 'VideoController@search');
+Route::get('/video/{id}', 'VideoController@watch');
