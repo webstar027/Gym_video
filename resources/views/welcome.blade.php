@@ -63,7 +63,7 @@
                         <a class="nav-link" href="{{ url('/student') }}">Student</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/gym-ownner') }}">Gym Owner</a>
+                        <a class="nav-link" href="{{ url('/gymowner') }}">Gym Owner</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
@@ -163,7 +163,7 @@
 						<h3>Quick Links</h3>
 						<nav class="nav flex-column">
 							<a class="nav-link" href="{{ url('/student') }}">Student</a>
-							<a class="nav-link" href="{{ url('/gym-ownner') }}">Gym Owner</a>
+							<a class="nav-link" href="{{ url('/gymowner') }}">Gym Owner</a>
 							<a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
 							<a class="nav-link" href="#">About Us</a>
 						</nav>

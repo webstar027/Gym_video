@@ -17,7 +17,7 @@ class AccountController extends Controller
 
     public function gymowner()
     {
-        return view();
+        return view('gymownner');
     }
 
     public function student()
