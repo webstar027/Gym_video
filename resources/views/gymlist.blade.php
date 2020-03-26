@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
 
-                <h1>Gym Owner</h1>
+                <h1>Gym List</h1>
                 
             </div>
         </div>

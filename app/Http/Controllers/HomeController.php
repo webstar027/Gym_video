@@ -28,12 +28,12 @@ class HomeController extends Controller
 
     public function gymowner()
     {
-        return view('gymowner');
+        return view('gymowneraccount');
     }
 
     public function student()
     {
-        return view('student');
+        return view('memberaccount');
     }
 
     public function about()
