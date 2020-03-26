@@ -18,7 +18,7 @@ class VideoController extends Controller
 
 	public function videos($gymid)
 	{
-		return view();
+		return view('viewvideos');
 	}
 
 	public function add($id)
@@ -28,6 +28,6 @@ class VideoController extends Controller
 
 	public function watch($id)
 	{
-		return view();
+		return view('watchvideo');
 	}
 }

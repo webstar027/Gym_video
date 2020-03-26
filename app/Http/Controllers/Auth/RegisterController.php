@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
+use App\Gym;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -84,10 +85,12 @@ class RegisterController extends Controller
      *
      * @param  array  $data
      * @return \App\User
+     * @return \App\Gym
      */
     protected function create(array $data)
     {
-            return User::create([
+        
+            $user =  User::create([
                 'first_name'=>$data['first_name'],
                 'last_name'=>$data['last_name'],
                 'name' => $data['name'],
@@ -95,18 +98,23 @@ class RegisterController extends Controller
                 'role_id' => $data['role_id'],
                 'password' => Hash::make($data['password']),
             ]);
-            //$userid = $data -> id;
-            //$gym = '';
-        // if($data['role_id'] == 2){
-        //     $gym = gym::create([
-        //         'gym_ownner_id' => $userid,
-        //         'gym_name' => $data['gym_name'],
-        //         'gym_address_1' => $data['gym_address_1'],
-        //         'gym_address_2' => $data['gym_address_2'],
-        //         'city' => $data['city'],
-        //         'state_province' => $data['state_province'],
-        //         'country' => $data['country'],
-        //     ]);
-        // }
+
+            if($data['role_id'] == 2)
+            {
+                $gym =  Gym::create([
+                    'owner_id' => $user ->id,
+                    'gym_name' => $data['gym_name'],
+                    'gym_address_1' => $data['gym_address_1'],
+                    'gym_address_2' => $data['gym_address_2'],
+                    'city' => $data['city'],
+                    'state_province' => $data['state_province'],
+                    'country' => $data['country'],
+                    'website' => $data['website'],
+                    'zip_code' => $data['zip_code']
+                ]);
+                
+            }
+
+            return $user;
     }
 }
