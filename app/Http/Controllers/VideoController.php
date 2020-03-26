@@ -15,4 +15,19 @@ class VideoController extends Controller
 	{
 		$this->videoservice = $videoservice;
 	}
+
+	public function videos($gymid)
+	{
+		return view();
+	}
+
+	public function add($id)
+	{
+		return view();
+	}
+
+	public function watch($id)
+	{
+		return view();
+	}
 }
