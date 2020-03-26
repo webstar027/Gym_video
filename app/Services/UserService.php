@@ -21,10 +21,10 @@ class UserService
 		$u = $this->userRepo->find($id);
 		
 		$gym = $this->gymRepo->getGymByOwner($id);
-
-        $members = $gym->members();
-        $active = $members->where('status', 1)->get();
-        $pending = $members->where('status', 2)->get();
+		$owner = $gym->owner;
+		$members = $gym->members;
+		$active = $gym->activeMembers;
+		$pending = $gym->pendingMembers;
         $videos = $gym->videos;
 
         $data = [

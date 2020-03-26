@@ -26,11 +26,18 @@ class Gym extends Model
 
     public function owner()
     {
-        return $this->belongTo('App\User', 'foreign_key', 'owner_id');
+        return $this->belongsTo('App\User', 'foreign_key', 'owner_id');
     }
-
     public function members()
     {
-        return $this->belongToMany('App\User', 'gym_user', 'gym_id', 'user_id') ->withPivot('status')->withTimestamps();
+        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->withPivot('status');
+    }
+    public function activeMembers()
+    {
+        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->wherePivot('status', 1);
+    }
+    public function pendingMembers()
+    {
+        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->wherePivot('status', 2);
     }
 }
