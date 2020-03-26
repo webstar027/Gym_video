@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2020 at 09:04 AM
+-- Generation Time: Mar 26, 2020 at 06:05 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -40,10 +40,10 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `gym`
+-- Table structure for table `gyms`
 --
 
-CREATE TABLE `gym` (
+CREATE TABLE `gyms` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `gym_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gym_address_1` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -51,7 +51,22 @@ CREATE TABLE `gym` (
   `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `website` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `gym_ownner_id` bigint(20) NOT NULL,
+  `owner_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gym_user`
+--
+
+CREATE TABLE `gym_user` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) NOT NULL,
+  `gym_id` bigint(20) NOT NULL,
+  `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -80,30 +95,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2020_03_24_221215_create_gym_table', 1),
 (6, '2020_03_25_022541_create_video_table', 1),
 (7, '2020_03_25_022605_create_user_gym_table', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `model_has_permissions`
---
-
-CREATE TABLE `model_has_permissions` (
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `model_has_roles`
---
-
-CREATE TABLE `model_has_roles` (
-  `role_id` bigint(20) UNSIGNED NOT NULL,
-  `model_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model_id` bigint(20) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -142,20 +133,8 @@ CREATE TABLE `permissions` (
 CREATE TABLE `roles` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `role_has_permissions`
---
-
-CREATE TABLE `role_has_permissions` (
-  `permission_id` bigint(20) UNSIGNED NOT NULL,
-  `role_id` bigint(20) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -183,30 +162,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', NULL, '$2y$10$eKywlGT3dmdRLt7sO/ztR.WGvYfTZdo5JJbOaTWAWGlOexKj7djym', 1, 'HB0QleSfFp7GmRkAdLJBWSL0QkBLDpQNGORdMIgnRe4oFWaervs3qJ6aMbKj', '2020-03-25 13:12:46', '2020-03-25 13:12:46');
+(3, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-26 09:19:42', '$2y$10$J1C2j9l4A053l6QFag4XM.5uAVEwKAzdxw7RbKAf2kgwlM3bs..ka', 1, 'epXaUOeHhl6P8XhuohP9mlokaoN6YamZDwa8QXSGWtY22OwdOPKPX1Yye99D', '2020-03-26 09:19:17', '2020-03-26 09:19:42');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user_gym`
+-- Table structure for table `videos`
 --
 
-CREATE TABLE `user_gym` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `gym_id` bigint(20) NOT NULL,
-  `status` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `video`
---
-
-CREATE TABLE `video` (
+CREATE TABLE `videos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `gym_id` bigint(20) NOT NULL,
   `video_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -227,9 +191,16 @@ ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `gym`
+-- Indexes for table `gyms`
 --
-ALTER TABLE `gym`
+ALTER TABLE `gyms`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `gyms_owner_id_foreign` (`owner_id`);
+
+--
+-- Indexes for table `gym_user`
+--
+ALTER TABLE `gym_user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -237,20 +208,6 @@ ALTER TABLE `gym`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `model_has_permissions`
---
-ALTER TABLE `model_has_permissions`
-  ADD PRIMARY KEY (`permission_id`,`model_id`,`model_type`),
-  ADD KEY `model_has_permissions_model_id_model_type_index` (`model_id`,`model_type`);
-
---
--- Indexes for table `model_has_roles`
---
-ALTER TABLE `model_has_roles`
-  ADD PRIMARY KEY (`role_id`,`model_id`,`model_type`),
-  ADD KEY `model_has_roles_model_id_model_type_index` (`model_id`,`model_type`);
 
 --
 -- Indexes for table `password_resets`
@@ -272,13 +229,6 @@ ALTER TABLE `roles`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `role_has_permissions`
---
-ALTER TABLE `role_has_permissions`
-  ADD PRIMARY KEY (`permission_id`,`role_id`),
-  ADD KEY `role_has_permissions_role_id_foreign` (`role_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -287,15 +237,9 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- Indexes for table `user_gym`
+-- Indexes for table `videos`
 --
-ALTER TABLE `user_gym`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `video`
---
-ALTER TABLE `video`
+ALTER TABLE `videos`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -309,9 +253,15 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `gym`
+-- AUTO_INCREMENT for table `gyms`
 --
-ALTER TABLE `gym`
+ALTER TABLE `gyms`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `gym_user`
+--
+ALTER TABLE `gym_user`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -345,15 +295,9 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `user_gym`
+-- AUTO_INCREMENT for table `videos`
 --
-ALTER TABLE `user_gym`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `video`
---
-ALTER TABLE `video`
+ALTER TABLE `videos`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -361,23 +305,10 @@ ALTER TABLE `video`
 --
 
 --
--- Constraints for table `model_has_permissions`
+-- Constraints for table `gyms`
 --
-ALTER TABLE `model_has_permissions`
-  ADD CONSTRAINT `model_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `model_has_roles`
---
-ALTER TABLE `model_has_roles`
-  ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `role_has_permissions`
---
-ALTER TABLE `role_has_permissions`
-  ADD CONSTRAINT `role_has_permissions_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `role_has_permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+ALTER TABLE `gyms`
+  ADD CONSTRAINT `gyms_owner_id_foreign` FOREIGN KEY (`owner_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
