@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserGymTable extends Migration
+class CreateFavoritesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,23 @@ class CreateUserGymTable extends Migration
      */
     public function up()
     {
-        Schema::create('gym_user', function (Blueprint $table) {
-
+        Schema::create('favorites', function (Blueprint $table) {
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('gym_id');
-            $table->integer('status');
-            $table->primary(['user_id', 'gym_id']);
+            $table->unsignedInteger('video_id');
+            $table->timestamps();
+
+            $table->primary(['user_id', 'video_id']);
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
 
-            $table->foreign('gym_id')
+            $table->foreign('video_id')
                 ->references('id')
-                ->on('gyms')
+                ->on('videos')
                 ->onDelete('cascade');
         });
-
-       
     }
 
     /**
@@ -41,6 +39,6 @@ class CreateUserGymTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gym_user');
+        Schema::dropIfExists('favorites');
     }
 }

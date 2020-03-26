@@ -16,10 +16,12 @@ class CreateVideoTable extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('gym_id');
+            $table->string('title');
             $table->string('video_url');
             $table->string('video_title');
             $table->string('description');
             $table->string('tag');
+            $table->integer('status');
             $table->timestamps();
         });
     }
