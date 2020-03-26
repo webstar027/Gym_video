@@ -29,13 +29,13 @@ Route::get('/pricing', 'HomeController@pricing')->name('pricing');
 
 // gymowner
 Route::get('/account/gymowner', 'AccountController@gymowner');
-Route::get('/account/member', 'AccountController@members');
-Route::get('/gym/myvideos/{gymid}', 'VideoController@videos');
-Route::get('/gym/video/{id}', 'VideoController@add');
+Route::get('/account/gymowner/members', 'AccountController@members');
+Route::get('/account/gymowner/gym/myvideos/{gymid}', 'VideoController@gymvideos');
+Route::get('/account/gymowner/gym/video/{id}', 'VideoController@addvideo');
 
 // student
 Route::get('/account/student', 'AccountController@student');
-Route::get('/account/gyms', 'AccountController@gymlist');
-Route::get('/gym/search', 'GymController@search');
-Route::get('/video/search', 'VideoController@search');
-Route::get('/video/{id}', 'VideoController@watch');
+Route::get('/account/student/gyms', 'AccountController@gymlist');
+Route::get('/account/student/gyms/search', 'GymController@addgym');
+// Route::get('/account/student/video/', 'VideoController@viewvideos');
+Route::get('/account/student/video/{id}', 'VideoController@watch');

@@ -13,25 +13,24 @@ class AccountController extends Controller
 	{
         $this->userservice = $userservice;
     }
+    //Gym ownner account
     public function gymowner(Request $request)
     {
         $user = $request->user();
         $gymownerid = $user->id;
         $data = $this->userservice->getGymSummary($gymownerid);
         
-        return view('gymowner', $data);
+        return view('gymowneraccount', $data);
     }
-
-    public function student()
-    {
-        return view('studentaccount');
-    }
-
     public function members($id)
     {
         return view('memberaccount');
     }
-
+    //student account
+    public function student()
+    {
+        return view('memberaccount');
+    }
     public function gymlist()
     {
         return view('gymlist');
