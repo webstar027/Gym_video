@@ -10,6 +10,6 @@ class Video extends Model
     
     public function Gym()
     {
-        return $this->belongTo('App\Gym');
+        return $this->belongsTo('App\Gym');
     }
 }

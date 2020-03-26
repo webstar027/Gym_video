@@ -29,6 +29,7 @@ class CreateUserGymTable extends Migration
                 ->references('id')
                 ->on('gyms')
                 ->onDelete('cascade');
+                
             $table->timestamps();
         });
 

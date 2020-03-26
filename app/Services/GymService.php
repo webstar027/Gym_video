@@ -17,7 +17,9 @@ class GymService
 	{
 		return $this->gym->all();
 	}
-             
+			 
+
+
     public function create(Request $request)
 	{
         $attributes = $request->all();

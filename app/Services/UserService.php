@@ -4,23 +4,27 @@ namespace App\Services;
  
 use App\User;
 use App\Repositories\UserRepository;
+use App\Repositories\GymRepository;
 use Illuminate\Http\Request;
  
 class UserService
 {
-	public function __construct(UserRepository $user)
+
+	public function __construct(UserRepository $userRepo, GymRepository $gymRepo)
 	{
-		$this->user = $user ;
+		$this->userRepo = $userRepo ;
+		$this->gymRepo = $gymRepo ;
 	}
  
 	public function getGymSummary($id)
 	{
-		$u = $this->user->find($id);
-		$gym = $u ->gyms->first();
-
-        $members = $gym->members;
-        $active = $members->where('status', 1)->get();
-        $pending = $members->where('status', 2)->get();
+		$u = $this->userRepo->find($id);
+		
+		$gym = $this->gymRepo->getGymByOwner($id);
+		$owner = $gym->owner;
+		$members = $gym->members;
+		$active = $gym->activeMembers;
+		$pending = $gym->pendingMembers;
         $videos = $gym->videos;
 
         $data = [
