@@ -17,7 +17,10 @@ class AccountController extends Controller
 
     public function gymowner()
     {
-        return view('gymowner', ['name'=> 'gymowner']);
+        $user = Auth::user();
+        $gymownerid = $user->id;
+        $data = $userservice.getGymSummary($gymownerid);
+        return view('gymowner', $data);
     }
 
     public function student()
