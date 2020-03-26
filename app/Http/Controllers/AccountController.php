@@ -12,7 +12,11 @@ class AccountController extends Controller
 	public function __construct(UserService $userservice)
 	{
         $this->userservice = $userservice;
-	}
+    }
+    
+
+
+    
 
     public function gymowner()
     {
