@@ -16,11 +16,11 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link rounded-0" id="pending_members_tab" data-toggle="pill" href="#pending_members" role="tab"
-                            aria-controls="pills-profile" aria-selected="false">Pending Request</a>
+                            aria-controls="pills-profile" aria-selected="false">{{ pending_count }}Pending Request</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link rounded-0" id="uploaded_videos_tab" data-toggle="pill" href="#uploaded_videos" role="tab"
-                            aria-controls="pills-contact" aria-selected="false">Uploaded Videos</a>
+                            aria-controls="pills-contact" aria-selected="false">{{ video_count }}Uploaded Videos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link rounded-0" id="new_video_tab" data-toggle="pill" href="#new_video" role="tab"
