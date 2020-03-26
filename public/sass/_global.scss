@@ -1,0 +1,137 @@
+@use 'variables' as *;
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-color: $body-color;
+}
+
+html, body {
+	height: 100%;
+}
+
+section {
+    padding: 50px 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: $title-color;
+}
+
+h3 {
+	font-size: 30px;
+	font-weight: 500;
+}
+
+p {
+	font-size: 17px;
+	line-height: 30px;
+	color: $text-color;
+	font-weight: normal;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.blank-space {
+	min-height: 107px;
+}
+
+// Background Colors
+.bg-white {
+	background-color: #fff;
+}
+
+.bg-alt {
+	background-color: $secondary-color;
+}
+
+.bg-trans {
+	background-color: $color-trans;
+}
+
+// Title Styles
+.title-default {
+	font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+	font-size: 50px;
+	text-align: center;
+    text-transform: uppercase;
+    color: $title-color;
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.title-default::after {
+    position: absolute;
+    content: "";
+    left: 50%;
+    bottom: -15px;
+    width: 100px;
+    height: 2px;
+    background-color: $primary-color;
+    -webkit-transform: translate(-50%, 0);
+       -moz-transform: translate(-50%, 0);
+        -ms-transform: translate(-50%, 0);
+         -o-transform: translate(-50%, 0);
+            transform: translate(-50%, 0);    
+}
+
+.title-helper {
+	font-size: 22px;
+	color: $text-color;
+	font-weight: normal;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.title-alt {
+	font-size: 50px;
+    color: $title-color;
+    font-weight: 500;
+}
+
+// Button Styles
+.my-btn {
+	background-color: $primary-color;
+    color: #fff;
+    font-size: 18px;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 0;
+    letter-spacing: 1px;
+}
+
+.my-btn:hover {
+	background-color: #174ea6;
+	color: #fff;
+}
+
+.my-btn:focus {
+	box-shadow: none;
+	outline: none;
+}
+
+.btn-large {
+	font-size: 25px;
+	padding: 10px 30px;
+	font-weight: 500;
+	letter-spacing: 1px;
+}
+
+// Custom Scrollbar
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 5px grey; 
+	border-radius: 20px;
+}
+
+::-webkit-scrollbar-thumb {
+	background: lightgray; 
+	border-radius: 20px;
+	box-shadow:0px 2px 5px 1px #000 inset;
+}

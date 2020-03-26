@@ -17,6 +17,7 @@ class CreateVideoTable extends Migration
             $table->id();
             $table->bigInteger('gym_id');
             $table->string('video_url');
+            $table->string('video_title');
             $table->string('description');
             $table->string('tag');
             $table->timestamps();

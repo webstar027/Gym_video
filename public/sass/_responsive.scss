@@ -1,0 +1,108 @@
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199px) {
+    // Header Start
+    .hero-text h1 {
+        font-size: 90px;
+    }
+    // Header End
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
+    // Global Start
+    .title-helper {
+        margin-bottom: 20px;
+    }
+    // Global End
+
+    // Header Start
+    .fixed-top {
+        background-color: #252525;
+    }
+    .navbar-light .navbar-toggler {
+        color: #ddd;
+    }
+    // Header End
+
+    // Hero Start
+    .hero-text h1 {
+        font-size: 80px;
+    }
+    .hero-text p, .title-helper {
+        font-size: 20px;
+    }
+    // Hero End
+
+    // Footer Bottom Start
+    #footer_bottom .justify-content-end {
+        justify-content: center!important;
+    }
+    .copyright-text p {
+        text-align: center;
+    }
+    .social-media ul li a {
+        margin: 0 5px;
+    }
+    // Footer Bottom End
+    
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767px) {
+
+}
+
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575px) {
+    // Global Start
+    section {
+        padding: 30px 0;
+    }
+    .title-default, .title-alt {
+        font-size: 30px;
+    }
+    .btn-large {
+        font-size: 20px;
+    }
+    // Global End
+
+    // Header Start
+    .fixed-top {
+        padding: 0;
+    }
+    .fixed-top .navbar {
+        padding: 0;
+    }
+    .fixed-top .navbar-nav {
+        padding-bottom: 15px;
+    }
+    // Header End
+    
+    // Hero Start
+	.hero-text h1 {
+        font-size: 40px;
+    }
+    // Hero End
+
+    // Footer top Start
+    .footer-top-about img {
+        width: 200px;
+    }
+    // Footer top End
+
+    // Login Register Start
+    .login-register {
+        margin-top: 0px;
+        margin-bottom: 0;
+        padding: 30px;
+    }
+    .blank-space {
+        min-height: 60px;
+    }
+    .account-type-btn .my-btn {
+        font-size: 16px;
+        padding: 5px 15px;
+    }
+    // Login Register End
+
+}

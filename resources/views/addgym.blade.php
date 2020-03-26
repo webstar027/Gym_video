@@ -1,12 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="bg-trans">
-    <div class="container">
-    <div class="row justify-content-center py-5">
-        <div class="col-md-8">
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Add Gym</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -15,11 +14,10 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    add new
                 </div>
             </div>
         </div>
     </div>
 </div>
-</section>
 @endsection
