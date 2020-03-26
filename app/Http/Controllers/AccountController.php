@@ -20,6 +20,7 @@ class AccountController extends Controller
         $user = Auth::user();
         $gymownerid = $user->id;
         $data = $userservice.getGymSummary($gymownerid);
+        
         return view('gymowner', $data);
     }
 
