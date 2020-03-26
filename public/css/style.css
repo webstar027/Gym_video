@@ -27,12 +27,16 @@ p {
   font-weight: normal;
 }
 
+a {
+  color: #1a73e8;
+}
+
 a:hover {
   text-decoration: none;
 }
 
 .blank-space {
-  min-height: 107px;
+  min-height: 87px;
 }
 
 .bg-white {
@@ -81,10 +85,20 @@ a:hover {
   margin-bottom: 50px;
 }
 
-.title-alt {
-  font-size: 50px;
+.page-sub-title {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 30px;
   color: #202124;
-  font-weight: 500;
+  font-weight: 600;
+}
+
+.page-sub-title-alt {
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  font-size: 25px;
+  color: #202124;
+  font-weight: 600;
 }
 
 .my-btn {
@@ -113,6 +127,21 @@ a:hover {
   padding: 10px 30px;
   font-weight: 500;
   letter-spacing: 1px;
+}
+
+.form-control {
+  height: inherit;
+  padding: 10px;
+  border-radius: 0;
+}
+
+.form-control:focus {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+  border: 1px solid lightgray;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar {
@@ -185,7 +214,7 @@ a:hover {
   padding-right: 10px;
 }
 
-.menu-button {
+.navbar-light .navbar-nav .nav-item:last-child .nav-link {
   background-color: #1a73e8;
 }
 
@@ -258,17 +287,6 @@ a:hover {
   color: #202124;
 }
 
-.login-register .form-control {
-  height: inherit;
-  padding: 10px;
-  border-radius: 0;
-}
-
-.login-register .form-control:focus {
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-  border: 1px solid lightgray;
-}
-
 .login-register-bottom {
   text-align: center;
   margin-top: 30px;
@@ -288,6 +306,28 @@ a:hover {
 .account-type-btn .active {
   background-color: #1a73e8;
   color: #fff;
+}
+
+.gym-name-stats .nav-link.active {
+  background-color: #1a73e8;
+  color: #fff;
+}
+
+.add-gym-user input[type=search] {
+  width: 450px;
+}
+
+.video-box {
+  margin-bottom: 30px;
+}
+
+.video-box h3 {
+  font-size: 20px;
+  margin-bottom: 0px;
+}
+
+.video-box p {
+  font-size: 14px;
 }
 
 #footer_top {
@@ -441,5 +481,3 @@ a:hover {
     padding: 5px 15px;
   }
 }
-
-/*# sourceMappingURL=style.css.map */

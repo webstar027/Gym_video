@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2020 at 06:05 AM
+-- Generation Time: Mar 26, 2020 at 07:46 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -49,12 +49,21 @@ CREATE TABLE `gyms` (
   `gym_address_1` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `gym_address_2` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `state_province` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `country` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zip_code` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `website` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `owner_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `gyms`
+--
+
+INSERT INTO `gyms` (`id`, `gym_name`, `gym_address_1`, `gym_address_2`, `city`, `state_province`, `country`, `zip_code`, `website`, `owner_id`, `created_at`, `updated_at`) VALUES
+(3, 'Joseph Scott', 'Joseph Scott', 'Joseph Scott', 'Tucson', 'AZ', 'US', '85750', 'www.website.com', 7, '2020-03-27 01:38:37', '2020-03-27 01:38:37');
 
 -- --------------------------------------------------------
 
@@ -63,12 +72,9 @@ CREATE TABLE `gyms` (
 --
 
 CREATE TABLE `gym_user` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
-  `gym_id` bigint(20) NOT NULL,
-  `status` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `gym_id` int(10) UNSIGNED NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -93,8 +99,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2020_03_24_213034_create_permission_tables', 1),
 (5, '2020_03_24_221215_create_gym_table', 1),
-(6, '2020_03_25_022541_create_video_table', 1),
-(7, '2020_03_25_022605_create_user_gym_table', 1);
+(6, '2020_03_25_022541_create_video_table', 1);
 
 -- --------------------------------------------------------
 
@@ -162,7 +167,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-26 09:19:42', '$2y$10$J1C2j9l4A053l6QFag4XM.5uAVEwKAzdxw7RbKAf2kgwlM3bs..ka', 1, 'epXaUOeHhl6P8XhuohP9mlokaoN6YamZDwa8QXSGWtY22OwdOPKPX1Yye99D', '2020-03-26 09:19:17', '2020-03-26 09:19:42');
+(3, 'john', 'smith', 'johnsmith', 'ruima027@gmail.com', '2020-03-27 01:26:50', '$2y$10$EU8fZiCXtNh9x0.U4Qw1q.RTlugu/hJ47Rej79OOZ7Yqw84Lx1Ft6', 1, NULL, '2020-03-27 01:26:18', '2020-03-27 01:26:50'),
+(4, 'Joseph', 'Scott', 'Josephscott0605', 'joseph.scott0605@gmail.com', '2020-03-27 01:28:27', '$2y$10$Gt2iR5wxHI9.lfCltLCKpu8om9Hh4BdVOePOS3S0DCq15b5CckygS', 1, NULL, '2020-03-27 01:27:44', '2020-03-27 01:28:27'),
+(5, 'bill', 'chong', 'bchong', 'bchong753@gmail.com', '2020-03-27 01:31:03', '$2y$10$0NseE0oKSfRpZ9gLiviIf.Tj88C4LCJwfox.bwzx6cbULnWSbNFiG', 1, NULL, '2020-03-27 01:30:36', '2020-03-27 01:31:03'),
+(6, 'Isi', 'Aucaman', 'isi.aucaman', 'isi.aucaman@yandex.com', '2020-03-27 01:33:16', '$2y$10$kUII4MSZsRPyKVV1LG8iC.Kj8hc1Cmp3YAbDbUxW4PkogOG1qas.m', 1, NULL, '2020-03-27 01:32:54', '2020-03-27 01:33:16'),
+(7, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-27 01:39:47', '$2y$10$DidLDiNRZRDo53CAMvEw0OetNhOr5LXKli9k5imdLlshZ4QNjLXp.', 2, NULL, '2020-03-27 01:38:37', '2020-03-27 01:39:47');
 
 -- --------------------------------------------------------
 
@@ -173,12 +182,25 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_ve
 CREATE TABLE `videos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `gym_id` bigint(20) NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `video_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `video_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `videos`
+--
+
+INSERT INTO `videos` (`id`, `gym_id`, `title`, `video_url`, `video_title`, `description`, `tag`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'my video', 'https://youtu.be/6g8G3YQtQt4', 'my video', 'my video', 'tag1', 1, '2020-03-12 07:00:00', '2020-03-26 07:00:00'),
+(2, 3, 'First video', 'https://youtu.be/6g8G3YQtQt4', 'First video', 'First video', 'tag1', 1, '2020-03-26 07:00:00', '2020-03-26 07:00:00'),
+(3, 3, 'second video', 'https://youtu.be/6g8G3YQtQt4', 'Second video', 'Second video', 'tag0', 1, '2020-03-26 07:00:00', '2020-03-26 07:00:00'),
+(4, 3, 'Third video', 'https://youtu.be/6g8G3YQtQt4', 'Third video', 'Third video', 'tag3', 0, '2020-03-26 07:00:00', '2020-03-26 07:00:00');
 
 --
 -- Indexes for dumped tables
@@ -201,7 +223,7 @@ ALTER TABLE `gyms`
 -- Indexes for table `gym_user`
 --
 ALTER TABLE `gym_user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`user_id`,`gym_id`);
 
 --
 -- Indexes for table `migrations`
@@ -256,19 +278,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `gyms`
 --
 ALTER TABLE `gyms`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `gym_user`
---
-ALTER TABLE `gym_user`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -292,13 +308,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
