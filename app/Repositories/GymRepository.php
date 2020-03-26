@@ -17,6 +17,11 @@ class GymRepository
   {
     return $this->gym->create($attributes);
   }
+
+  public function getGymByOwner($id)
+	{
+		return $this->gym->all()->where('owner_id', $id)->first();
+  }
   
   public function all()
   {

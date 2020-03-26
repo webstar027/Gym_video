@@ -13,11 +13,11 @@ class AccountController extends Controller
 	{
         $this->userservice = $userservice;
     }
-    public function gymowner()
+    public function gymowner(Request $request)
     {
-        $user = Auth::user();
+        $user = $request->user();
         $gymownerid = $user->id;
-        $data = $userservice.getGymSummary($gymownerid);
+        $data = $this->userservice->getGymSummary($gymownerid);
         
         return view('gymowner', $data);
     }
