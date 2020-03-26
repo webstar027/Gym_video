@@ -13,11 +13,6 @@ class AccountController extends Controller
 	{
         $this->userservice = $userservice;
     }
-    
-
-
-    
-
     public function gymowner()
     {
         return view('gymowneraccount');
