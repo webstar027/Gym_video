@@ -29,12 +29,16 @@ p {
 	font-weight: normal;
 }
 
+a {
+	color: $primary-color;
+}
+
 a:hover {
 	text-decoration: none;
 }
 
 .blank-space {
-	min-height: 107px;
+	min-height: 87px;
 }
 
 // Background Colors
@@ -85,10 +89,20 @@ a:hover {
 	margin-bottom: 50px;
 }
 
-.title-alt {
-	font-size: 50px;
+.page-sub-title {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-size: 30px;
     color: $title-color;
-    font-weight: 500;
+    font-weight: 600;
+}
+
+.page-sub-title-alt {
+	font-family: 'Montserrat', sans-serif;
+	text-transform: uppercase;
+	font-size: 25px;
+    color: $title-color;
+    font-weight: 600;
 }
 
 // Button Styles
@@ -118,6 +132,22 @@ a:hover {
 	padding: 10px 30px;
 	font-weight: 500;
 	letter-spacing: 1px;
+}
+
+// Input styles
+.form-control {
+	height: inherit;
+	padding: 10px;
+	border-radius: 0;
+}
+
+.form-control:focus {
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+	border: 1px solid lightgray;
+}
+
+.custom-checkbox .custom-control-label::before {
+	border-radius: 0;
 }
 
 // Custom Scrollbar

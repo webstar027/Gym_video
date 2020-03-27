@@ -28,7 +28,7 @@
 								<tbody>
 								@foreach($videos as $key => $video)
 									<tr>
-										<td scope="row"><a href="">{{ $video -> video_title }}</a></td>
+										<td scope="row"><a href="{{ url('/account/student/video/'.$video->id) }}">{{ $video -> video_title }}</a></td>
 										<td>{{ $video -> created_at }}</td>
                                         <td>
 											@if($video->status == "1") 

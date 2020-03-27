@@ -25,15 +25,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
+                                @foreach ($active_members as $key => $member)
+                                <tr>
+                                    <td> {{ $member -> name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
+                                    <td>
+                                    <a href="#" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
-                    <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">Ad
-                        pariatur nostrud pariatur exercitation ipsum ipsum culpa mollit commodo mollit ex. Aute sunt incididunt
-                        amet commodo est sint nisi deserunt pariatur do. Aliquip ex eiusmod voluptate exercitation cillum id
-                        incididunt elit sunt. Qui minim sit magna Lorem id et dolore velit Lorem amet exercitation duis
-                        deserunt. Anim id labore elit adipisicing ut in id occaecat pariatur ut ullamco ea tempor duis.</div>
+                    <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">
+                    <table class="table table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($pending_members as $key => $member)
+                                <tr>
+                                    <td> {{ $member -> name }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
+                                    <td>
+                                    <a href="#" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                        <a href="#" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
