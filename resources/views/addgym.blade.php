@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
+                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
                         <h2 class="page-sub-title">Gym Search</h2>
                         <input type="search" class="form-control" placeholder="Gym Name or Owner name">
                         <p>2 Gym(s) have matched your search criteria</p>
@@ -42,11 +42,11 @@
 										</td>
 										<td>
 											@if($gym -> status == 0)
-											<a href="#" class="text-info request-access">Request Access</a>
+											<a href="{{url('/account/student/gyms/access/'.$gym -> id)}}" class="text-info request-access">Request Access</a>
 											@elseif($gym -> status == 1) 
 											<a href="{{ url('/account/student/viewgym/'.$gym -> id) }}" class="text-success view_gympage">View Gym Page</a>
 											@elseif($gym -> status == 2) 
-											<a href="#" class="text-danger calcel-request">Cancel Request</a> 
+											<a href="{{url('/account/student/gyms/cancel/'.$gym -> id)}}" class="text-danger calcel-request">Cancel Request</a> 
 											@elseif($gym -> status == 3)
 											<a href="#" class="text-danger request-time">23:14:15 wait time</a> 
 											@endif

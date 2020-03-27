@@ -52,23 +52,28 @@ class GymService
 
 	public function approve_request($user_id, $gym_id)
 	{
-		$gym->members()->attach($user_id, ['status' => 1]);
+		$this->gymRepo->members()->attach($user_id, ['status' => 1]);
 	}
 
 	public function denied_request($user_id, $gym_id)
 	{
-		$gym->members()->attach($user_id, ['status' => 0]);
+		$this->gymRepo->members()->attach($user_id, ['status' => 0]);
 	}
 
 	public function access_request($user_id, $gym_id)
 	{
-		$gym = read($gym_id);
+		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->attach($user_id, ['status' => 2]);
 	}
 
 	public function cancel_request($user_id, $gym_id)
 	{
-		$gym = read($gym_id);
+		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);
+	}
+
+	public function deny_access()
+	{
+	  
 	}
 }

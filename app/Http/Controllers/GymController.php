@@ -56,10 +56,11 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */ 
-    public function request_access(request $request, $gym_id){
+    public function request_access($gym_id, Request $request ){
 
         $user = $request->user();
         $this->gymservice->access_request($user->id, $gym_id);
+        return redirect('/account/student/gyms/search');
         
     }
 
@@ -69,11 +70,24 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
-    public function request_cancel(request $request, $gym_id)
+    public function request_cancel($gym_id, Request $request)
     {
         $user = $request->user();
         $this->gymservice->cancel_request($user->id, $gym_id);
-
+        return redirect('/account/student/gyms/search');
+        
+    }
+    /**
+     * Deny to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
+    public function request_deny($gym_id, Request $request)
+    {
+        $user = $request->user();
+        $this->gymservice->eny_access($user->id, $gym_id);
+        return redirect('/account/student');
         
     }
 
