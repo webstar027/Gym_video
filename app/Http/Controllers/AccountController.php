@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Services\UserService;
+
 class AccountController extends Controller
 {
     protected $userservice;
