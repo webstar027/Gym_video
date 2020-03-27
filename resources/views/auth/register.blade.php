@@ -69,7 +69,7 @@
 							<div class="form-group btn-group account-type-btn">
                                 <div class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn my-btn gym_option active"  id="btn_individual">
-                                        <input type="radio" name="role_id" id="option1" value="1" autocomplete="off" checked> Individual
+                                        <input type="radio" name="role_id" id="option1" value="3" autocomplete="off" checked> Individual
                                     </label>
                                     <label class="btn my-btn gym_option gym_ownner"  id="btn_gym_owner">
                                         <input type="radio" name="role_id" id="option2" value="2" autocomplete="off"> Gym Owner

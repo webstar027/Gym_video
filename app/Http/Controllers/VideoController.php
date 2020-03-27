@@ -55,15 +55,13 @@ class VideoController extends Controller
 	public function updateVideo($id, Request $request)
 	{
 		$this->videoservice->update($request, $id);
-		$video = $this->videoservice->read($id);
-		$idd = $video->gym_id;
+		$idd = $this->videoservice->getGymId($id);
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
 	public function deleteVideo($id)
 	{	
-		$video = $this->videoservice->read($id);
-		$idd = $video->gym_id;
+		$idd = $this->videoservice->getGymId($id);
 		$this->videoservice->delete($id);
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
@@ -71,7 +69,7 @@ class VideoController extends Controller
 	public function publishVideo($id, Request $request)
 	{
 		$this->videoservice->publish($id);
-		$idd = $request->user()->gym->id;
+		$idd = $this->videoservice->getGymId($id);
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 	/**
