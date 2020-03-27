@@ -38,11 +38,21 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the role of user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
     public function role()
     {
         return $this->hasOne('App\role', 'foreign_key');
     }
 
+    /**
+     * Get the gyms subscribed to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
     public function gyms()
     {
         return $this->belongsToMany('App\Gym');
