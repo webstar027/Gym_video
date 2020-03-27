@@ -72,6 +72,6 @@ class GymController extends Controller
     }
     public function gymview($gym_id){
         $data = $this->gymservice->read($gym_id);
-        return view('viewgym',$data);
+        return view('viewgym',['data',$data]);
     }
 }
