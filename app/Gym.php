@@ -30,16 +30,6 @@ class Gym extends Model
     }
 
     /**
-     * Get the owner of this gym.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function owner()
-    {
-        return $this->belongsTo('App\User', 'foreign_key', 'owner_id');
-    }
-
-    /**
      * Get the members that have requests.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany

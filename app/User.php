@@ -57,4 +57,5 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->belongsToMany('App\Gym');
     }
+
 }
