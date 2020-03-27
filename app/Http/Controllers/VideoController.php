@@ -104,6 +104,6 @@ class VideoController extends Controller
 	public function watch($id)
 	{
 		$data = $this->videoservice->read($id);
-		return view('watchvideo', ['data' => $data]);
+		return view('watchvideogym', ['data' => $data]);
 	}
 }
