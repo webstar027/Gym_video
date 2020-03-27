@@ -40,6 +40,13 @@ class UserService
 		return $data;
 	}
 
+	public function getGymOwner($gym_id)
+	{
+		$gym = $this->gymRepo->find($id);
+		$owner = $this->userRepo->find($gym->owner_id);
+		return $owner;
+	}
+
 	public function getMembers($id)
 	{
 		$u = $this->userRepo->find($id);
