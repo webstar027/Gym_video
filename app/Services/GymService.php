@@ -3,44 +3,51 @@
 namespace App\Services;
  
 use App\Gym;
+use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
 use Illuminate\Http\Request;
  
 class GymService
 {
-	public function __construct(GymRepository $gym)
+	public function __construct(UserRepository $userRepo, GymRepository $gymRepo)
 	{
-		$this->gym = $gym ;
+		$this->userRepo = $userRepo ;
+		$this->gymRepo = $gymRepo ;
 	}
  
 	public function index()
 	{
-		return $this->gym->all();
+		return $this->gymRepo->all();
 	}
 			 
+	public function getGymOwner($owner_id)
+	{
+		$owner = $this->userRepo->find($owner_id);
+		return $owner;
+	}
 
 
     public function create(Request $request)
 	{
         $attributes = $request->all();
 
-        return $this->gym->create($attributes);
+        return $this->gymRepo->create($attributes);
 	}
 	    
 	public function read($id)
 	{
-        return $this->gym->find($id);
+        return $this->gymRepo->find($id);
 	}
  
 	public function update(Request $request, $id)
 	{
 	  $attributes = $request->all();
 	  
-      return $this->gym->update($id, $attributes);
+      return $this->gymRepo->update($id, $attributes);
 	}
  
 	public function delete($id)
 	{
-      return $this->gym->delete($id);
+      return $this->gymRepo->delete($id);
 	}
 }

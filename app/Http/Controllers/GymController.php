@@ -26,9 +26,26 @@ class GymController extends Controller
 	 * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function addgym()
+    public function search(Request $request)
     {
-        $gyms = $this->gymservice->index();
+        $user = $request->user();
+        $all = $this->gymservice->index();
+
+        $sub_gyms = $user->gyms;
+
+        foreach($all as $key=> $gym)
+        {
+            $sub = $sub_gyms.where('gym_id', $gym->id);
+            
+            if ($sub)
+            {
+                $gym->status = $sub->pivot->status;
+                $gym->time = $sub->pivot->updated_at;
+            }
+
+            $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
+        }
+
         return view('addgym', ['allgyms'=>$gyms]);
     }
 
