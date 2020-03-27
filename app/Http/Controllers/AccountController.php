@@ -27,13 +27,21 @@ class AccountController extends Controller
 
     public function members($id)
     {
-        return view('memberaccount');
+        return view('members');
     }
     
     //student account
-    public function student()
+    public function student(Request $request)
     {
-        return view('memberaccount');
+        $user = $request->user();
+        $id = $user->id;
+        $members = $this->userservice->getMembers($id);
+        // foreach($members as $key => $member)
+        // {
+        //     $o = $member->owner;
+        //     $v = $member->videos;
+        // }
+        return view('memberaccount', ['members'=> $members]);
     }
     
     public function gymlist()

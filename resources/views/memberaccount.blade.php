@@ -22,13 +22,15 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($members as $key => $member)
                                 <tr>
-                                    <td scope="row">Rima</td>
-                                    <td>Hasan</td>
-                                    <td>7</td>
-                                    <td>March 26, 2020 12:22pm</td>
+                                    <td scope="row">{{ $member -> gym_name }}</td>
+                                    <td></td>
+                                    <td>{{ $member -> videos->count() }}</td>
+                                    <td>{{ $member -> updated_at }}</td>
                                     <td><a href="#" class="text-danger"><i class="fas fa-trash"></i></a></td>
                                 </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

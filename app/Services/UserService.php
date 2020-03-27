@@ -40,6 +40,12 @@ class UserService
 		return $data;
 	}
 
+	public function getMembers($id)
+	{
+		$u = $this->userRepo->find($id);
+		return $u->gyms;
+	}
+
 	public function index()
 	{
 		return $this->user->all();
