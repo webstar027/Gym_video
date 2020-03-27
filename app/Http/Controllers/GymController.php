@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Services\GymService;
 
 
@@ -35,18 +36,18 @@ class GymController extends Controller
 
         foreach($all as $key=> $gym)
         {
-            $sub = $sub_gyms.where('gym_id', $gym->id);
+            $sub = $sub_gyms->where('gym_id', $gym->id);
             
-            if ($sub)
+            if ($sub->count() > 0)
             {
-                $gym->status = $sub->pivot->status;
-                $gym->time = $sub->pivot->updated_at;
+                $gym->status = $sub[0]->pivot->status;
+                $gym->time = $sub[0]->pivot->updated_at;
             }
 
             $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
         }
 
-        return view('addgym', ['allgyms'=>$gyms]);
+        return view('addgym', ['allgyms'=>$all]);
     }
 
     /**
