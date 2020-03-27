@@ -3,6 +3,8 @@
 namespace App\Services;
  
 use App\Gym;
+use App\Gym_User;
+
 use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
 use Illuminate\Http\Request;
@@ -52,12 +54,16 @@ class GymService
 
 	public function approve_request($user_id, $gym_id)
 	{
-		$gym->members()->attach($user_id, ['status' => 1]);
+		$guser = Gym_User::where('user_id', $user_id)->where('gym_id', $gym_id);
+		$guser->status = 1;
+		$guser->save();
 	}
 
 	public function denied_request($user_id, $gym_id)
 	{
-		$gym->members()->attach($user_id, ['status' => 0]);
+		$guser = Gym_User::where('user_id', $user_id)->where('gym_id', $gym_id);
+		$guser->status = 3;
+		$guser->save();
 	}
 
 	public function access_request($user_id, $gym_id)
