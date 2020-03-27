@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="subscriptions">
                     <h2 class="page-sub-title">My Subscriptions</h2>
-                    <a href="" class="btn my-btn mb-4">Add Gym</a>
+                    <a href="{{ url('/account/student/gyms/search') }}" class="btn my-btn mb-4">Add Gym</a>
                     <div class="table-responsive">
                         <table class="table table-striped">
                             <thead>
@@ -25,7 +25,7 @@
                                 @foreach ($members as $key => $member)
                                 <tr>
                                     <td scope="row">{{ $member -> gym_name }}</td>
-                                    <td></td>
+                                    <td>{{ $member -> owner ->name}}</td>
                                     <td>{{ $member -> videos->count() }}</td>
                                     <td>{{ $member -> updated_at }}</td>
                                     <td><a href="#" class="text-danger"><i class="fas fa-trash"></i></a></td>
@@ -50,34 +50,48 @@
                 <div class="account-details">
                     <h2 class="page-sub-title">My Account Details</h2>
                     <p>Need to make changes to your account?</p>
-                    <form>
+                    <form action="{{ url('/account/updateuser/'.$user->id) }}" method="POST">
+                        {{ method_field('PUT') }}
+                        @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="First Name">
+                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" value="{{ $user -> first_name }}" name="first_name" placeholder="First Name" required>
+                                @error('first_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="Last Name">
+                                <input type="text" class="form-control @error('last_name') is-invalid @enderror" value="{{ $user -> last_name }}" name="last_name" placeholder="Last Name" required>
+                                @error('last_name')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-lg-12">
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user -> email }}"  name="email" placeholder="Email Address" required>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Username">
+                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" autocomplete="old-password" required>
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="text" class="form-control" placeholder="Email Address">
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="password" class="form-control" placeholder="Password">
-                            </div>
-                            <div class="form-group col-lg-6">
-                                <input type="password" class="form-control" placeholder="Confirm Password">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="old-password" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
                                 <label class="custom-control-label" for="customCheck1">Sponsors help pay our server costs. I agree to receive a monthly email from our sponsors to use this site for free. if I unsubscribe, then my account will be suspended.</label>
                             </div>
                         </div>

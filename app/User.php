@@ -55,6 +55,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function gyms()
     {
-        return $this->belongsToMany('App\Gym');
+        return $this->belongsToMany('App\Gym')->withPivot("status")->withTimestamps();
     }
+
 }

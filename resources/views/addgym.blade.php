@@ -25,7 +25,35 @@
 									</tr>
 								</thead>
 								<tbody>
+									@foreach ($allgyms as $key => $gym)
 									<tr>
+										<td>{{$gym -> gym_name}}</td>
+										<td>{{$gym -> owner -> name}}</td>
+										<td>
+											@if($gym -> status == 0)
+											
+											@elseif($gym -> status == 1) 
+											Approved 
+											@elseif($gym -> status == 2) 
+											Pending 
+											@elseif($gym -> status == 3)
+											Denied
+											@endif
+										</td>
+										<td>
+											@if($gym -> status == 0)
+											<a href="#" class="text-info request-access">Request Access</a>
+											@elseif($gym -> status == 1) 
+											<a href="#" class="text-success view_gympage">View Gym Page</a>
+											@elseif($gym -> status == 2) 
+											<a href="#" class="text-danger calcel-request">Cancel Request</a> 
+											@elseif($gym -> status == 3)
+											<a href="#" class="text-danger request-time">23:14:15 wait time</a> 
+											@endif
+										</td>
+									</tr>
+									@endforeach
+									<!-- <tr>
 										<td scope="row">Rima</td>
 										<td>Hasan</td>
                                         <td>Pending</td>
@@ -48,7 +76,7 @@
 										<td>Hasan</td>
 										<td></td>
 										<td><a href="#" class="text-info">Request Access</a></td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\Services\GymService;
 
 
@@ -26,9 +27,27 @@ class GymController extends Controller
 	 * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function addgym()
+    public function search(Request $request)
     {
-        return view('addgym');
+        $user = $request->user();
+        $all = $this->gymservice->index();
+
+        $sub_gyms = $user->gyms;
+
+        foreach($all as $key=> $gym)
+        {
+            $sub = $sub_gyms->find($gym->id);
+            
+            if ($sub)
+            {
+                $gym->status = $sub->pivot->status;
+                $gym->time = $sub->pivot->updated_at;
+            }
+
+            $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
+        }
+
+        return view('addgym', ['allgyms'=>$all]);
     }
 
     /**

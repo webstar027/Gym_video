@@ -34,14 +34,22 @@ class AccountController extends Controller
     public function student(Request $request)
     {
         $user = $request->user();
-        $id = $user->id;
-        $members = $this->userservice->getMembers($id);
-        // foreach($members as $key => $member)
-        // {
-        //     $o = $member->owner;
-        //     $v = $member->videos;
-        // }
-        return view('memberaccount', ['members'=> $members]);
+       
+        $members = $user->gyms;
+        foreach($members as $key => $member)
+        {
+            $o = $this->userservice->read($member->owner_id);
+            $member->owner = $o;
+        }
+        return view('memberaccount', ['members'=> $members, 'user' => $user]);
+    }
+
+    public function updateUser($id, Request $request)
+	{
+        $user = $request->user();
+        
+		$this->userservice->update($request, $id);
+		return redirect('/admin');
     }
     
     public function gymlist()
