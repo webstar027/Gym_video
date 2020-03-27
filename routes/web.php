@@ -28,20 +28,20 @@ Route::get('/aboutus', 'HomeController@about')->name('aboutus');
 Route::get('/pricing', 'HomeController@pricing')->name('pricing');
 
 // gymowner
-Route::get('/account/gymowner', 'AccountController@gymowner');
-Route::get('/account/gymowner/members', 'AccountController@members');
-Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo');
-Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video');
-Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo');
-Route::post('/account/gymowner/addvideo', 'VideoController@createVideo');
-Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo');
-Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo');
-Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos');
-Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo');
+Route::get('/account/gymowner', 'AccountController@gymowner')->middleware('auth');;
+Route::get('/account/gymowner/members', 'AccountController@members')->middleware('auth');;
+Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo')->middleware('auth');;
+Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video')->middleware('auth');;
+Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo')->middleware('auth');;
+Route::post('/account/gymowner/addvideo', 'VideoController@createVideo')->middleware('auth');;
+Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo')->middleware('auth');;
+Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo')->middleware('auth');;
+Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos')->middleware('auth');;
+Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->middleware('auth');;
 
 // student
-Route::get('/account/student', 'AccountController@student');
-Route::get('/account/student/gyms', 'AccountController@gymlist');
-Route::get('/account/student/gyms/search', 'GymController@addgym');
+Route::get('/account/student', 'AccountController@student')->middleware('auth');;
+Route::get('/account/student/gyms', 'AccountController@gymlist')->middleware('auth');;
+Route::get('/account/student/gyms/search', 'GymController@addgym')->middleware('auth');;
 // Route::get('/account/student/video/', 'VideoController@viewvideos');
-Route::get('/account/student/video/{id}', 'VideoController@watch');
+Route::get('/account/student/video/{id}', 'VideoController@watch')->middleware('auth');
