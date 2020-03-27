@@ -36,12 +36,12 @@ class GymController extends Controller
 
         foreach($all as $key=> $gym)
         {
-            $sub = $sub_gyms->where('gym_id', $gym->id);
+            $sub = $sub_gyms->find($gym->id);
             
-            if ($sub->count() > 0)
+            if ($sub)
             {
-                $gym->status = $sub[0]->pivot->status;
-                $gym->time = $sub[0]->pivot->updated_at;
+                $gym->status = $sub->pivot->status;
+                $gym->time = $sub->pivot->updated_at;
             }
 
             $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
@@ -50,6 +50,15 @@ class GymController extends Controller
         return view('addgym', ['allgyms'=>$all]);
     }
 
+    public function request_access(request $request, $gym_id){
+
+        $this->gymservice->update($request, $gym_id);
+    }
+
+    public function request_cancel(request $request, $gym_id){
+
+        $this->gymservice->update($request, $gym_id);
+    }
     /**
      * Get videos of this gym
      *
@@ -60,5 +69,9 @@ class GymController extends Controller
 	{
         $videos = $this->gymservice->read($gym_id)->videos;
         return view('viewvideos', ['videos' => $videos, 'gym_id' => $gym_id]);
-	}
+    }
+    public function gymview($gym_id){
+        $data = $this->gymservice->read($gym_id);
+        return view('viewgym',$data);
+    }
 }

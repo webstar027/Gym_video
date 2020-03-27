@@ -22,8 +22,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/admin', 'HomeController@index')->name('admin');
 
-Route::get('/gymowner', 'HomeController@gymowner')->name('gymowner');
-Route::get('/student', 'HomeController@student')->name('student');
+Route::get('/gymowner', 'HomeController@gymownerpage')->name('gymowner');
+Route::get('/student', 'HomeController@studentpage')->name('student');
 Route::get('/aboutus', 'HomeController@about')->name('aboutus');
 Route::get('/pricing', 'HomeController@pricing')->name('pricing');
 
@@ -42,7 +42,7 @@ Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->midd
 // student
 Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
 Route::get('/account/student', 'AccountController@student')->middleware('auth');;
-Route::get('/account/student/gyms', 'AccountController@gymlist')->middleware('auth');;
+Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymview')->middleware('auth');;
 Route::get('/account/student/gyms/search', 'GymController@search')->middleware('auth');;
 // Route::get('/account/student/video/', 'VideoController@viewvideos');
 Route::get('/account/student/video/{id}', 'VideoController@watch')->middleware('auth');
