@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2020 at 09:00 PM
+-- Generation Time: Mar 27, 2020 at 06:21 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -84,10 +84,10 @@ CREATE TABLE `gym_user` (
 --
 
 INSERT INTO `gym_user` (`user_id`, `gym_id`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 1, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
-(2, 3, 0, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
 (3, 3, 2, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
-(4, 3, 3, '2020-03-27 08:38:37', '2020-03-27 08:38:37');
+(4, 3, 3, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
+(5, 3, 1, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
+(6, 3, 0, '2020-03-27 08:38:37', '2020-03-27 08:38:37');
 
 -- --------------------------------------------------------
 
@@ -194,12 +194,11 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_ve
 CREATE TABLE `videos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `gym_id` bigint(20) NOT NULL,
-  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `video_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `video_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -208,11 +207,10 @@ CREATE TABLE `videos` (
 -- Dumping data for table `videos`
 --
 
-INSERT INTO `videos` (`id`, `gym_id`, `title`, `video_url`, `video_title`, `description`, `tag`, `status`, `created_at`, `updated_at`) VALUES
-(1, 3, 'my video', 'https://youtu.be/6g8G3YQtQt4', 'my video', 'my video', 'tag1', 1, '2020-03-12 14:00:00', '2020-03-26 14:00:00'),
-(2, 3, 'First video', 'https://youtu.be/6g8G3YQtQt4', 'First video', 'First video', 'tag1', 1, '2020-03-26 14:00:00', '2020-03-26 14:00:00'),
-(3, 3, 'second video', 'https://youtu.be/6g8G3YQtQt4', 'Second video', 'Second video', 'tag0', 1, '2020-03-26 14:00:00', '2020-03-26 14:00:00'),
-(4, 3, 'Third video', 'https://youtu.be/6g8G3YQtQt4', 'Third video', 'Third video', 'tag3', 0, '2020-03-26 14:00:00', '2020-03-26 14:00:00');
+INSERT INTO `videos` (`id`, `gym_id`, `video_url`, `video_title`, `description`, `tag`, `status`, `created_at`, `updated_at`) VALUES
+(20, 3, 'https://www.youtube.com/watch?v=EgjHkGu3aKg', 'How to Build the Perfect Home Gym | Home Gym Tour👿', 'Like I said in the video, some items are sold out/prices have been inflated massively. I will still leave links to all the items but also ...', 'tag', 0, '2020-03-27 11:21:41', '2020-03-27 11:21:41'),
+(22, 3, 'https://www.youtube.com/watch?v=6VqqTdZrhhc', 'Ultimate Home Gym Tour!!!', 'Justin and Trey wanted to take y\'all along on a gym tour/fixer upper, we needed to get a couple of things', 'without', 0, '2020-03-27 11:42:12', '2020-03-27 11:42:12'),
+(23, 3, 'https://www.youtube.com/watch?v=UC6CumOP3Ug', '$20 A Month Gym VS $300+ A Month Gym', 'Check out ESNTLS, they sell the best essentials in the world: https://www.esntls.co/ Our collection', 'without', 0, '2020-03-27 11:47:10', '2020-03-27 11:47:10');
 
 --
 -- Indexes for dumped tables
@@ -326,7 +324,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Constraints for dumped tables
