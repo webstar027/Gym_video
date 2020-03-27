@@ -16,22 +16,22 @@ class VideoController extends Controller
 		$this->videoservice = $videoservice;
 	}
 
-	/**
-     * add video page
+    /**
+     * Show add video page.
      *
-     * @param $gym_id
-     * @return App\Video
+	 * @param gym_id
+     * @return \Illuminate\Contracts\Support\Renderable
      */
 	public function addvideo($gym_id)
 	{
 		return view('addvideo', ['gym_id' => $gym_id]);
 	}
 
-	/**
-     * post a video
+    /**
+     * Post video.
      *
-     * @param $video id
-     * @return App\Video
+	 * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
      */
 	public function createVideo(Request $request)
 	{	
@@ -40,11 +40,12 @@ class VideoController extends Controller
 		$idd = $video ->gym_id;
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
-	/**
-     * update video page
+
+    /**
+     * Show update video page.
      *
-     * @param $gym_id, $id
-     * @return App\Video
+	 * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
      */
 	public function update_video($id)
 	{
@@ -52,6 +53,13 @@ class VideoController extends Controller
 		return view('updatevideo', $video);
 	}
 
+    /**
+     * Put update video.
+     *
+	 * @param integer
+	 * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
 	public function updateVideo($id, Request $request)
 	{
 		$this->videoservice->update($request, $id);
@@ -60,6 +68,12 @@ class VideoController extends Controller
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
+    /**
+     * Delete video.
+     *
+	 * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
 	public function deleteVideo($id)
 	{	
 		$video = $this->videoservice->read($id);
@@ -68,17 +82,26 @@ class VideoController extends Controller
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
+
+    /**
+     * Publish video.
+     *
+	 * @param integer
+	 * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
 	public function publishVideo($id, Request $request)
 	{
 		$this->videoservice->publish($id);
 		$idd = $request->user()->gym->id;
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
+
 	/**
      * Get a video
      *
-     * @param $video id
-     * @return App\Video
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
      */
 	public function watch($id)
 	{
