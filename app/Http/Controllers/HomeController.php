@@ -28,11 +28,11 @@ class HomeController extends Controller
         $role = $user->role;
         if ($role->name == "gymowner")
         {
-            return redirect();
+            return redirect('/account/gymownner');
         }
         else if ($role->name == "student")
         {
-            return redirect();
+            return redirect('/account/student');
         }
         
         return view('home');
