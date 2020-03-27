@@ -49,16 +49,34 @@ class GymController extends Controller
 
         return view('addgym', ['allgyms'=>$all]);
     }
-
+    
+    /**
+     * Request to cancel the access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function request_access(request $request, $gym_id){
 
-        $this->gymservice->update($request, $gym_id);
+        $user = $request->user();
+        $this->gymservice->access_request($user->id, $gym_id);
+        
     }
 
-    public function request_cancel(request $request, $gym_id){
+    /**
+     * Request to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
+    public function request_cancel(request $request, $gym_id)
+    {
+        $user = $request->user();
+        $this->gymservice->cancel_request($user->id, $gym_id);
 
-        $this->gymservice->update($request, $gym_id);
+        
     }
+
     /**
      * Get videos of this gym
      *
@@ -70,6 +88,13 @@ class GymController extends Controller
         $videos = $this->gymservice->read($gym_id)->videos;
         return view('viewvideos', ['videos' => $videos, 'gym_id' => $gym_id]);
     }
+        
+    /**
+     * Get videos of this gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
     public function gymview($gym_id){
         $data = $this->gymservice->read($gym_id);
         return view('viewgym',['data',$data]);
