@@ -336,6 +336,10 @@ a:hover {
   cursor: pointer;
 }
 
+.video-description {
+  margin-top: 10px;
+}
+
 .pricing-text {
   margin-bottom: 50px;
 }
@@ -364,6 +368,21 @@ a:hover {
 
 .price-details {
   margin: 50px 0;
+}
+
+.view-members .btn-group {
+  margin-bottom: 20px;
+}
+
+.view-members .btn-group .my-btn {
+  background-color: transparent;
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+}
+
+.view-members .btn-group .active {
+  background-color: #1a73e8;
+  color: #fff;
 }
 
 #footer_top {
@@ -532,6 +551,15 @@ a:hover {
 
   .pricing-box .cost {
     font-size: 30px;
+  }
+
+  .video-box p {
+    line-height: 23px;
+    font-size: 15px;
+  }
+
+  .video-info p, .video-info a {
+    font-size: 14px;
   }
 }
 

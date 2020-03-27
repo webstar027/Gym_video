@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="watch-video">
-                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="">Managers BJJ</a> <i class="fas fa-angle-right"></i> Video Title</p>
+                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ url('/account/gymowner/gym/myvideos/'.$data->gym_id) }}">My Videos</a> <i class="fas fa-angle-right"></i> Video Title</p>
                         <h2 class="page-sub-title">{{ $data->video_title }}</h2>
                         <div class="row">
 							<div class="col-md-12">
@@ -22,7 +22,7 @@
 										<iframe class="embed-responsive-item" data_url="{{$data -> video_url }}" src="" allowfullscreen></iframe>
 									</div>
 									<div class="video-description">{{ $data -> description }}<a href="#" style="display:none">read more...</a> </div>
-									<p class="video_tag">{{ $data -> tag }}</p>
+									<p class="video_tag">Tags: <span class="text-primary text-uppercase">{{ $data -> tag }}</span> </p>
 								</div>
 							</div>
 						</div>
