@@ -1,0 +1,97 @@
+@use 'variables' as *;
+
+// Home Start
+#hero {
+	height: 100%;
+	position: relative;
+	z-index: 0;
+	background-image: url('../images/bg/home-bg.jpg');
+	background-attachment: fixed;
+}
+
+#hero::after {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: -1;
+}
+
+.hero-inner {
+	display: table;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-content {
+	display: table-cell;
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.hero-text h1 {
+	color: #fff;
+	font-size: 100px;
+	font-weight: 500;
+}
+
+.hero-text p {
+	font-size: 28px;
+	color: #fff;
+	margin: 30px 0;
+	font-weight: normal;
+}
+// Home End
+
+// Gym Owner Start
+.gym-owner .my-btn {
+	width: 250px;
+	margin: 0 auto;
+	display: block;
+}
+// Gym Owner End
+
+// Log In Start
+.login-register {
+	margin-top: 80px;
+	margin-bottom: 80px;
+	padding: 50px;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+	background-color: #fff;
+}
+.login-register h3 {
+	text-align: center;
+	margin-bottom: 15px;
+	color: $title-color;
+}
+.login-register .form-control {
+	height: inherit;
+	padding: 10px;
+	border-radius: 0;
+}
+.login-register .form-control:focus {
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+	border: 1px solid lightgray;
+}
+.login-register-bottom {
+	text-align: center;
+	margin-top: 30px;
+}
+.login-register-bottom a {
+	color: $primary-color;
+}
+.account-type-btn .my-btn {
+	background-color: transparent;
+	border: 2px solid $primary-color;
+	color: $primary-color;
+	margin: 0;
+}
+.account-type-btn .active {
+	background-color: $primary-color;
+	color: #fff;
+}
+// Log in End
