@@ -13,7 +13,7 @@
                         <a class="nav-link rounded-0 active"  id="active_members_tab" data-toggle="pill" href="#active_members" role="tab" aria-controls="active_members" aria-selected="true">{{ $active_count }} Active Members</a>
                         <a class="nav-link rounded-0"  id="pending_request_tab" data-toggle="pill" href="#pending_request" role="tab" aria-controls="pending_request">{{ $pending_count }} Pending Request</a>
                         <a class="nav-link" href="{{ url('/account/gymowner/gym/myvideos/') }}/{{ $gym_id }}">{{ $video_count }} Uploaded Videos</a>
-                        <a class="nav-link" href="{{ url('/account/gymowner/gym/video/') }}/{{ $gym_id }}">Add new Video</a>
+                        <a class="nav-link" href="{{ url('/account/gymowner/addvideo/') }}/{{ $gym_id }}">Add new Video</a>
                     </nav>
                 </div>
                 <div class="tab-content pt-2 pl-1" id="pills-tabContent">

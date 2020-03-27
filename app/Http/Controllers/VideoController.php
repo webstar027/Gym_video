@@ -34,12 +34,40 @@ class VideoController extends Controller
      * @return App\Video
      */
 	public function createVideo(Request $request)
+	{	
+		
+		$video = $this->videoservice->create($request);
+		$idd = $video ->gym_id;
+		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+	}
+	/**
+     * update video page
+     *
+     * @param $gym_id, $id
+     * @return App\Video
+     */
+	public function update_video($id)
 	{
-		$this->videoservice->create($request);
-		return redirect()->action('GymController@gymvideos', ['gym_id'=> $request->gym_id]);
+		$video = $this->videoservice->read($id);
+		return view('updatevideo', $video);
 	}
 
-    /**
+	public function updateVideo($id, Request $request)
+	{
+		$this->videoservice->update($request, $id);
+		$video = $this->videoservice->read($id);
+		$idd = $video->gym_id;
+		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+	}
+
+	public function deleteVideo($id)
+	{	
+		$video = $this->videoservice->read($id);
+		$idd = $video->gym_id;
+		$this->videoservice->delete($id);
+		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+	}
+	/**
      * Get a video
      *
      * @param $video id

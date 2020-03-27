@@ -11,12 +11,12 @@
 					<div class="add-gym-user">
                         <p><a href="{{ url('/account/gymowner') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
                         <h2 class="page-sub-title">My Videos</h2>
-                        <a href="">Add Videos</a>
-                        <input type="search" class="form-control" placeholder="Search by title, description or #tag">
-                        <p>2 Gym(s) have matched your search criteria</p>
+                        <a href="{{ url('/account/gymowner/addvideo/'.$gym_id) }}">Add Videos</a>
+                        <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description or #tag">
+                        <p><span id="video_count"></span>{{ $videos ->count() }} video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped">
+							<table class="table table-striped" id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Video Title</th>
@@ -26,23 +26,28 @@
 									</tr>
 								</thead>
 								<tbody>
+								@foreach($videos as $key => $video)
 									<tr>
-										<td scope="row"><a href="">Something new</a></td>
-										<td>March 25, 2020 4:20pm</td>
-                                        <td>Published</td>
+										<td scope="row"><a href="">{{ $video -> video_title }}</a></td>
+										<td>{{ $video -> created_at }}</td>
                                         <td>
-                                            <a href="#" class="text-danger"><i class="fas fa-trash"></i></a>
+											@if($video->status == "1") 
+												Published 
+											@else 
+												Pending
+											@endif
+										</td>
+										<td style="display:none">{{ $video -> tag }}</td>
+										<td style="display:none">{{ $video -> description }}</td>
+                                        <td>
+											<a href="{{ url('/account/gymowner/deletevideo/'.$video->id) }}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete Video"><i class="fas fa-trash"></i></a>
+											<a href="{{ url('/account/gymowner/updatevideo/'.$video->id) }}"  class="text-primary editvideo" data-toggle="tooltip" data-placement="top" title="Edit video"><i class="fas fa-pen-square"></i></a>
+											@if($video->status == "0") 
+											<a href="#" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Puhlish Video"><i class="fas fa-check-square"></i></a>
+											@endif
                                         </td>
 									</tr>
-									<tr>
-										<td scope="row"><a href="">Something new</a></td>
-										<td>March 25, 2020 4:20pm</td>
-                                        <td>Pending</td>
-                                        <td>
-                                            <a href="#" class="text-danger mr-2"><i class="fas fa-trash"></i></a>
-                                            <a href="#" class="text-success"><i class="fas fa-check-square"></i></a>
-                                        </td>
-									</tr>
+								@endforeach
 								</tbody>
 							</table>
 						</div>
@@ -52,6 +57,37 @@
 			</div><!-- //.row -->
 
 		</div><!-- //.container -->
-    </section>
+	</section>
+	<script>
+		jQuery(document).ready(function(){
+			$('.delete-video').click(function(e){
+				
+				var r = confirm("Are you sure delete this?");
+				if(r == true){
+					return;
+				}else{
+					e.preventDefault();
+				}
+			});
+		});
+		function searchvideo() {
+		var input, filter, table, tr, td, i, txtValue;
+		input = document.getElementById("searchinput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+		for (i = 1; i < tr.length; i++) {
+			td = tr[i];
+			if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+			}       
+		}
+		}
+	</script>
     <!-- //Section Accounts End -->
     @endsection
