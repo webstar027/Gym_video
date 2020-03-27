@@ -28,7 +28,8 @@ class GymController extends Controller
      */
     public function addgym()
     {
-        return view('addgym');
+        $gyms = $this->gymservice->index();
+        return view('addgym', ['allgyms'=>$gyms]);
     }
 
     /**

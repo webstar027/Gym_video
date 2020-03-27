@@ -25,6 +25,14 @@
 									</tr>
 								</thead>
 								<tbody>
+									@foreach ($allgyms as $key => $gym)
+									<tr>
+										<td>{{$gym -> gym_name}}</td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									@endforeach
 									<tr>
 										<td scope="row">Rima</td>
 										<td>Hasan</td>

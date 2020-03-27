@@ -40,6 +40,7 @@ Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos')
 Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->middleware('auth');;
 
 // student
+Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
 Route::get('/account/student', 'AccountController@student')->middleware('auth');;
 Route::get('/account/student/gyms', 'AccountController@gymlist')->middleware('auth');;
 Route::get('/account/student/gyms/search', 'GymController@addgym')->middleware('auth');;
