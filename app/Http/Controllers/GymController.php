@@ -11,4 +11,10 @@ class GymController extends Controller
     {
         return view('addgym');
     }
+    
+	public function gymvideos($gym_id)
+	{
+        return view('viewvideos');
+        
+	}
 }
