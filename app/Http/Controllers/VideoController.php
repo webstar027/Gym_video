@@ -15,10 +15,6 @@ class VideoController extends Controller
 	{
 		$this->videoservice = $videoservice;
 	}
-	public function gymvideos($gym_id)
-	{
-		return view('viewvideos');
-	}
 	public function addvideo($gym_id)
 	{
 		return view('addvideo', ['gym_id' => $gym_id]);
@@ -27,7 +23,7 @@ class VideoController extends Controller
 	public function createVideo(Request $request)
 	{
 		$this->videoservice->create($request);
-		return redirect()->action('VideoController@gymvideos', ['gym_id'=>$gym_id]);
+		return redirect()->action('VideoController@gymvideos', ['gym_id'=> $request->gym_id]);
 	}
 
 	public function watch($id)
