@@ -14,6 +14,7 @@ class AccountController extends Controller
 	{
         $this->userservice = $userservice;
     }
+    
     //Gym ownner account
     public function gymowner(Request $request)
     {
@@ -23,15 +24,18 @@ class AccountController extends Controller
         
         return view('gymowneraccount', $data);
     }
+
     public function members($id)
     {
         return view('memberaccount');
     }
+    
     //student account
     public function student()
     {
         return view('memberaccount');
     }
+    
     public function gymlist()
     {
         return view('gymlist');
