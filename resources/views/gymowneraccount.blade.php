@@ -17,12 +17,18 @@
                     </nav>
                 </div>
                 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
-                    <div class="tab-pane fade show active" id="active_members" role="tabpanel" aria-labelledby="active_members_tab">Consequat
-                        occaecat ullamco amet non eiusmod nostrud dolore irure incididunt est duis anim sunt officia. Fugiat
-                        velit proident aliquip nisi incididunt nostrud exercitation proident est nisi. Irure magna elit commodo
-                        anim ex veniam culpa eiusmod id nostrud sit cupidatat in veniam ad. Eiusmod consequat eu adipisicing
-                        minim anim aliquip cupidatat culpa excepteur quis. Occaecat sit eu exercitation irure Lorem incididunt
-                        nostrud.</div>
+                    <div class="tab-pane fade show active" id="active_members" role="tabpanel" aria-labelledby="active_members_tab">
+                        <table class="table table-striped" id="myTable">
+                            <thead>
+                                <tr>
+                                    <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">Ad
                         pariatur nostrud pariatur exercitation ipsum ipsum culpa mollit commodo mollit ex. Aute sunt incididunt
                         amet commodo est sint nisi deserunt pariatur do. Aliquip ex eiusmod voluptate exercitation cillum id

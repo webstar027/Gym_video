@@ -37,6 +37,16 @@ class VideoService
       return $this->video->update($id, $attributes);
 	}
  
+	public function getGymId($id)
+	{
+		return $video = $this->video->find($id)->gym_id;
+	}
+	
+	public function publish($id)
+	{
+		return $this->video->publish($id);
+	}
+	
 	public function delete($id)
 	{
       return $this->video->delete($id);

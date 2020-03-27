@@ -21,10 +21,10 @@ class GymController extends Controller
     }
 
     /**
-     * add gym
+     * Post video.
      *
-     * @param 
-     * @return 
+	 * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function addgym()
     {
@@ -34,8 +34,8 @@ class GymController extends Controller
     /**
      * Get videos of this gym
      *
-     * @param 
-     * @return 
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
      */    
 	public function gymvideos($gym_id)
 	{

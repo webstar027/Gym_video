@@ -3,7 +3,7 @@
 namespace App\Services;
  
 use App\Gym;
-use App\Repositories\gymRepository;
+use App\Repositories\GymRepository;
 use Illuminate\Http\Request;
  
 class GymService

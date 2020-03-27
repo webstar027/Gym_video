@@ -28,6 +28,11 @@ class VideoRepository
     return $this->video->find($id);
   }
   
+  public function publish($id)
+  {
+    $this->video->find($id)->update(['status' => 1]);
+  }
+
   public function update($id, array $attributes)
   {
     return $this->video->find($id)->update($attributes);

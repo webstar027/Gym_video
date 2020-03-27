@@ -169,7 +169,7 @@ a:hover {
 }
 
 .navbar-brand img {
-  width: 100px;
+  width: 150px;
 }
 
 .logo-alt {
@@ -308,7 +308,7 @@ a:hover {
   color: #fff;
 }
 
-.gym-name-stats .nav-link.active {
+.gym-name-stats .active {
   background-color: #1a73e8;
   color: #fff;
 }
@@ -330,8 +330,49 @@ a:hover {
   font-size: 14px;
 }
 
+.love {
+  width: 16px;
+  margin-top: -2px;
+  cursor: pointer;
+}
+
+.pricing-text {
+  margin-bottom: 50px;
+}
+
+.pricing-box {
+  border: 1px solid lightgray;
+  text-align: center;
+  padding: 50px 35px;
+  background-color: #fff;
+  transition: 1s;
+}
+
+.pricing-box:hover {
+  transform: scale(1.06);
+}
+
+.pricing-box h2 {
+  flex: 35;
+}
+
+.pricing-box .cost {
+  color: #1a73e8;
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.price-details {
+  margin: 50px 0;
+}
+
 #footer_top {
   background-color: #252525;
+}
+
+.footer-top-about img {
+  width: 250px;
+  margin-bottom: 20px;
 }
 
 .footer-top-about p {
@@ -480,4 +521,18 @@ a:hover {
     font-size: 16px;
     padding: 5px 15px;
   }
+
+  .pricing-box:hover {
+    transform: scale(1);
+  }
+
+  .price-details {
+    margin: 30px 0;
+  }
+
+  .pricing-box .cost {
+    font-size: 30px;
+  }
 }
+
+/*# sourceMappingURL=style.css.map */
