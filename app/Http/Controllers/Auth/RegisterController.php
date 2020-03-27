@@ -50,7 +50,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($data['role_id'] == 1){
+        if($data['role_id'] == 3){
             return Validator::make($data, [
                 'first_name'=>['required','string'],
                 'last_name'=>['required','string'],
