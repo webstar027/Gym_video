@@ -37,6 +37,11 @@ class VideoService
       return $this->video->update($id, $attributes);
 	}
  
+	public function publish($id)
+	{
+		return $this->video->publish($id);
+	}
+	
 	public function delete($id)
 	{
       return $this->video->delete($id);

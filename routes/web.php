@@ -35,7 +35,7 @@ Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video')
 Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo');
 Route::post('/account/gymowner/addvideo', 'VideoController@createVideo');
 Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo');
-Route::put('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo');
+Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo');
 Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos');
 Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo');
 
