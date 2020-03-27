@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class GymController extends Controller
 {
    
-    public function addgym($id)
+    public function addgym()
     {
         return view('addgym');
     }
