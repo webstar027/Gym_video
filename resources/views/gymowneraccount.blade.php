@@ -8,39 +8,26 @@
 
                 <!-- <h3>Hello {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</h3><br/> -->
                 <div class="gym-name-stats">
-                    <h1 class="page-sub-title mb-3">Gym Name Stats</h1>
-                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active rounded-0" id="active_members_tab" data-toggle="pill" href="#active_members" role="tab"
-                            aria-controls="pills-home" aria-selected="true">{{ active_count }}Active Members</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link rounded-0" id="pending_members_tab" data-toggle="pill" href="#pending_members" role="tab"
-                            aria-controls="pills-profile" aria-selected="false">{{ pending_count }}Pending Request</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link rounded-0" id="uploaded_videos_tab" data-toggle="pill" href="#uploaded_videos" role="tab"
-                            aria-controls="pills-contact" aria-selected="false">{{ video_count }}Uploaded Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link rounded-0" id="new_video_tab" data-toggle="pill" href="#new_video" role="tab"
-                            aria-controls="pills-contact" aria-selected="false">Add New Video</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content pt-2 pl-1" id="pills-tabContent">
-                        <div class="tab-pane fade show active" id="active_members" role="tabpanel" aria-labelledby="active_members_tab">
-                            Active Members
-                        </div>
-                        <div class="tab-pane fade" id="pending_members" role="tabpanel" aria-labelledby="pending_members_tab">
-                            Pending Request
-                        </div>
-                        <div class="tab-pane fade" id="uploaded_videos" role="tabpanel" aria-labelledby="uploaded_videos_tab">
-                            Uploaded Videos
-                        </div>
-                        <div class="tab-pane fade" id="new_video" role="tabpanel" aria-labelledby="new_video_tab">
-                            Add New Video
-                        </div>
-                    </div>
+                    <h2 class="page-sub-title pb-3 mb-3">Gym Name Stats</h2>
+                    <nav class="nav nav-pills">
+                        <a class="nav-link rounded-0 active"  id="active_members_tab" data-toggle="pill" href="#active_members" role="tab" aria-controls="active_members" aria-selected="true">{{ $active_count }} Active Members</a>
+                        <a class="nav-link rounded-0"  id="pending_request_tab" data-toggle="pill" href="#pending_request" role="tab" aria-controls="pending_request">{{ $pending_count }} Pending Request</a>
+                        <a class="nav-link" href="{{ url('/account/gymowner/gym/myvideos/') }}/{{ $gym_id }}">{{ $video_count }} Uploaded Videos</a>
+                        <a class="nav-link" href="{{ url('/account/gymowner/gym/video/') }}/{{ $gym_id }}">Add new Video</a>
+                    </nav>
+                </div>
+                <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="active_members" role="tabpanel" aria-labelledby="active_members_tab">Consequat
+                        occaecat ullamco amet non eiusmod nostrud dolore irure incididunt est duis anim sunt officia. Fugiat
+                        velit proident aliquip nisi incididunt nostrud exercitation proident est nisi. Irure magna elit commodo
+                        anim ex veniam culpa eiusmod id nostrud sit cupidatat in veniam ad. Eiusmod consequat eu adipisicing
+                        minim anim aliquip cupidatat culpa excepteur quis. Occaecat sit eu exercitation irure Lorem incididunt
+                        nostrud.</div>
+                    <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">Ad
+                        pariatur nostrud pariatur exercitation ipsum ipsum culpa mollit commodo mollit ex. Aute sunt incididunt
+                        amet commodo est sint nisi deserunt pariatur do. Aliquip ex eiusmod voluptate exercitation cillum id
+                        incididunt elit sunt. Qui minim sit magna Lorem id et dolore velit Lorem amet exercitation duis
+                        deserunt. Anim id labore elit adipisicing ut in id occaecat pariatur ut ullamco ea tempor duis.</div>
                 </div>
             </div>
         </div>
