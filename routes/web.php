@@ -22,8 +22,8 @@ Auth::routes(['verify' => true]);
 
 Route::get('/admin', 'HomeController@index')->name('admin');
 
-Route::get('/gymowner', 'HomeController@gymowner')->name('gymowner');
-Route::get('/student', 'HomeController@student')->name('student');
+Route::get('/gymowner', 'HomeController@gymownerpage')->name('gymowner');
+Route::get('/student', 'HomeController@studentpage')->name('student');
 Route::get('/aboutus', 'HomeController@about')->name('aboutus');
 Route::get('/pricing', 'HomeController@pricing')->name('pricing');
 
