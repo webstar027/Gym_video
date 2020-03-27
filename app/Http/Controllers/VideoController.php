@@ -15,17 +15,14 @@ class VideoController extends Controller
 	{
 		$this->videoservice = $videoservice;
 	}
-
-	public function videos($gymid)
+	public function gymvideos($gymid)
 	{
 		return view('viewvideos');
 	}
-
-	public function add($id)
+	public function addvideo($id)
 	{
-		return view();
+		return view('addvideo');
 	}
-
 	public function watch($id)
 	{
 		return view('watchvideo');
