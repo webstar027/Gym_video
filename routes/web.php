@@ -31,6 +31,7 @@ Route::get('/pricing', 'HomeController@pricing')->name('pricing');
 Route::get('/account/gymowner', 'AccountController@gymowner');
 Route::get('/account/gymowner/members', 'AccountController@members');
 Route::get('/account/gymowner/addvideo', 'VideoController@addVideo');
+Route::post('/account/gymowner/createvideo', 'VideoController@createVideo');
 Route::get('/account/gymowner/gym/myvideos/{gymid}', 'VideoController@gymvideos');
 Route::get('/account/gymowner/gym/video/{id}', 'VideoController@addvideo');
 
