@@ -43,7 +43,11 @@
 											<a href="{{ url('/account/gymowner/deletevideo/'.$video->id) }}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete Video"><i class="fas fa-trash"></i></a>
 											<a href="{{ url('/account/gymowner/updatevideo/'.$video->id) }}"  class="text-primary editvideo" data-toggle="tooltip" data-placement="top" title="Edit video"><i class="fas fa-pen-square"></i></a>
 											@if($video->status == "0") 
-											<a href="#" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Puhlish Video"><i class="fas fa-check-square"></i></a>
+											<form method="POST" action="{{ url('/account/gymowner/puhlishvideo/'.$video -> id) }}">
+												{{ method_field('PUT') }}
+												@csrf
+												<button type="submit" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Puhlish Video"><i class="fas fa-check-square"></i></button>
+											</form>
 											@endif
                                         </td>
 									</tr>

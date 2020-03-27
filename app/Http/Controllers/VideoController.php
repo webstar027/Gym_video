@@ -67,6 +67,15 @@ class VideoController extends Controller
 		$this->videoservice->delete($id);
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
+
+	public function publishVideo($id, Request $request){
+		$video = $this->videoservice->read($id);
+		$idd = $video->gym_id;
+		$video->status = 1;
+		$request = $video;
+		$this->videoservice->update($request, $id);
+		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+	}
 	/**
      * Get a video
      *
