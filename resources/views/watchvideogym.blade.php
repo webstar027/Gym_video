@@ -16,7 +16,7 @@
 								<div class="video-box">
 									<div class="row align-items-center video-info">
 										<div class="col-7"><p class="mb-0">Uploaded: {{ $data->created_at }}</p></div>
-										<div class="col-5 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i> Save as Favorite</a></div>
+										<div class="col-5 text-right"><a href="#" data-videoid="{{ $data->id }}" class="btn_favorite @if($data -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i> Save as Favorite</a></div>
 									</div>
 									<div class="embed-responsive embed-responsive-16by9">
 										<iframe class="embed-responsive-item" data_url="{{$data -> video_url }}" src="" allowfullscreen></iframe>
