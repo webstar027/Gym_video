@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Video;
 use App\Services\VideoService;
+use Alaouy\Youtube\Facades\Youtube;
 
 class VideoController extends Controller
 {
@@ -133,6 +134,19 @@ class VideoController extends Controller
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
 		return view('watchvideogym', ['data' => $video]);
+	}
+
+	/**
+     * Get youtube video information
+     *
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function getYoutubeVideoInfo($id)
+	{
+		$video = Youtube::getVideoInfo($id);
+
+		return $video;
 	}
 
 }
