@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -27,7 +28,13 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = RouteServiceProvider::HOME;
-
+    
+    /**
+     * Login username to be used by the controller.
+     *
+     * @var string
+     */
+    protected $username;
     /**
      * Create a new controller instance.
      *
@@ -36,5 +43,57 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+        $this->username = $this->findUsername();
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function findUsername()
+    {
+        $login = request()->input('login');
+ 
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+ 
+        request()->merge([$fieldType => $login]);
+ 
+        return $fieldType;
+    }
+    /**
+     * Get username property.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLogin(Request $request)
+    {
+        $messages = [
+            'login.required' => 'Email or username cannot be empty',
+            'email.exists' => 'Email or username already registered',
+            'username.exists' => 'Username is already registered',
+            'password.required' => 'Password cannot be empty',
+        ];
+
+        $request->validate([
+            'login' => 'required|string',
+            'password' => 'required|string',
+            'email' => 'string|exists:users',
+            'username' => 'string|exists:users',
+        ], $messages);
     }
 }

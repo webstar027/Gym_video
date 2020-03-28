@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2020 at 08:06 PM
+-- Generation Time: Mar 28, 2020 at 09:18 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -207,7 +207,7 @@ CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `first_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -221,12 +221,12 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
 (3, 'johnhh', 'smith', 'johnsmith', 'ruima027@gmail.com', '2020-03-27 15:26:50', '$2y$10$MgAIMhODqpdsbN.43YSOle5e6Sdt2H8DCNqujqt7sxepdNABt8AVS', 3, '7hAtTrbEP7U0I0hPFQwA4rBgb73I1Z6KA9y9WHY2FEHpywSgvO5uiX1LUAXe', '2020-03-27 15:26:18', '2020-03-28 08:13:30'),
 (4, 'Joseph', 'Scott', 'Josephscott0605', 'joseph.scott0605@gmail.com', '2020-03-27 15:28:27', '$2y$10$r9hd5uLxdtDU8Bl1z91Thu08JJyJ2e3b7gwo/WkWXZ/mMYGGFlqOy', 3, '4cCdLciurquXk9C7rkyV35MyjEAmxgdsQnz5VnhfRuvVl7f6DftMQXn09ra0', '2020-03-27 15:27:44', '2020-03-28 16:52:25'),
 (5, 'bill', 'chong', 'bchong', 'bchong753@gmail.com', '2020-03-27 15:31:03', '$2y$10$OLTwwO/OJnf26Ry50N/B1OrZBTxOlQEjfyfVKDebiLI9Dt5TqlDNy', 3, 'IvAUBSoZQUWoWUL1kZUVno9TgYbxEPzjy7mqhVQIumYatheH2U5iXghhcB1S', '2020-03-27 15:30:36', '2020-03-28 17:03:32'),
 (6, 'Isi', 'Aucaman', 'isi.aucaman', 'isi.aucaman@yandex.com', '2020-03-27 15:33:16', '$2y$10$kUII4MSZsRPyKVV1LG8iC.Kj8hc1Cmp3YAbDbUxW4PkogOG1qas.m', 2, NULL, '2020-03-27 15:32:54', '2020-03-27 15:33:16'),
-(7, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-27 15:39:47', '$2y$10$DidLDiNRZRDo53CAMvEw0OetNhOr5LXKli9k5imdLlshZ4QNjLXp.', 2, 'aZQSNzZRQ8eykvGfBDeWXMCbXYXCfkpCsHFxMc1vwsfFAxw3stIS4iIR7OXo', '2020-03-27 15:38:37', '2020-03-27 15:39:47'),
+(7, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-27 15:39:47', '$2y$10$DidLDiNRZRDo53CAMvEw0OetNhOr5LXKli9k5imdLlshZ4QNjLXp.', 2, '6nzI5ORCIpy3sQOS7nhfBfqNSUt4FQ8F8DAhdIrVV2NZy7XWJuTz6OIrKn0X', '2020-03-27 15:38:37', '2020-03-27 15:39:47'),
 (9, 'Judy', 'Ferrell', 'judyferrell', 'judyferrell@yandex.com', '2020-03-27 22:07:14', '$2y$10$z0X7WVSW81iiORbx/kE6TeDXcKPd22q9H4ATfH94EY4NXtf8II73.', 2, NULL, '2020-03-28 16:06:39', '2020-03-28 16:06:39');
 
 -- --------------------------------------------------------
@@ -322,7 +322,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_name_unique` (`name`),
+  ADD UNIQUE KEY `users_name_unique` (`username`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --

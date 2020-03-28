@@ -55,7 +55,7 @@ class RegisterController extends Controller
                 'first_name'=>['required','string'],
                 'last_name'=>['required','string'],
                 'role_id'=>['required','integer'],
-                'name' => ['required', 'string', 'max:255','min:6', 'unique:users'],
+                'username' => ['required', 'string', 'max:255','min:6', 'unique:users'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
@@ -65,7 +65,7 @@ class RegisterController extends Controller
                 'first_name'=>['required','string'],
                 'last_name'=>['required','string'],
                 'role_id'=>['required','integer'],
-                'name' => ['required', 'string', 'max:255','min:6', 'unique:users'],
+                'username' => ['required', 'string', 'max:255','min:6', 'unique:users'],
                 'email' => ['required', 'String', 'email', 'max:255', 'unique:users'],
                 // 'gym_name' => ['required','string'],
                 // 'gym_address_1' => ['required','string'],
@@ -93,7 +93,7 @@ class RegisterController extends Controller
             $user =  User::create([
                 'first_name'=>$data['first_name'],
                 'last_name'=>$data['last_name'],
-                'name' => $data['name'],
+                'username' => $data['username'],
                 'email' => $data['email'],
                 'role_id' => $data['role_id'],
                 'password' => Hash::make($data['password']),
