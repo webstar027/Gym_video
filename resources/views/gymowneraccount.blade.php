@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                    <input id="username" placeholder="Username" value="{{ $user -> username }} type="text" disabled class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+                                    <input id="username" placeholder="Username" value="{{ $user -> username }}" type="text" disabled class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
 
                                     @error('username')
                                         <span class="invalid-feedback" role="alert">
