@@ -23,7 +23,7 @@ class CreateGymTable extends Migration
             $table->string('country');
             $table->string('zip_code');
             $table->string('website');
-            $table->unsignedBigInteger('owner_id');
+            $table->unsignedInteger('owner_id');
             $table->foreign('owner_id')->references('id')->on('users');
             $table->timestamps();
         });

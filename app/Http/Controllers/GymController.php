@@ -120,11 +120,11 @@ class GymController extends Controller
     {
         $user = $request->user();
         $gym = $this->gymservice->read($gym_id);
-        $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
-        $videos = $videos_all->where('status', 1);
-        $gym->videos = $videos;
+        // $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        // $videos = $videos_all->where('status', 1);
+        // $gym->videos = $videos;
         
-        return view('viewgym',$gym);
+        return view('viewgym',['data' => $gym]);
     }
 
     	
@@ -138,7 +138,6 @@ class GymController extends Controller
 	{
 		$user = $request->user();
         $videos = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
-        
         return view();
 	}
 }

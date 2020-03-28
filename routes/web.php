@@ -38,14 +38,9 @@ Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo')-
 Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo')->middleware('auth');
 Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos')->middleware('auth');
 Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->middleware('auth');
-<<<<<<< HEAD
 Route::get('/account/gymowner/members/aprove/{gym_id}/{user_id}', 'GymController@request_aprove')->middleware('auth');
 Route::get('/account/gymowner/members/deny/{gym_id}/{user_id}', 'GymController@request_deny')->middleware('auth');
-=======
-Route::get('/account/gymowner/members/aprove/{gym_id}', 'GymController@request_aprove')->middleware('auth');
-Route::post('/getYoutube/{id}', 'VideoController@getYoutube')->middleware('auth');
-
->>>>>>> 90056a4e3177cb4993a369a5cd06fe2ec84c14c8
+Route::get('/getYoutube/{id}', 'VideoController@getYoutube')->middleware('auth');
 // student
 Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
 Route::get('/account/student', 'AccountController@student')->middleware('auth');
