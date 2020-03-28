@@ -77,4 +77,23 @@ class GymService
 		$gym = read($gym_id);
 		$gym->members()->detach($user_id);
 	}
+
+	public function getVideosIncludeFavorite($gym_id, $user)
+	{
+		$favorite = $user->favorites();
+		$videos = read($gym_id)->videos;
+
+		foreach($videos as $key => $video)
+		{
+			$video->favorite_count = $video->favorites()->count();
+			if ($favorite->where('video_id', $video->id)->count() > 0)
+			{
+				$video->favorite = true;
+			}
+			else
+			{
+				$video->favorite = false;
+			}
+		}
+	}
 }

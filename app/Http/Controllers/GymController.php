@@ -60,7 +60,7 @@ class GymController extends Controller
 
         $user = $request->user();
         $this->gymservice->access_request($user->id, $gym_id);
-        
+
     }
 
     /**
@@ -74,7 +74,6 @@ class GymController extends Controller
         $user = $request->user();
         $this->gymservice->cancel_request($user->id, $gym_id);
 
-        
     }
 
     /**
@@ -90,13 +89,31 @@ class GymController extends Controller
     }
         
     /**
-     * Get videos of this gym
+     * Get gym
      *
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
-    public function gymview($gym_id){
-        $data = $this->gymservice->read($gym_id);
-        return view('viewgym',$data);
+    public function gymview($gym_id, Request $request)
+    {
+        $gym = $this->gymservice->read($gym_id);
+        $videos = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        $gym->videos = $videos;
+        return view('viewgym',$gym);
     }
+
+    	
+	/**
+     * Get video list of gym
+     *
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function videos($gym_id, Request $request)
+	{
+		$user = $request->user();
+        $videos = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        
+        return view();
+	}
 }
