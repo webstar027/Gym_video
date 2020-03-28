@@ -100,8 +100,8 @@
 				
 				<div class="col-lg-6">
 					<div class="footer-top-about">
-						<img src="{{ asset('/images/logo-alt.png')}}" alt="">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem eum alias quasi eaque. Fugit beatae sapiente libero atque consequuntur iusto!</p>
+						<img src="{{ asset('images/logo-default.png')}}" alt="">
+						<p>Ground Monkey's private playlist format allows instructors to provide valuable video content for their members, while still maintaining an easily organized curriculum.</p>
 					</div>
 				</div>
 
@@ -112,7 +112,7 @@
 							<a class="nav-link" href="{{ url('/student') }}">Student</a>
 							<a class="nav-link" href="{{ url('/gymowner') }}">Gym Owner</a>
 							<a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
-							<a class="nav-link" href="#">About Us</a>
+							<a class="nav-link" href="{{ url('/aboutus') }}">About Us</a>
 						</nav>
 					</div>
 				</div>
@@ -130,12 +130,12 @@
 				
 				<div class="col-lg-6">
 					<div class="copyright-text">
-						<p>&copy; 2020 - Online Training</p>
+						<p>&copy; 2020 - Ground Monkey</p>
 					</div>
 				</div>
 
 				<div class="col-lg-6 mt-4 mt-lg-0">
-					<div class="social-media">
+					<!-- <div class="social-media">
 						<ul class="nav justify-content-end">
 							<li class="nav-item">
 								<a class="nav-link" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -153,10 +153,11 @@
 								<a class="nav-link" href="#" target="_blank"><i class="fab fa-google-plus-g"></i></a>
 							</li>
 						</ul>
-					</div>
+                    </div> -->
+                    
 				</div>
 
-			</div><!-- //.row -->
+            </div><!-- //.row -->
 
 		</div><!-- //.container -->
 	</section><!-- //Section Footer Bottom End -->

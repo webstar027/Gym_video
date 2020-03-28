@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use App\Services\GymService;
-
+use DateTime;
+use DateInterval;
 
 class GymController extends Controller
 {
@@ -34,6 +35,8 @@ class GymController extends Controller
 
         $sub_gyms = $user->gyms;
 
+        $current = new DateTime();
+        $current = $current->sub(new DateInterval('P1D'));
         foreach($all as $key=> $gym)
         {
             $sub = $sub_gyms->find($gym->id);
@@ -41,7 +44,18 @@ class GymController extends Controller
             if ($sub)
             {
                 $gym->status = $sub->pivot->status;
-                $gym->time = $sub->pivot->updated_at;
+                if ($gym->status == 3)
+                {
+                    $diff = $current->diff($sub->pivot->updated_at);
+                    if ($diff->h < 24)
+                    {
+                        $gym->time = str_pad($diff->h, 2, '0', STR_PAD_LEFT).':'.str_pad($diff->i, 2, '0', STR_PAD_LEFT).':'.str_pad($diff->s, 2, '0', STR_PAD_LEFT).' wait time';
+                    }
+                    else
+                    {
+                        $this->gymservice->cancel_request($user->id, $gym->id);
+                    }
+                }
             }
 
             $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
