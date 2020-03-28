@@ -56,11 +56,16 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */ 
-    public function request_access(request $request, $gym_id){
+    public function request_access($gym_id, Request $request ){
 
         $user = $request->user();
         $this->gymservice->access_request($user->id, $gym_id);
+<<<<<<< HEAD
+        return redirect('/account/student/gyms/search');
+        
+=======
 
+>>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
     }
 
     /**
@@ -69,13 +74,41 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
-    public function request_cancel(request $request, $gym_id)
+    public function request_cancel($gym_id, Request $request)
     {
         $user = $request->user();
         $this->gymservice->cancel_request($user->id, $gym_id);
+<<<<<<< HEAD
+        return redirect('/account/student/gyms/search');
+        
+=======
 
+>>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
     }
-
+    /**
+     * Deny to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
+    public function request_deny($gym_id, Request $request)
+    {
+        $user = $request->user();
+        $this->gymservice->denied_request($user->id, $gym_id);
+        return redirect('/account/student');
+        
+    }
+    /**
+     * aprove to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function request_aprove($gym_id, Request $request){
+        $user = $request->user();
+        $this->gymservice->approve_request($user->id, $gym_id);
+        return redirect('/account/student');
+    }
     /**
      * Get videos of this gym
      *
@@ -94,6 +127,11 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
+<<<<<<< HEAD
+    public function gymview($gym_id){
+        $data = $this->gymservice->read($gym_id);
+        return view('viewgym',['data',$data]);
+=======
     public function gymview($gym_id, Request $request)
     {
         $gym = $this->gymservice->read($gym_id);
@@ -102,6 +140,7 @@ class GymController extends Controller
         $gym->videos = $videos;
         
         return view('viewgym',$gym);
+>>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
     }
 
     	
