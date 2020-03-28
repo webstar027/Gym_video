@@ -20,4 +20,15 @@ class Video extends Model
     {
         return $this->belongsTo('App\Gym');
     }
+
+    
+    /**
+     * Get the favorate subscribed to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'video_id', 'user_id')->withTimestamps();
+    }
 }

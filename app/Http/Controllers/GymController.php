@@ -60,8 +60,12 @@ class GymController extends Controller
 
         $user = $request->user();
         $this->gymservice->access_request($user->id, $gym_id);
+<<<<<<< HEAD
         return redirect('/account/student/gyms/search');
         
+=======
+
+>>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
     }
 
     /**
@@ -74,8 +78,12 @@ class GymController extends Controller
     {
         $user = $request->user();
         $this->gymservice->cancel_request($user->id, $gym_id);
+<<<<<<< HEAD
         return redirect('/account/student/gyms/search');
         
+=======
+
+>>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
     }
     /**
      * Deny to access to the gym
@@ -114,13 +122,39 @@ class GymController extends Controller
     }
         
     /**
-     * Get videos of this gym
+     * Get gym
      *
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
+<<<<<<< HEAD
     public function gymview($gym_id){
         $data = $this->gymservice->read($gym_id);
         return view('viewgym',['data',$data]);
+=======
+    public function gymview($gym_id, Request $request)
+    {
+        $gym = $this->gymservice->read($gym_id);
+        $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        $videos = $videos_all->where('status', 1);
+        $gym->videos = $videos;
+        
+        return view('viewgym',$gym);
+>>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
     }
+
+    	
+	/**
+     * Get video list of gym
+     *
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function videos($gym_id, Request $request)
+	{
+		$user = $request->user();
+        $videos = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        
+        return view();
+	}
 }

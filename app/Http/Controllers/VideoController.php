@@ -80,6 +80,31 @@ class VideoController extends Controller
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
+	/**
+     * Favorite video.
+     *
+	 * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function favorite($id)
+	{	
+		$user = auth()->user();
+		$this->videoservice->favorite($user, $id);
+		return true;		
+	}
+
+	/**
+     * Unfavorite video.
+     *
+	 * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function unfavorite($id)
+	{	
+		$user = auth()->user();
+		$this->videoservice->unfavorite($user, $id);
+		return true;		
+	}
 
     /**
      * Publish video.
@@ -101,9 +126,13 @@ class VideoController extends Controller
      * @param integer $video id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function watch($id)
+	public function watch($id, Request $request)
 	{
-		$data = $this->videoservice->read($id);
-		return view('watchvideogym', ['data' => $data]);
+		$user = $request->user();
+		$video = $this->videoservice->read($id);
+		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
+		$video->favorite_count = $video->favorites()->count();
+		return view('watchvideogym', ['data' => $video]);
 	}
+
 }
