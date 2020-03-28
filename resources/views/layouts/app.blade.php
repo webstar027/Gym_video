@@ -100,7 +100,7 @@
 				
 				<div class="col-lg-6">
 					<div class="footer-top-about">
-						<img src="{{ asset('images/logo-default.png')}}" alt="">
+						<img src="{{ asset('images/logo-alt.png')}}" alt="">
 						<p>Ground Monkey's private playlist format allows instructors to provide valuable video content for their members, while still maintaining an easily organized curriculum.</p>
 					</div>
 				</div>
