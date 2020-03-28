@@ -97,8 +97,10 @@ class GymController extends Controller
     public function gymview($gym_id, Request $request)
     {
         $gym = $this->gymservice->read($gym_id);
-        $videos = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        $videos = $videos_all->where('status', 1);
         $gym->videos = $videos;
+        
         return view('viewgym',$gym);
     }
 
