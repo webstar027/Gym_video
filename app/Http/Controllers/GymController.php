@@ -77,6 +77,11 @@ class GymController extends Controller
         return redirect('/account/student');
     }
 
+    public function updategym($gym_id, Request $request){
+        $user = $request->user();
+        $this->gymservice->update($request, $gym_id);
+		return redirect('/account/gymowner');
+    }
     /**
      * Request to access to the gym
      *

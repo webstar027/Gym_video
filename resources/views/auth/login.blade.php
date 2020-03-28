@@ -13,7 +13,12 @@
                         @csrf
                         <div class="form-group">
                             <input id="text" type="text" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email Address or Username"  name="login" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                            @if ($errors->has('username') || $errors->has('email'))
+                            @error('username')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message ?? ''}}</strong>
+                                </span>
+                            @enderror
+                            @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message ?? ''}}</strong>
                                 </span>

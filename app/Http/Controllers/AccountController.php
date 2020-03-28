@@ -27,7 +27,7 @@ class AccountController extends Controller
         $user = $request->user();
         $gymownerid = $user->id;
         $data = $this->userservice->getGymSummary($gymownerid);
-        
+      
         return view('gymowneraccount', $data);
     }
 
