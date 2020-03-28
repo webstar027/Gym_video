@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Video;
 use App\Services\VideoService;
-use Alaouy\Youtube\Facades\Youtube;
+// use Alaouy\Youtube\Facades\Youtube;
 
 class VideoController extends Controller
 {
@@ -142,11 +142,10 @@ class VideoController extends Controller
      * @param integer $video id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function getYoutubeVideoInfo($id)
-	{
-		$video = Youtube::getVideoInfo($id);
-
-		return $video;
-	}
+	// public function getYoutubeVideoInfo($id)
+	// {
+	// 	$video = Youtube::getVideoInfo($id);
+	// 	return $video;
+	// }
 
 }
