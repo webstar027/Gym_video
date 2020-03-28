@@ -59,6 +59,16 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * Get the approved gyms subscribed to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function approved_gyms()
+    {
+        return $this->belongsToMany('App\Gym')->withPivot("status")->withTimestamps()->wherePivot('status', 1);;
+    }
+
+    /**
      * Get the favorate subscribed to this user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
