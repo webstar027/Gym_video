@@ -114,13 +114,21 @@ class VideoController extends Controller
      * @param integer $video id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function watch($id, Request $request)
+	public function watchgym($id, Request $request)
 	{
 		$user = $request->user();
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
 		return view('watchvideogym', ['data' => $video]);
+	}
+	public function watch($id, Request $request)
+	{
+		$user = $request->user();
+		$video = $this->videoservice->read($id);
+		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
+		$video->favorite_count = $video->favorites()->count();
+		return view('watchvideo', ['data' => $video]);
 	}
 
 	/**
