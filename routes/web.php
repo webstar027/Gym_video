@@ -41,6 +41,7 @@ Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->midd
 Route::get('/account/gymowner/members/aprove/{gym_id}/{user_id}', 'GymController@request_aprove')->middleware('auth');
 Route::get('/account/gymowner/members/deny/{gym_id}/{user_id}', 'GymController@request_deny')->middleware('auth');
 Route::get('/getYoutube/{id}', 'VideoController@getYoutube')->middleware('auth');
+Route::get('/account/gymowner/video/{id}', 'VideoController@watchgym')->middleware('auth');
 // student
 Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
 Route::get('/account/student', 'AccountController@student')->middleware('auth');

@@ -56,12 +56,12 @@ class VideoService
 	{
 		if($this->hasFavorite($user->id, $id))
 		{
-			$this->video->find($id)->detach($user->id);
+			$this->video->find($id)->favorites()->detach($user->id);
 			return false;
 		}
 		else
 		{
-			$this->video->find($id)->attach($user->id);
+			$this->video->find($id)->favorites()->attach($user->id);
 			return true;
 		}
 	}

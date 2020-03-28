@@ -79,18 +79,21 @@
 		$('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
 		//ajax favorite
 		$(".btn_favorite").click(function(e){
+			var active = $(this);
 			e.preventDefault();
 			var video_id = $(this).data('videoid');
 
 			$.ajax({
 				type:'GET',
 				url: "/account/favorite/video/" + video_id,
-				success : function(ret){
+				success : function(ret, status){
 					if (ret){
-						$(this).attr('class', 'btn_favorite active');
+						active.attr('class','btn_favorite active');
+						console.log('btn_favorite active');
 					}
 					else{
-						$(this).attr('class', 'btn_favorite unactive');
+						active.attr('class','btn_favorite unactive');
+						console.log('btn_favorite unactive');
 					}
 				}
 			});
@@ -104,6 +107,32 @@
 		}else{
 			$(this).parent().addClass('active');
 			$(this).text('less...');
+		}
+	});
+
+	//favorite toggle
+	$('.favorit_button').click(function(e){
+		e.preventDefault();
+		var video_col = $('.video_col');
+		if($(this).hasClass('active')){
+			$(this).removeClass('active');
+			$(this).addClass('unactive');
+			$('.video_col').each(function(index, item){
+				if(!$(this).find('.btn_favorite').hasClass('active')){
+					$(this).show();
+				}
+
+			});
+		
+		}else if($(this).hasClass('unactive')){
+			$(this).removeClass('unactive');
+			$(this).addClass('active');
+			$('.video_col').each(function(index, item){
+				if(!$(this).find('.btn_favorite').hasClass('active')){
+					$(this).hide();
+				}
+
+			});
 		}
 	});
 	});

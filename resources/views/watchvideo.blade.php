@@ -50,24 +50,29 @@
         }
         var src = $('.embed-responsive-item').attr('data_url');
 		$('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
+		
 		//ajax favorite
 		$(".btn_favorite").click(function(e){
+			var active = $(this);
 			e.preventDefault();
 			var video_id = $(this).data('videoid');
 
 			$.ajax({
 				type:'GET',
 				url: "/account/favorite/video/" + video_id,
-				success : function(ret){
+				success : function(ret, status){
 					if (ret){
-						$(this).attr('class', 'btn_favorite active');
+						active.attr('class','btn_favorite active');
+						console.log('btn_favorite active');
 					}
 					else{
-						$(this).attr('class', 'btn_favorite unactive');
+						active.attr('class','btn_favorite unactive');
+						console.log('btn_favorite unactive');
 					}
 				}
 			});
 		});
+
 		//read more...
 		$('.video_grid_content > a').click(function(e){
 			e.preventDefault();
