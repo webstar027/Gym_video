@@ -28,13 +28,15 @@ class UserService
         $videos = $gym->videos;
 
         $data = [
-                "gym_id"=> $gym->id,
-                "active_count"=> $active->count(),
-				"pending_count"=> $pending->count(),
+				"gym_id" => $gym->id,
+				'gym' => $gym,
+				'user'=> $u,
+                "active_count" => $active->count(),
+				"pending_count" => $pending->count(),
 				"video_count" => $videos->count(),
-                "active_members"=> $active,
-                "pending_members"=> $pending,
-                "videos"=> $videos
+                "active_members" => $active,
+                "pending_members" => $pending,
+                "videos" => $videos
 			];
 			
 		return $data;

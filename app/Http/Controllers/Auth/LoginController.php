@@ -72,28 +72,4 @@ class LoginController extends Controller
         return $this->username;
     }
 
-    /**
-     * Validate the user login request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return void
-     *
-     * @throws \Illuminate\Validation\ValidationException
-     */
-    protected function validateLogin(Request $request)
-    {
-        $messages = [
-            'login.required' => 'Email or username cannot be empty',
-            'email.exists' => 'Email or username already registered',
-            'username.exists' => 'Username is already registered',
-            'password.required' => 'Password cannot be empty',
-        ];
-
-        $request->validate([
-            'login' => 'required|string',
-            'password' => 'required|string',
-            'email' => 'string|exists:users',
-            'username' => 'string|exists:users',
-        ], $messages);
-    }
 }
