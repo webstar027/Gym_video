@@ -51,3 +51,5 @@ Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_acces
 
 // Route::get('/account/student/video/', 'VideoController@viewvideos');
 Route::get('/account/student/video/{id}', 'VideoController@watch')->middleware('auth');
+Route::get('/account/favorite/video/{id}', 'VideoController@favorite')->middleware('auth');
+Route::get('/account/unfavorite/video/{id}', 'VideoController@unfavorite')->middleware('auth');

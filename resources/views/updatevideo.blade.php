@@ -19,10 +19,10 @@
                                  
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <input type="url" class="form-control" name="video_url" value="{{ $video_url }}" placeholder="YouTube Video link" required>
+                                    <input type="url" class="form-control" name="video_url" value="{{ $video_url }}" disabled placeholder="YouTube Video link" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <button type="button" class="btn my-btn">Retrieve Info</button>
+                                    <button type="button" id="retrieve" class="btn my-btn">Retrieve Info</button>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -32,7 +32,7 @@
                                 <textarea class="form-control" name="description" cols="30" rows="5"  placeholder="Video Description">{{ $description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)" required>
+                                <input type="text" class="form-control" name="tag"  value="{{ $tag }}" style="display:none;" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -51,6 +51,26 @@
     </section>
     <script>
         jQuery(document).ready(function($){
+            $('#retrieve').click(function(){
+                
+                var url = $('input[name="video_url"]').val();
+                $.get("/getYoutube/"+getId(url), function(response, status){
+                    console.log(response);
+                    $('input[name="video_title"]').val(response['title']);
+                    $('textarea[name="description"]').text(response['description']);
+                    $('input[name="tag"]').val(response['tag']);
+                });
+            });
+            function getId(url) {
+                var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+                var match = url.match(regExp);
+
+                if (match && match[2].length == 11) {
+                    return match[2];
+                } else {
+                    return 'error';
+                }
+            }
             $('#customCheck1').on('change', function(){
             this.value = this.checked ? 1 : 0;
              //alert(this.value);

@@ -95,5 +95,6 @@ class GymService
 				$video->favorite = false;
 			}
 		}
+		return $videos;
 	}
 }

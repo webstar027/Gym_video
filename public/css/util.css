@@ -17,3 +17,31 @@ p {
     border: 0;
     background: unset;
 }
+.unactive > .fas{
+  display:none;
+}
+.active > .far{
+  display:none;
+}
+.video_grid_content{
+  position:relative;
+  padding-bottom:10px;
+  margin-bottom:10px;
+}
+.video_grid_content .video-description{
+  height:65px;
+  overflow:hidden;
+  transition:height 0.3s;
+  -webkit-transition:height 0.3s;
+  -o-transition:height 0.3s;
+  -moz-transition:height 0.3s;
+}
+.video_grid_content.active .video-description{
+  height:auto !important;
+  overflow:hidden;
+}
+.video_grid_content > a{
+  position:absolute;
+  right:0;
+  bottom:0;
+}

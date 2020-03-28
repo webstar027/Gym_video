@@ -14,7 +14,7 @@ class CreateGymTable extends Migration
     public function up()
     {
         Schema::create('gyms', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('gym_name');
             $table->string('gym_address_1');
             $table->string('gym_address_2');
@@ -23,8 +23,8 @@ class CreateGymTable extends Migration
             $table->string('country');
             $table->string('zip_code');
             $table->string('website');
-            $table->unsignedInteger('owner_id');
-            $table->foreign('owner_id')->references('id')->on('users');
+            $table->bigInteger('owner_id')->unsigned();
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
     }
