@@ -54,9 +54,7 @@ class GymService
 
 	public function approve_request($user_id, $gym_id)
 	{
-		$guser = Gym_User::where('user_id', $user_id)->where('gym_id', $gym_id);
-		$guser->status = 1;
-		$guser->save();
+		$guser = Gym_User::where('user_id', $user_id)->where('gym_id', $gym_id)->update('status', 1);
 	}
 
 	public function denied_request($user_id, $gym_id)

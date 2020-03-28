@@ -38,7 +38,7 @@ Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo')-
 Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo')->middleware('auth');;
 Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos')->middleware('auth');;
 Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->middleware('auth');;
-
+Route::post('/getyoutube','VideoController@getYoutube');
 // student
 Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
 Route::get('/account/student', 'AccountController@student')->middleware('auth');;
