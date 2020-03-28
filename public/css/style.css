@@ -385,6 +385,10 @@ a:hover {
   color: #fff;
 }
 
+.student-img-box {
+  margin-bottom: 30px;
+}
+
 #footer_top {
   background-color: #252525;
 }
@@ -419,6 +423,10 @@ a:hover {
   font-size: 15px;
   font-weight: normal;
   letter-spacing: 1px;
+}
+
+.social-media {
+  display: none;
 }
 
 .social-media ul li a {
@@ -562,5 +570,3 @@ a:hover {
     font-size: 14px;
   }
 }
-
-/*# sourceMappingURL=style.css.map */
