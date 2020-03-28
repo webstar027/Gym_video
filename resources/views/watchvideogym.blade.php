@@ -16,12 +16,15 @@
 								<div class="video-box">
 									<div class="row align-items-center video-info">
 										<div class="col-7"><p class="mb-0">Uploaded: {{ $data->created_at }}</p></div>
-										<div class="col-5 text-right"><a href=""><i class="fas fa-heart"></i> Save as Favorite</a></div>
+										<div class="col-5 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i> Save as Favorite</a></div>
 									</div>
 									<div class="embed-responsive embed-responsive-16by9">
 										<iframe class="embed-responsive-item" data_url="{{$data -> video_url }}" src="" allowfullscreen></iframe>
 									</div>
-									<div class="video-description">{{ $data -> description }}<a href="#" style="display:none">read more...</a> </div>
+									<div class="video_grid_content">
+											<p class="video-description">{{ $data -> description }}</p>
+											<a href="#">read more...</a> 
+									</div>
 									<p class="video_tag">Tags: <span class="text-primary text-uppercase">{{ $data -> tag }}</span> </p>
 								</div>
 							</div>
@@ -46,7 +49,36 @@
             }
         }
         var src = $('.embed-responsive-item').attr('data_url');
-        $('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
+		$('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
+		//ajax favorite
+		$(".btn_favorite").click(function(e){
+			e.preventDefault();
+			var video_id = $(this).data('videoid');
+
+			$.ajax({
+				type:'GET',
+				url: "/account/favorite/video/" + video_id,
+				success : function(ret){
+					if (ret){
+						$(this).attr('class', 'btn_favorite active');
+					}
+					else{
+						$(this).attr('class', 'btn_favorite unactive');
+					}
+				}
+			});
+		});
+		//read more...
+		$('.video_grid_content > a').click(function(e){
+			e.preventDefault();
+			if($(this).parent().hasClass('active')){
+				$(this).parent().removeClass('active');
+				$(this).text('read more...');
+			}else{
+				$(this).parent().addClass('active');
+				$(this).text('less...');
+			}
+		});
     });
     </script>
     <!-- //Section Accounts End -->

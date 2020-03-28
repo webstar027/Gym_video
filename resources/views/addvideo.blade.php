@@ -51,10 +51,13 @@
     jQuery(document).ready(function($){
         $('#retrieve').click(function(){
            
-            // var url = $('input[name="video_url"]').val();
-            // $.get("/getYoutube/"+getId(url), function(response, status){
-            //     console.log(status);
-            // });
+            var url = $('input[name="video_url"]').val();
+            $.get("/getYoutube/"+getId(url), function(response, status){
+                console.log(response);
+                $('input[name="video_title"]').val(response['title']);
+                $('textarea[name="description"]').text(response['description']);
+                $('input[name="tag"]').val(response['tag']);
+            });
         });
     function getId(url) {
         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;

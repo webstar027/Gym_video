@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Video;
 use App\Services\VideoService;
-// use Alaouy\Youtube\Facades\Youtube;
+use Alaouy\Youtube\Facades\Youtube;
 
 class VideoController extends Controller
 {
@@ -90,21 +90,8 @@ class VideoController extends Controller
 	public function favorite($id)
 	{	
 		$user = auth()->user();
-		$this->videoservice->favorite($user, $id);
-		return true;		
-	}
-
-	/**
-     * Unfavorite video.
-     *
-	 * @param integer
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-	public function unfavorite($id)
-	{	
-		$user = auth()->user();
-		$this->videoservice->unfavorite($user, $id);
-		return true;		
+		$ret = $this->videoservice->favorite($user, $id);
+		return $ret;		
 	}
 
     /**
@@ -142,10 +129,17 @@ class VideoController extends Controller
      * @param integer $video id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	// public function getYoutubeVideoInfo($id)
-	// {
-	// 	$video = Youtube::getVideoInfo($id);
-	// 	return $video;
-	// }
+	public function getYoutube($id)
+	{
+		$video = Youtube::getVideoInfo($id);
+		$video = json_decode(json_encode($video), true);
+		//$data = ['title'=>$video->title];
+		// print_r('<pre>');
+		// print_r($video);
+		// print_r('</pre>');
+		$tag = implode(',', $video['snippet']['tags']);
+		$data=['title'=>$video['snippet']['title'], 'description'=>$video['snippet']['description'], 'tag'=>$tag];
+		return $data;
+	}
 
 }

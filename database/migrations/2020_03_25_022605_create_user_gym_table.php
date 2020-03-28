@@ -15,8 +15,8 @@ class CreateUserGymTable extends Migration
     {
         Schema::create('gym_user', function (Blueprint $table) {
 
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('gym_id');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('gym_id')->unsigned();
             $table->integer('status');
             $table->primary(['user_id', 'gym_id']);
 
