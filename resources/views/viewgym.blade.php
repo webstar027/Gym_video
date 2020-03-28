@@ -13,13 +13,13 @@
                         <h2 class="page-sub-title">{{ $data -> gym_name }}</h2>
 						
 						<div class="row align-items-center">
-							<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Gym Name or Owner name" id="searchinput"></div>
+							<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Search by Title, Description, or #Tag" id="searchinput"></div>
 							<div class="col-md-8">
 								<p class="mb-0"><a href="#" class="favorit_button unactive"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a> Display only favorites</p>
 							</div>
 						</div>
                         <h3 class="page-sub-title-alt mt-3">Search Results</h3>
-						<p><span id="search_count">{{$data->videos->count()}}</span> Gym(s) have matched your search criteria</p>
+						<p><span id="search_count">{{$data->videos->count()}}</span> Video(s) have matched your search criteria.</p>
 						<div class="video_container" id="video_container">
 							<div class="row video_row">
 								@foreach($data->videos as $key => $video)

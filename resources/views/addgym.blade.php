@@ -12,7 +12,7 @@
                         <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
                         <h2 class="page-sub-title">Gym Search</h2>
                         <input type="search" onkeyup="searchvideo()" class="form-control" id="searchinput" placeholder="Gym Name or Owner name">
-                        <p>2 Gym(s) have matched your search criteria</p>
+                        <p><span id="gym_count">{{ $allgyms->count() }}</span> Gym(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
 							<table class="table table-striped" id="myTable">
@@ -28,7 +28,7 @@
 									@foreach ($allgyms as $key => $gym)
 									<tr>
 										<td>{{$gym -> gym_name}}</td>
-										<td>{{$gym -> owner -> name}}</td>
+										<td>{{$gym -> owner -> first_name}} {{$gym -> owner -> last_name}}</td>
 										<td>
 											@if($gym -> status == 0)
 											
@@ -105,17 +105,20 @@
 		filter = input.value.toUpperCase();
 		table = document.getElementById("myTable");
 		tr = table.getElementsByTagName("tr");
+		var inc =1;
 		for (i = 1; i < tr.length; i++) {
 			td = tr[i];
 			if (td) {
 			txtValue = td.textContent || td.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
 				tr[i].style.display = "";
+				inc++;
 			} else {
 				tr[i].style.display = "none";
 			}
 			}       
 		}
+		document.getElementById('gym_count').innerHTML = inc;
 		}
 	</script>
     <!-- //Section Accounts End -->
