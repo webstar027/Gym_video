@@ -12,8 +12,8 @@
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="form-group">
-                            <input id="text" type="text" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email Address or Username"  name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                            @if ($errors->has('email'))
+                            <input id="text" type="text" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Email Address or Username"  name="login" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @if ($errors->has('username') || $errors->has('email'))
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message ?? ''}}</strong>
                                 </span>
