@@ -92,7 +92,16 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-md-6">
+                                    <input id="username" placeholder="Username" type="text" disabled class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+
+                                    @error('username')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+							</div>
+                            <div class="form-group col-lg-6">
                                 <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user -> email }}"  name="email" placeholder="Email Address" required>
                             </div>
                         </div>
