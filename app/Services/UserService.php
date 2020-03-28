@@ -73,9 +73,16 @@ class UserService
  
 	public function update(Request $request, $id)
 	{
-	  $attributes = $request->all();
-	  
-      return $this->userRepo->update($id, $attributes);
+	  $newPassword = $request->get('password');
+
+        if(empty($newPassword)){
+			$attributes = $request->except('password');
+			return $this->userRepo->update($id, $attributes);
+        }else{
+			$attributes = $request->all();
+			return $this->userRepo->update($id, $attributes);
+        } 
+     
 	}
  
 	public function delete($id)

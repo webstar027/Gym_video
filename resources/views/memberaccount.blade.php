@@ -24,8 +24,8 @@
                             <tbody>
                                 @foreach ($members as $key => $member)
                                 <tr>
-                                    <td scope="row">{{ $member -> gym_name }}</td>
-                                    <td>{{ $member -> owner ->name}}</td>
+                                    <td scope="row"><a href="{{ url('/account/student/viewgym/'.$member -> id) }}">{{ $member -> gym_name }}</a></td>
+                                    <td>{{ $member -> owner ->first_name}} {{ $member -> owner ->last_name}}</td>
                                     <td>{{ $member -> videos->count() }}</td>
                                     <td>{{ $member -> updated_at }}</td>
                                     <td><a href="{{url('/account/student/gyms/cancel/'.$member -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request"><i class="fas fa-trash"></i></a></td>
@@ -87,7 +87,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" autocomplete="old-password" required>
+                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" autocomplete="old-password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -95,7 +95,7 @@
                                     @enderror
                             </div>
                             <div class="form-group col-lg-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="old-password" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="old-password">
                             </div>
                         </div>
                         <div class="form-group">
