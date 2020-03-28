@@ -59,6 +59,7 @@ class GymService
 		$gym->members()->attach($user_id, ['status' => 1]);
 	}
 
+
 	public function denied_request($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);

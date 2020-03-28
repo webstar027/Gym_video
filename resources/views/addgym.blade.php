@@ -48,7 +48,7 @@
 											@elseif($gym -> status == 2) 
 											<a href="{{url('/account/student/gyms/cancel/'.$gym -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request">Cancel Request</a> 
 											@elseif($gym -> status == 3)
-											<a href="#" class="text-danger request-time" data-toggle="tooltip" data-placement="top" title="Denied">23:14:15 wait time</a> 
+											<a href="#" class="text-danger request-time" data-toggle="tooltip" data-placement="top" title="Denied">{{ $gym->time }}</a> 
 											@endif
 										</td>
 									</tr>
