@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 27, 2020 at 07:42 PM
+-- Generation Time: Mar 26, 2020 at 09:00 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -63,7 +63,6 @@ CREATE TABLE `gyms` (
 --
 
 INSERT INTO `gyms` (`id`, `gym_name`, `gym_address_1`, `gym_address_2`, `city`, `state_province`, `country`, `zip_code`, `website`, `owner_id`, `created_at`, `updated_at`) VALUES
-(2, 'Isi Aucaman', 'Los Angeles', 'Los Angeles', 'Los Angeles', 'Los Angeles', 'United States', '123456', 'www.web.com', 6, '2020-03-26 07:00:00', '2020-03-26 07:00:00'),
 (3, 'Joseph Scott', 'Joseph Scott', 'Joseph Scott', 'Tucson', 'AZ', 'US', '85750', 'www.website.com', 7, '2020-03-27 08:38:37', '2020-03-27 08:38:37');
 
 -- --------------------------------------------------------
@@ -85,10 +84,10 @@ CREATE TABLE `gym_user` (
 --
 
 INSERT INTO `gym_user` (`user_id`, `gym_id`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 1, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
+(2, 3, 0, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
 (3, 3, 2, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
-(4, 3, 3, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
-(5, 3, 1, '2020-03-27 08:38:37', '2020-03-27 08:38:37'),
-(6, 3, 0, '2020-03-27 08:38:37', '2020-03-27 08:38:37');
+(4, 3, 3, '2020-03-27 08:38:37', '2020-03-27 08:38:37');
 
 -- --------------------------------------------------------
 
@@ -128,13 +127,6 @@ CREATE TABLE `password_resets` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `password_resets`
---
-
-INSERT INTO `password_resets` (`id`, `email`, `token`, `created_at`, `updated_at`) VALUES
-(1, 'joseph.scott027@outlook.com', '$2y$10$6ZHyGOrCLbnKBqpyQfuBIenkyX9Sn7Ax96yEGZVQEgLFFQiC7v2QO', '2020-03-27 23:21:32', NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -162,15 +154,6 @@ CREATE TABLE `roles` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `roles`
---
-
-INSERT INTO `roles` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'admin', NULL, NULL),
-(2, 'gymowner', NULL, NULL),
-(3, 'student', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -196,11 +179,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_verified_at`, `password`, `role_id`, `remember_token`, `created_at`, `updated_at`) VALUES
-(3, 'johnhh', 'smith', 'johnsmith', 'ruima027@gmail.com', '2020-03-27 08:26:50', 'RXe_7V&,mPae8StQR', 3, 'wZTrvVS0pMBmH7ATF844qby967Ol86RwG74babsS55y1jiZlLM501pUuI16n', '2020-03-27 08:26:18', '2020-03-28 01:01:08'),
-(4, 'Joseph', 'Scott', 'Josephscott0605', 'joseph.scott0605@gmail.com', '2020-03-27 08:28:27', '$2y$10$Gt2iR5wxHI9.lfCltLCKpu8om9Hh4BdVOePOS3S0DCq15b5CckygS', 3, NULL, '2020-03-27 08:27:44', '2020-03-27 08:28:27'),
-(5, 'bill', 'chong', 'bchong', 'bchong753@gmail.com', '2020-03-27 08:31:03', '$2y$10$0NseE0oKSfRpZ9gLiviIf.Tj88C4LCJwfox.bwzx6cbULnWSbNFiG', 3, NULL, '2020-03-27 08:30:36', '2020-03-27 08:31:03'),
-(6, 'Isi', 'Aucaman', 'isi.aucaman', 'isi.aucaman@yandex.com', '2020-03-27 08:33:16', '$2y$10$kUII4MSZsRPyKVV1LG8iC.Kj8hc1Cmp3YAbDbUxW4PkogOG1qas.m', 2, NULL, '2020-03-27 08:32:54', '2020-03-27 08:33:16'),
-(7, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-27 08:39:47', '$2y$10$DidLDiNRZRDo53CAMvEw0OetNhOr5LXKli9k5imdLlshZ4QNjLXp.', 2, 'AGFj7TTut5CsmE9LCO0QNKfBZ2k4MnXnslqiAMlzZleqEWqpXGCwh4Zz7T4Z', '2020-03-27 08:38:37', '2020-03-27 08:39:47');
+(3, 'john', 'smith', 'johnsmith', 'ruima027@gmail.com', '2020-03-27 08:26:50', '$2y$10$EU8fZiCXtNh9x0.U4Qw1q.RTlugu/hJ47Rej79OOZ7Yqw84Lx1Ft6', 1, NULL, '2020-03-27 08:26:18', '2020-03-27 08:26:50'),
+(4, 'Joseph', 'Scott', 'Josephscott0605', 'joseph.scott0605@gmail.com', '2020-03-27 08:28:27', '$2y$10$Gt2iR5wxHI9.lfCltLCKpu8om9Hh4BdVOePOS3S0DCq15b5CckygS', 1, NULL, '2020-03-27 08:27:44', '2020-03-27 08:28:27'),
+(5, 'bill', 'chong', 'bchong', 'bchong753@gmail.com', '2020-03-27 08:31:03', '$2y$10$0NseE0oKSfRpZ9gLiviIf.Tj88C4LCJwfox.bwzx6cbULnWSbNFiG', 1, NULL, '2020-03-27 08:30:36', '2020-03-27 08:31:03'),
+(6, 'Isi', 'Aucaman', 'isi.aucaman', 'isi.aucaman@yandex.com', '2020-03-27 08:33:16', '$2y$10$kUII4MSZsRPyKVV1LG8iC.Kj8hc1Cmp3YAbDbUxW4PkogOG1qas.m', 1, NULL, '2020-03-27 08:32:54', '2020-03-27 08:33:16'),
+(7, 'Joseph', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-27 08:39:47', '$2y$10$DidLDiNRZRDo53CAMvEw0OetNhOr5LXKli9k5imdLlshZ4QNjLXp.', 2, NULL, '2020-03-27 08:38:37', '2020-03-27 08:39:47');
 
 -- --------------------------------------------------------
 
@@ -211,11 +194,12 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `name`, `email`, `email_ve
 CREATE TABLE `videos` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `gym_id` bigint(20) NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `video_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `video_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tag` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '0',
+  `status` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -224,12 +208,11 @@ CREATE TABLE `videos` (
 -- Dumping data for table `videos`
 --
 
-INSERT INTO `videos` (`id`, `gym_id`, `video_url`, `video_title`, `description`, `tag`, `status`, `created_at`, `updated_at`) VALUES
-(20, 3, 'https://www.youtube.com/watch?v=EgjHkGu3aKg', 'How to Build the Perfect Home Gym | Home Gym Tour', 'Like I said in the video, some items are sold out/prices have been inflated massively. I will still leave links to all the items but also ...', 'tag', 1, '2020-03-27 11:21:41', '2020-03-27 20:31:01'),
-(22, 3, 'https://www.youtube.com/watch?v=6VqqTdZrhhc', 'Ultimate Home Gym Tour!!!', 'Justin and Trey wanted to take y\'all along on a gym tour/fixer upper, we needed to get a couple of things', 'without', 1, '2020-03-27 11:42:12', '2020-03-27 20:28:33'),
-(23, 3, 'https://www.youtube.com/watch?v=UC6CumOP3Ug', '$20 A Month Gym VS $300+ A Month Gym', 'Check out ESNTLS, they sell the best essentials in the world: https://www.esntls.co/ Our collection', 'without', 1, '2020-03-27 11:47:10', '2020-03-27 20:30:43'),
-(25, 3, 'https://youtu.be/6g8G3YQtQt4', 'Deploy Laravel To Shared Hosting The Easy Way', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.', 'tag1, tag3', 1, '2020-03-27 21:14:47', '2020-03-27 21:14:47'),
-(26, 3, 'https://www.youtube.com/watch?v=DJ6PD_jBtU0', 'Full Stack Vue.js & Laravel', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.', 'tag3, tag4', 0, '2020-03-27 21:15:32', '2020-03-27 21:15:32');
+INSERT INTO `videos` (`id`, `gym_id`, `title`, `video_url`, `video_title`, `description`, `tag`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'my video', 'https://youtu.be/6g8G3YQtQt4', 'my video', 'my video', 'tag1', 1, '2020-03-12 14:00:00', '2020-03-26 14:00:00'),
+(2, 3, 'First video', 'https://youtu.be/6g8G3YQtQt4', 'First video', 'First video', 'tag1', 1, '2020-03-26 14:00:00', '2020-03-26 14:00:00'),
+(3, 3, 'second video', 'https://youtu.be/6g8G3YQtQt4', 'Second video', 'Second video', 'tag0', 1, '2020-03-26 14:00:00', '2020-03-26 14:00:00'),
+(4, 3, 'Third video', 'https://youtu.be/6g8G3YQtQt4', 'Third video', 'Third video', 'tag3', 0, '2020-03-26 14:00:00', '2020-03-26 14:00:00');
 
 --
 -- Indexes for dumped tables
@@ -319,7 +302,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -331,7 +314,7 @@ ALTER TABLE `permissions`
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -343,7 +326,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables

@@ -58,4 +58,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\Gym')->withPivot("status")->withTimestamps();
     }
 
+    /**
+     * Get the favorate subscribed to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany(Video::class, 'favorites', 'user_id', 'video_id')->withTimestamps();
+    }
+
 }

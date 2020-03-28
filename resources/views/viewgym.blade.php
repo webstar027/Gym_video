@@ -21,6 +21,7 @@
                         <h3 class="page-sub-title-alt mt-3">Search Results</h3>
                         <p>2 Gym(s) have matched your search criteria</p>
                         <div class="row">
+							@foreach($data->videos as $key => $video)
 							<div class="col-md-6 col-lg-4">
 								<div class="video-box">
 									<h3>Video Title</h3>
@@ -29,7 +30,7 @@
 										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
 									</div>
 									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+										<iframe class="embed-responsive-item" data_url="" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
 									</div>
 									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
 									<a href="">#Tags</a>
@@ -38,91 +39,7 @@
 									<a href="">#Tags</a>
 								</div>
 							</div>
-							<div class="col-md-6 col-lg-4">
-								<div class="video-box">
-									<h3>Video Title</h3>
-									<div class="row align-items-center">
-										<div class="col-9"><p class="mb-0">Uploaded: March 23, 2002</p></div>
-										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
-									</div>
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-									</div>
-									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-								</div>
-							</div>
-							<div class="col-md-6 col-lg-4">
-								<div class="video-box">
-									<h3>Video Title</h3>
-									<div class="row align-items-center">
-										<div class="col-9"><p class="mb-0">Uploaded: March 23, 2002</p></div>
-										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
-									</div>
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-									</div>
-									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-								</div>
-							</div>
-							<div class="col-md-6 col-lg-4">
-								<div class="video-box">
-									<h3>Video Title</h3>
-									<div class="row align-items-center">
-										<div class="col-9"><p class="mb-0">Uploaded: March 23, 2002</p></div>
-										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
-									</div>
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-									</div>
-									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-								</div>
-							</div>
-							<div class="col-md-6 col-lg-4">
-								<div class="video-box">
-									<h3>Video Title</h3>
-									<div class="row align-items-center">
-										<div class="col-9"><p class="mb-0">Uploaded: March 23, 2002</p></div>
-										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
-									</div>
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-									</div>
-									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-								</div>
-							</div>
-							<div class="col-md-6 col-lg-4">
-								<div class="video-box">
-									<h3>Video Title</h3>
-									<div class="row align-items-center">
-										<div class="col-9"><p class="mb-0">Uploaded: March 23, 2002</p></div>
-										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
-									</div>
-									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
-									</div>
-									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-									<a href="">#Tags</a>
-								</div>
-							</div>
+							@endforeach
 						</div>
 					</div>
 				</div>
@@ -130,6 +47,22 @@
 			</div><!-- //.row -->
 
 		</div><!-- //.container -->
-    </section>
+	</section>
+<script>
+	// jQuery(document).ready(function($){
+    //     function getId(url) {
+    //         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    //         var match = url.match(regExp);
+
+    //         if (match && match[2].length == 11) {
+    //             return match[2];
+    //         } else {
+    //             return 'error';
+    //         }
+    //     }
+    //     var src = $('.embed-responsive-item').attr('data_url');
+    //     $('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
+    // });
+</script>
     <!-- //Section Accounts End -->
 @endsection

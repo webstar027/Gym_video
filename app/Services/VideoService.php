@@ -51,4 +51,19 @@ class VideoService
 	{
       return $this->video->delete($id);
 	}
+
+	public function favorite($user, $id)
+	{
+		 return $this->video->find($id)->attach($user);
+	}
+
+	public function unfavorite($user, $id)
+	{
+		return $this->video->find($id)->detach($user);
+	}
+
+	public function hasFavorite($user_id, $video_id)
+	{
+		return $this->video->find($video_id)->favorites()->where('user_id', $user_id)->count() > 0;
+	}
 }

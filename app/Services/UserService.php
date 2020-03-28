@@ -42,7 +42,7 @@ class UserService
 
 	public function getGymOwner($gym_id)
 	{
-		$gym = $this->gymRepo->find($id);
+		$gym = $this->gymRepo->find($gym_id);
 		$owner = $this->userRepo->find($gym->owner_id);
 		return $owner;
 	}

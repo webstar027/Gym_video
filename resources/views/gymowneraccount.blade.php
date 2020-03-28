@@ -29,7 +29,7 @@
                                 <tr>
                                     <td> {{ $member -> name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
                                     <td>
-                                    <a href="#" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                    <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -48,8 +48,8 @@
                                 <tr>
                                     <td> {{ $member -> name }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
                                     <td>
-                                    <a href="#" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
+                                        <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                        <a href="{{url('/account/gymowner/members/aprove/'.$gym_id.'/'.$member->id)}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -61,4 +61,17 @@
         </div>
     </div>
 </section>
+<script>
+		jQuery(document).ready(function(){
+			$('.delete-video').click(function(e){
+				
+				var r = confirm("Are you sure delete this?");
+				if(r == true){
+					return;
+				}else{
+					e.preventDefault();
+				}
+			});
+		});
+	</script>
 @endsection

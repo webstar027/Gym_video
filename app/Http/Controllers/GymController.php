@@ -49,7 +49,55 @@ class GymController extends Controller
 
         return view('addgym', ['allgyms'=>$all]);
     }
+    
+    /**
+     * Request to cancel the access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
+    public function request_access($gym_id, Request $request ){
 
+        $user = $request->user();
+        $this->gymservice->access_request($user->id, $gym_id);
+        return redirect('/account/student');
+    }
+
+    /**
+     * Request to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
+    public function request_cancel($gym_id, Request $request)
+    {
+        $user = $request->user();
+        $this->gymservice->cancel_request($user->id, $gym_id);
+        return redirect('/account/student');
+    }
+    /**
+     * Deny to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
+    public function request_deny( $gym_id , $user_id)
+    {
+        $this->gymservice->denied_request($user_id, $gym_id);
+        return redirect('/account/gymowner');
+        
+    }
+    /**
+     * aprove to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function request_aprove( $gym_id, $user_id){
+        
+        $this->gymservice->approve_request($user_id, $gym_id);
+        return redirect('/account/gymowner');
+    }
     /**
      * Get videos of this gym
      *
@@ -60,5 +108,37 @@ class GymController extends Controller
 	{
         $videos = $this->gymservice->read($gym_id)->videos;
         return view('viewvideos', ['videos' => $videos, 'gym_id' => $gym_id]);
+    }
+        
+    /**
+     * Get gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */  
+    public function gymview($gym_id, Request $request)
+    {
+        $user = $request->user();
+        $gym = $this->gymservice->read($gym_id);
+        $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        $videos = $videos_all->where('status', 1);
+        $gym->videos = $videos;
+        
+        return view('viewgym',$gym);
+    }
+
+    	
+	/**
+     * Get video list of gym
+     *
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function videos($gym_id, Request $request)
+	{
+		$user = $request->user();
+        $videos = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
+        
+        return view();
 	}
 }

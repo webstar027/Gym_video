@@ -15,7 +15,13 @@ class AccountController extends Controller
         $this->userservice = $userservice;
     }
     
-    //Gym ownner account
+
+    /**
+     * Get gym information
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */    
     public function gymowner(Request $request)
     {
         $user = $request->user();
@@ -25,12 +31,23 @@ class AccountController extends Controller
         return view('gymowneraccount', $data);
     }
 
+    /**
+     * Get members information
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function members($id)
     {
         return view('members');
     }
     
-    //student account
+    /**
+     * Show student page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function student(Request $request)
     {
         $user = $request->user();
@@ -44,6 +61,13 @@ class AccountController extends Controller
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
 
+        
+    /**
+     * Update user page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function updateUser($id, Request $request)
 	{
         $user = $request->user();
@@ -51,7 +75,14 @@ class AccountController extends Controller
 		$this->userservice->update($request, $id);
 		return redirect('/admin');
     }
-    
+  
+            
+    /**
+     * Update user page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function gymlist()
     {
         return view('gymlist');
