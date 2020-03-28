@@ -11,11 +11,11 @@
 					<div class="add-gym-user">
                         <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
                         <h2 class="page-sub-title">Gym Search</h2>
-                        <input type="search" class="form-control" placeholder="Gym Name or Owner name">
+                        <input type="search" onkeyup="searchvideo()" class="form-control" id="searchinput" placeholder="Gym Name or Owner name">
                         <p>2 Gym(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped">
+							<table class="table table-striped" id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Gym Name</th>
@@ -86,6 +86,37 @@
 			</div><!-- //.row -->
 
 		</div><!-- //.container -->
-    </section>
+	</section>
+	<script>
+		jQuery(document).ready(function(){
+			$('.calcel-request').click(function(e){
+				
+				var r = confirm("Are you sure cancel request?");
+				if(r == true){
+					return;
+				}else{
+					e.preventDefault();
+				}
+			});
+		});
+		function searchvideo() {
+		var input, filter, table, tr, td, i, txtValue;
+		input = document.getElementById("searchinput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+		for (i = 1; i < tr.length; i++) {
+			td = tr[i];
+			if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+			} else {
+				tr[i].style.display = "none";
+			}
+			}       
+		}
+		}
+	</script>
     <!-- //Section Accounts End -->
 @endsection

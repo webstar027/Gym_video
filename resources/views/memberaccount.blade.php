@@ -104,4 +104,17 @@
 
     </div><!-- //.container -->
 </section>
+<script>
+		jQuery(document).ready(function(){
+			$('.calcel-request').click(function(e){
+				
+				var r = confirm("Are you sure cancel this?");
+				if(r == true){
+					return;
+				}else{
+					e.preventDefault();
+				}
+			});
+		});
+	</script>
 @endsection

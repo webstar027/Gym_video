@@ -54,17 +54,16 @@ class GymService
 
 	public function approve_request($user_id, $gym_id)
 	{
-		$guser = Gym_User::where('user_id', $user_id)->where('gym_id', $gym_id);
-		$guser->status = 1;
-		$guser->save();
-
+		$gym = $this->gymRepo->find($gym_id);
+		$gym->members()->detach($user_id);
+		$gym->members()->attach($user_id, ['status' => 1]);
 	}
 
 	public function denied_request($user_id, $gym_id)
 	{
-		$guser = Gym_User::where('user_id', $user_id)->where('gym_id', $gym_id);
-		$guser->status = 3;
-		$guser->save();
+		$gym = $this->gymRepo->find($gym_id);
+		$gym->members()->detach($user_id);
+		$gym->members()->attach($user_id, ['status' => 3]);
 	}
 
 	public function access_request($user_id, $gym_id)
@@ -79,13 +78,10 @@ class GymService
 		$gym->members()->detach($user_id);
 	}
 
-<<<<<<< HEAD
-
-=======
 	public function getVideosIncludeFavorite($gym_id, $user)
 	{
 		$favorite = $user->favorites();
-		$videos = read($gym_id)->videos;
+		$videos = $this->read($gym_id)->videos;
 
 		foreach($videos as $key => $video)
 		{
@@ -100,5 +96,4 @@ class GymService
 			}
 		}
 	}
->>>>>>> 63d4d36db42ae9294445b84bdd2a159cf1c4c951
 }
