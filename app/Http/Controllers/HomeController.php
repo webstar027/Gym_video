@@ -62,20 +62,20 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function about()
-    {
-        return view('about');
-    }
-    public function studentpage()
-    {
-        return view('student');
-    }
-    public function pricing()
-    {
-        return view('pricing');
-    }
-    public function gymownerpage()
-    {
-        return view('gymowner');
-    }
+    // public function about()
+    // {
+    //     return view('about');
+    // }
+    // public function studentpage()
+    // {
+    //     return view('student');
+    // }
+    // public function pricing()
+    // {
+    //     return view('pricing');
+    // }
+    // public function gymownerpage()
+    // {
+    //     return view('gymowner');
+    // }
 }

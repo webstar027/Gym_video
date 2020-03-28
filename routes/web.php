@@ -22,10 +22,21 @@ Auth::routes(['verify' => true]);
 
 Route::get('/admin', 'HomeController@index')->name('admin');
 
-Route::get('/gymowner', 'HomeController@gymownerpage')->name('gymowner');
-Route::get('/student', 'HomeController@studentpage')->name('student');
-Route::get('/aboutus', 'HomeController@about')->name('aboutus');
-Route::get('/pricing', 'HomeController@pricing')->name('pricing');
+Route::get('/gymowner', function(){
+    return view('gymowner');
+});
+Route::get('/student', function(){
+    return view('student');
+});
+Route::get('/aboutus', function(){
+    return view('aboutus');
+});
+Route::get('/pricing', function(){
+    return view('pricing');
+});
+// Route::get('/student', 'HomeController@studentpage');
+// Route::get('/aboutus', 'HomeController@about');
+// Route::get('/pricing', 'HomeController@pricing');
 
 // gymowner
 Route::get('/account/gymowner', 'AccountController@gymowner')->middleware('auth');
