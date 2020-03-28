@@ -86,11 +86,21 @@ class GymController extends Controller
     public function request_deny($gym_id, Request $request)
     {
         $user = $request->user();
-        $this->gymservice->eny_access($user->id, $gym_id);
+        $this->gymservice->denied_request($user->id, $gym_id);
         return redirect('/account/student');
         
     }
-
+    /**
+     * aprove to access to the gym
+     *
+     * @param integer
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function request_aprove($gym_id, Request $request){
+        $user = $request->user();
+        $this->gymservice->approve_request($user->id, $gym_id);
+        return redirect('/account/student');
+    }
     /**
      * Get videos of this gym
      *

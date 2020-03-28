@@ -42,13 +42,13 @@
 										</td>
 										<td>
 											@if($gym -> status == 0)
-											<a href="{{url('/account/student/gyms/access/'.$gym -> id)}}" class="text-info request-access">Request Access</a>
+											<a href="{{url('/account/student/gyms/access/'.$gym -> id)}}" class="text-info request-access" data-toggle="tooltip" data-placement="top" title="Request Access">Request Access</a>
 											@elseif($gym -> status == 1) 
-											<a href="{{ url('/account/student/viewgym/'.$gym -> id) }}" class="text-success view_gympage">View Gym Page</a>
+											<a href="{{ url('/account/student/viewgym/'.$gym -> id) }}" class="text-success view_gympage" data-toggle="tooltip" data-placement="top" title="View Gym Page">View Gym Page</a>
 											@elseif($gym -> status == 2) 
-											<a href="{{url('/account/student/gyms/cancel/'.$gym -> id)}}" class="text-danger calcel-request">Cancel Request</a> 
+											<a href="{{url('/account/student/gyms/cancel/'.$gym -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request">Cancel Request</a> 
 											@elseif($gym -> status == 3)
-											<a href="#" class="text-danger request-time">23:14:15 wait time</a> 
+											<a href="#" class="text-danger request-time" data-toggle="tooltip" data-placement="top" title="Denied">23:14:15 wait time</a> 
 											@endif
 										</td>
 									</tr>

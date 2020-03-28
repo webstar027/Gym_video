@@ -48,8 +48,8 @@
                                 <tr>
                                     <td> {{ $member -> name }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
                                     <td>
-                                    <a href="#" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
-                                        <a href="#" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
+                                        <a href="{{url('/account/student/gyms/deny/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                        <a href="{{url('/account/gymowner/members/aprove/'.$member->id)}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

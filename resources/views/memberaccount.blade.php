@@ -28,7 +28,7 @@
                                     <td>{{ $member -> owner ->name}}</td>
                                     <td>{{ $member -> videos->count() }}</td>
                                     <td>{{ $member -> updated_at }}</td>
-                                    <td><a href="#" class="text-danger"><i class="fas fa-trash"></i></a></td>
+                                    <td><a href="{{url('/account/student/gyms/cancel/'.$member -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request"><i class="fas fa-trash"></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

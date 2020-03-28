@@ -30,7 +30,7 @@
 										<div class="col-3 text-right"><a href=""><i class="fas fa-heart"></i></a></div>
 									</div>
 									<div class="embed-responsive embed-responsive-16by9">
-										<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
+										<iframe class="embed-responsive-item" data_url="" src="https://www.youtube.com/embed/zpOULjyy-n8?rel=0" allowfullscreen></iframe>
 									</div>
 									<p class="video-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Suscipit rerum architecto omnis laudantium culpa porro eveniet libero? <a href="">read more...</a> </p>
 									<a href="">#Tags</a>
@@ -47,6 +47,22 @@
 			</div><!-- //.row -->
 
 		</div><!-- //.container -->
-    </section>
+	</section>
+<script>
+	// jQuery(document).ready(function($){
+    //     function getId(url) {
+    //         var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    //         var match = url.match(regExp);
+
+    //         if (match && match[2].length == 11) {
+    //             return match[2];
+    //         } else {
+    //             return 'error';
+    //         }
+    //     }
+    //     var src = $('.embed-responsive-item').attr('data_url');
+    //     $('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
+    // });
+</script>
     <!-- //Section Accounts End -->
 @endsection
