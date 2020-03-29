@@ -22,10 +22,14 @@
 										<iframe class="embed-responsive-item" data_url="{{$data -> video_url }}" src="" allowfullscreen></iframe>
 									</div>
 									<div class="video_grid_content">
-											<p class="video-description">{{ $data -> description }}</p>
-											<a href="#">read more...</a> 
+										<p class="video-sub-description">{{ Str::words($data -> description, 40)}} <a href="#">read more...</a></p>
+										<p class="video-description" style="display:none">{{ $data -> description }} <a href="#">read more...</a> </p>
 									</div>
-									<p class="video_tag">{{ $data -> tag }}</p>
+									<p class="video_tag">Tags: 
+										@foreach(explode(',',$data -> tag) as $row)
+										<span class="text-primary text-uppercase">{{ $row }}</span> ,
+										@endforeach	
+									</p>
 								</div>
 							</div>
 						</div>
@@ -74,13 +78,19 @@
 		});
 
 		//read more...
-		$('.video_grid_content > a').click(function(e){
+		$('.video_grid_content a').click(function(e){
 			e.preventDefault();
-			if($(this).parent().hasClass('active')){
-				$(this).parent().removeClass('active');
+			var sub_text = $(this).parent().find('.video-sub-description');
+			var text = $(this).parent().find('.video-description');
+			if($(this).hasClass('active')){
+				$(this).removeClass('active');
+				sub_text.css('display','block');
+				text.css('display','none');
 				$(this).text('read more...');
 			}else{
-				$(this).parent().addClass('active');
+				$(this).addClass('active');
+				text.css('display','block');
+				sub_text.css('display','none');
 				$(this).text('less...');
 			}
 		});

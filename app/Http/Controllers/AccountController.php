@@ -70,10 +70,9 @@ class AccountController extends Controller
      */ 
     public function updateUser($id, Request $request)
 	{
-        $user = $request->user();
-        
 
-		$this->userservice->update($request, $id);
+        $user = $request->user();
+        $this->userservice->update($request, $id);
 		return redirect('/admin');
     }
   

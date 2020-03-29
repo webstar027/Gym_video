@@ -58,6 +58,7 @@
                     console.log(response);
                     $('input[name="video_title"]').val(response['title']);
                     $('textarea[name="description"]').text(response['description']);
+                    $('textarea[name="description"]').val(response['description']);
                     $('input[name="tag"]').val(response['tag']);
                 });
             });

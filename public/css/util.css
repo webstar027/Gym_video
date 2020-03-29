@@ -28,20 +28,21 @@ p {
   padding-bottom:10px;
   margin-bottom:10px;
 }
-.video_grid_content .video-description{
+/* .video_grid_content .video-description{
   height:65px;
   overflow:hidden;
   transition:height 0.3s;
   -webkit-transition:height 0.3s;
   -o-transition:height 0.3s;
   -moz-transition:height 0.3s;
-}
-.video_grid_content.active .video-description{
+} */
+/* .video_grid_content.active .video-description{
   height:auto !important;
   overflow:hidden;
+}*/
+.video-sub-description{
+  margin-top: 10px;
 }
-.video_grid_content > a{
-  position:absolute;
-  right:0;
-  bottom:0;
-}
+.video_grid_content a{
+  float:right;
+} 
