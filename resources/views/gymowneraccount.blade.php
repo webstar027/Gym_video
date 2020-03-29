@@ -27,7 +27,7 @@
                             <tbody>
                                 @foreach ($active_members as $key => $member)
                                 <tr>
-                                    <td> {{ $member -> first_name }} {{ $member -> last_name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
+                                    <td> {{ $member -> name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
                                     <td>
                                     <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
                                     </td>
