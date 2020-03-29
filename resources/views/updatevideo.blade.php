@@ -22,17 +22,17 @@
                                     <input type="url" class="form-control" name="video_url" value="{{ $video_url }}" disabled placeholder="YouTube Video link" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <button type="button" id="retrieve" class="btn my-btn">Retrieve Info</button>
+                                    <button type="button" disabled id="retrieve" class="btn my-btn">Retrieve Info</button>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" name="video_title" class="form-control"  value="{{ $video_title }}" placeholder="Video Title" required>
+                                <input type="text" name="video_title" class="form-control" maxlength="100" value="{{ $video_title }}" placeholder="Video Title" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="description" cols="30" rows="5"  placeholder="Video Description">{{ $description }}</textarea>
+                                <textarea class="form-control" name="description" cols="30" maxlength="250" rows="5"  placeholder="Video Description">{{ $description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)" required>
+                                <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
