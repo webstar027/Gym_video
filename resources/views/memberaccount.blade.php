@@ -100,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                                <input type="checkbox" checked class="custom-control-input" id="customCheck1" required>
                                 <label class="custom-control-label" for="customCheck1">Sponsors help pay our server costs. I agree to receive a monthly email from our sponsors to use this site for free. if I unsubscribe, then my account will be suspended.</label>
                             </div>
                         </div>

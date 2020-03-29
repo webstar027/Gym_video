@@ -27,7 +27,7 @@
                             <tbody>
                                 @foreach ($active_members as $key => $member)
                                 <tr>
-                                    <td> {{ $member -> name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
+                                    <td> {{ $member -> first_name }} {{ $member -> last_name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
                                     <td>
                                     <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
                                     </td>
@@ -46,7 +46,7 @@
                             <tbody>
                                 @foreach ($pending_members as $key => $member)
                                 <tr>
-                                    <td> {{ $member -> username }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
+                                    <td> {{ $member -> first_name }} {{ $member -> last_name }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
                                     <td>
                                         <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
                                         <a href="{{url('/account/gymowner/members/aprove/'.$gym_id.'/'.$member->id)}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
@@ -120,7 +120,7 @@
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
-                                <input type="checkbox" class="custom-control-input" id="customCheck1" required>
+                                <input type="checkbox" checked class="custom-control-input" id="customCheck1" required>
                                 <label class="custom-control-label" for="customCheck1">Sponsors help pay our server costs. I agree to receive a monthly email from our sponsors to use this site for free. if I unsubscribe, then my account will be suspended.</label>
                             </div>
                         </div>
