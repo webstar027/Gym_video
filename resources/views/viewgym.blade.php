@@ -26,7 +26,7 @@
 								
 								<div class="col-md-6 col-lg-4 video_col">
 									<div class="video-box">
-										<h3>{{ Str::limit($video -> video_title, 50)}}</h3>
+										<h3><a href="{{ url('/account/student/video/'.$video -> id) }}">{{ Str::limit($video -> video_title, 50)}}</a></h3>
 										<div class="row align-items-center">
 											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at}}</p></div>
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
@@ -35,7 +35,7 @@
 											<iframe class="embed-responsive-item" data-url="{{ $video -> video_url }}" src="" allowfullscreen></iframe>
 										</div>
 										<p class="video_grid_content">
-											<span class="video-sub-description">{{ Str::limit($video -> description, 130)}}</span>
+											<span class="video-sub-description">{{ Str::limit($video -> description, 100)}}</span>
 											<span class="video-description" style="display:none">{{ $video -> description }}</span>
 											<a href="#">read more...</a>
 										</p>
