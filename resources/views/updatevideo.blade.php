@@ -36,7 +36,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="status" value="{{ $video_status }}" class="custom-control-input" id="customCheck1">
+                                    <input type="checkbox" name="status" value="{{ $status }}" @if($status == 1) checked @endif class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Publish this video</label>
                                 </div>
                             </div>
