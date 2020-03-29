@@ -32,7 +32,7 @@
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
 										</div>
 										<div class="embed-responsive embed-responsive-16by9">
-											<iframe class="embed-responsive-item" data_url="{{ $video -> video_url }}" src="" allowfullscreen></iframe>
+											<iframe class="embed-responsive-item" data-url="{{ $video -> video_url }}" src="" allowfullscreen></iframe>
 										</div>
 										<div class="video_grid_content">
 											<p class="video-description">{{ $video -> description }}</p>
@@ -75,8 +75,11 @@
                 return 'error';
             }
         }
-        var src = $('.embed-responsive-item').attr('data_url');
-		$('.embed-responsive-item').attr('src','//www.youtube.com/embed/' + getId(src));
+        $('.embed-responsive-item').each(function(){
+			var src = $(this).data('url');
+			$(this).attr('src','//www.youtube.com/embed/' + getId(src));
+		});
+		
 		//ajax favorite
 		$(".btn_favorite").click(function(e){
 			var active = $(this);
