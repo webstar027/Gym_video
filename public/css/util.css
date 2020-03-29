@@ -25,6 +25,7 @@ p {
 }
 .video_grid_content{
   position:relative;
+  margin-bottom:30px;
 }
 /* .video_grid_content .video-description{
   height:65px;
