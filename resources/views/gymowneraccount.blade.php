@@ -46,7 +46,7 @@
                             <tbody>
                                 @foreach ($pending_members as $key => $member)
                                 <tr>
-                                    <td> {{ $member -> first_rname }} {{ $member -> last_rname }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
+                                    <td> {{ $member -> username }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
                                     <td>
                                         <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
                                         <a href="{{url('/account/gymowner/members/aprove/'.$gym_id.'/'.$member->id)}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
