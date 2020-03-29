@@ -6,6 +6,7 @@ use App\User;
 use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
  
 class UserService
 {
@@ -80,6 +81,7 @@ class UserService
 			return $this->userRepo->update($id, $attributes);
         }else{
 			$attributes = $request->all();
+			$attributes['password'] =  Hash::make($request->input('password'));
 			return $this->userRepo->update($id, $attributes);
         } 
      
