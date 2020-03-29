@@ -22,7 +22,7 @@
                                     <input type="url" class="form-control" name="video_url" value="{{ $video_url }}" disabled placeholder="YouTube Video link" required>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <button type="button" disabled id="retrieve" class="btn my-btn">Retrieve Info</button>
+                                    <a href="" type="button" disabled id="retrieve" class="btn my-btn disabled" aria-disabled="true">Retrieve Info</a>
                                 </div>
                             </div>
                             <div class="form-group">

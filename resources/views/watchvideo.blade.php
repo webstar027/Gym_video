@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="watch-video">
-                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="">Managers BJJ</a> <i class="fas fa-angle-right"></i> Video Title</p>
+                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="">Managers BJJ</a> <i class="fas fa-angle-right"></i>{{Str::limit($data -> video_title, 50)}}</p>
                         <h2 class="page-sub-title">{{ $data->video_title }}</h2>
                         <div class="row">
 							<div class="col-md-12">
@@ -22,8 +22,9 @@
 										<iframe class="embed-responsive-item" data_url="{{$data -> video_url }}" src="" allowfullscreen></iframe>
 									</div>
 									<div class="video_grid_content">
-										<p class="video-sub-description">{{ Str::words($data -> description, 40)}} <a href="#">read more...</a></p>
-										<p class="video-description" style="display:none">{{ $data -> description }} <a href="#">read more...</a> </p>
+										<!-- <p class="video-sub-description">{{ Str::limit($data -> description, 150)}} <a href="#">read more...</a></p>
+										<p class="video-description" style="display:none">{{ $data -> description }} <a href="#">read more...</a> </p> -->
+										<p class="description">{{ $data -> description }}</p>
 									</div>
 									<p class="video_tag">Tags: 
 										@foreach(explode(',',$data -> tag) as $row)
