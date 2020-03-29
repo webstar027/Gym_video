@@ -32,11 +32,11 @@
                                 <textarea class="form-control" name="description" cols="30" rows="5"  placeholder="Video Description">{{ $description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag"  value="{{ $tag }}" style="display:none;" placeholder="Enter individual tags separated by a comma (,)" required>
+                                <input type="text" class="form-control" name="tag"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" name="status" class="custom-control-input" id="customCheck1">
+                                    <input type="checkbox" name="status" value="1"  class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Publish this video</label>
                                 </div>
                             </div>
@@ -71,10 +71,10 @@
                     return 'error';
                 }
             }
-            $('#customCheck1').on('change', function(){
-            this.value = this.checked ? 1 : 0;
-             //alert(this.value);
-            }).change();
+            // $('#customCheck1').on('change', function(){
+            // this.value = this.checked ? 1 : 0;
+            //  //alert(this.value);
+            // }).change();
         });
     </script>
     <!-- //Section Accounts End -->
