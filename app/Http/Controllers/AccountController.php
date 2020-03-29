@@ -70,7 +70,13 @@ class AccountController extends Controller
      */ 
     public function updateUser($id, Request $request)
 	{
-
+        if (!empty($request->input('password'))){
+            $this->validate($request, [
+                'email'=>'required|string|email',
+                'password'=>'sometimes|string|min:6|confirmed'
+                
+            ]);
+        }
         $user = $request->user();
         $this->userservice->update($request, $id);
 		return redirect('/admin');
