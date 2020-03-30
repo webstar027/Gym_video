@@ -460,9 +460,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            @if(session()->has('success'))
+                            @if(session()->has('successes'))
                                 <div class="alert alert-success">
-                                    {{ session()->get('success') }}
+                                    {{ session()->get('successes') }}
                                 </div>
                             @endif
                         </div>
