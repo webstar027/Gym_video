@@ -32,7 +32,7 @@
                                 <textarea class="form-control" name="description" cols="30" maxlength="250" rows="5"  placeholder="Video Description">{{ $description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)" required>
+                                <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">

@@ -30,7 +30,7 @@
                                 <textarea class="form-control" name="description" maxlength="250" cols="30" rows="5" placeholder="Video Description"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)" required>
+                                <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
