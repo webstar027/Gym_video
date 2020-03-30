@@ -1,21 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-	<section class="bg-trans">
+<section class="bg-trans">
 		<div class="container">
 
-			<div class="row">
-				
-				<div class="col-lg-12">
-					<div class="about-us">
-						<h2 class="title-default">Forgot Your Password?</h2>
-						<p class="title-helper">Reset it here</p>
-					</div>
-				</div>
-
-			</div><!-- //.row -->
-            
-            <div class="row justify-content-center">
+			<div class="row justify-content-center">
 				
 				<div class="col-lg-5">
                     @if (session('status'))
@@ -23,15 +12,21 @@
                             {{ session('status') }}
                         </div>
                     @endif
-					<div class="about-us">
+					<div class="login-register">
+						<h3>Forgot Your Password?</h3>
 						<form method="POST" action="{{ route('password.email') }}">
                         @csrf
                             <div class="form-group">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror text-center"  placeholder="Email Address or Username" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="text" class="form-control {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }} text-center"  placeholder="Email Address or Username" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             
+                                @error('username')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message ?? ''}}</strong>
+                                    </span>
+                                @enderror
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong>{{ $message ?? ''}}</strong>
                                     </span>
                                 @enderror
                             </div>
@@ -43,7 +38,7 @@
 			</div><!-- //.row -->
 
 		</div><!-- //.container -->
-	</section>
+	</section><!-- //Section Log In End -->
 <!-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
