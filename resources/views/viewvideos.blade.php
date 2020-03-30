@@ -16,7 +16,7 @@
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped .dtBasicExample" width="100%" id="myTable">
+							<table class="table table-striped dtBasicExample" width="100%" id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Video Title</th>
