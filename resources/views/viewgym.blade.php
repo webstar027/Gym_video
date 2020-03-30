@@ -26,7 +26,7 @@
 								
 								<div class="col-md-6 col-lg-4 video_col">
 									<div class="video-box">
-										<h3><a href="{{ url('/account/student/video/'.$video -> id) }}">{{ Str::limit($video -> video_title, 50)}}</a></h3>
+										<h3><a href="{{ url('/account/student/video/'.$video -> id) }}">{{ Str::limit($video -> video_title, 30)}}</a></h3>
 										<div class="row align-items-center">
 											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at}}</p></div>
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
@@ -53,6 +53,102 @@
 								@endif
 								@endforeach
 							</div>
+							@if($data->total_video > 6)
+							<nav aria-label="Page navigation example">
+								<ul class="pagination justify-content-center">
+								@if($data->currentpage == 1)
+									<li class="page-item disabled">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page=1')}}"  tabindex="-1" aria-label="First">
+										<span aria-hidden="true">&laquo;</span>
+        								<span class="sr-only">First</span>
+									</a>
+									</li>
+									<li class="page-item disabled">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
+										<span aria-hidden="true">&lt;</span>
+        								<span class="sr-only">Previous</span>
+									</a>
+									</li>
+									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.$data->currentpage)}}">{{$data->currentpage }}</a></li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}">{{$data->currentpage + 1}}</a></li>
+									@if(ceil($data->total_video/6) > 2)
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 2))}}">{{$data->currentpage + 2}}</a></li>
+									@endif
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}" aria-label="Next">
+										<span aria-hidden="true">&gt;</span>
+        								<span class="sr-only">Next</span>
+									</a>
+									</li>
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.(ceil($data->total_video/6)))}}" aria-label="End">
+										<span aria-hidden="true">&raquo;</span>
+        								<span class="sr-only">End</span>
+									</a>
+									</li>
+								@elseif($data->currentpage == ceil($data->total_video/6))
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page=1')}}"  tabindex="-1" aria-label="First">
+										<span aria-hidden="true">&laquo;</span>
+        								<span class="sr-only">First</span>
+									</a>
+									</li>
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
+										<span aria-hidden="true">&lt;</span>
+        								<span class="sr-only">Previous</span>
+									</a>
+									</li>
+									@if(ceil($data->total_video/6) > 2)
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 2))}}">{{$data->currentpage - 2}}</a></li>
+									@endif
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}">{{$data->currentpage - 1}}</a></li>
+									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.$data->currentpage)}}">{{$data->currentpage}}</a></li>
+									<li class="page-item disabled">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}" aria-label="Next">
+										<span aria-hidden="true">&gt;</span>
+        								<span class="sr-only">Next</span>
+									</a>
+									</li>
+									<li class="page-item disabled">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.(ceil($data->total_video/3)))}}" aria-label="End">
+										<span aria-hidden="true">&raquo;</span>
+        								<span class="sr-only">End</span>
+									</a>
+									</li>
+								@elseif($data->currentpage > 1 and ceil($data->total_video/6))
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page=1')}}"  tabindex="-1" aria-label="First">
+										<span aria-hidden="true">&laquo;</span>
+        								<span class="sr-only">First</span>
+									</a>
+									</li>
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
+										<span aria-hidden="true">&lt;</span>
+        								<span class="sr-only">Previous</span>
+									</a>
+									</li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}">{{$data->currentpage - 1}}</a></li>
+									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.$data->currentpage)}}">{{$data->currentpage}}</a></li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}">{{$data->currentpage + 1}}</a></li>
+									<li class="page-item ">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}" aria-label="Next">
+										<span aria-hidden="true">&gt;</span>
+        								<span class="sr-only">Next</span>
+									</a>
+									</li>
+									<li class="page-item">
+									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.(ceil($data->total_video/6)))}}" aria-label="Next">
+										<span aria-hidden="true">&raquo;</span>
+        								<span class="sr-only">Next</span>
+									</a>
+									</li>
+								@else
+								@endif
+								</ul>
+							</nav>
+							@endif
 						</div>
                         
 					</div>

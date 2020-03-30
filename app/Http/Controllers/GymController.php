@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use App\Services\GymService;
 use DateTime;
@@ -140,13 +142,23 @@ class GymController extends Controller
     {
         $user = $request->user();
 
+        $page = $request->query('page');
+        if (!$page)
+        {
+            $page = 1;
+        }
+
         $sub = $user->approved_gyms()->find($gym_id);
         if ($sub)
         {
             $gym = $this->gymservice->read($gym_id);
             $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
             $videos = $videos_all->where('status', 1);
+            $video_count = $videos->count();
+            $videos = $videos->forPage($page, 6);
             $gym->videos = $videos;
+            $gym->total_video = $video_count;
+            $gym->currentpage = $page;
             return view('viewgym',['data' => $gym]);
         }
         else
