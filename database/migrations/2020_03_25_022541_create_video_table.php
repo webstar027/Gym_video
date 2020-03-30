@@ -19,7 +19,7 @@ class CreateVideoTable extends Migration
             $table->string('video_url');
             $table->longText('video_title');
             $table->longText('description');
-            $table->longText('tag');
+            $table->longText('tag')->nullable();
             $table->boolean('status') -> default('0');
             $table->timestamps();
 
