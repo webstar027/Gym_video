@@ -13,7 +13,7 @@
                         <h2 class="page-sub-title">My Videos</h2>
                         <a href="{{ url('/account/gymowner/addvideo/'.$gym_id) }}">Add Videos</a>
                         <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description or #tag">
-                        <p><span id="video_count"></span>{{ $videos ->count() }} video(s) have matched your search criteria</p>
+                        <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
 							<table class="table table-striped" id="myTable">
@@ -76,17 +76,20 @@
 		filter = input.value.toUpperCase();
 		table = document.getElementById("myTable");
 		tr = table.getElementsByTagName("tr");
+		var inc = 1;
 		for (i = 1; i < tr.length; i++) {
 			td = tr[i];
 			if (td) {
 			txtValue = td.textContent || td.innerText;
 			if (txtValue.toUpperCase().indexOf(filter) > -1) {
 				tr[i].style.display = "";
+				inc++;
 			} else {
 				tr[i].style.display = "none";
 			}
 			}       
 		}
+		document.getElementById('video_count').innerHTML = inc;
 		}
 	</script>
     <!-- //Section Accounts End -->
