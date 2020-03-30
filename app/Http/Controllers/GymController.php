@@ -80,7 +80,7 @@ class GymController extends Controller
     public function updategym($gym_id, Request $request){
         $user = $request->user();
         $this->gymservice->update($request, $gym_id);
-		return redirect('/account/gymowner');
+		return redirect()->back()->with('success', 'My Gym Details have been updated successfully!');
     }
     /**
      * Request to access to the gym

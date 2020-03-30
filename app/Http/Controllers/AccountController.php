@@ -81,7 +81,7 @@ class AccountController extends Controller
         }else{
             $user = $request->user();
             $this->userservice->update($request, $id);
-            return redirect()->back()->with('success', 'Content has been updated successfully!');
+            return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
         }
         
     }

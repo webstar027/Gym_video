@@ -460,6 +460,11 @@
                                     @enderror
                                 </div>
                             </div>
+                            @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
                         </div>
                         <button type="submit" class="btn my-btn btn-block">Update</button>
                     </form>
