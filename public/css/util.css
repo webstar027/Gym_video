@@ -39,12 +39,10 @@ p {
   height:auto !important;
   overflow:hidden;
 }*/
-.video-sub-description{
-  margin-top: 10px;
-}
 .video_grid_content a{
   float:right;
 } 
 .description, .video-description, .video-sub-description{
   white-space: pre-wrap;
+  margin-top: 20px;
 }
