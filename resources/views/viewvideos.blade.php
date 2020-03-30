@@ -76,7 +76,7 @@
 		filter = input.value.toUpperCase();
 		table = document.getElementById("myTable");
 		tr = table.getElementsByTagName("tr");
-		var inc = 1;
+		var inc = 0;
 		for (i = 1; i < tr.length; i++) {
 			td = tr[i];
 			if (td) {
