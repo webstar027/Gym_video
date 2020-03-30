@@ -37,7 +37,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">
-                    <table class="table table-striped dtBasicExample" id="myTable">
+                    <table class="table table-striped dtBasicExample" width="100%" id="myTable">
                             <thead>
                                 <tr>
                                     <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>

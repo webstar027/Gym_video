@@ -22,7 +22,10 @@
 										<th scope="col">Video Title</th>
 										<th scope="col">Date</th>
 										<th scope="col">Status</th>
+										<td style="display:none">Tags</td>
+										<td style="display:none">Description</td>
 										<th scope="col">Action</th>
+										
 									</tr>
 								</thead>
 								<tbody>

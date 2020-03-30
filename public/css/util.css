@@ -54,9 +54,14 @@ p {
   flex-direction: row-reverse;
   text-align: right;
 }
-.dataTables_wrapper .dataTables_filter{
+/* .dataTables_wrapper .dataTables_filter{
   display: none;
-}
+} */
 .dataTables_length select{
   width:60px !important;
+}
+@media(max-width:600px){
+  .add-gym-user input[type=search]{
+    width:100% !important;
+  }
 }
