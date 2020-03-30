@@ -26,7 +26,7 @@
                                 <tr>
                                     <td scope="row"><a href="{{ url('/account/student/viewgym/'.$member -> id) }}">{{ $member -> gym_name }}</a></td>
                                     <td>{{ $member -> owner -> first_name}} {{ $member -> owner -> last_name}}</td>
-                                    <td>{{ $member -> videos->where('status', 1)->count() }}</td>
+                                    <td style="padding-left:28px;">{{ $member -> videos->where('status', 1)->count() }}</td>
                                     <td>{{ $member -> updated_at }}</td>
                                     <td><a href="{{url('/account/student/gyms/cancel/'.$member -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request"><i class="fas fa-trash"></i></a></td>
                                 </tr>
@@ -97,6 +97,11 @@
                             <div class="form-group col-lg-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="old-password">
                             </div>
+                            @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">

@@ -76,10 +76,15 @@ class AccountController extends Controller
                 'password'=>'sometimes|string|min:6|confirmed'
                 
             ]);
+            $user = $request->user();
+            $this->userservice->update($request, $id);
+            return redirect()->back()->with('success', 'Details and Passowrd has been updated successfully!');
+        }else{
+            $user = $request->user();
+            $this->userservice->update($request, $id);
+            return redirect()->back()->with('success', 'Content has been updated successfully!');
         }
-        $user = $request->user();
-        $this->userservice->update($request, $id);
-		return redirect('/admin');
+        
     }
   
             

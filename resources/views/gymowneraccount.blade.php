@@ -117,6 +117,11 @@
                             <div class="form-group col-lg-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="old-password">
                             </div>
+                            @if(session()->has('success'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('success') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="form-group">
                             <div class="custom-control custom-checkbox">
@@ -155,7 +160,7 @@
                                 <input type="text" class="form-control" value="{{ $gym->gym_address_1 }}" name="gym_address_1" placeholder="Gym Mailing Address" required>
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" value="{{ $gym->gym_address_2 }}" name="gym_address_2" placeholder="Gym Address 2" required>
+                                <input type="text" class="form-control" value="{{ $gym->gym_address_2 }}" name="gym_address_2" placeholder="Gym Address 2">
                             </div>
                         </div>
                         <div class="form-row">
