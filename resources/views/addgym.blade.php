@@ -10,12 +10,12 @@
 				<div class="col-md-12">
 					<div class="add-gym-user">
                         <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
-                        <h2 class="page-sub-title">Gym Search</h2>
+						<h2 class="page-sub-title">Gym Search</h2>
                         <input type="search" onkeyup="searchvideo()" class="form-control" id="searchinput" placeholder="Gym Name or Owner name">
                         <p><span id="gym_count">{{ $allgyms->count() }}</span> Gym(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped" id="myTable">
+							<table class="table table-striped dtBasicExample" width="100%"  id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Gym Name</th>
@@ -105,7 +105,7 @@
 		filter = input.value.toUpperCase();
 		table = document.getElementById("myTable");
 		tr = table.getElementsByTagName("tr");
-		var inc =1;
+		var inc =0;
 		for (i = 1; i < tr.length; i++) {
 			td = tr[i];
 			if (td) {
