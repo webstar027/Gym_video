@@ -32,7 +32,8 @@
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
 										</div>
 										<div class="embed-responsive embed-responsive-16by9">
-											<iframe class="embed-responsive-item" data-url="{{ $video -> video_url }}" src="" allowfullscreen></iframe>
+											<!-- <iframe class="embed-responsive-item" data-url="{{ $video -> video_url }}" src="" allowfullscreen></iframe> -->
+											<a href="{{ url('/account/student/video/'.$video -> id) }}"><img class="embed-responsive-item" data-url="{{ $video -> video_url }}" src=""/></a>
 										</div>
 										<p class="video_grid_content">
 											<span class="video-sub-description">{{ Str::limit($video -> description, 80)}}</span>
@@ -78,7 +79,7 @@
         }
         $('.embed-responsive-item').each(function(){
 			var src = $(this).data('url');
-			$(this).attr('src','//www.youtube.com/embed/' + getId(src));
+			$(this).attr('src','https://img.youtube.com/vi/'+getId(src)+'/hqdefault.jpg');
 		});
 		
 		//ajax favorite
