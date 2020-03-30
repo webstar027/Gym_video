@@ -45,3 +45,6 @@ p {
 .video_grid_content a{
   float:right;
 } 
+.description, .video-description, .video-sub-description{
+  white-space: pre-wrap;
+}
