@@ -77,7 +77,7 @@ class AccountController extends Controller
             ]);
             $user = $request->user();
             $this->userservice->update($request, $id);
-            return redirect()->back()->with('success', 'Details and Password has been updated successfully!');
+            return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
         }else{
             $user = $request->user();
             $this->userservice->update($request, $id);
