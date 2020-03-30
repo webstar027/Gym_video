@@ -18,7 +18,7 @@
                 </div>
                 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="active_members" role="tabpanel" aria-labelledby="active_members_tab">
-                        <table class="table table-striped" id="myTable">
+                        <table class="table table-striped dtBasicExample" width="100%" id="myTable">
                             <thead>
                                 <tr>
                                     <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
@@ -37,7 +37,7 @@
                         </table>
                     </div>
                     <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">
-                    <table class="table table-striped" id="myTable">
+                    <table class="table table-striped dtBasicExample" id="myTable">
                             <thead>
                                 <tr>
                                     <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>

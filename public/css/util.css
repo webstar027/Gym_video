@@ -46,3 +46,17 @@ p {
   white-space: pre-wrap;
   margin-top: 25px;
 }
+.table-responsive{
+  overflow:hidden;
+}
+.dataTables_wrapper > .row:first-child{
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.dataTables_wrapper .dataTables_filter{
+  display: none;
+}
+.dataTables_length select{
+  width:60px !important;
+}

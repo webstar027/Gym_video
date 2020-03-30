@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/util.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables-select.min.css') }}">
     <script src="{{ asset('js/jquery.min.js')}}"></script>
 </head>
 <body>
@@ -167,6 +169,9 @@
         <!--===============================================================================================-->
         <script src="{{ asset('js/popper.min.js')}}"></script>
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
+        <script src="{{ asset('js/datatables.min.js')}}"></script>
+        <script src="{{ asset('js/datatables-select.min.js')}}"></script>
+        <!-- <script src="{{ asset('js/mdb.min.js')}}"></script> -->
         <!--===============================================================================================-->
         <script src="{{ asset('/js/theme.js')}}"></script>
 </html>

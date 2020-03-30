@@ -25,5 +25,6 @@ $("#gym_owner_account").css('display','none');
 		$("#gym_owner_account").css('display','block');
 	});
 	$('[data-toggle="tooltip"]').tooltip();
-
+	$('.dtBasicExample').DataTable();
+	$('.dataTables_length').addClass('bs-select');
 });

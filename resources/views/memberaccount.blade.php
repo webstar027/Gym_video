@@ -11,7 +11,7 @@
                     <h2 class="page-sub-title">My Subscriptions</h2>
                     <a href="{{ url('/account/student/gyms/search') }}" class="btn my-btn mb-4">Add Gym</a>
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-striped dtBasicExample" width="100%">
                             <thead>
                                 <tr>
                                     <th scope="col">Gym Name</th>
