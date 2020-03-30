@@ -61,7 +61,6 @@ class AccountController extends Controller
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
 
-        
     /**
      * Update user page
      *
