@@ -44,5 +44,5 @@ p {
 } 
 .description, .video-description, .video-sub-description{
   white-space: pre-wrap;
-  margin-top: 250px;
+  margin-top: 25px;
 }
