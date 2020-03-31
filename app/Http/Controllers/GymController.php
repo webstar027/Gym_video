@@ -76,7 +76,7 @@ class GymController extends Controller
 
         $user = $request->user();
         $this->gymservice->access_request($user->id, $gym_id);
-        return redirect('/account/student');
+        return redirect('/account/student/gyms/search');
     }
 
     public function updategym($gym_id, Request $request){
@@ -94,7 +94,7 @@ class GymController extends Controller
     {
         $user = $request->user();
         $this->gymservice->cancel_request($user->id, $gym_id);
-        return redirect('/account/student');
+        return redirect('/account/student/gyms/search');
     }
     /**
      * Deny to access to the gym
