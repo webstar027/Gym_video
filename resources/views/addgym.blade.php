@@ -20,6 +20,7 @@
 									<tr>
 										<th scope="col">Gym Name</th>
 										<th scope="col">Gym Owner</th>
+										<th scope="col">Member Count</th>
 										<th scope="col">Status</th>
 										<th scope="col">Action</th>
 									</tr>
@@ -29,6 +30,7 @@
 									<tr>
 										<td>{{$gym -> gym_name}}</td>
 										<td>{{$gym -> owner -> first_name}} {{$gym -> owner -> last_name}}</td>
+										<td>{{$gym -> activeMembers -> count()}}</td>
 										<td>
 											@if($gym -> status == 0)
 											

@@ -66,4 +66,7 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::get('/account/favorite/video/{id}', 'VideoController@favorite');
     Route::get('/account/unfavorite/video/{id}', 'VideoController@unfavorite');
 
+    //Notification
+    Route::get('send', 'HomeController@send');
+
 });

@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Notifications\RequestAccessNotification;
 use Illuminate\Http\Request;
+use Notification;
 
 class HomeController extends Controller
 {
@@ -78,4 +79,11 @@ class HomeController extends Controller
     // {
     //     return view('gymowner');
     // }
+    public function send(Request $request)
+    {
+        $user = $request->user();
+        Notification::send($user, new RequestAccessNotification($user));
+
+        return dd("done");
+    }
 }
