@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\RequestAccessNotification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -9,6 +10,7 @@ use Illuminate\Support\Collection;
 use App\Services\GymService;
 use DateTime;
 use DateInterval;
+use Notification;
 
 class GymController extends Controller
 {
@@ -78,6 +80,9 @@ class GymController extends Controller
 
         $user = $request->user();
         $this->gymservice->access_request($user->id, $gym_id);
+        $gym = $this->gymservice->read($gym_id);
+        $gymowner = $this->gymservice->getGymOwner($gym->owner_id);
+        Notification::send($gymowner, new RequestAccessNotification($user));
         return redirect('/account/student/gyms/search');
     }
 
