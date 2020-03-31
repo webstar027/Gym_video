@@ -145,7 +145,12 @@ class VideoController extends Controller
 		// print_r('<pre>');
 		// print_r($video);
 		// print_r('</pre>');
-		$tag = implode(',', $video['snippet']['tags']);
+		$tag = "";
+		if (array_key_exists("tags", $video['snippet']))
+		{
+			$tag = implode(',', $video['snippet']['tags']);
+		}
+		
 		$data=['title'=>$video['snippet']['title'], 'description'=>$video['snippet']['description'], 'tag'=>$tag, 'thumbnail'=>$video['snippet']['thumbnails']['maxres']['url']];
 		return $data;
 	}

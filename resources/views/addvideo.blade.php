@@ -27,10 +27,10 @@
                                 <input type="text" name="video_title" maxlength="100" class="form-control" placeholder="Video Title" required>
                             </div>
                             <div class="form-group">
-                                <textarea class="form-control" name="description" maxlength="250" cols="30" rows="5" placeholder="Video Description"></textarea>
+                                <textarea class="form-control" name="description" maxlength="250" cols="30" rows="5" placeholder="Video Description" required></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)">
+                                <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
