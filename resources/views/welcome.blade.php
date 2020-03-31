@@ -43,12 +43,12 @@
     <div class="container">
         
         <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="./">
+            <a class="navbar-brand" href="/">
                 <span class="logo-default">
                     <img src="{{ asset('images/logo-default.png') }}" alt=""/>
                 </span>
                 <span class="logo-alt">
-                    <img src="{{ asset('images/logo-alt.png') }}" alt="">
+                    <img src="{{ asset('images/logo-default.png') }}" alt="">
                 </span>	
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,7 +58,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="./">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/student') }}">Student</a>
@@ -82,11 +82,11 @@
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->name }} <span class="caret"></span>
+                            {{ Auth::user()->username }} <span class="caret"></span>
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="/admin" class="dropdown-item">{{__('Dashboard')}}</a>
+                            <a href="/admin" class="dropdown-item">{{__('My Account')}}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -154,8 +154,8 @@
 				
 				<div class="col-lg-6">
 					<div class="footer-top-about">
-						<img src="{{ asset('/images/logo-alt.png')}}" alt="">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem eum alias quasi eaque. Fugit beatae sapiente libero atque consequuntur iusto!</p>
+						<img src="{{ asset('images/logo-alt.png')}}" alt="">
+						<p>Ground Monkey's private playlist format allows instructors to provide valuable video content for their members, while still maintaining an easily organized curriculum.</p>
 					</div>
 				</div>
 
@@ -166,7 +166,7 @@
 							<a class="nav-link" href="{{ url('/student') }}">Student</a>
 							<a class="nav-link" href="{{ url('/gymowner') }}">Gym Owner</a>
 							<a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
-							<a class="nav-link" href="#">About Us</a>
+							<a class="nav-link" href="{{ url('/aboutus') }}">About Us</a>
 						</nav>
 					</div>
 				</div>
@@ -184,12 +184,12 @@
 				
 				<div class="col-lg-6">
 					<div class="copyright-text">
-						<p>&copy; 2020 - Online Training</p>
+						<p>&copy; 2020 - Ground Monkey</p>
 					</div>
 				</div>
 
 				<div class="col-lg-6 mt-4 mt-lg-0">
-					<div class="social-media">
+					<!-- <div class="social-media">
 						<ul class="nav justify-content-end">
 							<li class="nav-item">
 								<a class="nav-link" href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
@@ -207,7 +207,7 @@
 								<a class="nav-link" href="#" target="_blank"><i class="fab fa-google-plus-g"></i></a>
 							</li>
 						</ul>
-					</div>
+                    </div> -->
 				</div>
 
 			</div><!-- //.row -->

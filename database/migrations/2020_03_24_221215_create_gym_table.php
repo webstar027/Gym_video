@@ -14,17 +14,17 @@ class CreateGymTable extends Migration
     public function up()
     {
         Schema::create('gyms', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('gym_name');
             $table->string('gym_address_1');
-            $table->string('gym_address_2');
+            $table->string('gym_address_2')->nullable();
             $table->string('city');
             $table->string('state_province');
             $table->string('country');
             $table->string('zip_code');
-            $table->string('website');
-            $table->unsignedBigInteger('owner_id');
-            $table->foreign('owner_id')->references('id')->on('users');
+            $table->string('website')->nullable();
+            $table->bigInteger('owner_id')->unsigned();
+            $table->foreign('owner_id')->references('id')->on('users')->onDelete('cascade');;
             $table->timestamps();
         });
     }

@@ -30,23 +30,13 @@ class Gym extends Model
     }
 
     /**
-     * Get the owner of this gym.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function owner()
-    {
-        return $this->belongsTo('App\User', 'foreign_key', 'owner_id');
-    }
-
-    /**
      * Get the members that have requests.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function members()
     {
-        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->withPivot('status');
+        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->withPivot('status')->withTimestamps();
     }
 
     /**
@@ -56,7 +46,7 @@ class Gym extends Model
      */
     public function activeMembers()
     {
-        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->wherePivot('status', 1);
+        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->withPivot('status')->withTimestamps()->wherePivot('status', 1);
     }
 
     
@@ -67,6 +57,6 @@ class Gym extends Model
      */
     public function pendingMembers()
     {
-        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->wherePivot('status', 2);
+        return $this->belongsToMany('App\User', 'gym_user', 'gym_id', 'user_id')->withPivot('status')->withTimestamps()->wherePivot('status', 2);
     }
 }

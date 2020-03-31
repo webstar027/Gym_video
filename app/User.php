@@ -17,7 +17,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name','last_name','name', 'email','role_id', 'password',
+        'first_name','last_name','username', 'email','role_id', 'password',
     ];
 
     /**
@@ -45,7 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function role()
     {
-        return $this->hasOne('App\role', 'foreign_key');
+        return $this->hasOne('App\role');
     }
 
     /**
@@ -55,6 +55,27 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function gyms()
     {
-        return $this->belongsToMany('App\Gym');
+        return $this->belongsToMany('App\Gym')->withPivot("status")->withTimestamps();
     }
+
+    /**
+     * Get the approved gyms subscribed to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function approved_gyms()
+    {
+        return $this->belongsToMany('App\Gym')->withPivot("status")->withTimestamps()->wherePivot('status', 1);;
+    }
+
+    /**
+     * Get the favorate subscribed to this user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
+     */
+    public function favorites()
+    {
+        return $this->belongsToMany(Video::class, 'favorites')->withTimestamps();
+    }
+
 }

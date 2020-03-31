@@ -105,4 +105,26 @@
     }
     // Login Register End
 
+    // Pricing Start
+    .pricing-box:hover {
+        transform: scale(1);
+    }
+    .price-details {
+        margin: 30px 0;
+    }
+    .pricing-box .cost {
+        font-size: 30px;
+    }
+    // Pricing End
+
+    // Watch Video Start
+    .video-box p {
+        line-height: 23px;
+        font-size: 15px;
+    }
+    .video-info p, .video-info a {
+        font-size: 14px;
+    }
+    // Watch Video End
+
 }

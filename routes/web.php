@@ -20,27 +20,50 @@ Route::get('/', function () {
 Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('/gymowner', function(){
+    return view('gymowner');
+});
+Route::get('/student', function(){
+    return view('student');
+});
+Route::get('/aboutus', function(){
+    return view('aboutus');
+});
+Route::get('/pricing', function(){
+    return view('pricing');
+});
+// Route::get('/student', 'HomeController@studentpage');
+// Route::get('/aboutus', 'HomeController@about');
+// Route::get('/pricing', 'HomeController@pricing');
+Route::middleware(['verified', 'auth'])->group(function () {
+    Route::get('/admin', 'HomeController@index')->name('admin');
+    // gymowner
+    Route::get('/account/gymowner', 'AccountController@gymowner');
+    Route::get('/account/gymowner/members', 'AccountController@members');
+    Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo');
+    Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video');
+    Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo');
+    Route::post('/account/gymowner/addvideo', 'VideoController@createVideo');
+    Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo');
+    Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo');
+    Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos');
+    Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo');
+    Route::get('/account/gymowner/members/aprove/{gym_id}/{user_id}', 'GymController@request_aprove');
+    Route::get('/account/gymowner/members/deny/{gym_id}/{user_id}', 'GymController@request_deny');
+    Route::get('/getYoutube/{id}', 'VideoController@getYoutube');
+    Route::get('/account/gymowner/video/{id}', 'VideoController@watchgym');
+    Route::put('/account/gymowner/updategym/{gym_id}','GymController@updategym');
+    // student
+    Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
+    Route::get('/account/student', 'AccountController@student');
+    Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymview');
+    Route::get('/account/student/gyms/search', 'GymController@search');
+    Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel');
+    Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_access');
 
-Route::get('/gymowner', 'HomeController@gymowner')->name('gymowner');
-Route::get('/student', 'HomeController@student')->name('student');
-Route::get('/aboutus', 'HomeController@about')->name('aboutus');
-Route::get('/pricing', 'HomeController@pricing')->name('pricing');
+    // Route::get('/account/student/video/', 'VideoController@viewvideos');
+    Route::get('/account/student/video/{id}', 'VideoController@watch');
+    Route::get('/account/favorite/video/{id}', 'VideoController@favorite');
+    Route::get('/account/unfavorite/video/{id}', 'VideoController@unfavorite');
 
-// gymowner
-Route::get('/account/gymowner', 'AccountController@gymowner');
-Route::get('/account/gymowner/members', 'AccountController@members');
-Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo');
-Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video');
-Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo');
-Route::post('/account/gymowner/addvideo', 'VideoController@createVideo');
-Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo');
-Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos');
-Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo');
-
-// student
-Route::get('/account/student', 'AccountController@student');
-Route::get('/account/student/gyms', 'AccountController@gymlist');
-Route::get('/account/student/gyms/search', 'GymController@addgym');
-// Route::get('/account/student/video/', 'VideoController@viewvideos');
-Route::get('/account/student/video/{id}', 'VideoController@watch');
+});

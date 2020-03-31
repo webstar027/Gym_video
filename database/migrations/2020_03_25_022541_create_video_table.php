@@ -14,14 +14,16 @@ class CreateVideoTable extends Migration
     public function up()
     {
         Schema::create('videos', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('gym_id');
+            $table->bigIncrements('id');
+            $table->bigInteger('gym_id')->unsigned();
             $table->string('video_url');
-            $table->string('video_title');
-            $table->string('description');
-            $table->string('tag');
+            $table->longText('video_title');
+            $table->longText('description');
+            $table->longText('tag')->nullable();
             $table->boolean('status') -> default('0');
             $table->timestamps();
+
+            $table->foreign('gym_id')->references('id')->on('gyms')->onDelete('cascade');;
         });
     }
 

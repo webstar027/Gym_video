@@ -9,13 +9,13 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
-                        <h2 class="page-sub-title">Gym Search</h2>
-                        <input type="search" class="form-control" placeholder="Gym Name or Owner name">
-                        <p>2 Gym(s) have matched your search criteria</p>
+                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
+						<h2 class="page-sub-title">Gym Search</h2>
+                        <input type="search" onkeyup="searchvideo()" class="form-control" id="searchinput" placeholder="Gym Name or Owner name">
+                        <p><span id="gym_count">{{ $allgyms->count() }}</span> Gym(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped">
+							<table class="table table-striped dtBasicExample" width="100%"  id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Gym Name</th>
@@ -25,7 +25,35 @@
 									</tr>
 								</thead>
 								<tbody>
+									@foreach ($allgyms as $key => $gym)
 									<tr>
+										<td>{{$gym -> gym_name}}</td>
+										<td>{{$gym -> owner -> first_name}} {{$gym -> owner -> last_name}}</td>
+										<td>
+											@if($gym -> status == 0)
+											
+											@elseif($gym -> status == 1) 
+											Approved 
+											@elseif($gym -> status == 2) 
+											Pending 
+											@elseif($gym -> status == 3)
+											Denied
+											@endif
+										</td>
+										<td>
+											@if($gym -> status == 0)
+											<a href="{{url('/account/student/gyms/access/'.$gym -> id)}}" class="text-info request-access" data-toggle="tooltip" data-placement="top" title="Request Access">Request Access</a>
+											@elseif($gym -> status == 1) 
+											<a href="{{ url('/account/student/viewgym/'.$gym -> id) }}" class="text-success view_gympage" data-toggle="tooltip" data-placement="top" title="View Gym Page">View Gym Page</a>
+											@elseif($gym -> status == 2) 
+											<a href="{{url('/account/student/gyms/cancel/'.$gym -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request">Cancel Request</a> 
+											@elseif($gym -> status == 3)
+											<a href="#" class="text-danger request-time" data-toggle="tooltip" data-placement="top" title="Denied">{{ $gym->time }}</a> 
+											@endif
+										</td>
+									</tr>
+									@endforeach
+									<!-- <tr>
 										<td scope="row">Rima</td>
 										<td>Hasan</td>
                                         <td>Pending</td>
@@ -48,7 +76,7 @@
 										<td>Hasan</td>
 										<td></td>
 										<td><a href="#" class="text-info">Request Access</a></td>
-									</tr>
+									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -58,6 +86,40 @@
 			</div><!-- //.row -->
 
 		</div><!-- //.container -->
-    </section>
+	</section>
+	<script>
+		jQuery(document).ready(function(){
+			$('.calcel-request').click(function(e){
+				
+				var r = confirm("Are you sure cancel request?");
+				if(r == true){
+					return;
+				}else{
+					e.preventDefault();
+				}
+			});
+		});
+		function searchvideo() {
+		var input, filter, table, tr, td, i, txtValue;
+		input = document.getElementById("searchinput");
+		filter = input.value.toUpperCase();
+		table = document.getElementById("myTable");
+		tr = table.getElementsByTagName("tr");
+		var inc =0;
+		for (i = 1; i < tr.length; i++) {
+			td = tr[i];
+			if (td) {
+			txtValue = td.textContent || td.innerText;
+			if (txtValue.toUpperCase().indexOf(filter) > -1) {
+				tr[i].style.display = "";
+				inc++;
+			} else {
+				tr[i].style.display = "none";
+			}
+			}       
+		}
+		document.getElementById('gym_count').innerHTML = inc;
+		}
+	</script>
     <!-- //Section Accounts End -->
 @endsection

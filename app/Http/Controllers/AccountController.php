@@ -14,24 +14,85 @@ class AccountController extends Controller
 	{
         $this->userservice = $userservice;
     }
-    //Gym ownner account
+    
+
+    /**
+     * Get gym information
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */    
     public function gymowner(Request $request)
     {
         $user = $request->user();
         $gymownerid = $user->id;
         $data = $this->userservice->getGymSummary($gymownerid);
-        
+      
         return view('gymowneraccount', $data);
     }
+
+    /**
+     * Get members information
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function members($id)
     {
-        return view('memberaccount');
+        return view('members');
     }
-    //student account
-    public function student()
+    
+    /**
+     * Show student page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
+    public function student(Request $request)
     {
-        return view('memberaccount');
+        $user = $request->user();
+       
+        $members = $user->approved_gyms;
+        foreach($members as $key => $member)
+        {
+            $o = $this->userservice->read($member->owner_id);
+            $member->owner = $o;
+        }
+        return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
+
+    /**
+     * Update user page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
+    public function updateUser($id, Request $request)
+	{
+        if (!empty($request->input('password'))){
+            $this->validate($request, [
+                'email'=>'required|string|email',
+                'password'=>'sometimes|string|min:6|confirmed'
+                
+            ]);
+            $user = $request->user();
+            $this->userservice->update($request, $id);
+            return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
+        }else{
+            $user = $request->user();
+            $this->userservice->update($request, $id);
+            return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
+        }
+        
+    }
+  
+            
+    /**
+     * Update user page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function gymlist()
     {
         return view('gymlist');

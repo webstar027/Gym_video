@@ -11,3 +11,57 @@ p {
 	margin-top: 0;
 	margin-bottom: 1rem;
   }
+  button.puhlish-video {
+    padding: 0;
+    height: 18px;
+    border: 0;
+    background: unset;
+}
+.unactive > .fas{
+  display:none;
+}
+.active > .far{
+  display:none;
+}
+.video_grid_content{
+  position:relative;
+  margin-bottom:30px;
+}
+/* .video_grid_content .video-description{
+  height:65px;
+  overflow:hidden;
+  transition:height 0.3s;
+  -webkit-transition:height 0.3s;
+  -o-transition:height 0.3s;
+  -moz-transition:height 0.3s;
+} */
+/* .video_grid_content.active .video-description{
+  height:auto !important;
+  overflow:hidden;
+}*/
+.video_grid_content a{
+  float:right;
+} 
+.description, .video-description, .video-sub-description{
+  white-space: pre-wrap;
+  margin-top: 25px;
+}
+.table-responsive{
+  overflow:hidden;
+}
+.dataTables_wrapper > .row:first-child{
+  display: flex;
+  flex-direction: row-reverse;
+  text-align: right;
+}
+/* .dataTables_wrapper .dataTables_filter{
+  display: none;
+} */
+.dataTables_length select{
+  width:60px !important;
+}
+@media(max-width:600px){
+  .add-gym-user input[type=search]{
+    width:100% !important;
+  }
+}

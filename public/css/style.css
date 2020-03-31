@@ -169,7 +169,7 @@ a:hover {
 }
 
 .navbar-brand img {
-  width: 100px;
+  width: 150px;
 }
 
 .logo-alt {
@@ -223,9 +223,10 @@ a:hover {
 }
 
 #hero {
-  height: 100%;
+  height: 50%;
   position: relative;
   z-index: 0;
+  padding: 80px 0 25px;
   background-image: url("../images/bg/home-bg.jpg");
   background-attachment: fixed;
 }
@@ -256,7 +257,7 @@ a:hover {
 
 .hero-text h1 {
   color: #fff;
-  font-size: 100px;
+  font-size: 70px;
   font-weight: 500;
 }
 
@@ -308,7 +309,7 @@ a:hover {
   color: #fff;
 }
 
-.gym-name-stats .nav-link.active {
+.gym-name-stats .active {
   background-color: #1a73e8;
   color: #fff;
 }
@@ -330,8 +331,72 @@ a:hover {
   font-size: 14px;
 }
 
+.love {
+  width: 16px;
+  margin-top: -2px;
+  cursor: pointer;
+}
+
+.video-description {
+  margin-top: 10px;
+}
+
+.pricing-text {
+  margin-bottom: 50px;
+}
+
+.pricing-box {
+  border: 1px solid lightgray;
+  text-align: center;
+  padding: 50px 35px;
+  background-color: #fff;
+  transition: 1s;
+}
+
+.pricing-box:hover {
+  transform: scale(1.06);
+}
+
+.pricing-box h2 {
+  flex: 35;
+}
+
+.pricing-box .cost {
+  color: #1a73e8;
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.price-details {
+  margin: 50px 0;
+}
+
+.view-members .btn-group {
+  margin-bottom: 20px;
+}
+
+.view-members .btn-group .my-btn {
+  background-color: transparent;
+  border: 1px solid #1a73e8;
+  color: #1a73e8;
+}
+
+.view-members .btn-group .active {
+  background-color: #1a73e8;
+  color: #fff;
+}
+
+.student-img-box {
+  margin-bottom: 30px;
+}
+
 #footer_top {
   background-color: #252525;
+}
+
+.footer-top-about img {
+  width: 250px;
+  margin-bottom: 20px;
 }
 
 .footer-top-about p {
@@ -359,6 +424,10 @@ a:hover {
   font-size: 15px;
   font-weight: normal;
   letter-spacing: 1px;
+}
+
+.social-media {
+  display: none;
 }
 
 .social-media ul li a {
@@ -479,5 +548,26 @@ a:hover {
   .account-type-btn .my-btn {
     font-size: 16px;
     padding: 5px 15px;
+  }
+
+  .pricing-box:hover {
+    transform: scale(1);
+  }
+
+  .price-details {
+    margin: 30px 0;
+  }
+
+  .pricing-box .cost {
+    font-size: 30px;
+  }
+
+  .video-box p {
+    line-height: 23px;
+    font-size: 15px;
+  }
+
+  .video-info p, .video-info a {
+    font-size: 14px;
   }
 }

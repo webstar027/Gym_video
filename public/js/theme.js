@@ -25,5 +25,25 @@ $("#gym_owner_account").css('display','none');
 		$("#gym_owner_account").css('display','block');
 	});
 	$('[data-toggle="tooltip"]').tooltip();
-
+	$('.dtBasicExample').DataTable({
+		"bJQueryUI": true,
+		"sPaginationType": "full_numbers",
+		"bPaginate": true,
+		"bFilter": false,
+		"bSort": true,
+		"aaSorting": [
+		  [1, "asc"]
+		],
+		"aoColumnDefs": [{
+		  "bSortable": true,
+		  "aTargets": [0]
+		}, {
+		  "bSortable": true,
+		  "aTargets": [1]
+		}, {
+		  "bSortable": false,
+		  "aTargets": [2]
+		}],
+	  });
+	$('.dataTables_length').addClass('bs-select');
 });
