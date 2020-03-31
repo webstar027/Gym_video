@@ -38,7 +38,7 @@ class GymController extends Controller
         $sub_gyms = $user->gyms;
 
         $current = new DateTime();
-        $current = $current->sub(new DateInterval('P1D'));
+        //$current = $current->sub(new DateInterval('P1D'));
         foreach($all as $key=> $gym)
         {
             $sub = $sub_gyms->find($gym->id);
@@ -48,14 +48,16 @@ class GymController extends Controller
                 $gym->status = $sub->pivot->status;
                 if ($gym->status == 3)
                 {
-                    $diff = $current->diff($sub->pivot->updated_at);
-                    if ($diff->h < 24)
+                    $last = $sub->pivot->updated_at->add(new DateInterval('P1D'));
+                    $diff = $current->diff($last);
+                    if ($diff->d < 1 && $diff->h < 24)
                     {
                         $gym->time = str_pad($diff->h, 2, '0', STR_PAD_LEFT).':'.str_pad($diff->i, 2, '0', STR_PAD_LEFT).':'.str_pad($diff->s, 2, '0', STR_PAD_LEFT).' wait time';
                     }
                     else
                     {
                         $this->gymservice->cancel_request($user->id, $gym->id);
+                        $gym->status = 0;
                     }
                 }
             }
