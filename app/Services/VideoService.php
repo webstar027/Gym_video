@@ -24,7 +24,7 @@ class VideoService
 	{
 		$attributes = $request->all();
 		$video = $this->video->create($attributes);
-		if($video != null && $attributes['status'] == 1)
+		if($video != null && array_key_exists('status', $attributes) && $attributes['status'] == 1)
 		{
 			$this->publish_notify($video->id);
 		}
