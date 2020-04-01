@@ -8,7 +8,7 @@ use App\Gym_User;
 use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
 use Illuminate\Http\Request;
- 
+
 class GymService
 {
 	public function __construct(UserRepository $userRepo, GymRepository $gymRepo)

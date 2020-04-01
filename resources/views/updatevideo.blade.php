@@ -35,6 +35,9 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group">
+                                <input type="text" class="form-control" data-provide="typeahead" name="playlist" class="playlist" maxlength="300" placeholder="Playlist">
+                            </div>
+                            <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="status" value="1" @if($status == 1) checked @endif class="custom-control-input" id="customCheck1">
                                     <label class="custom-control-label" for="customCheck1">Publish this video</label>
@@ -76,6 +79,15 @@
             // this.value = this.checked ? 1 : 0;
             //  //alert(this.value);
             // }).change();
+
+            var path = "{{ route('Autocomplete') }}";
+            $('.playlist').Typeahead({
+                source:  function (playlist, process) {
+                return $.get(path, { playlist: playlist }, function (data) {
+                        return process(data);
+                    });
+                }
+            });
         });
     </script>
     <!-- //Section Accounts End -->

@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Video;
 use App\Repositories\VideoRepository;
 use Illuminate\Http\Request;
- 
+use Notification;
+use App\Notifications\PublishedVideoNotification;
+
 class VideoService
 {
 	public function __construct(VideoRepository $video)
@@ -20,9 +22,13 @@ class VideoService
              
     public function create(Request $request)
 	{
-        $attributes = $request->all();
-
-        return $this->video->create($attributes);
+		$attributes = $request->all();
+		$video = $this->video->create($attributes);
+		if($video != null && $attributes['status'] == 1)
+		{
+			$this->publish_notify($video->id);
+		}
+        return $video;
 	}
 	    
 	public function read($id)
@@ -32,9 +38,14 @@ class VideoService
  
 	public function update(Request $request, $id)
 	{
-	  $attributes = $request->all();
-	  
-      return $this->video->update($id, $attributes);
+		$attributes = $request->all();
+		$oldvideo = $this->video->find($id);
+		$video = $this->video->update($id, $attributes);
+		if($video != null && $oldvideo->status != 1 && $video->status == 1)
+		{
+			$this->publish_notify($id);
+		}
+		return $video;
 	}
  
 	public function getGymId($id)
@@ -44,9 +55,22 @@ class VideoService
 	
 	public function publish($id)
 	{
+		$this->publish_notify($id);
 		return $this->video->publish($id);
 	}
 	
+	public function publish_notify($video_id){
+		$video = $this->video->find($video_id);
+		$gym = $video->Gym;
+
+		$active_users = $gym->activeMembers;
+
+		foreach($active_users as $key=> $member)
+		{
+			Notification::send($member, new PublishedVideoNotification($gym, $video_id));
+		}
+	}
+
 	public function delete($id)
 	{
       return $this->video->delete($id);
