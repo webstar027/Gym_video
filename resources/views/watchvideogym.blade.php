@@ -32,6 +32,24 @@
 										@endforeach	
 									</p>
 								</div>
+								<div class="comments-box">
+									<hr />
+									<h4>Add comment</h4>
+									<form method="post" action="{{ route('Comemnt') }}">
+										@csrf
+										<div class="form-group">
+											<textarea class="form-control" name="body"></textarea>
+											<input type="hidden" name="video_id" value="{{ $data->id }}" />
+										</div>
+										<div class="form-group justify-content-end">
+											<input type="submit" class="btn btn-primary" value="Add Comment" />
+										</div>
+									</form>
+									<hr />
+									<h4>Display Comments</h4>
+				
+									@include('CommentsDisplay', ['comments' => $data->comments, 'video_id' => $data->id, 'one_reply'=>false])
+								</div>
 							</div>
 						</div>
 					</div>

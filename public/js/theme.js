@@ -46,4 +46,14 @@ $("#gym_owner_account").css('display','none');
 		}],
 	  });
 	$('.dataTables_length').addClass('bs-select');
+$('.display_reply_form').click(function(e){
+	e.preventDefault();
+	$(this).parent().find('.reply_form').show();
+	$(this).hide();
+});
+$('.hide_reply_form').click(function(e){
+	e.preventDefault();
+	$(this).parent().parent('.reply_form').hide();
+	$(this).parent().parent().parent().find('.display_reply_form').show();
+});
 });

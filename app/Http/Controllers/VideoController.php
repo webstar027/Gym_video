@@ -120,6 +120,15 @@ class VideoController extends Controller
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
+		foreach($video->comments as $key=>$comment){
+			$cuser = $comment->user;
+			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
+			foreach($comment->replies as $key => $reply){
+				$ruser = $reply->user;
+				$reply->avatar = $this->videoservice->get_gravatar($ruser->email);
+			}
+		}
+
 		return view('watchvideogym', ['data' => $video]);
 	}
 	public function watch($id, Request $request)
@@ -128,9 +137,18 @@ class VideoController extends Controller
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
+		foreach($video->comments as $key=>$comment){
+			$cuser = $comment->user;
+			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
+			foreach($comment->replies as $key => $reply){
+				$ruser = $reply->user;
+				$reply->avatar = $this->videoservice->get_gravatar($ruser->email);
+			}
+		}
+		
 		return view('watchvideo', ['data' => $video]);
 	}
-
+	
 	/**
      * Get youtube video information
      *
