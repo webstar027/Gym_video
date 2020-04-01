@@ -20,7 +20,6 @@ class CreateVideosCommentsTable extends Migration
             $table->bigInteger('parent_id')->unsigned()->nullable();
             $table->text('body');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

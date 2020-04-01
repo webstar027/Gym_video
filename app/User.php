@@ -19,11 +19,11 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $fillable = [
         'first_name','last_name','username', 'email','role_id', 'password',
     ];
-    //email notification
-    public function routeNotificationForMail($notification)
-    {
-      return $this->email_address;
-    }
+    // //email notification
+    // public function routeNotificationForMail($notification)
+    // {
+    //   return $this->email_address;
+    // }
     /**
      * The attributes that should be hidden for arrays.
      *
