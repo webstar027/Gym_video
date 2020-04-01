@@ -2,26 +2,26 @@
 
 namespace App\Notifications;
 
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RequestAccessNotification extends Notification
+class PublishedVideoNotification extends Notification
 {
     use Queueable;
-
-    private $user;
+    private $video_id;
+    private $gym;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($gym, $video_id)
     {
         //
-        $this->user = $user;
+        $this->gym = $gym;
+        $this->video_id = $video_id;
     }
 
     /**
@@ -44,9 +44,9 @@ class RequestAccessNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line($this->user['first_name'].' '.$this->user['last_name'].' requested access to your Gym.')
-                    ->action('View Status', url('/account/gymowner#pending_request'))
-                    ->line('Please approve or deny the request.');
+                    ->line($this->gym->gym_name.' published a new video')
+                    ->action('View video', url('/account/student/video/'.$this->video_id))
+                    ->line('Thank you for using our application!');
     }
 
     /**

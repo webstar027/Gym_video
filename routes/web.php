@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,12 +32,19 @@ Route::get('/aboutus', function(){
 Route::get('/pricing', function(){
     return view('pricing');
 });
-// Route::get('/student', 'HomeController@studentpage');
-// Route::get('/aboutus', 'HomeController@about');
-// Route::get('/pricing', 'HomeController@pricing');
-Route::middleware(['verified', 'auth'])->group(function () {
-    Route::get('/admin', 'HomeController@index')->name('admin');
-    // gymowner
+
+Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
+     // student
+     Route::get('/account/student', 'AccountController@student');
+     Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymview');
+     Route::get('/account/student/gyms/search', 'GymController@search');
+     Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel');
+     Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_access');
+     Route::get('/account/student/video/{id}', 'VideoController@watch');
+});
+
+Route::group(['middleware'=>[ 'auth','verified', 'gymowner']], function(){
+    //gymowner
     Route::get('/account/gymowner', 'AccountController@gymowner');
     Route::get('/account/gymowner/members', 'AccountController@members');
     Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo');
@@ -53,22 +60,18 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::get('/getYoutube/{id}', 'VideoController@getYoutube');
     Route::get('/account/gymowner/video/{id}', 'VideoController@watchgym');
     Route::put('/account/gymowner/updategym/{gym_id}','GymController@updategym');
-    // student
+});
+Route::middleware(['verified', 'auth'])->group(function () {
+    Route::get('/admin', 'HomeController@index')->name('admin');
     Route::put('/account/updateuser/{id}', 'AccountController@updateUser')->name('auth');
-    Route::get('/account/student', 'AccountController@student');
-    Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymview');
-    Route::get('/account/student/gyms/search', 'GymController@search');
-    Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel');
-    Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_access');
 
-    // Route::get('/account/student/video/', 'VideoController@viewvideos');
-    Route::get('/account/student/video/{id}', 'VideoController@watch');
+    // gymowner
     Route::get('/account/favorite/video/{id}', 'VideoController@favorite');
     Route::get('/account/unfavorite/video/{id}', 'VideoController@unfavorite');
 
-    //Notification Test
-    // Route::get('send', 'HomeController@send');
-
     //Comment Route
     Route::post('/video/comment', 'CommentController@store')->name('Comemnt');
+
+    //Playlist
+    Route::get('palylistautocomplete','PlaylistController@autocomplete')->name('Autocomplete');
 });

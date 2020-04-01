@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2020 at 04:32 AM
+-- Generation Time: Apr 01, 2020 at 08:48 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -136,8 +136,7 @@ CREATE TABLE `gym_user` (
 --
 
 INSERT INTO `gym_user` (`user_id`, `gym_id`, `status`, `created_at`, `updated_at`) VALUES
-(5, 2, 3, '2020-03-29 01:12:58', '2020-03-29 01:12:58'),
-(5, 3, 1, '2020-03-29 00:57:17', '2020-03-29 00:57:17');
+(5, 3, 1, '2020-04-02 01:26:59', '2020-04-02 01:26:59');
 
 -- --------------------------------------------------------
 
@@ -164,7 +163,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2020_03_25_022541_create_video_table', 1),
 (7, '2020_03_25_022605_create_user_gym_table', 1),
 (8, '2020_03_25_221351_create_favorites_table', 1),
-(9, '2020_03_31_234640_create_videos_comments_table', 2);
+(9, '2020_03_31_234640_create_videos_comments_table', 2),
+(10, '2020_04_01_143736_playlist', 3);
 
 -- --------------------------------------------------------
 
@@ -198,6 +198,41 @@ CREATE TABLE `permissions` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `guard_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlists`
+--
+
+CREATE TABLE `playlists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `gym_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `playlists`
+--
+
+INSERT INTO `playlists` (`id`, `gym_id`, `name`, `created_at`, `updated_at`) VALUES
+(3, 2, 'playlist-1', '2020-04-01 07:00:00', '0000-00-00 00:00:00'),
+(5, 3, 'Playlist-2', '2020-04-01 09:17:21', '2020-04-01 09:17:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `playlist_videos`
+--
+
+CREATE TABLE `playlist_videos` (
+  `playlist_id` bigint(20) UNSIGNED NOT NULL,
+  `video_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -253,7 +288,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `emai
 (5, 'bill', 'chong', 'bchong', 'bchong753@gmail.com', '2020-03-27 15:31:03', '$2y$10$kf8trzyo2l7KSVkqlQRJnec//NcM5Nwe88PpTBYrdu1VyhBstRccq', 3, 'ejI8J6yd1x4hw1nw2OSgoqOWJ0XP6HFZuzwlySioquJyxtZenqajINbPoipT', '2020-03-27 15:30:36', '2020-03-30 05:27:29'),
 (6, 'Isi', 'Aucaman', 'isi.aucaman', 'isi.aucaman@yandex.com', '2020-03-27 15:33:16', '$2y$10$kUII4MSZsRPyKVV1LG8iC.Kj8hc1Cmp3YAbDbUxW4PkogOG1qas.m', 2, NULL, '2020-03-27 15:32:54', '2020-03-27 15:33:16'),
 (7, 'Jose', 'Scott', 'Joseph Scott', 'joseph.scott027@outlook.com', '2020-03-27 15:39:47', '$2y$10$QEgnEV/i/OX7q6VwJAS9dO43//sSlyq9VrIzPT.B0mN4SU1x3vegC', 2, 'PZbTMlyaXFgupZ3RvHeXVoTyZPMlUDNTYqTR67qXSacPHUWTtJRDB912lVs6', '2020-03-27 15:38:37', '2020-03-29 12:34:31'),
-(10, 'rui', 'ma', 'ruima027', 'ruima027@gmail.com', NULL, '$2y$10$aPm.waFtpW9z4U3n3GLXeO4WI3SBljS3e5sW804ER6zwTf0P7uZQi', 3, NULL, '2020-03-30 22:20:13', '2020-03-30 22:20:13');
+(12, 'Rui', 'Ma', 'ruima027', 'ruima027@gmail.com', NULL, '$2y$10$FTLsRixdFiSmf2Om9CItleG7L4852/18qXQLRF7fmnXpd9F9sxg2C', 3, NULL, '2020-04-01 22:55:32', '2020-04-01 22:55:32');
 
 -- --------------------------------------------------------
 
@@ -285,7 +320,11 @@ INSERT INTO `videos` (`id`, `gym_id`, `video_url`, `video_title`, `description`,
 (6, 3, 'https://www.youtube.com/watch?v=qlRC72jwu4s', 'Tiger Shroff’s gym workout video leaked!', 'Tiger Shroff who is known to be quite an avid fitness freak was caught working out in his gym. Here are some exclusive videos and photos of the actor’s fitness regime. Check it out!\r\n\r\nWatch latest Bollywood gossip videos, latest Bollywood news and behind the scene Bollywood Masala. For interesting Latest Bollywood News subscribe to Biscoot TV now : http://www.youtube.com/BiscootTV\r\n\r\nLike us on Facebook\r\nhttps://www.facebook.com/BiscootLive\r\n\r\nFollow us on Twitter\r\nhttp://www.twitter.com/BiscootLive\r\n\r\nFor Latest Bollywood News Subscribe us on Youtube \r\nhttp://www.youtube.com/c/BiscootTV\r\n\r\nCircle us on G+ \r\nhttps://plus.google.com/+BiscootLive\r\n\r\nFind us on Pinterest\r\nhttp://pinterest.com/BiscootLive', 'tiger shroff gym,tiger shroff gym video,gym video,tiger shroff body workout,tiger shroff gym workout,tiger shroff workout in gym videos,tiger shroff body building in gym,gym video workout,tiger shroff exercise,tiger shroff fitness,gym workout,tiger shroff workout,zym work out,gym work out,tiger shroff video,work out videos,gym videos,gym workout videos,tiger shroff body,workout gym,tiger shroff,tiger shrof,workout videos,work out,gym,workout', 1, '2020-03-28 23:12:49', '2020-03-28 23:14:22'),
 (8, 3, 'https://www.youtube.com/watch?v=KRtx_SbAlXw', 'Bringing Your SERVICE DOG to the GYM: Tips and Tricks!', 'HOUSEWARMING WISHLIST – http://a.co/exMhN1h\r\nOUR PATREON PAGE – https://www.patreon.com/ChronicallyJaquie\r\n- LIVE STREAMS, EARLY video access, SKYPE sessions and more!\r\nOUR ONLINE STORE – https://teespring.com/stores/chronicallyjaquie\r\n\r\nNEW TO CHRONICALLY JAQUIE? START HERE!\r\n- All About My Chronic Illnesses – https://www.youtube.com/playlist?list=PLrAi_F1oEjCMOPAUpC5zjqGxFiko9FH3p\r\n- All About Harlow – https://www.youtube.com/watch?v=QCb2Rl3BB4s\r\n- Judd and Jaq Relationship Q&A Vlog – https://www.youtube.com/watch?v=Co3ctXejU6w&index=68&list=PLrAi_F1oEjCOCESscC9SX8knIJjfKRVpF&t=701s\r\n--- Skip to 7:03 in the Vlog to watch the Relationship Q&A section!\r\n- “New Here” Playlist - https://www.youtube.com/playlist?list=PLrAi_F1oEjCMOPAUpC5zjqGxFiko9FH3p\r\n\r\nLIKE WHAT YOU SEE?\r\n- Cambridge Mask – https://cambridgemask.com/\r\n--- I wear the mask due to my Mast Cell and Immunodeficiency, it filters allergens and germs. Thanks to IVIG (a treatment for my immunodeficiency), I no longer need it as often as before. However, I still wear it in higher risk areas, such as hospitals/emergency rooms.\r\n- Primary Camera (Canon G7 X Mark II) – https://shop.usa.canon.com/shop/en/catalog/powershot-g7-x-mark-ii?cm_mmc=GA-_-CameraGroup-_-160224Brand%20Paid%20Search-_-canon%20G7%20X%20Mark%20II&Ap=Camera%20General&gclid=Cj0KEQjw0IvIBRDF0Yzq4qGE4IwBEiQATMQlMQV9VB6friCb290bDPvMB70AbclocCMqy58uFX13d2waAqCK8P8HAQ\r\n- Secondary Camera (Canon SX620) – https://shop.usa.canon.com/shop/en/catalog/powershot-sx620-hs-red-digital-camera?krypto=UCdm6VXznCPNmFdZVYYXtVDRRtyaWArk1AvLZe9yU9Tf3xY%2F6zptnlo42D%2B%2BwTodNSM9dmePQunDRXt4rkOh8GmPqYk8iySBNNllVQdxyUKXTqo7iIdDN2eKxZpW%2Bv9YR%2BCU6EE1eNnB7b5yto7%2BJ5RFhgkGu2urb2k3OOrLUTc%3D&ddkey=http%3Aen%2Fcatalog%2Fpowershot-sx620-hs-black-digital-camera#\r\n- My Editing Software (Filmora) – https://filmora.wondershare.com/\r\n\r\nNEED MORE CHRONIC ILLNESS OR SERVICE DOG INFO?\r\n- Chronic Illness Support Playlist – https://www.youtube.com/watch?v=yjprUf9wHvg\r\n- Service Dog Support Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCOTWZJyvgqJV1Y5uP6xrvtS\r\n- Training Tutorial Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCM53-RI_yxebqrcwIc-lmge\r\n- Mito Disease/Genetics Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCMFMgqRvI3HIZJOEabb08we\r\n- Mast Cell/Xolair Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCNRVP3Qu0Y8IAivKXDcH2Gw\r\n- Dysautonomia/POTS Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCMp_-Lhptp0eh90natpCzKc\r\n- Feeding Tube/Gastroparesis Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCM6tTJsNeA0wR-4eI2XU-J0\r\n- IV Therapy/Central Line Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCN2opVmL52XThP0pFFsgFkf\r\n- Pain Management/EDS Playlist – https://www.youtube.com/watch?v=AZ95DqE6An4&list=PLrAi_F1oEjCNPSs3kb8YQBKGWQbnKL8dV\r\n- Medical Cannabis Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCMQ-a2WpfU4OeN71ZnyifAw\r\n- IVIG/Immunodeficiency Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCMimJMcrtJw2Njhw-nXejRV\r\n- Custom Wheelchair Playlist – https://www.youtube.com/playlist?list=PLrAi_F1oEjCMxwq35jtx-L5ivk67ElCI9\r\n- Other Helpful Playlists – https://www.youtube.com/channel/UCKaX0dQwEUgTafzCZ2yEjUQ/playlists', 'weight training (hobby),physical exercise (interest),how to train a service dog,service dog,Service Dog at the Gym,Golden Retriever Service Dog,Dysautonomia Exercie,Ehlers Danlos Exercise,Chronic Illness Exercise,Dog Training,Service Dog Training,Public Access Training,Chronic Illness,Chronic Pain,Disability,Spoonie,Health,Medicine', 1, '2020-03-28 23:13:42', '2020-03-28 23:17:37'),
 (10, 2, 'https://www.youtube.com/watch?v=6g8G3YQtQt4', 'Deploy Laravel To Shared Hosting The Easy Way', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.\r\n\r\nINMOTION HOSTING: Get an account for $5.99 per month\r\nhttps://secure1.inmotionhosting.com/cgi-bin/gby/clickthru.cgi?id=traversymedia\r\n\r\n10 PROJECT LARAVEL COURSE: Please use affiliate link below\r\nhttps://www.eduonix.com/affiliates/id/16-10485\r\n50% OFF: Use special code \"traversy\"\r\n\r\nCODE: Complete Code For This Series\r\nhttps://github.com/bradtraversy/lsapp\r\n\r\nFULL SERIES:\r\nhttps://www.youtube.com/watch?v=EU7PRmCpx-0\r\n\r\nSUPPORT: We spend massive amounts of time creating these free videos, please donate to show your support:\r\nhttp://www.paypal.me/traversymedia\r\nhttp://www.patreon.com/traversymedia\r\n\r\nFOLLOW TRAVERSY MEDIA:\r\nhttp://www.facebook.com/traversymedia\r\nhttp://www.twitter.com/traversymedia\r\nhttp://www.linkedin.com/in/bradtraversy', 'laravel deploy,deploy laravel,laravel hosting,laravel shared hosting,laravel,host laravel,laravel server,laravel ftp,laravel cpanel,inmotion hosting', 1, '2020-03-29 07:56:01', '2020-03-29 07:56:09'),
-(11, 3, 'https://youtu.be/U6SBVeWpJ6Q', 'Gym Music 2018 - Best Gym Music Playlist', 'Please subscribe our Workout Music Channel for more weekly new free music: http://goo.gl/1qWwDI\r\n\r\nWorkout Motivation on Facebook:\r\nhttps://www.facebook.com/WorkoutMusicService\r\n\r\nWorkout Music Mobile App:\r\nhttps://goo.gl/FpURHx \r\n\r\nWorkout Music Service on Twitter:\r\nhttps://twitter.com/WorkoutMusic1\r\n\r\nWorkout Music on Instagram:\r\nhttps://instagram.com/workout_music_service/\r\n\r\nBest Workout Music Playlist on Spotify:\r\nhttp://goo.gl/m73QMy\r\n\r\nYou want a Channel like this ? Build your own Channel: http://goo.gl/bJs4Rb\r\n\r\n\r\n charts 2018 2019 2k18 motivacion fitness motivation', 'Gym Music 2018,Gym Music,workout songs,workout music,gym motivation,2018,motivation,charts 2018,2019,motivacion,2k18,best songs of 2018,top 2018,crossfit music,best songs 2018,warm up,playlist,female motivation,2018 mix,free download,best gym music,training,motivation music workout,songs for workout,top songs of 2018,music workout,gym workout,powerlifting motivation,morning motivation,mix 2018,charts,workout music mix 2017,running playlist 2017', 1, '2020-03-29 14:16:46', '2020-03-31 00:13:32');
+(11, 3, 'https://youtu.be/U6SBVeWpJ6Q', 'Gym Music 2018 - Best Gym Music Playlist', 'Please subscribe our Workout Music Channel for more weekly new free music: http://goo.gl/1qWwDI\r\n\r\nWorkout Motivation on Facebook:\r\nhttps://www.facebook.com/WorkoutMusicService\r\n\r\nWorkout Music Mobile App:\r\nhttps://goo.gl/FpURHx \r\n\r\nWorkout Music Service on Twitter:\r\nhttps://twitter.com/WorkoutMusic1\r\n\r\nWorkout Music on Instagram:\r\nhttps://instagram.com/workout_music_service/\r\n\r\nBest Workout Music Playlist on Spotify:\r\nhttp://goo.gl/m73QMy\r\n\r\nYou want a Channel like this ? Build your own Channel: http://goo.gl/bJs4Rb\r\n\r\n\r\n charts 2018 2019 2k18 motivacion fitness motivation', 'Gym Music 2018,Gym Music,workout songs,workout music,gym motivation,2018,motivation,charts 2018,2019,motivacion,2k18,best songs of 2018,top 2018,crossfit music,best songs 2018,warm up,playlist,female motivation,2018 mix,free download,best gym music,training,motivation music workout,songs for workout,top songs of 2018,music workout,gym workout,powerlifting motivation,morning motivation,mix 2018,charts,workout music mix 2017,running playlist 2017', 1, '2020-03-29 14:16:46', '2020-03-31 00:13:32'),
+(12, 3, 'https://www.youtube.com/watch?v=6g8G3YQtQt4', 'Deploy Laravel To Shared Hosting The Easy Way', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.\r\n\r\nINMOTION HOSTING: Get an account for $5.99 per month\r\nhttps://secure1.inmotionhosting.com/cgi-bin/gby/clickthru.cgi?id=traversymedia\r\n\r\n10 PROJECT LARAVEL COURSE: Please use affiliate link below\r\nhttps://www.eduonix.com/affiliates/id/16-10485\r\n50% OFF: Use special code \"traversy\"\r\n\r\nCODE: Complete Code For This Series\r\nhttps://github.com/bradtraversy/lsapp\r\n\r\nFULL SERIES:\r\nhttps://www.youtube.com/watch?v=EU7PRmCpx-0\r\n\r\nSUPPORT: We spend massive amounts of time creating these free videos, please donate to show your support:\r\nhttp://www.paypal.me/traversymedia\r\nhttp://www.patreon.com/traversymedia\r\n\r\nFOLLOW TRAVERSY MEDIA:\r\nhttp://www.facebook.com/traversymedia\r\nhttp://www.twitter.com/traversymedia\r\nhttp://www.linkedin.com/in/bradtraversy', 'laravel deploy,deploy laravel,laravel hosting,laravel shared hosting,laravel,host laravel,laravel server,laravel ftp,laravel cpanel,inmotion hosting', 1, '2020-04-02 01:41:35', '2020-04-02 01:41:35'),
+(13, 3, 'https://www.youtube.com/watch?v=6g8G3YQtQt4', 'Deploy Laravel To Shared Hosting The Easy Way', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.\r\n\r\nINMOTION HOSTING: Get an account for $5.99 per month\r\nhttps://secure1.inmotionhosting.com/cgi-bin/gby/clickthru.cgi?id=traversymedia\r\n\r\n10 PROJECT LARAVEL COURSE: Please use affiliate link below\r\nhttps://www.eduonix.com/affiliates/id/16-10485\r\n50% OFF: Use special code \"traversy\"\r\n\r\nCODE: Complete Code For This Series\r\nhttps://github.com/bradtraversy/lsapp\r\n\r\nFULL SERIES:\r\nhttps://www.youtube.com/watch?v=EU7PRmCpx-0\r\n\r\nSUPPORT: We spend massive amounts of time creating these free videos, please donate to show your support:\r\nhttp://www.paypal.me/traversymedia\r\nhttp://www.patreon.com/traversymedia\r\n\r\nFOLLOW TRAVERSY MEDIA:\r\nhttp://www.facebook.com/traversymedia\r\nhttp://www.twitter.com/traversymedia\r\nhttp://www.linkedin.com/in/bradtraversy', 'laravel deploy,deploy laravel,laravel hosting,laravel shared hosting,laravel,host laravel,laravel server,laravel ftp,laravel cpanel,inmotion hosting', 1, '2020-04-02 01:42:12', '2020-04-02 01:42:12'),
+(14, 3, 'https://www.youtube.com/watch?v=6g8G3YQtQt4', 'Deploy Laravel To Shared Hosting The Easy Way', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.\r\n\r\nINMOTION HOSTING: Get an account for $5.99 per month\r\nhttps://secure1.inmotionhosting.com/cgi-bin/gby/clickthru.cgi?id=traversymedia\r\n\r\n10 PROJECT LARAVEL COURSE: Please use affiliate link below\r\nhttps://www.eduonix.com/affiliates/id/16-10485\r\n50% OFF: Use special code \"traversy\"\r\n\r\nCODE: Complete Code For This Series\r\nhttps://github.com/bradtraversy/lsapp\r\n\r\nFULL SERIES:\r\nhttps://www.youtube.com/watch?v=EU7PRmCpx-0\r\n\r\nSUPPORT: We spend massive amounts of time creating these free videos, please donate to show your support:\r\nhttp://www.paypal.me/traversymedia\r\nhttp://www.patreon.com/traversymedia\r\n\r\nFOLLOW TRAVERSY MEDIA:\r\nhttp://www.facebook.com/traversymedia\r\nhttp://www.twitter.com/traversymedia\r\nhttp://www.linkedin.com/in/bradtraversy', 'laravel deploy,deploy laravel,laravel hosting,laravel shared hosting,laravel,host laravel,laravel server,laravel ftp,laravel cpanel,inmotion hosting', 1, '2020-04-02 01:45:12', '2020-04-02 01:45:12'),
+(15, 3, 'https://www.youtube.com/watch?v=6g8G3YQtQt4', 'Deploy Laravel To Shared Hosting The Easy Way', 'In this video I will show you how to easily deploy a Laravel application to a shared hosting account with InMotion hosting. We will deploy without having to type in one command. Everything will be done via Cpanel and FTP.\r\n\r\nINMOTION HOSTING: Get an account for $5.99 per month\r\nhttps://secure1.inmotionhosting.com/cgi-bin/gby/clickthru.cgi?id=traversymedia\r\n\r\n10 PROJECT LARAVEL COURSE: Please use affiliate link below\r\nhttps://www.eduonix.com/affiliates/id/16-10485\r\n50% OFF: Use special code \"traversy\"\r\n\r\nCODE: Complete Code For This Series\r\nhttps://github.com/bradtraversy/lsapp\r\n\r\nFULL SERIES:\r\nhttps://www.youtube.com/watch?v=EU7PRmCpx-0\r\n\r\nSUPPORT: We spend massive amounts of time creating these free videos, please donate to show your support:\r\nhttp://www.paypal.me/traversymedia\r\nhttp://www.patreon.com/traversymedia\r\n\r\nFOLLOW TRAVERSY MEDIA:\r\nhttp://www.facebook.com/traversymedia\r\nhttp://www.twitter.com/traversymedia\r\nhttp://www.linkedin.com/in/bradtraversy', 'laravel deploy,deploy laravel,laravel hosting,laravel shared hosting,laravel,host laravel,laravel server,laravel ftp,laravel cpanel,inmotion hosting', 1, '2020-04-02 01:46:21', '2020-04-02 01:46:21');
 
 --
 -- Indexes for dumped tables
@@ -344,6 +383,19 @@ ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `playlists`
+--
+ALTER TABLE `playlists`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `playlist_videos`
+--
+ALTER TABLE `playlist_videos`
+  ADD PRIMARY KEY (`playlist_id`,`video_id`),
+  ADD KEY `playlist_videos_video_id_foreign` (`video_id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -390,7 +442,7 @@ ALTER TABLE `gyms`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
@@ -405,6 +457,12 @@ ALTER TABLE `permissions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `playlists`
+--
+ALTER TABLE `playlists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
@@ -414,13 +472,13 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `videos`
 --
 ALTER TABLE `videos`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
@@ -445,6 +503,13 @@ ALTER TABLE `gyms`
 ALTER TABLE `gym_user`
   ADD CONSTRAINT `gym_user_gym_id_foreign` FOREIGN KEY (`gym_id`) REFERENCES `gyms` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `gym_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `playlist_videos`
+--
+ALTER TABLE `playlist_videos`
+  ADD CONSTRAINT `playlist_videos_playlist_id_foreign` FOREIGN KEY (`playlist_id`) REFERENCES `playlists` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `playlist_videos_video_id_foreign` FOREIGN KEY (`video_id`) REFERENCES `videos` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `videos`

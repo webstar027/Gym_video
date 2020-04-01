@@ -43,9 +43,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function gymowner()
+    public function gymowner(Request $request)
     {
+        $user = $request->user();
+        if ($user->role_id == 3)
+        {
+            return redirect('/account/student');
+        }
         return view('gymowneraccount');
+        
     }
 
     /**
@@ -53,9 +59,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function student()
+    public function student(Request $request)
     {
+        $user = $request->user();
+        if ($user->role_id == 2)
+        {
+            return redirect('/account/gymowner');
+        }
         return view('memberaccount');
+        
     }
 
     /**
