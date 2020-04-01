@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2020 at 09:05 PM
+-- Generation Time: Apr 01, 2020 at 04:32 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.1
 
@@ -21,6 +21,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `ground_monkey`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `video_id` bigint(20) UNSIGNED NOT NULL,
+  `parent_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `body` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `video_id`, `parent_id`, `body`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 5, 2, NULL, 'Very very very good', '2020-04-01 07:21:06', '2020-04-01 07:21:06', NULL),
+(3, 5, 2, NULL, 'Facility tour example of how to welcome and how not to welcome people visiting. Reminds us of all the inappropriate examples that may be available in such a setting whereby the visitor may feel vulnerable as they are in a new place.', '2020-04-01 07:24:26', '2020-04-01 07:24:26', NULL),
+(4, 5, 2, 1, 'Ok, Thanks', '2020-04-01 07:24:48', '2020-04-01 07:24:48', NULL),
+(5, 5, 2, 1, 'Thanks', '2020-04-01 07:28:38', '2020-04-01 07:28:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -136,7 +163,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2020_03_24_221215_create_gym_table', 1),
 (6, '2020_03_25_022541_create_video_table', 1),
 (7, '2020_03_25_022605_create_user_gym_table', 1),
-(8, '2020_03_25_221351_create_favorites_table', 1);
+(8, '2020_03_25_221351_create_favorites_table', 1),
+(9, '2020_03_31_234640_create_videos_comments_table', 2);
 
 -- --------------------------------------------------------
 
@@ -264,6 +292,12 @@ INSERT INTO `videos` (`id`, `gym_id`, `video_url`, `video_title`, `description`,
 --
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -335,6 +369,12 @@ ALTER TABLE `videos`
 --
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -350,7 +390,7 @@ ALTER TABLE `gyms`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `password_resets`

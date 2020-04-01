@@ -30,7 +30,7 @@
 									<tr>
 										<td>{{$gym -> gym_name}}</td>
 										<td>{{$gym -> owner -> first_name}} {{$gym -> owner -> last_name}}</td>
-										<td>{{$gym -> activeMembers -> count()}}</td>
+										<td style="padding-left:50px">{{$gym -> activeMembers -> count()}}</td>
 										<td>
 											@if($gym -> status == 0)
 											

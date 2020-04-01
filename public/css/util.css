@@ -65,3 +65,33 @@ p {
     width:100% !important;
   }
 }
+.justify-content-end{
+  display: flex;
+}
+.display-comment {
+  background-color: #ececec;
+  padding: 12px;
+  margin-bottom: 20px;
+}
+.display-comment .display-comment{
+  margin-bottom: 0;
+  padding: 0 20px;
+}
+.display-comment form, .display_reply_form{
+  margin-left: 40px;
+  padding: 0 20px;
+}
+.comment-box img{
+  margin-right: 15px;
+  border-radius:50%;
+  float:left;
+}
+.comment-box {
+  min-height: 80px;
+  margin-bottom: 15px;
+}
+span.day_ago {
+  font-size: 14px;
+  margin-left: 20px;
+  color: #929292;
+}

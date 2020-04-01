@@ -66,6 +66,19 @@ class VideoService
 		}
 	}
 
+	public function get_gravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
+		$url = 'https://www.gravatar.com/avatar/';
+		$url .= md5( strtolower( trim( $email ) ) );
+		$url .= "?s=$s&d=$d&r=$r";
+		if ( $img ) {
+			$url = '<img src="' . $url . '"';
+			foreach ( $atts as $key => $val )
+				$url .= ' ' . $key . '="' . $val . '"';
+			$url .= ' />';
+		}
+		return $url;
+	}
+	
 	public function hasFavorite($user_id, $video_id)
 	{
 		return $this->video->find($video_id)->favorites()->where('user_id', $user_id)->count() > 0;
