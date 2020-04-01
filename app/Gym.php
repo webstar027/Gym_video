@@ -30,6 +30,16 @@ class Gym extends Model
     }
 
     /**
+     * Get the playlists belong to this gym.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function playlists()
+    {
+        return $this->hasMany('App\PlayList');
+    }
+
+    /**
      * Get the members that have requests.
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
