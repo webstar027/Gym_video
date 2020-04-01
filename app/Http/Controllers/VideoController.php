@@ -173,4 +173,47 @@ class VideoController extends Controller
 		return $data;
 	}
 
+=======
+     */
+	public function watchgym($id, Request $request)
+	{
+		$user = $request->user();
+		$video = $this->videoservice->read($id);
+		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
+		$video->favorite_count = $video->favorites()->count();
+		return view('watchvideogym', ['data' => $video]);
+	}
+	public function watch($id, Request $request)
+	{
+		$user = $request->user();
+		$video = $this->videoservice->read($id);
+		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
+		$video->favorite_count = $video->favorites()->count();
+		return view('watchvideo', ['data' => $video]);
+	}
+
+	/**
+     * Get youtube video information
+     *
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+	public function getYoutube($id)
+	{
+		$video = Youtube::getVideoInfo($id);
+		$video = json_decode(json_encode($video), true);
+		//$data = ['title'=>$video->title];
+		// print_r('<pre>');
+		// print_r($video);
+		// print_r('</pre>');
+		$tag = "";
+		if (array_key_exists("tags", $video['snippet']))
+		{
+			$tag = implode(',', $video['snippet']['tags']);
+		}
+		
+		$data=['title'=>$video['snippet']['title'], 'description'=>$video['snippet']['description'], 'tag'=>$tag, 'thumbnail'=>$video['snippet']['thumbnails']['maxres']['url']];
+		return $data;
+	}
+
 }
