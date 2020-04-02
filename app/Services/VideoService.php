@@ -71,6 +71,20 @@ class VideoService
 		return $playlists->first();		
 	}
 
+	public function WithPlaylist($video)
+	{
+		$p = $video->playlists;
+		if ($p->count() > 0)
+		{
+			$video->playlist = $p->first()->name;
+		}
+		else
+		{
+			$video->playlist = "";
+		}
+		return $video;
+	}
+
 	public function publish($id)
 	{
 		$this->publish_notify($id);

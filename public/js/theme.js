@@ -41,7 +41,7 @@ $("#gym_owner_account").css('display','none');
 		  "bSortable": true,
 		  "aTargets": [1]
 		}, {
-		  "bSortable": false,
+		  "bSortable": true,
 		  "aTargets": [2]
 		}],
 	  });

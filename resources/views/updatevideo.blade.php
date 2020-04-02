@@ -35,10 +35,7 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group position-relative">
-                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" placeholder="Playlist">
-                                <datalist id="typeahead">
-                                    <option value="">
-                                </datalist>
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="false" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -89,36 +86,10 @@
             
 
             var path = $('.playlist').attr('data-path');
-<<<<<<< HEAD
-            // $.get(path, function(data){
-            //         $('.playlist').typeahead({
-            //             hint:true,
-            //             highlight:true
-            //         },{
-            //             display: 'name',
-            //             source:  function(d){
-            //                 return "terere";
-            //             },
-            //             templates: {
-            //                 empty: function(d){
-            //                     return '<p>+ Add new item</p>'
-            //                 }
-            //             }
-            //         });
-                   
-            // });
-            $('.playlist').on('keyup', function(){
-                if($(this).val() != ""){
-                    console.log($(this).val());
-                    $('#typeahead option:first-child').attr('value',$(this).val());
-                    $.get(path, {query:$(this).val()}, function(data){
-                        console.log(JSON.stringify(data));
-=======
             $.get(path, function(data){
 
                 var names = jQuery.map(data, function(n, i){
                     return n.name;
->>>>>>> 15f73d35dbb6e25f45f3eae49aca8f6c1f1fa574
                     });
 
                 var name_result = new Bloodhound({
@@ -134,7 +105,7 @@
                     source:  name_result,
                     templates: {
                         empty: function(d){
-                            return '<p>+ Add new item</p>'
+                            return '<div role="option" class="tt-suggestion tt-selectable">+ Add new</div>'
                         }
                     },
                    

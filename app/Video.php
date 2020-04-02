@@ -32,20 +32,7 @@ class Video extends Model
     {
         return $this->belongsToMany(User::class, 'favorites', 'video_id', 'user_id')->withTimestamps();
     }
-    /**
-     * Get the playlist
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
-     */
-    public function playlist()
-    {
-        $playlists =  $this->belongsToMany(Playlist::class, 'playlist', 'video_id', 'playlist_id')->withTimestamps();
-        if ($playlists->count() > 0)
-            return $playlists->first()->name;
-        else
-            return "";
-    }
-           
+   
     /**
      * Get the playlists
      *
@@ -53,7 +40,7 @@ class Video extends Model
      */
     public function playlists()
     {
-        return $this->belongsToMany(Playlist::class, 'playlist', 'video_id', 'playlist_id')->withTimestamps();
+        return $this->belongsToMany(Playlist::class, 'playlist_videos', 'video_id', 'playlist_id')->withTimestamps();
     }
     /**
      * The has Many Relationship

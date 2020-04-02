@@ -21,6 +21,7 @@
 									<tr>
 										<th scope="col">Video Title</th>
 										<th scope="col">Date</th>
+										<th scope="col">Playlist</th>
 										<th scope="col">Status</th>
 										<td style="display:none">Tags</td>
 										<td style="display:none">Description</td>
@@ -33,6 +34,7 @@
 									<tr>
 										<td scope="row"><a href="{{ url('/account/gymowner/video/'.$video->id) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
 										<td>{{ $video -> created_at }}</td>
+										<td>{{ $video -> playlist }}</td>
                                         <td>
 											@if($video->status == "1") 
 												Published 
