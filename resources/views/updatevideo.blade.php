@@ -55,7 +55,8 @@
 
 		</div><!-- //.container -->
     </section>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/bloodhound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>
     <script>
     
         jQuery(document).ready(function($){
@@ -84,33 +85,37 @@
             // this.value = this.checked ? 1 : 0;
             //  //alert(this.value);
             // }).change();
+
+            
+
             var path = $('.playlist').attr('data-path');
-            // $.get(path, function(data){
-            //         $('.playlist').typeahead({
-            //             hint:true,
-            //             highlight:true
-            //         },{
-            //             display: 'name',
-            //             source:  function(d){
-            //                 return "terere";
-            //             },
-            //             templates: {
-            //                 empty: function(d){
-            //                     return '<p>+ Add new item</p>'
-            //                 }
-            //             }
-            //         });
-                   
-            // });
-            $('.playlist').on('keyUp', function(){
-                if($(this).val() != ""){
-                    console.log($(this).val());
-                    $('#typeahead option:first-child').attr('value',$(this).val());
-                    $.get(path, {query:$(this).val()}, function(data){
-                        console.log(data);
+            $.get(path, function(data){
+
+                var names = jQuery.map(data, function(n, i){
+                    return n.name;
                     });
-                }
+
+                var name_result = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.whitespace,
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    local: names
+                });
+                $('.playlist').typeahead({
+                    hint:true,
+                    highlight:true
+                },{
+                    name: 'arabic_phrases',
+                    source:  name_result,
+                    templates: {
+                        empty: function(d){
+                            return '<p>+ Add new item</p>'
+                        }
+                    },
+                   
+                });
+                   
             });
+         
             
         });
     </script>
