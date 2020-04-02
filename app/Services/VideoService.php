@@ -56,6 +56,15 @@ class VideoService
 	
 	public function getPlaylist($video_id, $name){
 		$video = $this->read($video_id);
+		if ($video->playlists->count() > 0)
+		{
+			$old = $video->playlists->first();
+			if ($old->name != $name)
+			{
+				$video->playlists->detach($old->id);
+			}
+		}
+
 		$gym = $video->Gym;
 		$playlists = $gym->playlists->where('name', $name);
 
@@ -70,6 +79,7 @@ class VideoService
 
 		return $playlists->first();		
 	}
+
 
 	public function WithPlaylist($video)
 	{
