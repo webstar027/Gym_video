@@ -102,12 +102,12 @@
             //         });
                    
             // });
-            $('.playlist').on('keyUp', function(){
+            $('.playlist').on('keyup', function(){
                 if($(this).val() != ""){
                     console.log($(this).val());
                     $('#typeahead option:first-child').attr('value',$(this).val());
                     $.get(path, {query:$(this).val()}, function(data){
-                        console.log(data);
+                        console.log(JSON.stringify(data));
                     });
                 }
             });
