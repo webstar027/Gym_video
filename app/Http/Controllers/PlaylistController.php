@@ -31,13 +31,23 @@ class PlaylistController extends Controller
     {
         $playlist = $this->gymservice->getPlaylist($id);
 
-        return $playlist->videos;
+        return view('gymplaylistview', ['videos'=>$playlist->videos, 'playlist_name'=>$playlist->name]);
     }
 
-    public function approved_videos($id)
+    public function approved_videos($id, Request $request)
     {
-        $playlist = $this->gymservice->getPlaylist($id);
+        $user = $request->user();
 
-        return $playlist->vidoes->where('status', 1);
+        $page = $request->query('page');
+        if (!$page)
+        {
+            $page = 1;
+        }
+        $playlist = $this->gymservice->getPlaylist($id);
+        $videos =  $playlist->videos->where('status', 1);
+        $total_video = $playlist->videos->count();
+        $videos = $videos->forPage($page, 6);
+        $currentpage = $page;
+        return view('studentplaylistview', ['videos'=>$videos,'total_video'=>$total_video, 'currentpage'=>$currentpage, 'playlist_name'=>$playlist->name, 'playlist_id'=>$playlist->id]);
     }
 }

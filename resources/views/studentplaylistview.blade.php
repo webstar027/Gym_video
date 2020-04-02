@@ -9,29 +9,25 @@
 				
 				<div class="col-md-12">
 					<div class="view-gym-user">
-                        <p><a href="{{ url('/account/student') }}">My Account</a> <i class="fas fa-angle-right"></i> {{ $data->gym_name }}</p>
-                        <h2 class="page-sub-title">{{ $data->gym_name }}</h2>
+                        <p><a href="{{ url('/account/student') }}">My Account</a> <i class="fas fa-angle-right"></i> Playlist <i class="fas fa-angle-right"></i>  {{ $playlist_name }}</p>
+                        <h2 class="page-sub-title">{{ $playlist_name }}</h2>
 						
 						<div class="row align-items-center">
-							<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Search by Title, Description, Playlist or #Tag" id="searchinput"></div>
+							<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Search by Title, Description, or #Tag" id="searchinput"></div>
 							<div class="col-md-8">
 								<p class="mb-0"><a href="#" class="favorit_button unactive"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a> Display only favorites</p>
 							</div>
 						</div>
                         <h3 class="page-sub-title-alt mt-3">Search Results</h3>
-						<p><span id="search_count">{{$data->videos->count()}}</span> Video(s) have matched your search criteria.</p>
+						<p><span id="search_count">{{$videos->count()}}</span> Video(s) have matched your search criteria.</p>
 						<div class="video_container" id="video_container">
 							<div class="row video_row">
-								@foreach($data->videos as $key => $video)
+								@foreach($videos as $key => $video)
 								
 								<div class="col-md-6 col-lg-4 video_col">
 									<div class="video-box">
-										<h3><a href="{{ url('/account/student/video/'.$video -> id) }}">{{ Str::limit($video -> video_title, 30)}}</a></h3>
-										<p style="margin-bottom:0; height:25px;">
-											@if($video->playlist !=null)
-											<a href="{{url('/account/student/playlist/'.$video->playlist->id)}}">{{ $video->playlist->name }}</a>
-											@endif
-										</p>
+                                        <h3><a href="{{ url('/account/student/video/'.$video -> id) }}">{{ Str::limit($video -> video_title, 30)}}</a></h3>
+                                        <p style="margin-bottom:0; height:25px;"><a href="{{url('/account/student/playlist/'.$playlist_id)}}">{{ $playlist_name }}</a></p>
 										<div class="row align-items-center">
 											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at}}</p></div>
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
@@ -58,93 +54,93 @@
 								@endif
 								@endforeach
 							</div>
-							@if($data->total_video > 6)
+							@if($total_video > 6)
 							<nav aria-label="Page navigation example">
 								<ul class="pagination justify-content-center">
-								@if($data->currentpage == 1)
+								@if($currentpage == 1)
 									<li class="page-item disabled">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page=1')}}"  tabindex="-1" aria-label="First">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page=1')}}"  tabindex="-1" aria-label="First">
 										<span aria-hidden="true">&laquo;</span>
         								<span class="sr-only">First</span>
 									</a>
 									</li>
 									<li class="page-item disabled">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
 										<span aria-hidden="true">&lt;</span>
         								<span class="sr-only">Previous</span>
 									</a>
 									</li>
-									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.$data->currentpage)}}">{{$data->currentpage }}</a></li>
-									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}">{{$data->currentpage + 1}}</a></li>
-									@if(ceil($data->total_video/6) > 2)
-									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 2))}}">{{$data->currentpage + 2}}</a></li>
+									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.$currentpage)}}">{{$currentpage }}</a></li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage + 1))}}">{{$currentpage + 1}}</a></li>
+									@if(ceil($total_video/6) > 2)
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage + 2))}}">{{$currentpage + 2}}</a></li>
 									@endif
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}" aria-label="Next">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage + 1))}}" aria-label="Next">
 										<span aria-hidden="true">&gt;</span>
         								<span class="sr-only">Next</span>
 									</a>
 									</li>
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.(ceil($data->total_video/6)))}}" aria-label="End">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.(ceil($total_video/6)))}}" aria-label="End">
 										<span aria-hidden="true">&raquo;</span>
         								<span class="sr-only">End</span>
 									</a>
 									</li>
-								@elseif($data->currentpage == ceil($data->total_video/6))
+								@elseif($currentpage == ceil($total_video/6))
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page=1')}}"  tabindex="-1" aria-label="First">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page=1')}}"  tabindex="-1" aria-label="First">
 										<span aria-hidden="true">&laquo;</span>
         								<span class="sr-only">First</span>
 									</a>
 									</li>
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
 										<span aria-hidden="true">&lt;</span>
         								<span class="sr-only">Previous</span>
 									</a>
 									</li>
-									@if(ceil($data->total_video/6) > 2)
-									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 2))}}">{{$data->currentpage - 2}}</a></li>
+									@if(ceil($total_video/6) > 2)
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage - 2))}}">{{$currentpage - 2}}</a></li>
 									@endif
-									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}">{{$data->currentpage - 1}}</a></li>
-									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.$data->currentpage)}}">{{$data->currentpage}}</a></li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage - 1))}}">{{$currentpage - 1}}</a></li>
+									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.$currentpage)}}">{{$currentpage}}</a></li>
 									<li class="page-item disabled">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}" aria-label="Next">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage + 1))}}" aria-label="Next">
 										<span aria-hidden="true">&gt;</span>
         								<span class="sr-only">Next</span>
 									</a>
 									</li>
 									<li class="page-item disabled">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.(ceil($data->total_video/3)))}}" aria-label="End">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.(ceil($total_video/3)))}}" aria-label="End">
 										<span aria-hidden="true">&raquo;</span>
         								<span class="sr-only">End</span>
 									</a>
 									</li>
-								@elseif($data->currentpage > 1 and ceil($data->total_video/6))
+								@elseif($currentpage > 1 and ceil($total_video/6))
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page=1')}}"  tabindex="-1" aria-label="First">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page=1')}}"  tabindex="-1" aria-label="First">
 										<span aria-hidden="true">&laquo;</span>
         								<span class="sr-only">First</span>
 									</a>
 									</li>
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage - 1))}}"  tabindex="-1" aria-label="Previous">
 										<span aria-hidden="true">&lt;</span>
         								<span class="sr-only">Previous</span>
 									</a>
 									</li>
-									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage - 1))}}">{{$data->currentpage - 1}}</a></li>
-									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.$data->currentpage)}}">{{$data->currentpage}}</a></li>
-									<li class="page-item"><a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}">{{$data->currentpage + 1}}</a></li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage - 1))}}">{{$currentpage - 1}}</a></li>
+									<li class="page-item disabled"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.$currentpage)}}">{{$currentpage}}</a></li>
+									<li class="page-item"><a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage + 1))}}">{{$currentpage + 1}}</a></li>
 									<li class="page-item ">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.($data->currentpage + 1))}}" aria-label="Next">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.($currentpage + 1))}}" aria-label="Next">
 										<span aria-hidden="true">&gt;</span>
         								<span class="sr-only">Next</span>
 									</a>
 									</li>
 									<li class="page-item">
-									<a class="page-link" href="{{url('/account/student/viewgym/'.$data->id.'?page='.(ceil($data->total_video/6)))}}" aria-label="Next">
+									<a class="page-link" href="{{url('/account/student/playlist/'.$playlist_id.'?page='.(ceil($total_video/6)))}}" aria-label="Next">
 										<span aria-hidden="true">&raquo;</span>
         								<span class="sr-only">Next</span>
 									</a>

@@ -10,7 +10,10 @@
 				<div class="col-md-12">
 					<div class="watch-video">
                         <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ url('/account/gymowner/gym/myvideos/'.$data->gym_id) }}">My Videos</a> <i class="fas fa-angle-right"></i> {{ Str::limit($data -> video_title, 50)}} </p>
-                        <h2 class="page-sub-title">{{ $data->video_title }}</h2>
+						<h2 class="page-sub-title">{{ $data->video_title }}</h2>
+						@if($data->playlist != null)
+						<p><a href="{{url('/account/gymowner/playlist/'.$data->playlist->id)}}">{{$data->playlist->name}}</a></p>
+						@endif
                         <div class="row">
 							<div class="col-md-12">
 								<div class="video-box">

@@ -25,6 +25,8 @@ class Playlist extends Model
      */
     public function videos()
     {
-        return $this->belongsToMany('App\Video')->withTimestamps();
+        return $this->belongsToMany('App\Video', 'playlist_videos', 'playlist_id', 'video_id')->withTimestamps();
     }
+
+
 }

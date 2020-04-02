@@ -9,9 +9,8 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="{{ url('/account/gymowner') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
-                        <h2 class="page-sub-title">My Videos</h2>
-                        <a href="{{ url('/account/gymowner/addvideo/'.$gym_id) }}">Add Videos</a>
+                        <p><a href="{{ url('/account/gymowner') }}">My Account</a> <i class="fas fa-angle-right"></i> {{$playlist_name}}</p>
+                        <h2 class="page-sub-title">{{$playlist_name}}</h2>
                         <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or #tag">
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
@@ -34,10 +33,7 @@
 									<tr>
 										<td scope="row"><a href="{{ url('/account/gymowner/video/'.$video->id) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
 										<td>{{ $video -> created_at }}</td>
-										<td>
-											@if($video->playlist !=null)
-											<a href="{{ url('/account/gymowner/playlist/'.$video->playlist->id) }}">{{ $video->playlist->name }}</a></td>
-											@endif
+										<td><a href="{{ url('/account/gymowner/playlist/'.$video->pivot->playlist_id) }}">{{$playlist_name}}</a></td>
                                         <td>
 											@if($video->status == "1") 
 												Published 
