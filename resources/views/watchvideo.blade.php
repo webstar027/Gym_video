@@ -38,7 +38,7 @@
 									<form method="post" class="comment_form" action="{{ route('Comemnt') }}">
 										@csrf
 										<div class="form-group">
-											<textarea class="form-control comment-body"  name="body" value="OK"></textarea>
+											<textarea class="form-control comment-body" name="body"></textarea>
 											<input type="hidden" name="video_id" value="{{ $data->id }}" />
 										</div>
 										<div class="form-group justify-content-end">
