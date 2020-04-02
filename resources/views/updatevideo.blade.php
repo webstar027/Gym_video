@@ -35,7 +35,7 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group position-relative">
-                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" value="@if($playlist != null) {{$playlist->name}} @endif" maxlength="300" autocomplete="off" placeholder="Playlist">
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" value="{{$playlist_name}}" maxlength="300" autocomplete="off" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
