@@ -26,4 +26,18 @@ class PlaylistController extends Controller
         $playlists = $this->gymservice->read($gym_id)->playlists;
         return response()->json($playlists);
     }
+
+    public function videos($id, Request $request)
+    {
+        $playlist = $this->gymservice->getPlaylist($id);
+
+        return $playlist->videos;
+    }
+
+    public function approved_videos($id)
+    {
+        $playlist = $this->gymservice->getPlaylist($id);
+
+        return $playlist->vidoes->where('status', 1);
+    }
 }

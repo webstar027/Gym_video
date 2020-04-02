@@ -7,14 +7,16 @@ use App\Gym_User;
 
 use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
+use App\Repositories\PlaylistRepository;
 use Illuminate\Http\Request;
 
 class GymService
 {
-	public function __construct(UserRepository $userRepo, GymRepository $gymRepo)
+	public function __construct(UserRepository $userRepo, GymRepository $gymRepo, PlaylistRepository $playlistRepo)
 	{
 		$this->userRepo = $userRepo ;
 		$this->gymRepo = $gymRepo ;
+		$this->playlistRepo = $playlistRepo;
 	}
  
 	public function index()
@@ -97,5 +99,11 @@ class GymService
 			}
 		}
 		return $videos;
+	}
+
+
+	public function getPlaylist($id)
+	{
+		return $this->playlistRepo->find($id);
 	}
 }
