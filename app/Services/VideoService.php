@@ -61,7 +61,7 @@ class VideoService
 			$old = $video->playlists->first();
 			if ($old->name != $name)
 			{
-				$video->playlists->detach($old->id);
+				$video->playlists()->detach($old->id);
 			}
 		}
 
