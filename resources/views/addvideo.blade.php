@@ -95,7 +95,7 @@
                 source:  name_result,
                 templates: {
                     empty: function(d){
-                        return '<div role="option" class="tt-suggestion tt-selectable">+ Add new</div>'
+                        return '<div role="option" class="tt-suggestion tt-selectable">This is a new Playlist</div>'
                     }
                 },
                 
