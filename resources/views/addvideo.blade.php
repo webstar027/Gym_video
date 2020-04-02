@@ -33,7 +33,7 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group position-relative">
-                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="false" placeholder="Playlist">
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="off" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -50,6 +50,8 @@
 
 		</div><!-- //.container -->
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/bloodhound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>
 <script>
     jQuery(document).ready(function($){
         $('#retrieve').click(function(){

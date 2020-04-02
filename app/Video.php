@@ -5,9 +5,11 @@ namespace App;
 use App\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Video extends Model
 {
+    use LogsActivity;
     /**
      * Get the gyms subscribed to this user.
      *
