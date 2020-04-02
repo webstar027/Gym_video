@@ -35,7 +35,7 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" data-path="{{ route('Autocomplete') }}" data-provide="typeahead" name="playlist" class="playlist" maxlength="300" placeholder="Playlist">
+                                <input type="text" class="form-control playlist" data-path="{{ route('Autocomplete') }}" data-provide="typeahead" name="playlist" maxlength="300" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -52,7 +52,7 @@
 
 		</div><!-- //.container -->
     </section>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.js"></script>
+    
     <script>
     
         jQuery(document).ready(function($){
@@ -82,14 +82,28 @@
             //  //alert(this.value);
             // }).change();
 
-            var path = $('.playlist').data('path');
+            var path = $('.playlist').attr('data-path');
+            // $('.playlist').typeahead({
+            //     source:  function (query, process) {
+            //     return $.get(path, { query: $(this).val()}, function(data) {
+            //             return process(data);
+            //         });
+            //     }
+            // });
             $('.playlist').typeahead({
-                source:  function (playlist, process) {
-                return $.get(path, { playlist: playlist }, function (data) {
-                        return process(data);
-                    });
-                }
-            });
+                    source: [
+                        {id: 1, name: 'Toronto'},
+                        {id: 2, name: 'Montreal'},
+                        {id: 3, name: 'New York'},
+                        {id: 4, name: 'Buffalo'},
+                        {id: 5, name: 'Boston'},
+                        {id: 6, name: 'Columbus'},
+                        {id: 7, name: 'Dallas'},
+                        {id: 8, name: 'Vancouver'},
+                        {id: 9, name: 'Seattle'},
+                        {id: 10, name: 'Los Angeles'}
+                    ],
+                });
         });
     </script>
     <!-- //Section Accounts End -->
