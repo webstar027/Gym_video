@@ -24,7 +24,7 @@
 									<div class="video_grid_content">
 										<!-- <p class="video-sub-description">{{ Str::limit($data -> description, 150)}} <a href="#">read more...</a> </p>
 										<p class="video-description" style="display:none">{{ $data -> description }} <a href="#">read more...</a> </p> -->
-										<p class="description" >{{ $data -> description }}</p>
+										<p class="description">{{ $data -> description }}</p>
 									</div>
 									<p class="video_tag">Tags: 
 										@foreach(explode(',',$data -> tag) as $row)
@@ -35,10 +35,10 @@
 								<div class="comments-box">
 									<hr />
 									<h4>Add comment</h4>
-									<form method="post" action="{{ route('Comemnt') }}">
+									<form method="post" class="comment_form" action="{{ route('Comemnt') }}">
 										@csrf
 										<div class="form-group">
-											<textarea class="form-control" name="body"></textarea>
+											<textarea class="form-control comment-body" name="body"></textarea>
 											<input type="hidden" name="video_id" value="{{ $data->id }}" />
 										</div>
 										<div class="form-group justify-content-end">
@@ -47,8 +47,9 @@
 									</form>
 									<hr />
 									<h4>Display Comments</h4>
-				
+									<div class="comment-content">
 									@include('CommentsDisplay', ['comments' => $data->comments, 'video_id' => $data->id, 'one_reply'=>false])
+									</div>
 								</div>
 							</div>
 						</div>
@@ -115,10 +116,10 @@
 			}
 		});
 	
-		//ajax comment form
+		//ajax for main comment form
 		$('.comment_form').on('submit',function(event){
 			event.preventDefault();
-
+			var container = $(this);
 			var body = $(this).find('textarea.comment-body').val();
 			var video_id = $(this).find('input[name="video_id"]').val();
 
@@ -130,18 +131,106 @@
 			var data = {
 				"_token": "{{ csrf_token() }}",
 				video_id:video_id,
-				parent_id:parent_id,
+				body:body,
 			};
 
 			$.ajax({
 			url: "{{ route('Comemnt') }}",
 			type:"POST",
-			data:JSON.stringify(data),
+			data:data,
 			success:function(response){
-				console.log(response);
+				//console.log(response);
+				var conent = "<div class='display-comment'><div class='parent-comment comment-box'><img src='"+response.user_avatar+"'/><p class='mb-0'><strong>"+response.first_name+' '+response.first_name+"</strong><span class='day_ago'>"+response.diff+"</span></p><p>"+response.body+"</p></div><a href='#' class='display_reply_form'>Reply</a><div class='reply_comment'></div><form class='reply_form' style='display:none;' action=''><div class='form-group'><input type='text' name='body' class='form-control' /><input type='hidden' name='video_id' value='"+response.video_id+"' /><input type='hidden' name='parent_id' value='"+response.id+"' /></div><div class='form-group justify-content-end'><a href='#' class='hide_reply_form btn btn-secondary mr-3' >Cancel</a><input type='submit' class='btn btn-warning' value='Reply' /></div></form></div>";
+				container.parent().children('.comment-content').prepend(conent);
+				$('.display_reply_form').click(function(e){
+					e.preventDefault();
+					$(this).parent().find('.reply_form').show();
+					$(this).hide();
+				});
+				$('.hide_reply_form').click(function(e){
+					e.preventDefault();
+					$(this).parent().parent('.reply_form').hide();
+					$(this).parent().parent().parent().find('.display_reply_form').show();
+				});
+				$('.reply_form').on('submit',function(event){
+					event.preventDefault();
+					var ele = $(this);
+					var body = ele.find('input[name="body"]').val();
+					var video_id = ele.find('input[name="video_id"]').val();
+					var parent_id;
+					if(ele.find('input[name="parent_id"]'))
+					{
+						var parent_id =	ele.find('input[name="parent_id"]').val();
+					}
+
+					if (!body)
+					{
+						return;
+					}
+
+					var data = {
+						"_token": "{{ csrf_token() }}",
+						video_id:video_id,
+						parent_id:parent_id,
+						body:body,
+					};
+
+					$.ajax({
+					url: "{{ route('Comemnt') }}",
+					type:"POST",
+					data:data,
+					success:function(response){
+						var conent_reply = "<div class='display-comment' style='margin-left:40px;'><div class='parent-comment comment-box'><img src='"+response.user_avatar+"'/><p class='mb-0'><strong>"+response.first_name+' '+response.last_name+"</strong><span class='day_ago'>"+response.diff+"</span></p><p>"+response.body+"</p></div></div>"
+						ele.parent().find('.reply_comment').prepend(conent_reply);
+						ele.parent().find('.display_reply_form').show();
+						ele.hide();
+						$('input[name="body"]').val('');
+					},
+					});
+				});
+				$('textarea[name="body"]').val('');
+				$('textarea[name="body"]').text('');
 			},
 			});
-        });
+		});
+		
+		//ajax for reply form
+		$('.reply_form').on('submit',function(event){
+			event.preventDefault();
+			var ele = $(this);
+			var body = ele.find('input[name="body"]').val();
+			var video_id = ele.find('input[name="video_id"]').val();
+			var parent_id;
+			if(ele.find('input[name="parent_id"]'))
+			{
+				var parent_id =	ele.find('input[name="parent_id"]').val();
+			}
+
+			if (!body)
+			{
+				return;
+			}
+
+			var data = {
+				"_token": "{{ csrf_token() }}",
+				video_id:video_id,
+				parent_id:parent_id,
+				body:body,
+			};
+
+			$.ajax({
+			url: "{{ route('Comemnt') }}",
+			type:"POST",
+			data:data,
+			success:function(response){
+				var conent = "<div class='display-comment' style='margin-left:40px;'><div class='parent-comment comment-box'><img src='"+response.user_avatar+"'/><p class='mb-0'><strong>"+response.first_name+' '+response.last_name+"</strong><span class='day_ago'>"+response.diff+"</span></p><p>"+response.body+"</p></div></div>"
+				ele.parent().find('.reply_comment').prepend(conent);
+				ele.parent().find('.display_reply_form').show();
+				ele.hide();
+				$('input[name="body"]').val('');
+			},
+			});
+		});
     });
     </script>
     <!-- //Section Accounts End -->
