@@ -36,7 +36,7 @@ class Gym extends Model
      */
     public function playlists()
     {
-        return $this->hasMany('App\PlayList');
+        return $this->hasMany('App\PlayList')->orderby('name');
     }
 
     /**
