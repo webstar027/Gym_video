@@ -35,7 +35,7 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" data-provide="typeahead" name="playlist" class="playlist" maxlength="300" placeholder="Playlist">
+                                <input type="text" class="form-control" data-path="{{ route('Autocomplete') }}" data-provide="typeahead" name="playlist" class="playlist" maxlength="300" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -52,7 +52,9 @@
 
 		</div><!-- //.container -->
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-typeahead/2.11.0/jquery.typeahead.js"></script>
     <script>
+    
         jQuery(document).ready(function($){
             $('#retrieve').click(function(){
                 
@@ -80,8 +82,8 @@
             //  //alert(this.value);
             // }).change();
 
-            var path = "{{ route('Autocomplete') }}";
-            $('.playlist').Typeahead({
+            var path = $('.playlist').data('path');
+            $('.playlist').typeahead({
                 source:  function (playlist, process) {
                 return $.get(path, { playlist: playlist }, function (data) {
                         return process(data);

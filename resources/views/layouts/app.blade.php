@@ -172,7 +172,7 @@
         <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
         <script src="{{ asset('js/datatables.min.js')}}"></script>
         <script src="{{ asset('js/datatables-select.min.js')}}"></script>
-        <script src="{{ asset('js/jquery.typeahead.js')}}"></script>
+     
         <!--===============================================================================================-->
         <script src="{{ asset('/js/theme.js')}}"></script>
 </html>
