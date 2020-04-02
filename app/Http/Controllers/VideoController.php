@@ -36,9 +36,17 @@ class VideoController extends Controller
      */
 	public function createVideo(Request $request)
 	{	
-		
 		$video = $this->videoservice->create($request);
 		$idd = $video ->gym_id;
+
+		$attributes = $request->all();
+		if (array_key_exists('playlist', $attributes) && $attributes['playlist'])
+		{
+			$playlist = $this->videoservice->getPlaylist($video->id, $attributes['playlist']);
+			$id = $playlist->id;
+			$video->playlists()->attach($playlist->id);
+		}
+
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
