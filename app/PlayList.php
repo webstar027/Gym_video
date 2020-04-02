@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PlayList extends Model
+class Playlist extends Model
 {
     //
         /**
@@ -14,7 +14,7 @@ class PlayList extends Model
      */
     public function gym()
     {
-        return $this->belongsTo('App\PlayList');
+        return $this->belongsTo('App\Gym');
     }
     
     /**

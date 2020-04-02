@@ -73,5 +73,5 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::post('/video/comment', 'CommentController@store')->name('Comemnt');
 
     //Playlist
-    Route::get('palylistautocomplete','PlaylistController@autocomplete')->name('Autocomplete');
+    Route::get('/palylistautocomplete/{gym_id}','PlaylistController@autocomplete')->name('Autocomplete');
 });

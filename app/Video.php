@@ -41,7 +41,7 @@ class Video extends Model
      */
     public function playlists()
     {
-        return $this->belongsToMany(PlayList::class, 'playlists', 'video_id', 'playlist_id')->withTimestamps();
+        return $this->belongsToMany(Playlist::class, 'playlists', 'video_id', 'playlist_id')->withTimestamps();
     }
     /**
      * The has Many Relationship

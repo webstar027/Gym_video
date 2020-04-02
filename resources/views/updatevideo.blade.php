@@ -34,8 +34,11 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control playlist" data-path="{{ route('Autocomplete') }}" data-provide="typeahead" name="playlist" maxlength="300" placeholder="Playlist">
+                            <div class="form-group position-relative">
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" placeholder="Playlist">
+                                <datalist id="typeahead">
+                                    <option value="">
+                                </datalist>
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -81,29 +84,34 @@
             // this.value = this.checked ? 1 : 0;
             //  //alert(this.value);
             // }).change();
-
             var path = $('.playlist').attr('data-path');
-            // $('.playlist').typeahead({
-            //     source:  function (query, process) {
-            //     return $.get(path, { query: $(this).val()}, function(data) {
-            //             return process(data);
+            // $.get(path, function(data){
+            //         $('.playlist').typeahead({
+            //             hint:true,
+            //             highlight:true
+            //         },{
+            //             display: 'name',
+            //             source:  function(d){
+            //                 return "terere";
+            //             },
+            //             templates: {
+            //                 empty: function(d){
+            //                     return '<p>+ Add new item</p>'
+            //                 }
+            //             }
             //         });
-            //     }
+                   
             // });
-            $('.playlist').typeahead({
-                    source: [
-                        {id: 1, name: 'Toronto'},
-                        {id: 2, name: 'Montreal'},
-                        {id: 3, name: 'New York'},
-                        {id: 4, name: 'Buffalo'},
-                        {id: 5, name: 'Boston'},
-                        {id: 6, name: 'Columbus'},
-                        {id: 7, name: 'Dallas'},
-                        {id: 8, name: 'Vancouver'},
-                        {id: 9, name: 'Seattle'},
-                        {id: 10, name: 'Los Angeles'}
-                    ],
-                });
+            $('.playlist').on('keyUp', function(){
+                if($(this).val() != ""){
+                    console.log($(this).val());
+                    $('#typeahead option:first-child').attr('value',$(this).val());
+                    $.get(path, {query:$(this).val()}, function(data){
+                        console.log(data);
+                    });
+                }
+            });
+            
         });
     </script>
     <!-- //Section Accounts End -->
