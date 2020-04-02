@@ -141,7 +141,7 @@
 			success:function(response){
 				//console.log(response);
 				var conent = "<div class='display-comment'><div class='parent-comment comment-box'><img src='"+response.user_avatar+"'/><p class='mb-0'><strong>"+response.first_name+' '+response.last_name+"</strong><span class='day_ago'>"+response.diff+"</span></p><p>"+response.body+"</p></div><a href='#' class='display_reply_form'>Reply</a><div class='reply_comment'></div><form class='reply_form' style='display:none;' action=''><div class='form-group'><input type='text' name='body' class='form-control' /><input type='hidden' name='video_id' value='"+response.video_id+"' /><input type='hidden' name='parent_id' value='"+response.id+"' /></div><div class='form-group justify-content-end'><a href='#' class='hide_reply_form btn btn-secondary mr-3' >Cancel</a><input type='submit' class='btn btn-warning' value='Reply' /></div></form></div>";
-				container.parent().children('.comment-content').prepend(conent);
+				container.parent().children('.comment-content').append(conent);
 				$('.display_reply_form').click(function(e){
 					e.preventDefault();
 					$(this).parent().find('.reply_form').show();
@@ -181,7 +181,7 @@
 					data:data,
 					success:function(response){
 						var conent_reply = "<div class='display-comment' style='margin-left:40px;'><div class='parent-comment comment-box'><img src='"+response.user_avatar+"'/><p class='mb-0'><strong>"+response.first_name+' '+response.last_name+"</strong><span class='day_ago'>"+response.diff+"</span></p><p>"+response.body+"</p></div></div>"
-						ele.parent().find('.reply_comment').prepend(conent_reply);
+						ele.parent().find('.reply_comment').append(conent_reply);
 						ele.parent().find('.display_reply_form').show();
 						ele.hide();
 						$('input[name="body"]').val('');
@@ -224,7 +224,7 @@
 			data:data,
 			success:function(response){
 				var conent = "<div class='display-comment' style='margin-left:40px;'><div class='parent-comment comment-box'><img src='"+response.user_avatar+"'/><p class='mb-0'><strong>"+response.first_name+' '+response.last_name+"</strong><span class='day_ago'>"+response.diff+"</span></p><p>"+response.body+"</p></div></div>"
-				ele.parent().find('.reply_comment').prepend(conent);
+				ele.parent().find('.reply_comment').append(conent);
 				ele.parent().find('.display_reply_form').show();
 				ele.hide();
 				$('input[name="body"]').val('');
