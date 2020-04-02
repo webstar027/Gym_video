@@ -140,11 +140,7 @@ class GymController extends Controller
             $p = $video->playlists;
             if ($p->count() > 0)
             {
-                $video->playlist = $p->first()->name;
-            }
-            else
-            {
-                $video->playlist = "";
+                $video->playlist = $p->first();
             }
         }
         $count = $videos->where('status', 1)->count();
@@ -175,7 +171,18 @@ class GymController extends Controller
             $videos = $videos_all->where('status', 1);
             $video_count = $videos->count();
             $videos = $videos->forPage($page, 6);
+            foreach($videos as $key => $video)
+            {
+                $p = $video->playlists;
+                if ($p->count() > 0)
+                {
+                    $video->playlist = $p->first();
+                    
+                }
+              
+            }
             $gym->videos = $videos;
+        
             $gym->total_video = $video_count;
             $gym->currentpage = $page;
             return view('viewgym',['data' => $gym]);

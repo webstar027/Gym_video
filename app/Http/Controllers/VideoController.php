@@ -59,6 +59,9 @@ class VideoController extends Controller
 	public function update_video($id)
 	{
 		$video = $this->videoservice->read($id);
+		if ($video->playlists->count() > 0){
+			$video->playlist = $video->playlists->first();
+		}
 		return view('updatevideo', $video);
 	}
 
@@ -138,6 +141,9 @@ class VideoController extends Controller
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
+		if ($video->playlists->count() > 0){
+			$video->playlist = $video->playlists->first();
+		}
 		foreach($video->comments as $key=>$comment){
 			$cuser = $comment->user;
 			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
@@ -155,6 +161,9 @@ class VideoController extends Controller
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
+		if ($video->playlists->count() > 0){
+			$video->playlist = $video->playlists->first();
+		}
 		foreach($video->comments as $key=>$comment){
 			$cuser = $comment->user;
 			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
