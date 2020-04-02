@@ -32,16 +32,15 @@ class Video extends Model
     {
         return $this->belongsToMany(User::class, 'favorites', 'video_id', 'user_id')->withTimestamps();
     }
-
-           
+   
     /**
-     * Get the favorate subscribed to this user.
+     * Get the playlists
      *
      * @return \Illuminate\Database\Eloquent\Relations\belongsToMany
      */
     public function playlists()
     {
-        return $this->belongsToMany(PlayList::class, 'playlists', 'video_id', 'playlist_id')->withTimestamps();
+        return $this->belongsToMany(Playlist::class, 'playlist_videos', 'video_id', 'playlist_id')->withTimestamps();
     }
     /**
      * The has Many Relationship

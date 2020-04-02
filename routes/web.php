@@ -41,6 +41,7 @@ Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
      Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel');
      Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_access');
      Route::get('/account/student/video/{id}', 'VideoController@watch');
+     Route::get('/account/student/playlist/{playlist_id}','PlaylistController@videos')->name('studentplaylist');
 });
 
 Route::group(['middleware'=>[ 'auth','verified', 'gymowner']], function(){
@@ -60,6 +61,7 @@ Route::group(['middleware'=>[ 'auth','verified', 'gymowner']], function(){
     Route::get('/getYoutube/{id}', 'VideoController@getYoutube');
     Route::get('/account/gymowner/video/{id}', 'VideoController@watchgym');
     Route::put('/account/gymowner/updategym/{gym_id}','GymController@updategym');
+    Route::get('/account/gymowner/playlist/{playlist_id}','PlaylistController@videos')->name('gymplaylist');
 });
 Route::middleware(['verified', 'auth'])->group(function () {
     Route::get('/admin', 'HomeController@index')->name('admin');
@@ -73,5 +75,6 @@ Route::middleware(['verified', 'auth'])->group(function () {
     Route::post('/video/comment', 'CommentController@store')->name('Comemnt');
 
     //Playlist
-    Route::get('palylistautocomplete','PlaylistController@autocomplete')->name('Autocomplete');
+    Route::get('/palylistautocomplete/{gym_id}','PlaylistController@autocomplete')->name('Autocomplete');
+    
 });

@@ -34,8 +34,8 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control playlist" data-path="{{ route('Autocomplete') }}" data-provide="typeahead" name="playlist" maxlength="300" placeholder="Playlist">
+                            <div class="form-group position-relative">
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="false" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
@@ -52,7 +52,8 @@
 
 		</div><!-- //.container -->
     </section>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/bloodhound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>
     <script>
     
         jQuery(document).ready(function($){
@@ -82,28 +83,37 @@
             //  //alert(this.value);
             // }).change();
 
+            
+
             var path = $('.playlist').attr('data-path');
-            // $('.playlist').typeahead({
-            //     source:  function (query, process) {
-            //     return $.get(path, { query: $(this).val()}, function(data) {
-            //             return process(data);
-            //         });
-            //     }
-            // });
-            $('.playlist').typeahead({
-                    source: [
-                        {id: 1, name: 'Toronto'},
-                        {id: 2, name: 'Montreal'},
-                        {id: 3, name: 'New York'},
-                        {id: 4, name: 'Buffalo'},
-                        {id: 5, name: 'Boston'},
-                        {id: 6, name: 'Columbus'},
-                        {id: 7, name: 'Dallas'},
-                        {id: 8, name: 'Vancouver'},
-                        {id: 9, name: 'Seattle'},
-                        {id: 10, name: 'Los Angeles'}
-                    ],
+            $.get(path, function(data){
+
+                var names = jQuery.map(data, function(n, i){
+                    return n.name;
+                    });
+
+                var name_result = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.whitespace,
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    local: names
                 });
+                $('.playlist').typeahead({
+                    hint:true,
+                    highlight:true
+                },{
+                    name: 'arabic_phrases',
+                    source:  name_result,
+                    templates: {
+                        empty: function(d){
+                            return '<div role="option" class="tt-suggestion tt-selectable">+ Add new</div>'
+                        }
+                    },
+                   
+                });
+                   
+            });
+         
+            
         });
     </script>
     <!-- //Section Accounts End -->

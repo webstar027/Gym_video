@@ -32,6 +32,9 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
+                            <div class="form-group position-relative">
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="false" placeholder="Playlist">
+                            </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="status" class="custom-control-input" value="1" id="customCheck1">
@@ -60,16 +63,45 @@
                 $('input[name="tag"]').val(response['tag']);
             });
         });
-    function getId(url) {
-        var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-        var match = url.match(regExp);
+        function getId(url) {
+            var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            var match = url.match(regExp);
 
-        if (match && match[2].length == 11) {
-            return match[2];
-        } else {
-            return 'error';
+            if (match && match[2].length == 11) {
+                return match[2];
+            } else {
+                return 'error';
+            }
         }
-    }
+
+        //playlist
+        var path = $('.playlist').attr('data-path');
+        $.get(path, function(data){
+
+            var names = jQuery.map(data, function(n, i){
+                return n.name;
+                });
+
+            var name_result = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.whitespace,
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                local: names
+            });
+            $('.playlist').typeahead({
+                hint:true,
+                highlight:true
+            },{
+                name: 'arabic_phrases',
+                source:  name_result,
+                templates: {
+                    empty: function(d){
+                        return '<div role="option" class="tt-suggestion tt-selectable">+ Add new</div>'
+                    }
+                },
+                
+            });
+                
+        });
     });
 </script>
     <!-- //Section Accounts End -->

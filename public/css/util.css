@@ -95,3 +95,15 @@ span.day_ago {
   margin-left: 20px;
   color: #929292;
 }
+.twitter-typeahead {
+  width: 100%;
+}
+.tt-menu {
+  width: 100%;
+  background: #ffffff;
+  padding: 2px 15px;
+  border-bottom: 1px dotted;
+}
+.tt-menu > div > div{
+  border-bottom: 1px dotted;
+}

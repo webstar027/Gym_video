@@ -3,6 +3,7 @@
 namespace App\Services;
  
 use App\Video;
+use App\Playlist;
 use App\Repositories\VideoRepository;
 use Illuminate\Http\Request;
 use Notification;
@@ -53,6 +54,37 @@ class VideoService
 		return $video = $this->video->find($id)->gym_id;
 	}
 	
+	public function getPlaylist($video_id, $name){
+		$video = $this->read($video_id);
+		$gym = $video->Gym;
+		$playlists = $gym->playlists->where('name', $name);
+
+		if ($playlists->count() == 0)
+		{
+			$playlist = new Playlist;
+			$playlist->gym_id = $gym->id;
+			$playlist->name = $name;
+			$playlist->save();
+			return $playlist;
+		}
+
+		return $playlists->first();		
+	}
+
+	public function WithPlaylist($video)
+	{
+		$p = $video->playlists;
+		if ($p->count() > 0)
+		{
+			$video->playlist = $p->first()->name;
+		}
+		else
+		{
+			$video->playlist = "";
+		}
+		return $video;
+	}
+
 	public function publish($id)
 	{
 		$this->publish_notify($id);

@@ -135,6 +135,18 @@ class GymController extends Controller
 	public function gymvideos($gym_id)
 	{
         $videos = $this->gymservice->read($gym_id)->videos;
+        foreach($videos as $key => $video)
+        {
+            $p = $video->playlists;
+            if ($p->count() > 0)
+            {
+                $video->playlist = $p->first()->name;
+            }
+            else
+            {
+                $video->playlist = "";
+            }
+        }
         $count = $videos->where('status', 1)->count();
         return view('viewvideos', ['videos' => $videos, 'gym_id' => $gym_id, 'published_count'=>$count]);
     }
