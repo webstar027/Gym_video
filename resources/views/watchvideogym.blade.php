@@ -114,6 +114,34 @@
 				$(this).text('less...');
 			}
 		});
+	
+		//ajax comment form
+		$('.comment_form').on('submit',function(event){
+			event.preventDefault();
+
+			var body = $(this).find('textarea.comment-body').val();
+			var video_id = $(this).find('input[name="video_id"]').val();
+
+			if (!body)
+			{
+				return;
+			}
+
+			var data = {
+				"_token": "{{ csrf_token() }}",
+				video_id:video_id,
+				parent_id:parent_id,
+			};
+
+			$.ajax({
+			url: "{{ route('Comemnt') }}",
+			type:"POST",
+			data:JSON.stringify(data),
+			success:function(response){
+				console.log(response);
+			},
+			});
+        });
     });
     </script>
     <!-- //Section Accounts End -->

@@ -8,9 +8,11 @@
         @if($comment->parent_id == null)
         <a href="#" class="display_reply_form">Reply</a>
         @endif
+        
         @if(!$one_reply)
-
+            <div class="reply_comment">
             @include('CommentsDisplay', ['comments' => $comment->replies, 'one_reply' => true])
+            </div>
         <a href="" id="reply"></a>
         <form method="post" class="reply_form" style="display:none;" action="{{ route('Comemnt') }}">
             @csrf
