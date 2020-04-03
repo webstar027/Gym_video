@@ -97,4 +97,14 @@ class AccountController extends Controller
     {
         return view('gymlist');
     }
+
+    //member activity
+    public function adminactivity()
+    {
+        return view('adminmemberactivity');
+    }
+    public function gymactivity()
+    {
+        return view('adminmemberactivity');
+    }
 }
