@@ -7,8 +7,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Comment extends Model
 {
-    use LogsActivity;
-    protected static $logAttributes = ['id','user_id', 'video_id', 'parent_id', 'body'];
+    // use LogsActivity;
+    // protected static $logAttributes = ['id','user_id', 'video_id', 'parent_id', 'body'];
 
     /**
      * The attributes that are mass assignable.
