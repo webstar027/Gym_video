@@ -42,7 +42,7 @@ class CommentController extends Controller
 		activity()
 			->performedOn($comment)
 			->causedBy($user)
-			->log('comment');
+			->log('comment_video');
 
 
         return $comment;

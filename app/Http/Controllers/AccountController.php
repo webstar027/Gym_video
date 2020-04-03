@@ -77,10 +77,22 @@ class AccountController extends Controller
             ]);
             $user = $request->user();
             $this->userservice->update($request, $id);
+
+            activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('update_user');
+
             return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
         }else{
             $user = $request->user();
             $this->userservice->update($request, $id);
+
+            activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('update_user');
+
             return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
         }
         
