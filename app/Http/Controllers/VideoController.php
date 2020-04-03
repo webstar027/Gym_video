@@ -89,12 +89,9 @@ class VideoController extends Controller
 		$idd = $this->videoservice->getGymId($id);
 
 		$attributes = $request->all();
-		if (array_key_exists('playlist', $attributes) && $attributes['playlist'])
-		{
-			$playlist = $this->videoservice->getPlaylist($id, $attributes['playlist']);
-			$id = $playlist->id;
-			$video->playlists()->attach($playlist->id);
-		}
+	
+		$this->videoservice->getPlaylist($id, $attributes['playlist']);
+	
 		$user = $request->user;
 		activity()
 			->performedOn($video)

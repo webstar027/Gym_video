@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Services\UserService;
+use Spatie\Activitylog\Models\Activity;
 
 class AccountController extends Controller
 {
@@ -112,9 +113,21 @@ class AccountController extends Controller
 
     //member activity
     public function adminactivity()
-    {
-        return view('adminmemberactivity');
+    {   
+        $activities = Activity::all();
+
+        foreach($activities as $activity)
+        {
+            $causer = $activity->causer;
+            $subject = $activity->subject;
+            $action = $activity->descrption;
+        }
+
+        return view('home', ['activities'=>$activities]);
     }
+
+
+
     public function gymactivity()
     {
         return view('adminmemberactivity');
