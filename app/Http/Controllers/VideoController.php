@@ -65,6 +65,13 @@ class VideoController extends Controller
 	public function update_video($id)
 	{
 		$video = $this->videoservice->read($id);
+		if ($video->playlists->count() > 0){
+            $video->playlist = $video->playlists->first();
+            $video->playlist_name = $video->playlists->first()->name;
+        }
+        else{
+            $video->playlist_name = "";
+        }
 		return view('updatevideo', $video);
 	}
 

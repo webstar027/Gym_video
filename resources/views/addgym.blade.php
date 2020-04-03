@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="{{ url('/admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
+                        <p><a href="{{ route('admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Search</p>
 						<h2 class="page-sub-title">Gym Search</h2>
                         <input type="search" onkeyup="searchvideo()" class="form-control" id="searchinput" placeholder="Gym Name or Owner name">
                         <p><span id="gym_count">{{ $allgyms->count() }}</span> Gym(s) have matched your search criteria</p>
@@ -44,11 +44,11 @@
 										</td>
 										<td>
 											@if($gym -> status == 0)
-											<a href="{{url('/account/student/gyms/access/'.$gym -> id)}}" class="text-info request-access" data-toggle="tooltip" data-placement="top" title="Request Access">Request Access</a>
+											<a href="{{route('request_access', ['gym_id'=>$gym -> id])}}" class="text-info request-access" data-toggle="tooltip" data-placement="top" title="Request Access">Request Access</a>
 											@elseif($gym -> status == 1) 
-											<a href="{{ url('/account/student/viewgym/'.$gym -> id) }}" class="text-success view_gympage" data-toggle="tooltip" data-placement="top" title="View Gym Page">View Gym Page</a>
+											<a href="{{ route('view_gym',['gym_id'=>$gym -> id]) }}" class="text-success view_gympage" data-toggle="tooltip" data-placement="top" title="View Gym Page">View Gym Page</a>
 											@elseif($gym -> status == 2) 
-											<a href="{{url('/account/student/gyms/cancel/'.$gym -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request">Cancel Request</a> 
+											<a href="{{route('request_cancel', ['gym_id'=>$gym -> id])}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request">Cancel Request</a> 
 											@elseif($gym -> status == 3)
 											<a href="#" class="text-danger request-time" data-toggle="tooltip" data-placement="top" title="Denied">{{ $gym->time }}</a> 
 											@endif

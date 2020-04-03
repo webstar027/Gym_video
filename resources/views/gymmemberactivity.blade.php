@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="{{ url('/account/gymowner') }}">My Account</a> <i class="fas fa-angle-right"></i> Member Activity</p>
+                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Member Activity</p>
                         <h3>Member Activity</h3>
                         <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by membername or action">
                         <p><span id="video_count"></span> log(s) have matched your search criteria</p>

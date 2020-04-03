@@ -9,9 +9,9 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="{{ url('/account/gymowner') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
+                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
                         <h2 class="page-sub-title">My Videos</h2>
-                        <a href="{{ url('/account/gymowner/addvideo/'.$gym_id) }}">Add Videos</a>
+                        <a href="{{ route('add_video', ['gym_id'=>$gym_id]) }}">Add Videos</a>
                         <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or #tag">
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
@@ -32,11 +32,11 @@
 								<tbody>
 								@foreach($videos as $key => $video)
 									<tr>
-										<td scope="row"><a href="{{ route('watchgym', ['id'=>$video->id]) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
+										<td scope="row"><a href="{{ route('watch_gym', ['id'=>$video->id]) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
 										<td>{{ $video -> created_at }}</td>
 										<td>
 											@if($video->playlist !=null)
-											<a href="{{ route('gymplaylist', ['id'=>$video->playlist->id]) }}">{{ $video->playlist->name }}</a></td>
+											<a href="{{ route('gym_playlist', ['id'=>$video->playlist->id]) }}">{{ $video->playlist->name }}</a></td>
 											@endif
                                         <td>
 											@if($video->status == "1") 
@@ -48,10 +48,10 @@
 										<td style="display:none">{{ $video -> tag }}</td>
 										<td style="display:none">{{ $video -> description }}</td>
                                         <td>
-											<a href="{{ url('/account/gymowner/deletevideo/'.$video->id) }}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete Video"><i class="fas fa-trash"></i></a>
-											<a href="{{ url('/account/gymowner/updatevideo/'.$video->id) }}"  class="text-primary editvideo" data-toggle="tooltip" data-placement="top" title="Edit video"><i class="fas fa-pen-square"></i></a>
+											<a href="{{ route('delete_video', ['id'=>$video->id]) }}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete Video"><i class="fas fa-trash"></i></a>
+											<a href="{{ route('update_video', ['id'=>$video->id]) }}"  class="text-primary editvideo" data-toggle="tooltip" data-placement="top" title="Edit video"><i class="fas fa-pen-square"></i></a>
 											@if($video->status == "0") 
-												<a href="{{url('/account/gymowner/puhlishvideo/'.$video->id)}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Puhlish Video"><i class="fas fa-check-square"></i></a>
+												<a href="{{route('publish_video', ['id'=>$video->id])}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Puhlish Video"><i class="fas fa-check-square"></i></a>
 											@endif
                                         </td>
 									</tr>
