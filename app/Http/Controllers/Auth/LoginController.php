@@ -81,7 +81,7 @@ class LoginController extends Controller
     {
         activity()
             ->causedBy($user)
-            ->log('Login');
+            ->log('login_user');
     }
 
 }

@@ -51,7 +51,7 @@ class VideoController extends Controller
 		activity()
 			->performedOn($video)
 			->causedBy($user)
-			->log('created');
+			->log('create_video');
 
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
@@ -99,7 +99,7 @@ class VideoController extends Controller
 		activity()
 			->performedOn($video)
 			->causedBy($user)
-			->log('edited');
+			->log('update_video');
 
 
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
@@ -121,7 +121,7 @@ class VideoController extends Controller
 		activity()
 			->performedOn($video)
 			->causedBy($user)
-			->log('delete');
+			->log('delete_video');
 
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
@@ -142,7 +142,7 @@ class VideoController extends Controller
 			->performedOn($video)
 			->causedBy($user)
 			->withProperties(['isFavorite' => $ret])
-			->log('favorite');
+			->log('favorite_video');
 
 		return $ret;		
 	}
@@ -165,7 +165,7 @@ class VideoController extends Controller
 		activity()
 			->performedOn($video)
 			->causedBy($user)
-			->log('publish');
+			->log('publish_video');
 
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
@@ -194,7 +194,7 @@ class VideoController extends Controller
 		activity()
 			->performedOn($video)
 			->causedBy($user)
-			->log('WatchVideo');
+			->log('watch_video');
 
 		return view('watchvideogym', ['data' => $video]);
 	}
@@ -216,7 +216,7 @@ class VideoController extends Controller
 		activity()
 			->performedOn($video)
 			->causedBy($user)
-			->log('WatchVideo');
+			->log('watch_video');
 
 		return view('watchvideo', ['data' => $video]);
 	}

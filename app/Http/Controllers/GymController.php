@@ -86,7 +86,7 @@ class GymController extends Controller
         activity()
             ->performedOn($gym)
             ->causedBy($user)
-            ->log('request');
+            ->log('request_member');
 
         Notification::send($gymowner, new RequestAccessNotification($user));
         return redirect('/account/student/gyms/search');
@@ -100,7 +100,7 @@ class GymController extends Controller
         activity()
             ->performedOn($gym)
             ->causedBy($user)
-            ->log('update');
+            ->log('update_gym');
 
 		return redirect()->back()->with('successes', 'My Gym Details have been updated successfully!');
     }
@@ -119,7 +119,7 @@ class GymController extends Controller
         activity()
             ->performedOn($gym)
             ->causedBy($user)
-            ->log('cancel');
+            ->log('cancel_member');
 
         return redirect('/account/student/gyms/search');
     }
@@ -138,7 +138,7 @@ class GymController extends Controller
         activity()
             ->performedOn($gym)
             ->causedBy($user)
-            ->log('denied');
+            ->log('deny_member');
 
         return redirect('/account/gymowner');
     }
@@ -157,7 +157,7 @@ class GymController extends Controller
         activity()
             ->performedOn($gym)
             ->causedBy($user)
-            ->log('approve');
+            ->log('approve_member');
 
         return redirect('/account/gymowner');
     }
