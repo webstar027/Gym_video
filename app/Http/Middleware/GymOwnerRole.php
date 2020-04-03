@@ -20,7 +20,7 @@ class GymOwnerRole
 
         if ($user->role_id == 3)
         {
-            return redirect('/account/student');
+            return redirect(route('student_account'));
         }
         return $next($request);
     }

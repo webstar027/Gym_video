@@ -56,6 +56,13 @@ class UserService
 		return $u->gyms;
 	}
 
+	public function isGymMember($user, $gym_id)
+	{
+		$gym = $this->gymRepo->find($gym_id);
+		$members = $gym->members->where('id', $user->id);
+		return $members->count();
+	}
+
 	public function index()
 	{
 		return $this->userRepo->all();

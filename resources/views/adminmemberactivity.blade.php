@@ -70,6 +70,9 @@
 											@case('update_gym')
 												Updated Gym Details
 												@break
+											@case('update_user')
+												Updated Account Details
+												@break
 										@endswitch
 										</td>
 										<!-- <td>{{$activity->description}}</td> -->
