@@ -108,7 +108,7 @@
 			"bFilter": true,
 			"bSort": true,
 			"aaSorting": [
-			[1, "asc"]
+			[2, "desc"]
 			]
 		});
 		$('input[type="search"]').on('keyup', function(){
