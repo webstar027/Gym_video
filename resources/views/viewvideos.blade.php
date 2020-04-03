@@ -12,7 +12,7 @@
                         <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
                         <h2 class="page-sub-title">My Videos</h2>
                         <a href="{{ route('add_video', ['gym_id'=>$gym_id]) }}">Add Videos</a>
-                        <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or #tag">
+                        <input type="search" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or #tag">
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
@@ -78,27 +78,46 @@
 				}
 			});
 		});
-		function searchvideo() {
-		var input, filter, table, tr, td, i, txtValue;
-		input = document.getElementById("searchinput");
-		filter = input.value.toUpperCase();
-		table = document.getElementById("myTable");
-		tr = table.getElementsByTagName("tr");
-		var inc = 0;
-		for (i = 1; i < tr.length; i++) {
-			td = tr[i];
-			if (td) {
-			txtValue = td.textContent || td.innerText;
-			if (txtValue.toUpperCase().indexOf(filter) > -1) {
-				tr[i].style.display = "";
-				inc++;
-			} else {
-				tr[i].style.display = "none";
-			}
-			}       
-		}
-		document.getElementById('video_count').innerHTML = inc;
-		}
+		var table = $('.dtBasicExample').DataTable({
+			"bJQueryUI": true,
+			"sPaginationType": "full_numbers",
+			"bPaginate": true,
+			"bFilter": true,
+			"bSort": true,
+			"aaSorting": [
+			[1, "asc"]
+			]
+		});
+		//function searchvideo() {
+		// var input, filter, table, tr, td, i, txtValue;
+		// input = document.getElementById("searchinput");
+		// filter = input.value.toUpperCase();
+		// table = document.getElementById("myTable");
+		// tr = table.getElementsByTagName("tr");
+		// var inc = 0;
+		// for (i = 1; i < tr.length; i++) {
+		// 	td = tr[i];
+		// 	if (td) {
+		// 	txtValue = td.textContent || td.innerText;
+		// 	if (txtValue.toUpperCase().indexOf(filter) > -1) {
+		// 		tr[i].style.display = "";
+		// 		inc++;
+		// 	} else {
+		// 		tr[i].style.display = "none";
+		// 	}
+		// 	}       
+		// }
+		// document.getElementById('video_count').innerHTML = inc;
+		
+		
+		//}
+		$('input[type="search"]').on('keyup', function(){
+			table.search( this.value ).draw();
+			var info = table.page.info();
+			var rowstot = info.recordsTotal;
+			var rowsshown = info.recordsDisplay;
+			$('#video_count').text(rowsshown);
+		});
 	</script>
     <!-- //Section Accounts End -->
     @endsection

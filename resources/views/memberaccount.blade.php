@@ -128,7 +128,33 @@
 				}else{
 					e.preventDefault();
 				}
-			});
+            });
+            var table = $('.dtBasicExample').DataTable({
+                "bJQueryUI": true,
+                "sPaginationType": "full_numbers",
+                "bPaginate": true,
+                "bFilter": true,
+                "bSort": true,
+                "aaSorting": [
+                [1, "asc"]
+                ],
+                "aoColumnDefs": [{
+                "bSortable": true,
+                "aTargets": [0]
+                }, {
+                "bSortable": true,
+                "aTargets": [1]
+                }, {
+                "bSortable": true,
+                "aTargets": [2]
+                }, {
+                "bSortable": true,
+                "aTargets": [3]
+                }, {
+                "bSortable": false,
+                "aTargets": [4]
+                }],
+            });
 		});
 	</script>
 @endsection
