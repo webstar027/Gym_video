@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Auth;
 use Closure;
 
 class AdminRole
@@ -19,7 +20,7 @@ class AdminRole
 
         if ($user->role_id == 1)
         {
-            return redirect('/admin/memberactivity');
+            return redirect('/admin');
         }
         return $next($request);
     }

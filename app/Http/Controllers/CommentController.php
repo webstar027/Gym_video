@@ -39,8 +39,10 @@ class CommentController extends Controller
         $comment -> last_name = $user->last_name;
         $comment -> diff = $comment->created_at->diffForHumans();
 
+        $video = $this->videoservice->read($comment->video_id);
+        
 		activity()
-			->performedOn($comment)
+			->performedOn($video)
 			->causedBy($user)
 			->log('comment_video');
 

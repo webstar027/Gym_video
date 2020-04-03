@@ -34,8 +34,8 @@ Route::get('/aboutus', function(){
 Route::get('/pricing', function(){
     return view('pricing');
 })->name('pricing');
-Route::middleware([ 'verified', 'auth', 'admin'])->group(function(){
-    Route::get('/admin', 'AccountController@adminactivity')->name('adminmember_activity');
+Route::middleware(['auth','verified'])->group(function(){
+    Route::get('/adminactivity', 'AccountController@adminactivity')->name('adminmember_activity');
 });
 Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
      // student
@@ -44,7 +44,7 @@ Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
      Route::get('/account/student/gyms/search', 'GymController@search')->name('add_gym');
      Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel')->name('request_cancel');
      Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_access')->name('request_access');
-     Route::get('/account/student/video/{id}', 'VideoController@watch')->name('student_watch');
+     Route::get('/account/video/{id}', 'VideoController@watch')->name('student_watch');
      Route::get('/account/student/playlist/{id}','PlaylistController@approved_videos')->name('student_playlist');
 });
 
