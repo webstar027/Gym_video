@@ -30,7 +30,7 @@
                                 <textarea class="form-control" name="description" maxlength="250" cols="30" rows="5" placeholder="Video Description" required></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)" required>
+                                <input type="text" class="form-control" name="tag"  maxlength="100" data-role="tagsinput" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group position-relative">
                                 <input type="text" list="typeahead" class="form-control playlist" data-path="{{ route('Autocomplete', ['gym_id'=>$gym_id]) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="off" placeholder="Playlist">
@@ -54,6 +54,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/corejs-typeahead/1.2.1/typeahead.jquery.min.js"></script>
 <script>
     jQuery(document).ready(function($){
+
+        //tag input
+        //$('input[name="tag"]').tagsinput();
+
         $('#retrieve').click(function(){
            
             var url = $('input[name="video_url"]').val();
@@ -62,7 +66,8 @@
                 $('input[name="video_title"]').val(response['title']);
                 $('textarea[name="description"]').text(response['description']);
                 $('textarea[name="description"]').val(response['description']);
-                $('input[name="tag"]').val(response['tag']);
+                //$('input[name="tag"]').val(response['tag']);
+                $('input[name="tag"]').tagsinput('add', response['tag']);
             });
         });
         function getId(url) {
