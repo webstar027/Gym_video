@@ -9,6 +9,7 @@
                 <!-- <h3>Hello {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</h3><br/> -->
                 <div class="gym-name-stats">
                     <h2 class="page-sub-title pb-3 mb-3">{{$gym->gym_name}}</h2>
+                    
                     <nav class="nav nav-pills">
                         <a class="nav-link rounded-0 active"  id="active_members_tab" data-toggle="pill" href="#active_members" role="tab" aria-controls="active_members" aria-selected="true">{{ $active_count }} Active Members</a>
                         <a class="nav-link rounded-0"  id="pending_request_tab" data-toggle="pill" href="#pending_request" role="tab" aria-controls="pending_request">{{ $pending_count }} Pending Request</a>

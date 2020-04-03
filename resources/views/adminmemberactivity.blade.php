@@ -11,7 +11,7 @@
 					<div class="add-gym-user">
                         <p><a href="{{ route('admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Member Activity</p>
                         <h3>Member Activity</h3>
-                        <input type="search" id="searchinput" class="form-control" placeholder="Search by membername or action">
+                        <input type="search" id="searchinput" class="form-control" placeholder="Search by Member Name or Action">
                         <p><span id="video_count">{{ $activities->count() }}</span> log(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">

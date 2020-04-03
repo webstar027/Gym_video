@@ -32,7 +32,7 @@
                                 <textarea class="form-control" name="description" cols="30" maxlength="250" rows="5"  placeholder="Video Description">{{ $description }}</textarea>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" name="tag" maxlength="100"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
+                                <input type="text" class="form-control" name="tag" maxlength="100"  data-role="tagsinput"  value="{{ $tag }}" placeholder="Enter individual tags separated by a comma (,)">
                             </div>
                             <div class="form-group position-relative">
                                 <input type="text" list="typeahead" class="form-control playlist" data-path="{{ route('Autocomplete', ['gym_id'=>$gym_id]) }}" data-provide="typeahead" name="playlist" value="{{$playlist_name}}" maxlength="300" autocomplete="off" placeholder="Playlist">
@@ -65,7 +65,8 @@
                     $('input[name="video_title"]').val(response['title']);
                     $('textarea[name="description"]').text(response['description']);
                     $('textarea[name="description"]').val(response['description']);
-                    $('input[name="tag"]').val(response['tag']);
+                    //$('input[name="tag"]').val(response['tag']);
+                    $('input[name="tag"]').tagsinput('add', response['tag']);
                 });
             });
             function getId(url) {

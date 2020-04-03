@@ -23,12 +23,14 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/datatables-select.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.typeahead.css')}}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/tagsinput.css')}}" >
     <script src="{{ asset('vendor/jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.jquery.min.js"></script>
     <script src="{{ asset('js/popper.min.js')}}"></script>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/datatables.min.js')}}"></script>
     <script src="{{ asset('js/datatables-select.min.js')}}"></script>
+    <script src="{{ asset('js/tagsinput.js')}}"></script>
 </head>
 <body>
     <section id="header" class="fixed-top fixed-top-alt">
