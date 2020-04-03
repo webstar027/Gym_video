@@ -32,11 +32,11 @@
 								<tbody>
 								@foreach($videos as $key => $video)
 									<tr>
-										<td scope="row"><a href="{{ url('/account/gymowner/video/'.$video->id) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
+										<td scope="row"><a href="{{ route('watchgym', ['id'=>$video->id]) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
 										<td>{{ $video -> created_at }}</td>
 										<td>
 											@if($video->playlist !=null)
-											<a href="{{ url('/account/gymowner/playlist/'.$video->playlist->id) }}">{{ $video->playlist->name }}</a></td>
+											<a href="{{ route('gymplaylist', ['id'=>$video->playlist->id]) }}">{{ $video->playlist->name }}</a></td>
 											@endif
                                         <td>
 											@if($video->status == "1") 
