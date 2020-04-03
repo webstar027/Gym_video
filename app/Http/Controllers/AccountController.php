@@ -5,15 +5,18 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Services\UserService;
+use App\Services\GymService;
 use Spatie\Activitylog\Models\Activity;
 
 class AccountController extends Controller
 {
     protected $userservice;
- 
-	public function __construct(UserService $userservice)
+    protected $gymservice;
+
+	public function __construct(UserService $userservice, GymService $gymservice)
 	{
         $this->userservice = $userservice;
+        $this->gymservice = $gymservice;
     }
     
 
@@ -128,16 +131,22 @@ class AccountController extends Controller
 
 
 
-    public function gymactivity()
+    public function gymactivity($gym_id, Request $request)
     {
         $activities = Activity::orderBy('created_at','desc')->get();
+        $user = auth()->user();
+        $activities = Activity::orderBy('created_at','desc')->get();
 
-        foreach($activities as $activity)
+        $nactivites = collect();
+        foreach($activities as $key =>$activity)
         {
             $causer = $activity->causer;
-            $subject = $activity->subject;
-            $action = $activity->description;
+            if ($causer->id == $user->id || $this->userservice->isGymMember($activity->causer, $gym_id))
+            {
+                $nactivites->push($activity); 
+            }
         }
-        return view('gymmemberactivity', ['activities'=>$activities]);
+          
+        return view('gymmemberactivity', ['activities'=>$nactivites]);
     }
 }

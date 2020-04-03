@@ -18,10 +18,13 @@ class AdminRole
     {  
          $user = $request->user();
 
-        if ($user->role_id == 1)
-        {
-            return redirect('/admin');
-        }
+         if ($user->role_id == 3)
+         {
+             return redirect(route('student_account'));
+         }
+         elseif($user->role_id == 2){
+            return redirect(route('gymowner_account'));
+         }
         return $next($request);
     }
 }

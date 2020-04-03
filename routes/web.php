@@ -34,7 +34,7 @@ Route::get('/aboutus', function(){
 Route::get('/pricing', function(){
     return view('pricing');
 })->name('pricing');
-Route::middleware(['auth','verified'])->group(function(){
+Route::middleware(['auth','verified','admin'])->group(function(){
     Route::get('/adminactivity', 'AccountController@adminactivity')->name('adminmember_activity');
 });
 Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
