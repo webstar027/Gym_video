@@ -47,6 +47,12 @@ class VideoController extends Controller
 			$video->playlists()->attach($playlist->id);
 		}
 
+		$user = $request->user;
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->log('create_video');
+
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
@@ -60,11 +66,12 @@ class VideoController extends Controller
 	{
 		$video = $this->videoservice->read($id);
 		if ($video->playlists->count() > 0){
-			$video->playlist_name = $video->playlists->first()->name;
-		}
-		else{
-			$video->playlist_name = "";
-		}
+            $video->playlist = $video->playlists->first();
+            $video->playlist_name = $video->playlists->first()->name;
+        }
+        else{
+            $video->playlist_name = "";
+        }
 		return view('updatevideo', $video);
 	}
 
@@ -82,12 +89,15 @@ class VideoController extends Controller
 		$idd = $this->videoservice->getGymId($id);
 
 		$attributes = $request->all();
-		if (array_key_exists('playlist', $attributes) && $attributes['playlist'])
-		{
-			$playlist = $this->videoservice->getPlaylist($id, $attributes['playlist']);
-			$id = $playlist->id;
-			$video->playlists()->attach($playlist->id);
-		}
+	
+		$this->videoservice->getPlaylist($id, $attributes['playlist']);
+	
+		$user = $request->user;
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->log('update_video');
+
 
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
@@ -98,10 +108,18 @@ class VideoController extends Controller
 	 * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function deleteVideo($id)
+	public function deleteVideo($id, Request $request)
 	{	
+		$video = $this->videoservice->read($id);
 		$idd = $this->videoservice->getGymId($id);
 		$this->videoservice->delete($id);
+		$user = $request->user;
+
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->log('delete_video');
+
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
@@ -115,6 +133,14 @@ class VideoController extends Controller
 	{	
 		$user = auth()->user();
 		$ret = $this->videoservice->favorite($user, $id);
+		$video = $this->videoservice->read($id);
+
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->withProperties(['isFavorite' => $ret])
+			->log('favorite_video');
+
 		return $ret;		
 	}
 
@@ -129,6 +155,15 @@ class VideoController extends Controller
 	{
 		$this->videoservice->publish($id);
 		$idd = $this->videoservice->getGymId($id);
+
+		$user = $request->user;
+		$video = $this->videoservice->read($id);
+
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->log('publish_video');
+
 		return redirect('/account/gymowner/gym/myvideos/'.$idd);
 	}
 
@@ -144,9 +179,6 @@ class VideoController extends Controller
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
-		if ($video->playlists->count() > 0){
-			$video->playlist = $video->playlists->first();
-		}
 		foreach($video->comments as $key=>$comment){
 			$cuser = $comment->user;
 			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
@@ -156,6 +188,11 @@ class VideoController extends Controller
 			}
 		}
 
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->log('watch_video');
+
 		return view('watchvideogym', ['data' => $video]);
 	}
 	public function watch($id, Request $request)
@@ -164,9 +201,6 @@ class VideoController extends Controller
 		$video = $this->videoservice->read($id);
 		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
 		$video->favorite_count = $video->favorites()->count();
-		if ($video->playlists->count() > 0){
-			$video->playlist = $video->playlists->first();
-		}
 		foreach($video->comments as $key=>$comment){
 			$cuser = $comment->user;
 			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
@@ -176,6 +210,11 @@ class VideoController extends Controller
 			}
 		}
 		
+		activity()
+			->performedOn($video)
+			->causedBy($user)
+			->log('watch_video');
+
 		return view('watchvideo', ['data' => $video]);
 	}
 	

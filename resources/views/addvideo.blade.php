@@ -9,9 +9,9 @@
 				
 				<div class="col-md-12">
 					<div class="view-gym-user">
-                        <p><a href="{{ url('/account/gymowner') }}">My Account</a> <i class="fas fa-angle-right"></i> Add Video</p>
+                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Add Video</p>
                         <h2 class="page-sub-title">Add Video</h2>
-                        <form method="POST" action="{{ url('/account/gymowner/addvideo') }}">
+                        <form method="POST" action="{{ route('create_video') }}">
                             @csrf
                             <input type="hidden" name="gym_id" value="{{ $gym_id }}">
                                   
@@ -33,7 +33,7 @@
                                 <input type="text" class="form-control" name="tag" maxlength="100" placeholder="Enter individual tags separated by a comma (,)" required>
                             </div>
                             <div class="form-group position-relative">
-                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ url('/palylistautocomplete/'.$gym_id) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="off" placeholder="Playlist">
+                                <input type="text" list="typeahead" class="form-control playlist" data-path="{{ route('Autocomplete', ['gym_id'=>$gym_id]) }}" data-provide="typeahead" name="playlist" maxlength="300" autocomplete="off" placeholder="Playlist">
                             </div>
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">

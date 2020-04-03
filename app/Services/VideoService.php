@@ -55,29 +55,47 @@ class VideoService
 	}
 	
 	public function getPlaylist($video_id, $name){
+
 		$video = $this->read($video_id);
-		if ($video->playlists->count() > 0)
-		{
-			$old = $video->playlists->first();
-			if ($old->name != $name)
-			{
-				$video->playlists()->detach($old->id);
-			}
-		}
-
 		$gym = $video->Gym;
-		$playlists = $gym->playlists->where('name', $name);
-
-		if ($playlists->count() == 0)
+		if ($name == null || $name == "")
 		{
-			$playlist = new Playlist;
-			$playlist->gym_id = $gym->id;
-			$playlist->name = $name;
-			$playlist->save();
-			return $playlist;
+			if ($video->playlists->count() > 0)
+			{
+				$old = $video->playlists->first();
+				{
+					$video->playlists()->detach($old->id);
+				}
+			}
+
+			return;
+		}
+		
+		$gym_playlists = $gym->playlists->where('name', $name);
+		if ($gym_playlists->count() > 0)
+		{
+			$gym_playlist = $gym_playlists->first();
+		}
+		else
+		{
+			$gym_playlist = new Playlist;
+			$gym_playlist->gym_id = $gym->id;
+			$gym_playlist->name = $name;
+			$gym_playlist->save();
 		}
 
-		return $playlists->first();		
+		if ($video->playlists->count() > 0)
+        {
+            $old = $video->playlists->first();
+            if ($old->name != $name)
+            {
+				$video->playlists()->detach($old->id);
+				$video->playlists()->attach($gym_playlist->id);
+			}
+        }
+		else{
+			$video->playlists()->attach($gym_playlist->id);
+		}
 	}
 
 

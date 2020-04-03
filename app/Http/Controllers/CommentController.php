@@ -29,7 +29,8 @@ class CommentController extends Controller
         ]);
    
         $input = $request->all();
-        $input['user_id'] = auth()->user()->id;
+        $user = auth()->user();
+        $input['user_id'] = $user->id;
     
         $comment = Comment::create($input);
         $user = $this -> userRepo -> find($comment->user_id);
@@ -37,6 +38,13 @@ class CommentController extends Controller
         $comment -> first_name = $user->first_name;
         $comment -> last_name = $user->last_name;
         $comment -> diff = $comment->created_at->diffForHumans();
+
+		activity()
+			->performedOn($comment)
+			->causedBy($user)
+			->log('comment_video');
+
+
         return $comment;
     }
     

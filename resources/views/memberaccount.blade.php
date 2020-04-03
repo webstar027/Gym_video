@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="subscriptions">
                     <h2 class="page-sub-title">My Subscriptions</h2>
-                    <a href="{{ url('/account/student/gyms/search') }}" class="btn my-btn mb-4">Add Gym</a>
+                    <a href="{{ route('add_gym') }}" class="btn my-btn mb-4">Add Gym</a>
                     <div class="table-responsive">
                         <table class="table table-striped dtBasicExample" width="100%">
                             <thead>
@@ -24,11 +24,11 @@
                             <tbody>
                                 @foreach ($members as $key => $member)
                                 <tr>
-                                    <td scope="row"><a href="{{ url('/account/student/viewgym/'.$member -> id) }}">{{ $member -> gym_name }}</a></td>
+                                    <td scope="row"><a href="{{ route('view_gym', ['gym_id'=>$member->id]) }}">{{ $member -> gym_name }}</a></td>
                                     <td>{{ $member -> owner -> first_name}} {{ $member -> owner -> last_name}}</td>
                                     <td style="padding-left:28px;">{{ $member -> videos->where('status', 1)->count() }}</td>
                                     <td>{{ $member -> updated_at }}</td>
-                                    <td><a href="{{url('/account/student/gyms/cancel/'.$member -> id)}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request"><i class="fas fa-trash"></i></a></td>
+                                    <td><a href="{{route('request_cancel', ['gym_id'=>$member->id])}}" class="text-danger calcel-request" data-toggle="tooltip" data-placement="top" title="Cancel Request"><i class="fas fa-trash"></i></a></td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -50,7 +50,7 @@
                 <div class="account-details">
                     <h2 class="page-sub-title">My Account Details</h2>
                     <p>Need to make changes to your account?</p>
-                    <form action="{{ url('/account/updateuser/'.$user->id) }}" method="POST">
+                    <form action="{{ route('auth_update', ['id'=>$user->id]) }}" method="POST">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-row">

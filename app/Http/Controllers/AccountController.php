@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Services\UserService;
+use Spatie\Activitylog\Models\Activity;
 
 class AccountController extends Controller
 {
@@ -77,10 +78,22 @@ class AccountController extends Controller
             ]);
             $user = $request->user();
             $this->userservice->update($request, $id);
+
+            activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('update_user');
+
             return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
         }else{
             $user = $request->user();
             $this->userservice->update($request, $id);
+
+            activity()
+                ->performedOn($user)
+                ->causedBy($user)
+                ->log('update_user');
+
             return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
         }
         
@@ -96,5 +109,27 @@ class AccountController extends Controller
     public function gymlist()
     {
         return view('gymlist');
+    }
+
+    //member activity
+    public function adminactivity()
+    {   
+        $activities = Activity::all();
+
+        foreach($activities as $activity)
+        {
+            $causer = $activity->causer;
+            $subject = $activity->subject;
+            $action = $activity->descrption;
+        }
+
+        return view('home', ['activities'=>$activities]);
+    }
+
+
+
+    public function gymactivity()
+    {
+        return view('adminmemberactivity');
     }
 }

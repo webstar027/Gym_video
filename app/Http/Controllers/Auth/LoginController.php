@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class LoginController extends Controller
 {
@@ -70,6 +71,17 @@ class LoginController extends Controller
     public function username()
     {
         return $this->username;
+    }
+    /**
+     * logined
+     *
+     * @return string
+     */
+    function authenticated(Request $request, $user)
+    {
+        activity()
+            ->causedBy($user)
+            ->log('login_user');
     }
 
 }

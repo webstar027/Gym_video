@@ -12,8 +12,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable;
 
-    use LogsActivity;
-    protected static $logAttributes = ['id','first_name','last_name','username', 'email','role_id'];
+    // use LogsActivity;
+    // protected static $logAttributes = ['id','first_name','last_name','username', 'email','role_id'];
 
 
     /**

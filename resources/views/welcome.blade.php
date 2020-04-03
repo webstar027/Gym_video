@@ -29,7 +29,7 @@
         @if (Route::has('login'))
         <!-- <div class="top-right links">
             @auth
-            <a href="{{ url('/admin') }}">Dashboard</a>
+            <a href="{{ route('admin') }}">Dashboard</a>
             @else
             <a href="{{ route('login') }}">Login</a>
 
@@ -61,13 +61,13 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/student') }}">Student</a>
+                        <a class="nav-link" href="{{ route('student') }}">Student</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/gymowner') }}">Gym Owner</a>
+                        <a class="nav-link" href="{{ route('gymowner') }}">Gym Owner</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
+                        <a class="nav-link" href="{{ route('pricing') }}">Pricing</a>
                     </li>
                     @guest
                     <li class="nav-item">
@@ -86,7 +86,7 @@
                         </a>
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a href="/admin" class="dropdown-item">{{__('My Account')}}</a>
+                            <a href="{{ route('admin') }}" class="dropdown-item">{{__('My Account')}}</a>
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -163,10 +163,10 @@
 					<div class="quick-links">
 						<h3>Quick Links</h3>
 						<nav class="nav flex-column">
-							<a class="nav-link" href="{{ url('/student') }}">Student</a>
-							<a class="nav-link" href="{{ url('/gymowner') }}">Gym Owner</a>
-							<a class="nav-link" href="{{ url('/pricing') }}">Pricing</a>
-							<a class="nav-link" href="{{ url('/aboutus') }}">About Us</a>
+							<a class="nav-link" href="{{ route('student') }}">Student</a>
+							<a class="nav-link" href="{{ route('gymowner') }}">Gym Owner</a>
+							<a class="nav-link" href="{{ route('pricing') }}">Pricing</a>
+							<a class="nav-link" href="{{ route('aboutus') }}">About Us</a>
 						</nav>
 					</div>
 				</div>

@@ -7,8 +7,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Gym extends Model
 {
-    use LogsActivity;
-    protected static $logAttributes = ['id','owner_id', 'gym_name', 'gym_address_1', 'gym_address_2', 'city', 'state_province', 'country', 'website', 'zip_code'];
+    // use LogsActivity;
+    // protected static $logAttributes = ['id','owner_id', 'gym_name', 'gym_address_1', 'gym_address_2', 'city', 'state_province', 'country', 'website', 'zip_code'];
 
     protected $fillable = [
         'owner_id', 'gym_name', 'gym_address_1', 'gym_address_2', 'city', 'state_province', 'country', 'website', 'zip_code'

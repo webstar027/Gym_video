@@ -9,8 +9,8 @@ use Spatie\Activitylog\Traits\LogsActivity;
 
 class Video extends Model
 {
-    use LogsActivity;
-    protected static $logAttributes = ['id','gym_id','video_url','video_title', 'description','tag', 'status'];
+    // use LogsActivity;
+    // protected static $logAttributes = ['id','gym_id','video_url','video_title', 'description','tag', 'status'];
     /**
      * Get the gyms subscribed to this user.
      *

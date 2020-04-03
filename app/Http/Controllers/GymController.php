@@ -82,6 +82,12 @@ class GymController extends Controller
         $this->gymservice->access_request($user->id, $gym_id);
         $gym = $this->gymservice->read($gym_id);
         $gymowner = $this->gymservice->getGymOwner($gym->owner_id);
+
+        activity()
+            ->performedOn($gym)
+            ->causedBy($user)
+            ->log('request_member');
+
         Notification::send($gymowner, new RequestAccessNotification($user));
         return redirect('/account/student/gyms/search');
     }
@@ -89,6 +95,13 @@ class GymController extends Controller
     public function updategym($gym_id, Request $request){
         $user = $request->user();
         $this->gymservice->update($request, $gym_id);
+
+        $gym = $this->gymservice->read($gym_id);
+        activity()
+            ->performedOn($gym)
+            ->causedBy($user)
+            ->log('update_gym');
+
 		return redirect()->back()->with('successes', 'My Gym Details have been updated successfully!');
     }
     /**
@@ -100,7 +113,14 @@ class GymController extends Controller
     public function request_cancel($gym_id, Request $request)
     {
         $user = $request->user();
+        $gym = $this->gymservice->read($gym_id);
         $this->gymservice->cancel_request($user->id, $gym_id);
+
+        activity()
+            ->performedOn($gym)
+            ->causedBy($user)
+            ->log('cancel_member');
+
         return redirect('/account/student/gyms/search');
     }
     /**
@@ -112,8 +132,15 @@ class GymController extends Controller
     public function request_deny( $gym_id , $user_id)
     {
         $this->gymservice->denied_request($user_id, $gym_id);
+
+        $gym = $this->gymservice->read($gym_id);
+        $user = auth()->user();
+        activity()
+            ->performedOn($gym)
+            ->causedBy($user)
+            ->log('deny_member');
+
         return redirect('/account/gymowner');
-        
     }
     /**
      * aprove to access to the gym
@@ -124,6 +151,14 @@ class GymController extends Controller
     public function request_aprove( $gym_id, $user_id){
         
         $this->gymservice->approve_request($user_id, $gym_id);
+        
+        $gym = $this->gymservice->read($gym_id);
+        $user = auth()->user();
+        activity()
+            ->performedOn($gym)
+            ->causedBy($user)
+            ->log('approve_member');
+
         return redirect('/account/gymowner');
     }
     /**
@@ -177,9 +212,7 @@ class GymController extends Controller
                 if ($p->count() > 0)
                 {
                     $video->playlist = $p->first();
-                    
                 }
-              
             }
             $gym->videos = $videos;
         

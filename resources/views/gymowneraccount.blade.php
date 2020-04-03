@@ -12,8 +12,8 @@
                     <nav class="nav nav-pills">
                         <a class="nav-link rounded-0 active"  id="active_members_tab" data-toggle="pill" href="#active_members" role="tab" aria-controls="active_members" aria-selected="true">{{ $active_count }} Active Members</a>
                         <a class="nav-link rounded-0"  id="pending_request_tab" data-toggle="pill" href="#pending_request" role="tab" aria-controls="pending_request">{{ $pending_count }} Pending Request</a>
-                        <a class="nav-link" href="{{ url('/account/gymowner/gym/myvideos/') }}/{{ $gym_id }}">{{ $video_count }} Uploaded Videos</a>
-                        <a class="nav-link" href="{{ url('/account/gymowner/addvideo/') }}/{{ $gym_id }}">Add new Video</a>
+                        <a class="nav-link" href="{{ route('my_videos', ['gym_id'=>$gym_id]) }}">{{ $video_count }} Uploaded Videos</a>
+                        <a class="nav-link" href="{{ route('add_video',['gym_id'=>$gym_id]) }}">Add new Video</a>
                     </nav>
                 </div>
                 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
@@ -29,7 +29,7 @@
                                 <tr>
                                     <td> {{ $member -> first_name }} {{ $member -> last_name }}</td><td>Activated</td><td>{{ $member->created_at }}</td>
                                     <td>
-                                    <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                    <a href="{{route('request_deny', ['gym_id'=>$gym_id, 'user_id'=>$member->id])}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -48,8 +48,8 @@
                                 <tr>
                                     <td> {{ $member -> first_name }} {{ $member -> last_name }}</td><td>Pending</td><td>{{ $member->created_at }}</td>
                                     <td>
-                                        <a href="{{url('/account/gymowner/members/deny/'.$gym_id.'/'.$member->id)}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
-                                        <a href="{{url('/account/gymowner/members/aprove/'.$gym_id.'/'.$member->id)}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
+                                        <a href="{{route('request_deny', ['gym_id'=>$gym_id, 'user_id'=>$member->id])}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
+                                        <a href="{{route('request_aprove', ['gym_id'=>$gym_id, 'user_id'=>$member->id])}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -70,7 +70,7 @@
                 <div class="account-details">
                     <h2 class="page-sub-title">My Account Details</h2>
                     <p>Need to make changes to your account?</p>
-                    <form action="{{ url('/account/updateuser/'.$user->id) }}" method="POST">
+                    <form action="{{ route('auth_update', ['id'=>$user->id]) }}" method="POST">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-row">
@@ -147,7 +147,7 @@
                 <div class="account-details">
                     <h2 class="page-sub-title">My Gym Details</h2>
                     <p>Need to make changes to your Gym details?</p>
-                    <form method="POST" action="{{ url('/account/gymowner/updategym/'.$gym_id) }}">
+                    <form method="POST" action="{{ route('update_gym',['gym_id'=>$gym_id]) }}">
                         {{ method_field('PUT') }}
                         @csrf
                         <div class="form-row">
