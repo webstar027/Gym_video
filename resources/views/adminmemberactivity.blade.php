@@ -24,13 +24,58 @@
 									</tr>
 								</thead>
 								<tbody>
-								
+                                    
+								@foreach($activities as $key => $activity)
 									<tr>
-										<td></td>
-										<td></td>
-										<td></td>
+										@if($activity->causer->role_id == 2)
+										<td data-id="{{ $activity->causer->id }}" style="font-weight: bold;">{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+										@else
+										<td>{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+										@endif
+										<td>
+										@switch($activity->description)
+											@case('favorite_video')
+												Fevorited <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												@break
+											@case('watch_video')
+												Watched <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												@break
+											@case('login_user')
+												Logged In
+												@break
+											@case('update_video')
+												Edited <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												@break
+											@case('delete_video')
+												Removed video
+												@break
+											@case('deny_member')
+												Denied Member <span>{{$activity->subject->first_name}} {{$activity->subject->last_name}}</span>
+												@break
+											@case('request_member')
+												Requested Access to <span>{{$activity->subject->gym_name}}</span>
+												@break
+											@case('cancel_member')
+												Canceled Request of <span>{{$activity->subject->first_name}} {{$activity->subject->last_name}}</span>
+												@break
+											@case('approve_member')
+												Added Member <span>{{$activity->subject->first_name}} {{$activity->subject->last_name}}</span>
+												@break
+											@case('create_video')
+												Added <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												@break
+											@case('comment_video')
+												Commented on <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												@break
+											@case('update_gym')
+												Updated Gym Details
+												@break
+										@endswitch
+										</td>
+										<!-- <td>{{$activity->description}}</td> -->
+										<td>{{$activity->created_at}}</td>
 									</tr>
-								
+								@endforeach
 								</tbody>
 							</table>
 						</div>

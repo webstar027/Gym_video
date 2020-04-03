@@ -114,22 +114,30 @@ class AccountController extends Controller
     //member activity
     public function adminactivity()
     {   
-        $activities = Activity::all();
+        $activities = Activity::orderBy('created_at','desc')->get();
 
         foreach($activities as $activity)
         {
             $causer = $activity->causer;
             $subject = $activity->subject;
-            $action = $activity->descrption;
+            $action = $activity->description;
         }
 
-        return view('home', ['activities'=>$activities]);
+        return view('adminmemberactivity', ['activities'=>$activities]);
     }
 
 
 
     public function gymactivity()
     {
-        return view('adminmemberactivity');
+        $activities = Activity::orderBy('created_at','desc')->get();
+
+        foreach($activities as $activity)
+        {
+            $causer = $activity->causer;
+            $subject = $activity->subject;
+            $action = $activity->description;
+        }
+        return view('gymmemberactivity', ['activities'=>$activities]);
     }
 }

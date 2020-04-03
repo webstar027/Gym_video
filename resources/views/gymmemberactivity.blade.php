@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="add-gym-user">
-                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Member Activity</p>
+                        <p><a href="{{ route('admin') }}">My Account</a> <i class="fas fa-angle-right"></i> Member Activity</p>
                         <h3>Member Activity</h3>
                         <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by membername or action">
                         <p><span id="video_count"></span> log(s) have matched your search criteria</p>
@@ -24,14 +24,67 @@
 									</tr>
 								</thead>
 								<tbody>
-								
-									<tr>
-										<td ></td>
-										<td></td>
-										<td></td>
-
-									</tr>
-								
+                                    
+								@foreach($activities as $key => $activity)
+									
+										@switch($activity->description)
+											@case('favorite_video')
+											<tr>
+												@if($activity->causer->role_id == 2)
+												<td data-id="{{ $activity->causer->id }}" style="font-weight: bold;">{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@else
+												<td>{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@endif
+												<td>
+												Fevorited <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												
+												</td>
+												<!-- <td>{{$activity->description}}</td> -->
+												<td>{{$activity->created_at}}</td>
+											</tr>@break
+											@case('watch_video')
+											<tr>
+												@if($activity->causer->role_id == 2)
+												<td data-id="{{ $activity->causer->id }}" style="font-weight: bold;">{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@else
+												<td>{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@endif
+												<td>
+												Watched <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												
+												</td>
+												<!-- <td>{{$activity->description}}</td> -->
+												<td>{{$activity->created_at}}</td>
+											</tr>@break
+											@case('login_user')
+											<tr>
+												@if($activity->causer->role_id == 2)
+												<td data-id="{{ $activity->causer->id }}" style="font-weight: bold;">{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@else
+												<td>{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@endif
+												<td>
+												Logged In
+												</td>
+												<!-- <td>{{$activity->description}}</td> -->
+												<td>{{$activity->created_at}}</td>
+											</tr>@break
+											@case('comment_video')
+											<tr>
+												@if($activity->causer->role_id == 2)
+												<td data-id="{{ $activity->causer->id }}" style="font-weight: bold;">{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@else
+												<td>{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
+												@endif
+												<td>
+												Commented on <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												</td>
+												<!-- <td>{{$activity->description}}</td> -->
+												<td>{{$activity->created_at}}</td>
+											</tr>@break
+										@endswitch
+										
+								@endforeach
 								</tbody>
 							</table>
 						</div>

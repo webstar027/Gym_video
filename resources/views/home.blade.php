@@ -24,14 +24,11 @@
 									</tr>
 								</thead>
 								<tbody>
-                                    
-								@foreach($activities as $key => $activity)
 									<tr>
-										<td>{{$activity->causer->first_name}} {{$activity->causer->last_name}}</td>
-										<td>{{$activity->descrption}}</td>
-										<td>{{$activity->created_at}}</td>
+										<td></td>
+										<td></td>
+										<td></td>
 									</tr>
-								@endforeach
 								</tbody>
 							</table>
 						</div>
