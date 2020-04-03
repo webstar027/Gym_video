@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Video;
+use App\Gym;
+
 use App\Services\UserService;
 use App\Services\GymService;
 use Spatie\Activitylog\Models\Activity;
@@ -141,10 +144,27 @@ class AccountController extends Controller
         foreach($activities as $key =>$activity)
         {
             $causer = $activity->causer;
-            if ($causer->id == $user->id || $this->userservice->isGymMember($activity->causer, $gym_id))
+            $subject = $activity->subject;
+
+            if ($causer->id == $user->id)
             {
                 $nactivites->push($activity); 
             }
+            else
+            {
+                if ($this->userservice->isGymMember($causer, $gym_id)){
+                    if ($subject instanceof Video && $subject->gym->id == $gym_id)
+                    {
+                        $nactivites->push($activity); 
+                    }
+                    else if ($subject instanceof Gym && $subject->id == $gym_id)
+                    {
+                        $nactivites->push($activity); 
+                    }
+                }
+               
+            }
+
         }
           
         return view('gymmemberactivity', ['activities'=>$nactivites]);
