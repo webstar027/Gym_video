@@ -8,6 +8,13 @@
 			<div class="row">
 				
 				<div class="col-md-12">
+					<nav class="nav nav-pills mb-3">
+                        <a class="nav-link rounded-0 border border-primary" href="{{ route('gymowner_account') }}">Members</a>
+                        <a class="nav-link rounded-0 border border-primary" href="{{ route('gymmember_activity', ['gym_id'=>$gym_id]) }}">Member Activity</a>
+                        <a class="nav-link rounded-0 border border-primary active" href="{{ route('my_videos', ['gym_id'=>$gym_id]) }}">{{ $videos->count() }} Videos</a>
+                        <a class="nav-link rounded-0 border border-primary" href="{{ route('gymowner_details') }}">Account Details</a>
+                        <a class="nav-link rounded-0 border border-primary" href="{{ route('gym_details') }}">Gym Details</a>
+                    </nav>
 					<div class="add-gym-user">
                         <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
                         <h2 class="page-sub-title">My Videos</h2>

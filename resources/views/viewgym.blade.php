@@ -14,7 +14,7 @@
 					</nav>
 					<div class="tab-content pt-2 pl-1" id="pills-tabContent">
 						<div class="view-playlist tab-pane fade pt-3 active show" id="playlist" role="tabpanel" aria-labelledby="playlist_tab">
-							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Playlist</p>
+							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Playlists</p>
 							<h3 class="page-sub-title">{{ $data->gym_name }} Playlists</h3>
 							
 							<div class="row align-items-center">
@@ -145,9 +145,8 @@
 							</div>
 						</div>
 						<div class="view-gym-user tab-pane fade pt-3" id="view_gym" role="tabpanel" aria-labelledby="view_gym_tab">
-							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> {{ $data->gym_name }}</p>
+							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> {{ $data->gym_name }} <i class="fas fa-angle-right"></i> Videos</p>
 							<h2 class="page-sub-title">{{ $data->gym_name }}</h2>
-							
 							<div class="row align-items-center">
 								<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Search by Title, Description, Playlist or #Tag" id="searchinput"></div>
 								<div class="col-md-8">

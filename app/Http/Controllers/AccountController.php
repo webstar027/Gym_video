@@ -37,7 +37,22 @@ class AccountController extends Controller
       
         return view('gymowneraccount', $data);
     }
-
+    public function gymowner_details(Request $request)
+    {
+        $user = $request->user();
+        $gymownerid = $user->id;
+        $data = $this->userservice->getGymSummary($gymownerid);
+      
+        return view('gymownerdetails', $data);
+    }
+    public function gym_details(Request $request)
+    {
+        $user = $request->user();
+        $gymownerid = $user->id;
+        $data = $this->userservice->getGymSummary($gymownerid);
+      
+        return view('gymdetails', $data);
+    }
     /**
      * Get members information
      *
@@ -166,7 +181,7 @@ class AccountController extends Controller
             }
 
         }
-          
-        return view('gymmemberactivity', ['activities'=>$nactivites]);
+        $gym = $this->gymservice->read($gym_id);
+        return view('gymmemberactivity', ['activities'=>$nactivites, 'gym'=>$gym]);
     }
 }

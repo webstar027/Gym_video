@@ -3,13 +3,11 @@
 @section('content')
 	<!-- Section Accounts Start -->
 	<section class="bg-trans">
-		<div class="container">
-            
+		<div class="container">    
 			<div class="row">
-				
 				<div class="col-md-12">
 					<div class="view-gym-user">
-                        <p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Playlist <i class="fas fa-angle-right"></i>  {{ $playlist_name }}</p>
+                        <p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ route('view_gym', ['gym_id'=>$gym->id]) }}">{{ $gym->gym_name }}</a> <i class="fas fa-angle-right"></i> <a href="{{ route('view_gym', ['gym_id'=>$gym->id]) }}">Playlist</a> <i class="fas fa-angle-right"></i>  {{ $playlist_name }}</p>
                         <h2 class="page-sub-title">{{ $playlist_name }}</h2>
 						
 						<div class="row align-items-center">
@@ -29,7 +27,7 @@
                                         <h3><a href="{{ route('student_watch', ['id'=>$video -> id]) }}">{{ Str::limit($video -> video_title, 30)}}</a></h3>
                                         <p style="margin-bottom:0; height:25px;"><a href="{{route('student_playlist', ['id'=>$playlist_id])}}">{{ $playlist_name }}</a></p>
 										<div class="row align-items-center">
-											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at}}</p></div>
+											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/yy h:m') }}</p></div>
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
 										</div>
 										<div class="embed-responsive embed-responsive-16by9">
@@ -43,7 +41,7 @@
 										</p>
 										<p class="video_tag">TAGS: 
 											@foreach(explode(',',Str::limit($video -> tag, 50)) as $row)
-											<span class="text-primary text-uppercase">{{ $row }}</span> ,
+											<span class="text-primary text-uppercase">{{ $row }}</span> @if($loop->iteration < count(explode(',',Str::limit($video -> tag, 50)))),@endif
 											@endforeach	
 										</p>
 									</div>
@@ -183,7 +181,7 @@
 		$(".btn_favorite").click(function(e){
 			var active = $(this);
 			e.preventDefault();
-			var video_id = $(this).data('videoid');
+			var video_id = $(this).attr('data-videoid');
 
 			$.ajax({
 				type:'GET',

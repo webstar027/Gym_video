@@ -45,9 +45,10 @@ class PlaylistController extends Controller
         }
         $playlist = $this->gymservice->getPlaylist($id);
         $videos =  $playlist->videos->where('status', 1);
+        $gym = $playlist->gym;
         $total_video = $playlist->videos->count();
         $videos = $videos->forPage($page, 6);
         $currentpage = $page;
-        return view('studentplaylistview', ['videos'=>$videos,'total_video'=>$total_video, 'currentpage'=>$currentpage, 'playlist_name'=>$playlist->name, 'playlist_id'=>$playlist->id]);
+        return view('studentplaylistview', ['videos'=>$videos,'total_video'=>$total_video, 'currentpage'=>$currentpage, 'playlist_name'=>$playlist->name, 'playlist_id'=>$playlist->id, 'gym'=>$gym]);
     }
 }

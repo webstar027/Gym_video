@@ -52,6 +52,8 @@ Route::group(['middleware'=>[ 'auth','verified', 'gymowner']], function(){
     //gymowner
     Route::get('/account/gymowner/{gym_id}/memberactivity', 'AccountController@gymactivity')->name('gymmember_activity');
     Route::get('/account/gymowner', 'AccountController@gymowner')->name('gymowner_account');
+    Route::get('/account/gymowner/account_details', 'AccountController@gymowner_details')->name('gymowner_details');
+    Route::get('/account/gymowner/gym_details', 'AccountController@gym_details')->name('gym_details');
     Route::get('/account/gymowner/members', 'AccountController@members')->name('gymowner_members');
     Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo')->name('add_video');
     Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video')->name('update_video');

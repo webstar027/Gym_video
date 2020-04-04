@@ -107,3 +107,6 @@ span.day_ago {
 .tt-menu > div > div{
   border-bottom: 1px dotted;
 }
+.video-box{
+  overflow:hidden;
+}

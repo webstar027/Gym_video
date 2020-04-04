@@ -37,7 +37,7 @@
 										</td>
 										<td>
 											<span class="m-title">Date: </span>
-											<span class="m-data">{{ $video -> created_at }}</span>
+											<span class="m-data">{{ $video -> created_at->format('m/d/yy h:m') }}</span>
 										</td>
 										<td>
 											<span class="m-title">Playlist: </span>

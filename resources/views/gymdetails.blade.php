@@ -10,161 +10,14 @@
                 <div class="gym-name-stats">
                     <h2 class="page-sub-title pb-3 mb-3">{{$gym->gym_name}} Stats</h2>
                     <nav class="nav nav-pills">
-                        <a class="nav-link rounded-0 active border border-primary" id="members_tab" data-toggle="pill" href="#members" role="tab" aria-controls="members" aria-selected="true">Members</a>
+                        <a class="nav-link rounded-0 border border-primary" href="{{ route('gymowner_account') }}">Members</a>
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('gymmember_activity', ['gym_id'=>$gym_id]) }}">Member Activity</a>
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('my_videos', ['gym_id'=>$gym_id]) }}">{{ $video_count }} Videos</a>
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('gymowner_details') }}">Account Details</a>
-                        <a class="nav-link rounded-0 border border-primary" href="{{ route('gym_details') }}">Gym Details</a>
-                        
+                        <a class="nav-link rounded-0 border border-primary active" href="#gym_details">Gym Details</a>
                     </nav>
                 </div>
-                <div class="tab-content pt-2 pl-1" id="pills-tabContent">
-                    <div class="tab-pane fade show active pt-3" id="members" role="tabpanel" aria-labelledby="members_tab">
-                        <h2 class="page-sub-title">My Members</h2>
-                        <nav class="nav nav-pills">
-                            <a class="nav-link rounded-0 active"  id="active_members_tab" data-toggle="pill" href="#active_members" role="tab" aria-controls="active_members" aria-selected="true">{{ $active_count }} Active Members</a>
-                            <a class="nav-link rounded-0"  id="pending_request_tab" data-toggle="pill" href="#pending_request" role="tab" aria-controls="pending_request">{{ $pending_count }} Pending Request</a>
-                        </nav>
-                        <div class="tab-content pt-2 pl-1" id="pills-tabContent">
-                            <div class="tab-pane fade show active" id="active_members" role="tabpanel" aria-labelledby="active_members_tab">
-                                <table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($active_members as $key => $member)
-                                        <tr>
-                                            <td>
-                                                <span class="m-title">Member Name: </span> 
-                                                <span class="m-data">{{ $member -> first_name }} {{ $member -> last_name }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="m-title">Status: </span> 
-                                                <span class="m-data">Activated</span>
-                                            </td>
-                                            <td>
-                                                <span class="m-title">Date: </span>
-                                                <span class="m-data">{{ $member->created_at->format('m/d/yy h:m') }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="m-title">Action: </span>
-                                                <span class="m-data"><a href="{{route('request_deny', ['gym_id'=>$gym_id, 'user_id'=>$member->id])}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a></span>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="tab-pane fade" id="pending_request" role="tabpanel" aria-labelledby="pending_request_tab">
-                            <table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
-                                    <thead>
-                                        <tr>
-                                            <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($pending_members as $key => $member)
-                                        <tr>
-                                            <td>
-                                                <span class="m-title">Member Name: </span>
-                                                <span class="m-data">{{ $member -> first_name }} {{ $member -> last_name }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="m-title">Status: </span>
-                                                <span class="m-data">Pending</span>
-                                            </td>
-                                            <td>
-                                                <span class="m-title">Date: </span>
-                                                <span class="m-data">{{ $member->created_at->format('m/d/yy h:m') }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="m-title">Action: </span>
-                                                <span class="m-data">
-                                                    <a href="{{route('request_deny', ['gym_id'=>$gym_id, 'user_id'=>$member->id])}}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete member"><i class="fas fa-trash"></i></a>
-                                                    <a href="{{route('request_aprove', ['gym_id'=>$gym_id, 'user_id'=>$member->id])}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Active member"><i class="fas fa-check-square"></i></a>
-                                                </span>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade pt-3" id="account_details" role="tabpanel" aria-labelledby="account_details_tab">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="account-details">
-                                    <h2 class="page-sub-title">My Account Details</h2>
-                                    <p>Need to make changes to your account?</p>
-                                    <form action="{{ route('auth_update', ['id'=>$user->id]) }}" method="POST">
-                                        {{ method_field('PUT') }}
-                                        @csrf
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <input type="text" class="form-control @error('first_name') is-invalid @enderror" value="{{ $user -> first_name }}" name="first_name" placeholder="First Name" required>
-                                                @error('first_name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <input type="text" class="form-control @error('last_name') is-invalid @enderror" value="{{ $user -> last_name }}" name="last_name" placeholder="Last Name" required>
-                                                @error('last_name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                    <input id="username" placeholder="Username" value="{{ $user -> username }}" type="text" disabled class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username" autofocus>
-
-                                                    @error('username')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <input type="email" class="form-control @error('email') is-invalid @enderror" value="{{ $user -> email }}"  name="email" placeholder="Email Address" required>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="form-group col-md-6">
-                                                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" autocomplete="old-password">
-                                                    @error('password')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                            </div>
-                                            <div class="form-group col-lg-6">
-                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="old-password">
-                                            </div>
-                                            @if(session()->has('success'))
-                                                <div class="alert alert-success">
-                                                    {{ session()->get('success') }}
-                                                </div>
-                                            @endif
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input type="checkbox" checked class="custom-control-input" id="customCheck1" required>
-                                                <label class="custom-control-label" for="customCheck1">Sponsors help pay our server costs. I agree to receive a monthly email from our sponsors to use this site for free. if I unsubscribe, then my account will be suspended.</label>
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn my-btn btn-block">Update</button>
-                                    </form>                
-                                </div>
-                            </div>
-                        </div><!-- //.row -->
-                    </div>
-                    <div class="tab-pane fade pt-3" id="gym_details" role="tabpanel" aria-labelledby="gym_details_tab">
+                    <div class="pt-3" id="gym_details" role="tabpanel" aria-labelledby="gym_details_tab">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="account-details">
@@ -495,8 +348,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                    
             </div>
         </div>
     </div>
