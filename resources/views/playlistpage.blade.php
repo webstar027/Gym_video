@@ -13,7 +13,7 @@
                         <h2 class="page-sub-title">{{ $data->gym_name }} Playlists</h2>
 						
 						<div class="row align-items-center">
-							<div class="col-md-4"><input type="search" onkeyup="searchplaylist()" class="form-control" placeholder="Search by Title, Description, Playlist or #Tag" id="searchplaylist"></div>
+							<div class="col-md-4"><input type="search" onkeyup="searchplaylist()" class="form-control" placeholder="Search by Title, Description, Playlist or Tag" id="searchplaylist"></div>
 						</div>
                         <h3 class="page-sub-title-alt mt-3">Search Results</h3>
 						<p><span id="search_palylist_count">{{ $data->playlists->count() }}</span> Playlist(s) have matched your search criteria.</p>
@@ -28,7 +28,7 @@
 											<span id="playlist_count">{{ $playlist->videos->count() }}</span> video(s) in this Playlist
 										</p>
 										<div class="row align-items-center">
-											<div class="col-9"><p class="mb-0">Last Updates: {{ $playlist->updated_at->format('m/d/yy h:m') }}</p></div>
+											<div class="col-9"><p class="mb-0">Last Updates: {{ $playlist->updated_at->format('m/d/Y g:iA') }}</p></div>
 										</div>
 										<div class="embed-responsive embed-responsive-16by9">
 											<a href="#"><img class="embed-responsive-item" data-url="{{ $playlist->thumbnail }}" src=""/></a>

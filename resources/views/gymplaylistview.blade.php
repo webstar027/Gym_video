@@ -11,7 +11,7 @@
 					<div class="add-gym-user">
                         <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> {{$playlist_name}}</p>
                         <h2 class="page-sub-title">{{$playlist_name}}</h2>
-                        <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or #tag">
+                        <input type="search" onkeyup="searchvideo()" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or tag">
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
@@ -37,7 +37,7 @@
 										</td>
 										<td>
 											<span class="m-title">Date: </span>
-											<span class="m-data">{{ $video -> created_at->format('m/d/yy h:m') }}</span>
+											<span class="m-data">{{ $video -> created_at->format('m/d/Y g:iA') }}</span>
 										</td>
 										<td>
 											<span class="m-title">Playlist: </span>

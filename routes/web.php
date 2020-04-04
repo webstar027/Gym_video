@@ -40,6 +40,7 @@ Route::middleware(['auth','verified','admin'])->group(function(){
 Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
      // student
      Route::get('/account/student', 'AccountController@student')->name('student_account');
+     Route::get('/account/student/account_details', 'AccountController@student_details')->name('student_details');
      Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymview')->name('view_gym');
      Route::get('/account/student/gyms/search', 'GymController@search')->name('add_gym');
      Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel')->name('request_cancel');

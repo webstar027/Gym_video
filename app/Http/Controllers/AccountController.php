@@ -82,7 +82,18 @@ class AccountController extends Controller
         }
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
-
+    public function student_details(Request $request)
+    {
+        $user = $request->user();
+       
+        $members = $user->approved_gyms;
+        foreach($members as $key => $member)
+        {
+            $o = $this->userservice->read($member->owner_id);
+            $member->owner = $o;
+        }
+        return view('studentaccountdetails', ['members'=> $members, 'user' => $user]);
+    }
     /**
      * Update user page
      *

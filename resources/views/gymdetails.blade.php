@@ -8,7 +8,7 @@
 
                 <!-- <h3>Hello {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</h3><br/> -->
                 <div class="gym-name-stats">
-                    <h2 class="page-sub-title pb-3 mb-3">{{$gym->gym_name}} Stats</h2>
+                    <!-- <h2 class="page-sub-title pb-3 mb-3">{{$gym->gym_name}} Stats</h2> -->
                     <nav class="nav nav-pills">
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('gymowner_account') }}">Members</a>
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('gymmember_activity', ['gym_id'=>$gym_id]) }}">Member Activity</a>
@@ -18,6 +18,7 @@
                     </nav>
                 </div>
                     <div class="pt-3" id="gym_details" role="tabpanel" aria-labelledby="gym_details_tab">
+                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Gym Details</p>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="account-details">

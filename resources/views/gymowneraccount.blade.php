@@ -8,7 +8,7 @@
 
                 <!-- <h3>Hello {{ isset(Auth::user()->name) ? Auth::user()->name : Auth::user()->email }}</h3><br/> -->
                 <div class="gym-name-stats">
-                    <h2 class="page-sub-title pb-3 mb-3">{{$gym->gym_name}} Stats</h2>
+                    <!-- <h2 class="page-sub-title pb-3 mb-3">{{$gym->gym_name}} Stats</h2> -->
                     <nav class="nav nav-pills">
                         <a class="nav-link rounded-0 active border border-primary" id="members_tab" data-toggle="pill" href="#members" role="tab" aria-controls="members" aria-selected="true">Members</a>
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('gymmember_activity', ['gym_id'=>$gym_id]) }}">Member Activity</a>
@@ -19,6 +19,7 @@
                     </nav>
                 </div>
                 <div class="tab-content pt-2 pl-1" id="pills-tabContent">
+                <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Members</p>
                     <div class="tab-pane fade show active pt-3" id="members" role="tabpanel" aria-labelledby="members_tab">
                         <h2 class="page-sub-title">My Members</h2>
                         <nav class="nav nav-pills">
@@ -30,7 +31,7 @@
                                 <table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
                                     <thead>
                                         <tr>
-                                            <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
+                                            <td>Member Name</td><td>Date</td><td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -41,12 +42,8 @@
                                                 <span class="m-data">{{ $member -> first_name }} {{ $member -> last_name }}</span>
                                             </td>
                                             <td>
-                                                <span class="m-title">Status: </span> 
-                                                <span class="m-data">Activated</span>
-                                            </td>
-                                            <td>
                                                 <span class="m-title">Date: </span>
-                                                <span class="m-data">{{ $member->created_at->format('m/d/yy h:m') }}</span>
+                                                <span class="m-data">{{ $member->created_at->format('m/d/Y g:iA') }}</span>
                                             </td>
                                             <td>
                                                 <span class="m-title">Action: </span>
@@ -61,7 +58,7 @@
                             <table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
                                     <thead>
                                         <tr>
-                                            <td>Member Name</td><td>Status</td><td>Date</td><td>Action</td>
+                                            <td>Member Name</td><td>Date</td><td>Action</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,12 +69,8 @@
                                                 <span class="m-data">{{ $member -> first_name }} {{ $member -> last_name }}</span>
                                             </td>
                                             <td>
-                                                <span class="m-title">Status: </span>
-                                                <span class="m-data">Pending</span>
-                                            </td>
-                                            <td>
                                                 <span class="m-title">Date: </span>
-                                                <span class="m-data">{{ $member->created_at->format('m/d/yy h:m') }}</span>
+                                                <span class="m-data">{{ $member->created_at->format('m/d/Y g:iA') }}</span>
                                             </td>
                                             <td>
                                                 <span class="m-title">Action: </span>

@@ -24,8 +24,8 @@ class UserService
 		$gym = $this->gymRepo->getGymByOwner($id);
 		$owner = $gym->owner;
 		$members = $gym->members;
-		$active = $gym->activeMembers;
-		$pending = $gym->pendingMembers;
+		$active = $gym->activeMembers->sortBy('first_name');
+		$pending = $gym->pendingMembers->sortBy('first_name');
         $videos = $gym->videos;
 
         $data = [

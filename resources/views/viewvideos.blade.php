@@ -3,10 +3,8 @@
 @section('content')
 <!-- Section Accounts Start -->
 <section class="bg-trans">
-		<div class="container">
-            
+		<div class="container"> 
 			<div class="row">
-				
 				<div class="col-md-12">
 					<nav class="nav nav-pills mb-3">
                         <a class="nav-link rounded-0 border border-primary" href="{{ route('gymowner_account') }}">Members</a>
@@ -18,8 +16,8 @@
 					<div class="add-gym-user">
                         <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> My Videos</p>
                         <h2 class="page-sub-title">My Videos</h2>
-                        <a href="{{ route('add_video', ['gym_id'=>$gym_id]) }}">Add Videos</a>
-                        <input type="search" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or #tag">
+                        <a href="{{ route('add_video', ['gym_id'=>$gym_id]) }}" class="btn my-btn mb-3">Add Videos</a>
+                        <input type="search" id="searchinput" class="form-control" placeholder="Search by title, description, playlist or tag">
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
@@ -45,7 +43,7 @@
 										</td>
 										<td>
 											<span class="m-title">Date: </span>
-											<span class="m-data">{{ $video -> created_at->format('m/d/yy h:m') }}</span>
+											<span class="m-data">{{ $video -> created_at->format('m/d/Y g:iA') }}</span>
 										</td>
 										<td>
 											<span class="m-title">Playlist: </span>

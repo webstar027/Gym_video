@@ -14,11 +14,11 @@
 					</nav>
 					<div class="tab-content pt-2 pl-1" id="pills-tabContent">
 						<div class="view-playlist tab-pane fade pt-3 active show" id="playlist" role="tabpanel" aria-labelledby="playlist_tab">
-							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Playlists</p>
+							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ route('view_gym', ['gym_id'=>$data->id]) }}">{{ $data->gym_name }}</a> <i class="fas fa-angle-right"></i> Playlists</p>
 							<h3 class="page-sub-title">{{ $data->gym_name }} Playlists</h3>
 							
 							<div class="row align-items-center">
-								<div class="col-md-4"><input type="search" onkeyup="searchplaylist()" class="form-control" placeholder="Search by Title, Description, Playlist or #Tag" id="searchplaylist"></div>
+								<div class="col-md-4"><input type="search" onkeyup="searchplaylist()" class="form-control" placeholder="Search by Title, Description, Playlist or Tag" id="searchplaylist"></div>
 							</div>
 							<h3 class="page-sub-title-alt mt-3">Search Results</h3>
 							<p><span id="search_palylist_count">{{ $data->playlists->count() }}</span> Playlist(s) have matched your search criteria.</p>
@@ -33,7 +33,7 @@
 												<span id="playlist_count">{{ $playlist->videos->count() }}</span> video(s) in this Playlist
 											</p>
 											<div class="row align-items-center">
-												<div class="col-9"><p class="mb-0">Uploaded: {{ $playlist->updated_at->format('m/d/yy h:m') }}</p></div>
+												<div class="col-9"><p class="mb-0">Uploaded: {{ $playlist->updated_at->format('m/d/Y g:iA') }}</p></div>
 											</div>
 											<div class="embed-responsive embed-responsive-16by9">
 												<a href="{{ route('student_playlist', ['id'=>$playlist->id]) }}"><img class="embed-responsive-item" data-url="{{ $playlist->thumbnail }}" src=""/></a>
@@ -145,10 +145,10 @@
 							</div>
 						</div>
 						<div class="view-gym-user tab-pane fade pt-3" id="view_gym" role="tabpanel" aria-labelledby="view_gym_tab">
-							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> {{ $data->gym_name }} <i class="fas fa-angle-right"></i> Videos</p>
-							<h2 class="page-sub-title">{{ $data->gym_name }}</h2>
+							<p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ route('view_gym', ['gym_id'=>$data->id]) }}">{{ $data->gym_name }}</a> <i class="fas fa-angle-right"></i> Videos</p>
+							<h2 class="page-sub-title">{{ $data->gym_name }}</h2> 
 							<div class="row align-items-center">
-								<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Search by Title, Description, Playlist or #Tag" id="searchinput"></div>
+								<div class="col-md-4"><input type="search" onkeyup="searchvideo()" class="form-control" placeholder="Search by Title, Description, Playlist or Tag" id="searchinput"></div>
 								<div class="col-md-8">
 									<p class="mb-0"><a href="#" class="favorit_button unactive"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a> Display only favorites</p>
 								</div>
@@ -168,7 +168,7 @@
 												@endif
 											</p>
 											<div class="row align-items-center">
-												<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/yy h:m')}}</p></div>
+												<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/Y g:iA')}}</p></div>
 												<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
 											</div>
 											<div class="embed-responsive embed-responsive-16by9">
