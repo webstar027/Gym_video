@@ -15,7 +15,7 @@
                         <p><span id="gym_count">{{ $allgyms->count() }}</span> Gym(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped dtBasicExample" width="100%"  id="myTable">
+							<table class="table table-striped dtBasicExample m-table" width="100%"  id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Gym Name</th>
@@ -28,10 +28,21 @@
 								<tbody>
 									@foreach ($allgyms as $key => $gym)
 									<tr>
-										<td>{{$gym -> gym_name}}</td>
-										<td>{{$gym -> owner -> first_name}} {{$gym -> owner -> last_name}}</td>
-										<td style="padding-left:50px">{{$gym -> activeMembers -> count()}}</td>
 										<td>
+											<span class="m-title">Gym Name: </span>
+											<span class="m-data">{{$gym -> gym_name}}</span>
+										</td>
+										<td>
+											<span class="m-title">Gym Owner: </span>
+											<span class="m-data">{{$gym -> owner -> first_name}} {{$gym -> owner -> last_name}}</span>
+										</td>
+										<td style="padding-left:50px">
+											<span class="m-title">Member Count: </span>
+											<span class="m-data">{{$gym -> activeMembers -> count()}}</span>
+										</td>
+										<td>
+											<span class="m-title">Status: </span>
+											<span class="m-data">
 											@if($gym -> status == 0)
 											
 											@elseif($gym -> status == 1) 
@@ -41,8 +52,11 @@
 											@elseif($gym -> status == 3)
 											Denied
 											@endif
+											</span>
 										</td>
 										<td>
+											<span class="m-title">Action: </span>
+											<span class="m-data">
 											@if($gym -> status == 0)
 											<a href="{{route('request_access', ['gym_id'=>$gym -> id])}}" class="text-info request-access" data-toggle="tooltip" data-placement="top" title="Request Access">Request Access</a>
 											@elseif($gym -> status == 1) 
@@ -52,6 +66,7 @@
 											@elseif($gym -> status == 3)
 											<a href="#" class="text-danger request-time" data-toggle="tooltip" data-placement="top" title="Denied">{{ $gym->time }}</a> 
 											@endif
+											</span>
 										</td>
 									</tr>
 									@endforeach

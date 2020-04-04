@@ -76,7 +76,7 @@
 										@endswitch
 										</td>
 										<!-- <td>{{$activity->description}}</td> -->
-										<td>{{$activity->created_at->format('m/d/y h:m')}}</td>
+										<td>{{$activity->created_at->format('m/d/yy h:m')}}</td>
 									</tr>
 								@endforeach
 								</tbody>

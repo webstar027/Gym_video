@@ -15,7 +15,7 @@
                         <p><span id="video_count">{{ $videos ->count() }}</span> video(s) have matched your search criteria</p>
                         <h3 class="page-sub-title-alt">Search Results</h3>
                         <div class="table-responsive">
-							<table class="table table-striped dtBasicExample" width="100%" id="myTable">
+							<table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
 								<thead>
 									<tr>
 										<th scope="col">Video Title</th>
@@ -31,24 +31,45 @@
 								<tbody>
 								@foreach($videos as $key => $video)
 									<tr>
-										<td scope="row"><a href="{{ route('watch_gym', ['id'=>$video->id]) }}">{{ Str::limit($video -> video_title, 40)}}</a></td>
-										<td>{{ $video -> created_at }}</td>
-										<td><a href="{{ route('gym_playlist',['id'=>$video->pivot->playlist_id]) }}">{{$playlist_name}}</a></td>
+										<td scope="row">
+											<span class="m-title">Video Title: </span>
+											<span class="m-data"><a href="{{ route('watch_gym', ['id'=>$video->id]) }}">{{ Str::limit($video -> video_title, 40)}}</a></span>
+										</td>
+										<td>
+											<span class="m-title">Date: </span>
+											<span class="m-data">{{ $video -> created_at }}</span>
+										</td>
+										<td>
+											<span class="m-title">Playlist: </span>
+											<span class="m-data"><a href="{{ route('gym_playlist',['id'=>$video->pivot->playlist_id]) }}">{{$playlist_name}}</a></span>
+										</td>
                                         <td>
+											<span class="m-title">Status: </span>
+											<span class="m-data">
 											@if($video->status == "1") 
 												Published 
 											@else 
 												Pending
 											@endif
+											</span>
 										</td>
-										<td style="display:none">{{ $video -> tag }}</td>
-										<td style="display:none">{{ $video -> description }}</td>
+										<td style="display:none">
+											<span class="m-title">Tags: </span>
+											<span class="m-data">{{ $video -> tag }}</span>
+										</td>
+										<td style="display:none">
+											<span class="m-title">Description: </span>
+											<span class="m-data">{{ $video -> description }}</span>
+										</td>
                                         <td>
+											<span class="m-title">Action </span>
+											<span class="m-data">
 											<a href="{{ route('delete_video', ['id'=>$video->id]) }}" class="text-danger delete-video" data-toggle="tooltip" data-placement="top" title="Delete Video"><i class="fas fa-trash"></i></a>
 											<a href="{{ route('update_video', ['id'=>$video->id]) }}"  class="text-primary editvideo" data-toggle="tooltip" data-placement="top" title="Edit video"><i class="fas fa-pen-square"></i></a>
 											@if($video->status == "0") 
 												<a href="{{route('publish_video', ['id'=>$video->id])}}" class="text-success puhlish-video" data-toggle="tooltip" data-placement="top" title="Puhlish Video"><i class="fas fa-check-square"></i></a>
 											@endif
+											</span>
                                         </td>
 									</tr>
 								@endforeach

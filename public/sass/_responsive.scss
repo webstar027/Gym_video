@@ -49,7 +49,36 @@
 
 // Small devices (landscape phones, less than 768px)
 @media (max-width: 767px) {
-
+    .m-table thead {
+        display: none;
+    }
+    .m-table tr {
+        display: grid;
+        margin-bottom: 30px;
+    }
+    .m-table td, .m-table th {
+        font-size: 15px;
+        text-align: center;
+        padding: 0;
+        padding-top: 7px;
+        padding-bottom: 7px;
+    }
+    .m-title {
+        display: inline-block;
+        width: 40%;
+        text-align: right;
+        font-weight: bold;
+        vertical-align: top;
+    }
+    .m-data {
+        display: inline-block;
+        width: 58%;
+        text-align: left;
+        vertical-align: top;
+    }
+    .add-gym-user input[type=search] {
+        width: 100%;
+    }
 }
 
 // Extra small devices (portrait phones, less than 576px)
@@ -79,6 +108,10 @@
     // Header End
     
     // Hero Start
+    #hero {
+        padding-top: 95px;
+        padding-bottom: 50px;
+    }
 	.hero-text h1 {
         font-size: 40px;
     }

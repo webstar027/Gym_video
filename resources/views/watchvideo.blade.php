@@ -31,7 +31,7 @@
 									</div>
 									<p class="video_tag">Tags: 
 										@foreach(explode(',',$data -> tag) as $row)
-										<span class="text-primary text-uppercase">{{ $row }}</span> ,
+										<span class="text-primary text-uppercase">{{ $row }}</span> @if($loop->iteration < count(explode(',',$data -> tag))),@endif
 										@endforeach	
 									</p>
 								</div>

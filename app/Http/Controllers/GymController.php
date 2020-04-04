@@ -198,6 +198,13 @@ class GymController extends Controller
             $page = 1;
         }
 
+        $ppage = $request->query('ppage');
+        if (!$ppage)
+        {
+            $ppage = 1;
+        }
+
+
         $sub = $user->approved_gyms()->find($gym_id);
         if ($sub)
         {
@@ -213,11 +220,29 @@ class GymController extends Controller
                 {
                     $video->playlist = $p->first();
                 }
+
+                $video->favorite = $user->favorites->where('id', $video->id)->count() > 0;
+
             }
             $gym->videos = $videos;
         
             $gym->total_video = $video_count;
             $gym->currentpage = $page;
+
+            $playlists = $gym->playlists;
+            $nplaylists =  collect();
+            foreach($playlists as $playlist)
+            {
+                if ($playlist->videos->count() > 0)
+                {
+                    $playlist->thumbnail = $playlist->videos->first()->video_url;
+                    $nplaylists->push($playlist);
+                }
+            }
+            $gym->playlists = $nplaylists->forPage($ppage, 6);
+            $gym->playlists_total = $nplaylists->count();
+            $gym->playlists_current = $ppage;
+
             return view('viewgym',['data' => $gym]);
         }
         else

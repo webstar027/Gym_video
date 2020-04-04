@@ -251,8 +251,8 @@
 		filter = input.value.toUpperCase();
 		table = document.getElementById("video_container");
 		tr = document.getElementsByClassName("video_col");
-		inc = 1;
-		for (i = 1; i < tr.length; i++) {
+		inc = 0;
+		for (i = 0; i < tr.length; i++) {
 			td = tr[i];
 			if (td) {
 			txtValue = td.textContent || td.innerText;
