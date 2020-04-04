@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="watch-video">
-                        <p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{route('view_gym', ['gym_id'=>$data -> gym_id])}}">{{$data -> Gym->gym_name}}</a> <i class="fas fa-angle-right"></i>{{Str::limit($data -> video_title, 50)}}</p>
+                        <p><a href="{{ route('student_account') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{route('view_gym', ['gym_id'=>$data -> gym_id])}}">{{$data -> Gym->gym_name}}</a>  <i class="fas fa-angle-right"></i>  {{Str::limit($data -> video_title, 50)}}</p>
 						<h2 class="page-sub-title">{{ $data->video_title }}</h2>
 						@if($data->playlist != null)
 						<p><a href="{{route('student_playlist', ['id'=>$data->playlist->id])}}">{{$data->playlist->name}}</a></p>

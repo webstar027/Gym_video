@@ -35,7 +35,7 @@
 										<td>
 										@switch($activity->description)
 											@case('favorite_video')
-												Fevorited <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												Favorited <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
 												@break
 											@case('watch_video')
 												Watched <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
@@ -76,7 +76,7 @@
 										@endswitch
 										</td>
 										<!-- <td>{{$activity->description}}</td> -->
-										<td>{{$activity->created_at}}</td>
+										<td>{{$activity->created_at->format('m/d/y h:m')}}</td>
 									</tr>
 								@endforeach
 								</tbody>

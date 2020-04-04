@@ -9,7 +9,7 @@
 				
 				<div class="col-md-12">
 					<div class="watch-video">
-                        <p><a href="{{ route('admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ route('my_videos', ['gym_id'=>$data->gym_id]) }}">My Videos</a> <i class="fas fa-angle-right"></i> {{ Str::limit($data -> video_title, 50)}} </p>
+                        <p><a href="{{ route('admin') }}">My Account</a> <i class="fas fa-angle-right"></i> <a href="{{ route('my_videos', ['gym_id'=>$data->gym_id]) }}">My Videos</a> <i class="fas fa-angle-right"></i>  {{ Str::limit($data -> video_title, 50)}} </p>
 						<h2 class="page-sub-title">{{ $data->video_title }}</h2>
 						@if($data->playlist != null)
 						<p><a href="{{route('gym_playlist', ['id'=>$data->playlist->id])}}">{{$data->playlist->name}}</a></p>
@@ -31,7 +31,7 @@
 									</div>
 									<p class="video_tag">Tags: 
 										@foreach(explode(',',$data -> tag) as $row)
-										<span class="text-primary text-uppercase">{{ $row }}</span> ,
+										<span class="text-primary text-uppercase">{{ $row }}</span> @if($loop->iteration < count(explode(',',$data -> tag))),@endif
 										@endforeach	
 									</p>
 								</div>

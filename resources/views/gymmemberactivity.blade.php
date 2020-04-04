@@ -35,16 +35,16 @@
 										<td>
 										@switch($activity->description)
 											@case('favorite_video')
-												Fevorited <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												Favorited <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
 												@break
 											@case('watch_video')
-												Watched <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												Watched <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
 												@break
 											@case('login_user')
 												Logged In
 												@break
 											@case('update_video')
-												Edited <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												Edited <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
 												@break
 											@case('delete_video')
 												Removed video
@@ -62,10 +62,10 @@
 												Added Member <span>{{$activity->subject->first_name}} {{$activity->subject->last_name}}</span>
 												@break
 											@case('create_video')
-												Added <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												Added <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
 												@break
 											@case('comment_video')
-												Commented on <a href="{{ route('student_watch', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
+												Commented on <a href="{{ route('watch_gym', ['id' => $activity->subject->id])}}">{{ $activity->subject->video_title }}</a>
 												@break
 											@case('update_gym')
 												Updated Gym Details
@@ -76,7 +76,7 @@
 										@endswitch
 												</td>
 										<!-- <td>{{$activity->description}}</td> -->
-										<td>{{$activity->created_at}}</td>
+										<td>{{$activity->created_at->format('m/d/y h:m')}}</td>
 									</tr>
 								@endforeach
 								</tbody>
