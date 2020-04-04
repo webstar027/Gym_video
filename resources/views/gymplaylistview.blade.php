@@ -84,7 +84,7 @@
 		</div><!-- //.container -->
 	</section>
 	<script>
-		jQuery(document).ready(function(){
+		jQuery(document).ready(function($){
 			$('.delete-video').click(function(e){
 				
 				var r = confirm("Are you sure delete this?");
@@ -93,6 +93,16 @@
 				}else{
 					e.preventDefault();
 				}
+			});
+			var table = $('.dtBasicExample').DataTable({
+				"bJQueryUI": true,
+				"sPaginationType": "full_numbers",
+				"bPaginate": true,
+				"bFilter": true,
+				"bSort": true,
+				"aaSorting": [
+				[1, "desc"]
+				]
 			});
 		});
 		function searchvideo() {
