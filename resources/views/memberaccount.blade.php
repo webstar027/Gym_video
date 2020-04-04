@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($members as $key => $member)
+                                @foreach ($members->sortByDesc('updated_at') as $key => $member)
                                 <tr>
                                     <td scope="row">
                                         <span class="m-title">Gym Name: </span>
@@ -46,7 +46,7 @@
                                     </td>
                                     <td>
                                         <span class="m-title">Latest Entry: </span>
-                                        <span class="m-data">{{ $member -> updated_at->format('m/d/Y g:iA') }}</span>
+                                        <span class="m-data">{{ $member -> updated_at->format('m/d/Y g:i A') }}</span>
                                     </td>
                                     <td>
                                         <span class="m-title">Action: </span>
@@ -89,7 +89,7 @@
                 "bFilter": true,
                 "bSort": true,
                 "aaSorting": [
-                [1, "asc"]
+                [3, "desc"]
                 ],
                 "aoColumnDefs": [{
                 "bSortable": true,

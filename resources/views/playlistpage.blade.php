@@ -28,7 +28,7 @@
 											<span id="playlist_count">{{ $playlist->videos->count() }}</span> video(s) in this Playlist
 										</p>
 										<div class="row align-items-center">
-											<div class="col-9"><p class="mb-0">Last Updates: {{ $playlist->updated_at->format('m/d/Y g:iA') }}</p></div>
+											<div class="col-9"><p class="mb-0">Last Updates: {{ $playlist->updated_at->format('m/d/Y g:i A') }}</p></div>
 										</div>
 										<div class="embed-responsive embed-responsive-16by9">
 											<a href="#"><img class="embed-responsive-item" data-url="{{ $playlist->thumbnail }}" src=""/></a>

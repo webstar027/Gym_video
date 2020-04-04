@@ -84,7 +84,7 @@
 										@endswitch
 												</td>
 										<!-- <td>{{$activity->description}}</td> -->
-										<td>{{$activity->created_at->format('m/d/Y g:iA')}}</td>
+										<td>{{$activity->created_at->format('m/d/Y g:i A')}}</td>
 									</tr>
 								@endforeach
 								</tbody>

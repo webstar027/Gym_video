@@ -74,7 +74,7 @@ class AccountController extends Controller
     {
         $user = $request->user();
        
-        $members = $user->approved_gyms;
+        $members = $user->approved_gyms->sortBy('updated_at');
         foreach($members as $key => $member)
         {
             $o = $this->userservice->read($member->owner_id);

@@ -43,7 +43,7 @@
                                             </td>
                                             <td>
                                                 <span class="m-title">Date: </span>
-                                                <span class="m-data">{{ $member->created_at->format('m/d/Y g:iA') }}</span>
+                                                <span class="m-data">{{ $member->created_at->format('m/d/Y g:i A') }}</span>
                                             </td>
                                             <td>
                                                 <span class="m-title">Action: </span>
@@ -70,7 +70,7 @@
                                             </td>
                                             <td>
                                                 <span class="m-title">Date: </span>
-                                                <span class="m-data">{{ $member->created_at->format('m/d/Y g:iA') }}</span>
+                                                <span class="m-data">{{ $member->created_at->format('m/d/Y g:i A') }}</span>
                                             </td>
                                             <td>
                                                 <span class="m-title">Action: </span>
@@ -522,7 +522,7 @@
                 "bFilter": true,
                 "bSort": true,
                 "aaSorting": [
-                [1, "asc"]
+                [0, "asc"]
                 ],
                 "aoColumnDefs": [{
                 "bSortable": true,
@@ -531,11 +531,8 @@
                 "bSortable": true,
                 "aTargets": [1]
                 }, {
-                "bSortable": true,
-                "aTargets": [2]
-                }, {
                 "bSortable": false,
-                "aTargets": [3]
+                "aTargets": [2]
                 }],
             });
 		});

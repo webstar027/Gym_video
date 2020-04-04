@@ -27,7 +27,7 @@
                                         <h3><a href="{{ route('student_watch', ['id'=>$video -> id]) }}">{{ Str::limit($video -> video_title, 30)}}</a></h3>
                                         <p style="margin-bottom:0; height:25px;"><a href="{{route('student_playlist', ['id'=>$playlist_id])}}">{{ $playlist_name }}</a></p>
 										<div class="row align-items-center">
-											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/Y g:iA') }}</p></div>
+											<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/Y g:i A') }}</p></div>
 											<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
 										</div>
 										<div class="embed-responsive embed-responsive-16by9">

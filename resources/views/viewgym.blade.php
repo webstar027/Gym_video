@@ -33,7 +33,7 @@
 												<span id="playlist_count">{{ $playlist->videos->count() }}</span> video(s) in this Playlist
 											</p>
 											<div class="row align-items-center">
-												<div class="col-9"><p class="mb-0">Uploaded: {{ $playlist->updated_at->format('m/d/Y g:iA') }}</p></div>
+												<div class="col-9"><p class="mb-0">Uploaded: {{ $playlist->updated_at->format('m/d/Y g:i A') }}</p></div>
 											</div>
 											<div class="embed-responsive embed-responsive-16by9">
 												<a href="{{ route('student_playlist', ['id'=>$playlist->id]) }}"><img class="embed-responsive-item" data-url="{{ $playlist->thumbnail }}" src=""/></a>
@@ -168,7 +168,7 @@
 												@endif
 											</p>
 											<div class="row align-items-center">
-												<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/Y g:iA')}}</p></div>
+												<div class="col-9"><p class="mb-0">Uploaded: {{ $video -> created_at->format('m/d/Y g:i A')}}</p></div>
 												<div class="col-3 text-right"><a href="#" data-videoid="{{ $video->id }}" class="btn_favorite @if($video -> favorite == true) active @else unactive @endif"><i class="fas fa-heart"></i><i class="far fa-heart"></i></a></div>
 											</div>
 											<div class="embed-responsive embed-responsive-16by9">
