@@ -31,7 +31,7 @@
                                 <table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
                                     <thead>
                                         <tr>
-                                            <td>Member Name</td><td>Date</td><td>Action</td>
+                                            <th>Member Name</th><th>Date</th><th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,7 +58,7 @@
                             <table class="table table-striped dtBasicExample m-table" width="100%" id="myTable">
                                     <thead>
                                         <tr>
-                                            <td>Member Name</td><td>Date</td><td>Action</td>
+                                            <th>Member Name</th><th>Date</th><th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
