@@ -1,18 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Requests;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateUserRequest extends Request
+class UpdateUserRequest extends FormRequest
 {
-    /**
-     * Get data to be validated from the request.
-     *
-     * @return array
-     */
-    protected function validationData()
-    {
-        return $this->get('video') ?: [];
-    }
 
     /**
      * Get the validation rules that apply to the request.

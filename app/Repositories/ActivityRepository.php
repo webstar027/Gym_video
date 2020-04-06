@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
  
-use App\Activity;
+use Spatie\Activitylog\Models\Activity;
  
 class ActivityRepository
 {

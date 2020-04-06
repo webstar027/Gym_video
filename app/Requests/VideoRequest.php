@@ -1,18 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Requests;
+use Illuminate\Foundation\Http\FormRequest;
 
-class VideoRequest extends Request
+class VideoRequest extends FormRequest
 {
-    /**
-     * Get data to be validated from the request.
-     *
-     * @return array
-     */
-    protected function validationData()
-    {
-        return $this->get('video') ?: [];
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -22,10 +15,10 @@ class VideoRequest extends Request
     public function rules()
     {
         return [
-            'video_url' => 'required|url|',
+            'video_url' => 'required',
             'video_title' => 'required' ,
             'description' => 'required',
-            'tag' => 'sometimes|nullable',
+            'tag' => 'sometimes',
         ];
     }
 }

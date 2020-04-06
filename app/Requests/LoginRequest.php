@@ -1,18 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Requests;
+use Illuminate\Foundation\Http\FormRequest;
 
-class LoginRequest extends Request
+class LoginRequest extends FormRequest
 {
-    /**
-     * Get data to be validated from the request.
-     *
-     * @return array
-     */
-    protected function validationData()
-    {
-        return $this->get('user') ?: [];
-    }
 
     /**
      * Get the validation rules that apply to the request.

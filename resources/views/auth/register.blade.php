@@ -127,7 +127,7 @@
 								</div>
 								<div class="form-row">
 									<div class="form-group col-md-6">
-                                        <select id="country" class="form-control @error('country') is-invalid @enderror selectpicker"  data-live-search="true" name="country" required >
+                                        <select id="country" class="form-control @error('country') is-invalid @enderror"  data-live-search="true" name="country" required >
                                             <option  data-tokens="United States" value="United States">United States</option>    
                                             <option  data-tokens="Afghanistan" value="Afghanistan">Afghanistan</option>
                                             <option  data-tokens="Åland Islands" value="Åland Islands">Åland Islands</option>

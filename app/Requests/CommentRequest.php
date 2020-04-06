@@ -1,20 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Requests;
 
-use Illuminate\Http\Request;
+use Illuminate\Foundation\Http\FormRequest;
 
-class CommentRequest extends Request
+class CommentRequest extends FormRequest
 {
-    /**
-     * Get data to be validated from the request.
-     *
-     * @return array
-     */
-    protected function validationData()
-    {
-        return $this->get('comment') ?: [];
-    }
+
 
     /**
      * Get the validation rules that apply to the request.
@@ -24,7 +16,7 @@ class CommentRequest extends Request
     public function rules()
     {
         return [
-            'body' => 'requried'
+            'body' => 'required'
         ];
     }
 }

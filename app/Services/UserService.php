@@ -3,12 +3,15 @@
 namespace App\Services;
  
 use App\User;
+use App\Gym;
+use App\Video;
 use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
 use App\Repositories\ActivityRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
- 
+use Spatie\Activitylog\Models\Activity;
+
 class UserService
 {
 
@@ -116,13 +119,14 @@ class UserService
             $causer = $activity->causer;
             $subject = $activity->subject;
 
-            if ($causer->id == $user_id)
+			if ($causer == null || $subject == null) continue;
+            if ($causer && $causer->id == $user_id)
             {
                 $nactivites->push($activity); 
             }
             else
             {
-                if ($this->userservice->isGymMember($causer, $gym_id)){
+                if ($this->isGymMember($causer, $gym_id)){
                     if ($subject instanceof Video && $subject->gym->id == $gym_id)
                     {
                         $nactivites->push($activity); 
@@ -136,7 +140,7 @@ class UserService
             }
 		}
 		
-		return nactivities;
+		return $nactivites;
 	}
 
 	public function getApprovedMembers($user)
@@ -144,7 +148,7 @@ class UserService
 		$members = $user->approved_gyms->sortBy('updated_at');
         foreach($members as $key => $member)
         {
-            $o = $this->userservice->read($member->owner_id);
+            $o = $this->read($member->owner_id);
             $member->owner = $o;
 		}
 		

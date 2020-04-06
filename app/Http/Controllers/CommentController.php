@@ -29,7 +29,7 @@ class CommentController extends Controller
         $user = auth()->user();
         $input['user_id'] = $user->id;
     
-        $comment = $this->videoservice->createComment($request);
+        $comment = $this->videoservice->createComment($request, $user->id);
         $video = $this->videoservice->read($comment->video_id);
         
 		activity()

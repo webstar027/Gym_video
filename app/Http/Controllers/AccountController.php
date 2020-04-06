@@ -10,6 +10,7 @@ use App\Gym;
 use App\Services\UserService;
 use App\Services\GymService;
 use Spatie\Activitylog\Models\Activity;
+use App\Requests\UpdateUserRequest;
 
 class AccountController extends Controller
 {
@@ -84,7 +85,7 @@ class AccountController extends Controller
     public function student(Request $request)
     {
         $user = $request->user();
-        $members = $this->userservice->getApprovedGyms($user);
+        $members = $this->userservice->getApprovedMembers($user);
        
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
@@ -99,7 +100,7 @@ class AccountController extends Controller
     public function studentDetails(Request $request)
     {
         $user = $request->user();
-        $members = $this->userservice->getApprovedGyms($user);
+        $members = $this->userservice->getApprovedMembers($user);
        
         return view('studentaccountdetails', ['members'=> $members, 'user' => $user]);
     }
@@ -159,6 +160,6 @@ class AccountController extends Controller
         $activities = $this->userservice->getGymActivities($gym_id, $user->id);
         $gym = $this->gymservice->read($gym_id);
 
-        return view('gymmemberactivity', ['activities'=>$nactivites, 'gym'=>$gym]);
+        return view('gymmemberactivity', ['activities'=>$activities, 'gym'=>$gym]);
     }
 }

@@ -10,7 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Requests\RegisterUserRequest;
-use App\Services\GymService;
+use App\Repositories\GymRepository;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -69,6 +70,7 @@ class RegisterController extends Controller
 
             if($data['role_id'] == 2)
             {
+                $data["owner_id"] = $user->id;
                 $gym = $this->gymRepo->create($data);
                //  $gym =  Gym::create([
                //     'owner_id' => $user ->id,
@@ -92,7 +94,6 @@ class RegisterController extends Controller
     {
         event(new Registered($user = $this->create($request->all())));
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
+        return  redirect($this->redirectPath());
     }
 }

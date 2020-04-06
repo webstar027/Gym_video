@@ -60,7 +60,7 @@ Route::group(['middleware'=>[ 'auth','verified', 'gymowner']], function(){
     Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo')->name('update_video');
     Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo')->name('delete_video');
     Route::post('/account/gymowner/addvideo', 'VideoController@createVideo')->name('create_video');
-    Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideoPost')->name('updatevideo');
+    Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideoPost')->name('update_video_post');
     Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo')->name('publish_video');
     Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymVideos')->name('my_videos');
     Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->name('myvideo');

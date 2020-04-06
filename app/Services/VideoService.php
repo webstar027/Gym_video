@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Notification;
 use App\Notifications\PublishedVideoNotification;
 use App\Requests\CommentRequest;
+use App\Requests\VideoRequest;
 
 class VideoService
 {
@@ -83,9 +84,7 @@ class VideoService
 			if ($video->playlists->count() > 0)
 			{
 				$old = $video->playlists->first();
-				{
-					$video->playlists()->detach($old->id);
-				}
+				$video->playlists()->detach($old->id);
 			}
 
 			return;
@@ -190,11 +189,13 @@ class VideoService
 		return $this->video->find($video_id)->favorites()->where('user_id', $user_id)->count() > 0;
 	}
 
-	public function createComment(CommentRequest $request)
+	public function createComment(CommentRequest $request, $user_id)
 	{
-		$comment = $this->commentRepo->create($request);
+		$attributes = $request->all();
+		$attributes["user_id"] = $user_id;
+		$comment = $this->commentRepo->create($attributes);
         $user = $comment->user;
-        $comment -> user_avatar = $this->videoservice->getGravatar($user->email);
+        $comment -> user_avatar = $this->getGravatar($user->email);
         $comment -> first_name = $user->first_name;
         $comment -> last_name = $user->last_name;
 		$comment -> diff = $comment->created_at->diffForHumans();

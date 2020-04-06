@@ -35,7 +35,7 @@ class VideoController extends Controller
 	 * @param App\Requests\VideoRequest
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function createVideo(VideoRequest $request)
+	public function createVideo(Request $request)
 	{	
 		$video = $this->videoservice->create($request);
 
@@ -43,8 +43,6 @@ class VideoController extends Controller
 		if (array_key_exists('playlist', $attributes) && $attributes['playlist'])
 		{
 			$playlist = $this->videoservice->getPlaylist($video->id, $attributes['playlist']);
-			$id = $playlist->id;
-			$video->playlists()->attach($playlist->id);
 		}
 
 		$user = $request->user;
@@ -82,7 +80,7 @@ class VideoController extends Controller
 	 * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function updateVideoPost($id, VideoRequest $request)
+	public function updateVideoPost($id, Request $request)
 	{
 		$this->videoservice->update($request, $id);
 		$video = $this->videoservice->read($id);

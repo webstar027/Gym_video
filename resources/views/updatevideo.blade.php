@@ -9,9 +9,9 @@
 				
 				<div class="col-md-12">
 					<div class="view-gym-user">
-                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Add Video</p>
-                        <h2 class="page-sub-title">Add Video</h2>
-                        <form method="POST" action="{{ route('updatevideo', ['id'=>$id]) }}">
+                        <p><a href="{{ route('gymowner_account') }}">My Account</a> <i class="fas fa-angle-right"></i> Update Video</p>
+                        <h2 class="page-sub-title">Update Video</h2>
+                        <form method="POST" action="{{ route('update_video_post', ['id'=>$id]) }}">
                             {{ method_field('PUT') }}
                             @csrf
                             <input type="hidden" name="gym_id" value="{{ $id }}">
@@ -43,7 +43,7 @@
                                     <label class="custom-control-label" for="customCheck1">Publish this video</label>
                                 </div>
                             </div>
-                            <button type="submit" class="btn my-btn">Submit Video</button>
+                            <button type="submit" class="btn my-btn">Update Video</button>
                         </form>                        
 					</div>
 				</div>

@@ -9,6 +9,9 @@ use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
 use App\Repositories\PlaylistRepository;
 use Illuminate\Http\Request;
+use App\Requests\UpdateGymRequest;
+use DateTime;
+use DateInterval;
 
 class GymService
 {
@@ -30,7 +33,7 @@ class GymService
 		return $owner;
 	}
 
-    public function create(Request $request)
+    public function create(UpdateGymRequest $request)
 	{
         $attributes = $request->all();
 
@@ -42,7 +45,7 @@ class GymService
         return $this->gymRepo->find($id);
 	}
  
-	public function update(Request $request, $id)
+	public function update(UpdateGymRequest $request, $id)
 	{
 	  $attributes = $request->all();
 	  
@@ -138,13 +141,13 @@ class GymService
                     }
                     else
                     {
-                        $this->gymservice->cancelRequest($user->id, $gym->id);
+                        $this->cancelRequest($user->id, $gym->id);
                         $gym->status = 0;
                     }
                 }
             }
 
-            $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
+            $gym->owner = $this->getGymOwner($gym->owner_id);
         }
 
 		return $all;
