@@ -115,29 +115,6 @@
 			[1, "desc"]
 			]
 		});
-		//function searchvideo() {
-		// var input, filter, table, tr, td, i, txtValue;
-		// input = document.getElementById("searchinput");
-		// filter = input.value.toUpperCase();
-		// table = document.getElementById("myTable");
-		// tr = table.getElementsByTagName("tr");
-		// var inc = 0;
-		// for (i = 1; i < tr.length; i++) {
-		// 	td = tr[i];
-		// 	if (td) {
-		// 	txtValue = td.textContent || td.innerText;
-		// 	if (txtValue.toUpperCase().indexOf(filter) > -1) {
-		// 		tr[i].style.display = "";
-		// 		inc++;
-		// 	} else {
-		// 		tr[i].style.display = "none";
-		// 	}
-		// 	}       
-		// }
-		// document.getElementById('video_count').innerHTML = inc;
-		
-		
-		//}
 		$('input[type="search"]').on('keyup', function(){
 			table.search( this.value ).draw();
 			var info = table.page.info();

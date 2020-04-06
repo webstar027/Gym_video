@@ -494,16 +494,6 @@
         </div>
     </div>
 </section>
-<!-- <section class="bg-white">
-    <div class="container">
-    </div>
-</section>
-<section class="bg-white">
-    <div class="container">
-        
-        
-    </div>
-</section> -->
 <script>
 		jQuery(document).ready(function(){
 			$('.delete-video').click(function(e){

@@ -34,7 +34,7 @@ class CommentController extends Controller
     
         $comment = Comment::create($input);
         $user = $this -> userRepo -> find($comment->user_id);
-        $comment -> user_avatar = $this->videoservice->get_gravatar($user->email);
+        $comment -> user_avatar = $this->videoservice->getGravatar($user->email);
         $comment -> first_name = $user->first_name;
         $comment -> last_name = $user->last_name;
         $comment -> diff = $comment->created_at->diffForHumans();

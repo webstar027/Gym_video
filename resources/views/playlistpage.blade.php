@@ -35,10 +35,6 @@
 										</div>
 									</div>
 								</div>
-								@if($loop->iteration%3 == 0 )
-								<!-- </div>
-								<div class="row"> -->
-								@endif
 								@endforeach
 							</div>
 							@if($data->playlists_total > 6)

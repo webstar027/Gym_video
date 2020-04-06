@@ -54,7 +54,7 @@ class GymService
       return $this->gymRepo->delete($id);
 	}
 
-	public function approve_request($user_id, $gym_id)
+	public function approveRequest($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);
@@ -62,20 +62,20 @@ class GymService
 	}
 
 
-	public function denied_request($user_id, $gym_id)
+	public function deniedRequest($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);
 		$gym->members()->attach($user_id, ['status' => 3]);
 	}
 
-	public function access_request($user_id, $gym_id)
+	public function accessRequest($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->attach($user_id, ['status' => 2]);
 	}
 
-	public function cancel_request($user_id, $gym_id)
+	public function cancelRequest($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);

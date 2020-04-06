@@ -25,8 +25,6 @@
 										<iframe class="embed-responsive-item" data_url="{{$data -> video_url }}" src="" allowfullscreen></iframe>
 									</div>
 									<div class="video_grid_content">
-										<!-- <p class="video-sub-description">{{ Str::limit($data -> description, 150)}} <a href="#">read more...</a> </p>
-										<p class="video-description" style="display:none">{{ $data -> description }} <a href="#">read more...</a> </p> -->
 										<p class="description">{{ $data -> description }}</p>
 									</div>
 									<p class="video_tag">Tags: 

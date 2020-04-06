@@ -23,7 +23,7 @@ class VideoController extends Controller
 	 * @param gym_id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function addvideo($gym_id)
+	public function addVideo($gym_id)
 	{
 		return view('addvideo', ['gym_id' => $gym_id]);
 	}
@@ -62,7 +62,7 @@ class VideoController extends Controller
 	 * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function update_video($id)
+	public function updateVideo($id)
 	{
 		$video = $this->videoservice->read($id);
 		if ($video->playlists->count() > 0){
@@ -82,7 +82,7 @@ class VideoController extends Controller
 	 * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function updateVideo($id, Request $request)
+	public function updateVideoPost($id, Request $request)
 	{
 		$this->videoservice->update($request, $id);
 		$video = $this->videoservice->read($id);
@@ -173,7 +173,7 @@ class VideoController extends Controller
      * @param integer $video id
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function watchgym($id, Request $request)
+	public function watchGym($id, Request $request)
 	{
 		$user = $request->user();
 		$video = $this->videoservice->read($id);
@@ -181,10 +181,10 @@ class VideoController extends Controller
 		$video->favorite_count = $video->favorites()->count();
 		foreach($video->comments as $key=>$comment){
 			$cuser = $comment->user;
-			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
+			$comment->avatar = $this->videoservice->getGravatar($cuser->email);
 			foreach($comment->replies as $key => $reply){
 				$ruser = $reply->user;
-				$reply->avatar = $this->videoservice->get_gravatar($ruser->email);
+				$reply->avatar = $this->videoservice->getGravatar($ruser->email);
 			}
 		}
 
@@ -203,10 +203,10 @@ class VideoController extends Controller
 		$video->favorite_count = $video->favorites()->count();
 		foreach($video->comments as $key=>$comment){
 			$cuser = $comment->user;
-			$comment->avatar = $this->videoservice->get_gravatar($cuser->email);
+			$comment->avatar = $this->videoservice->getGravatar($cuser->email);
 			foreach($comment->replies as $key => $reply){
 				$ruser = $reply->user;
-				$reply->avatar = $this->videoservice->get_gravatar($ruser->email);
+				$reply->avatar = $this->videoservice->getGravatar($ruser->email);
 			}
 		}
 		

@@ -21,7 +21,7 @@ class PlaylistController extends Controller
     }
 
     //
-    public function autocomplete($gym_id, Request $request)
+    public function autoComplete($gym_id, Request $request)
     {
         $playlists = $this->gymservice->read($gym_id)->playlists;
         return response()->json($playlists);
@@ -34,7 +34,7 @@ class PlaylistController extends Controller
         return view('gymplaylistview', ['videos'=>$playlist->videos, 'playlist_name'=>$playlist->name]);
     }
 
-    public function approved_videos($id, Request $request)
+    public function approvedVideos($id, Request $request)
     {
         $user = $request->user();
 

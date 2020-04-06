@@ -35,40 +35,40 @@ Route::get('/pricing', function(){
     return view('pricing');
 })->name('pricing');
 Route::middleware(['auth','verified','admin'])->group(function(){
-    Route::get('/adminactivity', 'AccountController@adminactivity')->name('adminmember_activity');
+    Route::get('/adminactivity', 'AccountController@adminActivity')->name('adminmember_activity');
 });
 Route::middleware([ 'verified', 'auth', 'student'])->group(function(){
      // student
      Route::get('/account/student', 'AccountController@student')->name('student_account');
-     Route::get('/account/student/account_details', 'AccountController@student_details')->name('student_details');
-     Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymview')->name('view_gym');
+     Route::get('/account/student/account_details', 'AccountController@studentDetails')->name('student_details');
+     Route::get('/account/student/viewgym/{gym_id}', 'GymController@gymView')->name('view_gym');
      Route::get('/account/student/gyms/search', 'GymController@search')->name('add_gym');
-     Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@request_cancel')->name('request_cancel');
-     Route::get('/account/student/gyms/access/{gym_id}', 'GymController@request_access')->name('request_access');
+     Route::get('/account/student/gyms/cancel/{gym_id}', 'GymController@requestCancel')->name('request_cancel');
+     Route::get('/account/student/gyms/access/{gym_id}', 'GymController@requestAccess')->name('request_access');
      Route::get('/account/video/{id}', 'VideoController@watch')->name('student_watch');
-     Route::get('/account/student/playlist/{id}','PlaylistController@approved_videos')->name('student_playlist');
+     Route::get('/account/student/playlist/{id}','PlaylistController@approvedVideos')->name('student_playlist');
 });
 
 Route::group(['middleware'=>[ 'auth','verified', 'gymowner']], function(){
     //gymowner
-    Route::get('/account/gymowner/{gym_id}/memberactivity', 'AccountController@gymactivity')->name('gymmember_activity');
-    Route::get('/account/gymowner', 'AccountController@gymowner')->name('gymowner_account');
-    Route::get('/account/gymowner/account_details', 'AccountController@gymowner_details')->name('gymowner_details');
-    Route::get('/account/gymowner/gym_details', 'AccountController@gym_details')->name('gym_details');
+    Route::get('/account/gymowner/{gym_id}/memberactivity', 'AccountController@gymActivity')->name('gymmember_activity');
+    Route::get('/account/gymowner', 'AccountController@gymOwner')->name('gymowner_account');
+    Route::get('/account/gymowner/account_details', 'AccountController@gymOwner_Details')->name('gymowner_details');
+    Route::get('/account/gymowner/gym_details', 'AccountController@gymDetails')->name('gym_details');
     Route::get('/account/gymowner/members', 'AccountController@members')->name('gymowner_members');
     Route::get('/account/gymowner/addvideo/{gym_id}', 'VideoController@addVideo')->name('add_video');
-    Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@update_video')->name('update_video');
+    Route::get('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo')->name('update_video');
     Route::get('/account/gymowner/deletevideo/{id}', 'VideoController@deleteVideo')->name('delete_video');
     Route::post('/account/gymowner/addvideo', 'VideoController@createVideo')->name('create_video');
-    Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideo')->name('updatevideo');
+    Route::put('/account/gymowner/updatevideo/{id}', 'VideoController@updateVideoPost')->name('updatevideo');
     Route::get('/account/gymowner/puhlishvideo/{id}', 'VideoController@publishVideo')->name('publish_video');
-    Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymvideos')->name('my_videos');
+    Route::get('/account/gymowner/gym/myvideos/{gym_id}', 'GymController@gymVideos')->name('my_videos');
     Route::get('/account/gymowner/gym/video/{id}', 'VideoController@gymVideo')->name('myvideo');
-    Route::get('/account/gymowner/members/aprove/{gym_id}/{user_id}', 'GymController@request_aprove')->name('request_aprove');
-    Route::get('/account/gymowner/members/deny/{gym_id}/{user_id}', 'GymController@request_deny')->name('request_deny');
+    Route::get('/account/gymowner/members/aprove/{gym_id}/{user_id}', 'GymController@requestAprove')->name('request_aprove');
+    Route::get('/account/gymowner/members/deny/{gym_id}/{user_id}', 'GymController@requestDeny')->name('request_deny');
     Route::get('/getYoutube/{id}', 'VideoController@getYoutube')->name('get_youtube');
-    Route::get('/account/gymowner/video/{id}', 'VideoController@watchgym')->name('watch_gym');
-    Route::put('/account/gymowner/updategym/{gym_id}','GymController@updategym')->name('update_gym');
+    Route::get('/account/gymowner/video/{id}', 'VideoController@watchGym')->name('watch_gym');
+    Route::put('/account/gymowner/updategym/{gym_id}','GymController@updateGym')->name('update_gym');
     Route::get('/account/gymowner/playlist/{id}','PlaylistController@videos')->name('gym_playlist');
 });
 Route::middleware(['verified', 'auth'])->group(function () {
@@ -77,12 +77,12 @@ Route::middleware(['verified', 'auth'])->group(function () {
 
     // gymowner
     Route::get('/account/favorite/video/{id}', 'VideoController@favorite')->name('favorite');
-    Route::get('/account/unfavorite/video/{id}', 'VideoController@unfavorite')->name('unfavorite');
+    Route::get('/account/unfavorite/video/{id}', 'VideoController@unFavorite')->name('unfavorite');
 
     //Comment Route
     Route::post('/video/comment', 'CommentController@store')->name('Comemnt');
 
     //Playlist
-    Route::get('/palylistautocomplete/{gym_id}','PlaylistController@autocomplete')->name('Autocomplete');
+    Route::get('/palylistautocomplete/{gym_id}','PlaylistController@autoComplete')->name('Autocomplete');
     
 });

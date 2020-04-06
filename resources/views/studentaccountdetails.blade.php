@@ -92,13 +92,6 @@
 
     </div><!-- //.container -->
 </section>
-<!-- <section class="bg-white">
-    <div class="container">
-        
-        
-
-    </div>
-</section> -->
 <script>
 		jQuery(document).ready(function(){
 			$('.calcel-request').click(function(e){

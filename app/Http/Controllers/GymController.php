@@ -58,7 +58,7 @@ class GymController extends Controller
                     }
                     else
                     {
-                        $this->gymservice->cancel_request($user->id, $gym->id);
+                        $this->gymservice->cancelRequest($user->id, $gym->id);
                         $gym->status = 0;
                     }
                 }
@@ -76,10 +76,10 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */ 
-    public function request_access($gym_id, Request $request ){
+    public function requestAccess($gym_id, Request $request ){
 
         $user = $request->user();
-        $this->gymservice->access_request($user->id, $gym_id);
+        $this->gymservice->accessRequest($user->id, $gym_id);
         $gym = $this->gymservice->read($gym_id);
         $gymowner = $this->gymservice->getGymOwner($gym->owner_id);
 
@@ -92,7 +92,7 @@ class GymController extends Controller
         return redirect('/account/student/gyms/search');
     }
 
-    public function updategym($gym_id, Request $request){
+    public function updateGym($gym_id, Request $request){
         $user = $request->user();
         $this->gymservice->update($request, $gym_id);
 
@@ -110,11 +110,11 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
-    public function request_cancel($gym_id, Request $request)
+    public function requestCancel($gym_id, Request $request)
     {
         $user = $request->user();
         $gym = $this->gymservice->read($gym_id);
-        $this->gymservice->cancel_request($user->id, $gym_id);
+        $this->gymservice->cancelRequest($user->id, $gym_id);
 
         activity()
             ->performedOn($gym)
@@ -129,9 +129,9 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
-    public function request_deny( $gym_id , $user_id)
+    public function requestDeny( $gym_id , $user_id)
     {
-        $this->gymservice->denied_request($user_id, $gym_id);
+        $this->gymservice->deniedRequest($user_id, $gym_id);
 
         $gym = $this->gymservice->read($gym_id);
         $user = auth()->user();
@@ -148,9 +148,9 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function request_aprove( $gym_id, $user_id){
+    public function requestAprove( $gym_id, $user_id){
         
-        $this->gymservice->approve_request($user_id, $gym_id);
+        $this->gymservice->approveRequest($user_id, $gym_id);
         
         $gym = $this->gymservice->read($gym_id);
         $user = auth()->user();
@@ -167,7 +167,7 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */    
-	public function gymvideos($gym_id)
+	public function gymVideos($gym_id)
 	{
         $videos = $this->gymservice->read($gym_id)->videos;
         foreach($videos as $key => $video)
@@ -188,7 +188,7 @@ class GymController extends Controller
      * @param integer
      * @return \Illuminate\Contracts\Support\Renderable
      */  
-    public function gymview($gym_id, Request $request)
+    public function gymView($gym_id, Request $request)
     {
         $user = $request->user();
 

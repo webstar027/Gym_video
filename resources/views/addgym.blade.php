@@ -70,30 +70,6 @@
 										</td>
 									</tr>
 									@endforeach
-									<!-- <tr>
-										<td scope="row">Rima</td>
-										<td>Hasan</td>
-                                        <td>Pending</td>
-                                        <td><a href="#" class="text-danger">Cancel Request</a></td>
-									</tr>
-									<tr>
-										<td scope="row">Rima</td>
-										<td>Hasan</td>
-										<td>Denied</td>
-										<td>23:14:15 wait time</td>
-									</tr>
-									<tr>
-										<td scope="row">Rima</td>
-										<td>Hasan</td>
-										<td>Approved</td>
-										<td><a href="#" class="text-success">View Gym Page</a></td>
-									</tr>
-									<tr>
-										<td scope="row">Rima</td>
-										<td>Hasan</td>
-										<td></td>
-										<td><a href="#" class="text-info">Request Access</a></td>
-									</tr> -->
 								</tbody>
 							</table>
 						</div>
@@ -116,27 +92,6 @@
 				}
 			});
 		});
-		// function searchvideo() {
-		// var input, filter, table, tr, td, i, txtValue;
-		// input = document.getElementById("searchinput");
-		// filter = input.value.toUpperCase();
-		// table = document.getElementById("myTable");
-		// tr = table.getElementsByTagName("tr");
-		// var inc =0;
-		// for (i = 1; i < tr.length; i++) {
-		// 	td = tr[i];
-		// 	if (td) {
-		// 	txtValue = td.textContent || td.innerText;
-		// 	if (txtValue.toUpperCase().indexOf(filter) > -1) {
-		// 		tr[i].style.display = "";
-		// 		inc++;
-		// 	} else {
-		// 		tr[i].style.display = "none";
-		// 	}
-		// 	}       
-		// }
-		// document.getElementById('gym_count').innerHTML = inc;
-		// }
 		var table = $('.dtBasicExample').DataTable({
 			"bJQueryUI": true,
 			"sPaginationType": "full_numbers",

@@ -29,7 +29,7 @@ class AccountController extends Controller
      * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */    
-    public function gymowner(Request $request)
+    public function gymOwner(Request $request)
     {
         $user = $request->user();
         $gymownerid = $user->id;
@@ -37,7 +37,7 @@ class AccountController extends Controller
       
         return view('gymowneraccount', $data);
     }
-    public function gymowner_details(Request $request)
+    public function gymOwner_Details(Request $request)
     {
         $user = $request->user();
         $gymownerid = $user->id;
@@ -45,7 +45,7 @@ class AccountController extends Controller
       
         return view('gymownerdetails', $data);
     }
-    public function gym_details(Request $request)
+    public function gymDetails(Request $request)
     {
         $user = $request->user();
         $gymownerid = $user->id;
@@ -82,7 +82,7 @@ class AccountController extends Controller
         }
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
-    public function student_details(Request $request)
+    public function studentDetails(Request $request)
     {
         $user = $request->user();
        
@@ -138,13 +138,13 @@ class AccountController extends Controller
      * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */ 
-    public function gymlist()
+    public function gymList()
     {
         return view('gymlist');
     }
 
     //member activity
-    public function adminactivity()
+    public function adminActivity()
     {   
         $activities = Activity::orderBy('created_at','desc')->get();
 
@@ -160,7 +160,7 @@ class AccountController extends Controller
 
 
 
-    public function gymactivity($gym_id, Request $request)
+    public function gymActivity($gym_id, Request $request)
     {
         $activities = Activity::orderBy('created_at','desc')->get();
         $user = auth()->user();

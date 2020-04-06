@@ -27,7 +27,7 @@ class VideoService
 		$video = $this->video->create($attributes);
 		if($video != null && array_key_exists('status', $attributes) && $attributes['status'] == 1)
 		{
-			$this->publish_notify($video->id);
+			$this->publishNotify($video->id);
 		}
         return $video;
 	}
@@ -44,7 +44,7 @@ class VideoService
 		$video = $this->video->update($id, $attributes);
 		if($video != null && $oldvideo->status != 1 && $video->status == 1)
 		{
-			$this->publish_notify($id);
+			$this->publishNotify($id);
 		}
 		return $video;
 	}
@@ -99,7 +99,7 @@ class VideoService
 	}
 
 
-	public function WithPlaylist($video)
+	public function withPlaylist($video)
 	{
 		$p = $video->playlists;
 		if ($p->count() > 0)
@@ -115,11 +115,11 @@ class VideoService
 
 	public function publish($id)
 	{
-		$this->publish_notify($id);
+		$this->publishNotify($id);
 		return $this->video->publish($id);
 	}
 	
-	public function publish_notify($video_id){
+	public function publishNotify($video_id){
 		$video = $this->video->find($video_id);
 		$gym = $video->Gym;
 
@@ -150,7 +150,7 @@ class VideoService
 		}
 	}
 
-	public function get_gravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
+	public function getGravatar( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
 		$url = 'https://www.gravatar.com/avatar/';
 		$url .= md5( strtolower( trim( $email ) ) );
 		$url .= "?s=$s&d=$d&r=$r";
