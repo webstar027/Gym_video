@@ -5,16 +5,18 @@ namespace App\Services;
 use App\User;
 use App\Repositories\UserRepository;
 use App\Repositories\GymRepository;
+use App\Repositories\ActivityRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
  
 class UserService
 {
 
-	public function __construct(UserRepository $userRepo, GymRepository $gymRepo)
+	public function __construct(UserRepository $userRepo, GymRepository $gymRepo, ActivityRepository $activityRepo)
 	{
 		$this->userRepo = $userRepo ;
 		$this->gymRepo = $gymRepo ;
+		$this->activityRepo = $activityRepo;
 	}
  
 	public function getGymSummary($id)
@@ -97,5 +99,55 @@ class UserService
 	public function delete($id)
 	{
       return $this->userRepo->delete($id);
+	}
+
+	public function getActivities()
+	{
+		return $this->activityRepo->all()->sortByDesc("created_at");
+	}
+
+	public function getGymActivities($gym_id, $user_id)
+	{
+		$activities = $this->activityRepo->all()->sortByDesc("created_at");
+
+        $nactivites = collect();
+        foreach($activities as $key =>$activity)
+        {
+            $causer = $activity->causer;
+            $subject = $activity->subject;
+
+            if ($causer->id == $user_id)
+            {
+                $nactivites->push($activity); 
+            }
+            else
+            {
+                if ($this->userservice->isGymMember($causer, $gym_id)){
+                    if ($subject instanceof Video && $subject->gym->id == $gym_id)
+                    {
+                        $nactivites->push($activity); 
+                    }
+                    else if ($subject instanceof Gym && $subject->id == $gym_id)
+                    {
+                        $nactivites->push($activity); 
+                    }
+                }
+               
+            }
+		}
+		
+		return nactivities;
+	}
+
+	public function getApprovedGyms($user)
+	{
+		$members = $user->approved_gyms->sortBy('updated_at');
+        foreach($members as $key => $member)
+        {
+            $o = $this->userservice->read($member->owner_id);
+            $member->owner = $o;
+		}
+		
+		return $members;
 	}
 }

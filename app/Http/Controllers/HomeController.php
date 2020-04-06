@@ -91,10 +91,5 @@ class HomeController extends Controller
     // {
     //     return view('gymowner');
     // }
-    public function send(Request $request)
-    {
-        $user = $request->user();
-        // Notification::send($user, new RequestAccessNotification($user));
-        return dd("done");
-    }
+
 }

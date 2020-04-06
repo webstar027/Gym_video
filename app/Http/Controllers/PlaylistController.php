@@ -20,20 +20,38 @@ class PlaylistController extends Controller
         $this->gymservice = $gymservice;
     }
 
-    //
-    public function autoComplete($gym_id, Request $request)
+
+    /**
+     * Get playlists of gym
+     *
+	 * @param integer 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function autoComplete($gym_id)
     {
         $playlists = $this->gymservice->read($gym_id)->playlists;
         return response()->json($playlists);
     }
 
+    /**
+     * Get videos of playlist
+     *
+	 * @param integer 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function videos($id, Request $request)
     {
         $playlist = $this->gymservice->getPlaylist($id);
 
         return view('gymplaylistview', ['videos'=>$playlist->videos, 'playlist_name'=>$playlist->name]);
     }
-
+    
+    /**
+     * Get videos of playlist
+     *
+	 * @param integer 
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function approvedVideos($id, Request $request)
     {
         $user = $request->user();

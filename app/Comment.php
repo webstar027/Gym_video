@@ -26,6 +26,16 @@ class Comment extends Model
     {
         return $this->belongsTo(User::class);
     }
+      
+    /**
+     * The belongs to Relationship
+     *
+     * @var array
+     */
+    public function video()
+    {
+        return $this->belongsTo(Video::class);
+    }
    
     /**
      * The has Many Relationship

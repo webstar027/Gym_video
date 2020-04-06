@@ -5,15 +5,18 @@ namespace App\Services;
 use App\Video;
 use App\Playlist;
 use App\Repositories\VideoRepository;
+use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use Notification;
 use App\Notifications\PublishedVideoNotification;
+use App\Requests\CommentRequest;
 
 class VideoService
 {
-	public function __construct(VideoRepository $video)
+	public function __construct(VideoRepository $video, CommentRepository $comment)
 	{
 		$this->video = $video ;
+		$this->commentRepo = $comment;
 	}
  
 	public function index()
@@ -54,6 +57,23 @@ class VideoService
 		return $video = $this->video->find($id)->gym_id;
 	}
 	
+	public function getVideoDetail($id, $user)
+	{
+		$video = $this->video->find($id);
+		$video->favorite = $this->hasFavorite($user->id, $id);
+		$video->favorite_count = $video->favorites()->count();
+		foreach($video->comments as $key=>$comment){
+			$cuser = $comment->user;
+			$comment->avatar = $this->getGravatar($cuser->email);
+			foreach($comment->replies as $key => $reply){
+				$ruser = $reply->user;
+				$reply->avatar = $this->getGravatar($ruser->email);
+			}
+		}
+
+		return $video;
+	}
+
 	public function getPlaylist($video_id, $name){
 
 		$video = $this->read($video_id);
@@ -116,7 +136,9 @@ class VideoService
 	public function publish($id)
 	{
 		$this->publishNotify($id);
-		return $this->video->publish($id);
+		$this->video->publish($id);
+
+		return $this->video->find($id);
 	}
 	
 	public function publishNotify($video_id){
@@ -166,5 +188,17 @@ class VideoService
 	public function hasFavorite($user_id, $video_id)
 	{
 		return $this->video->find($video_id)->favorites()->where('user_id', $user_id)->count() > 0;
+	}
+
+	public function createComment(CommentRequest $request)
+	{
+		$comment = $this->commentRepo->create($request);
+        $user = $comment->user;
+        $comment -> user_avatar = $this->videoservice->getGravatar($user->email);
+        $comment -> first_name = $user->first_name;
+        $comment -> last_name = $user->last_name;
+		$comment -> diff = $comment->created_at->diffForHumans();
+		
+		return $comment;
 	}
 }

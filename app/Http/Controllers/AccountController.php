@@ -21,7 +21,6 @@ class AccountController extends Controller
         $this->userservice = $userservice;
         $this->gymservice = $gymservice;
     }
-    
 
     /**
      * Get gym information
@@ -32,27 +31,39 @@ class AccountController extends Controller
     public function gymOwner(Request $request)
     {
         $user = $request->user();
-        $gymownerid = $user->id;
-        $data = $this->userservice->getGymSummary($gymownerid);
+        $gymSummary = $this->userservice->getGymSummary($user->id);
       
-        return view('gymowneraccount', $data);
-    }
-    public function gymOwner_Details(Request $request)
+        return view('gymowneraccount', $gymSummary);
+    }    
+    
+    /**
+    * Get gym information
+    *
+    * @param Illuminate\Http\Request
+    * @return \Illuminate\Contracts\Support\Renderable
+    */    
+    public function gymOwnerDetails(Request $request)
     {
         $user = $request->user();
-        $gymownerid = $user->id;
-        $data = $this->userservice->getGymSummary($gymownerid);
+        $data = $this->userservice->getGymSummary($user->id);
       
         return view('gymownerdetails', $data);
-    }
+    }    
+
+    /**
+    * Get gym information
+    *
+    * @param Illuminate\Http\Request
+    * @return \Illuminate\Contracts\Support\Renderable
+    */  
     public function gymDetails(Request $request)
     {
         $user = $request->user();
-        $gymownerid = $user->id;
-        $data = $this->userservice->getGymSummary($gymownerid);
+        $data = $this->userservice->getGymSummary($user->id);
       
         return view('gymdetails', $data);
     }
+
     /**
      * Get members information
      *
@@ -73,62 +84,43 @@ class AccountController extends Controller
     public function student(Request $request)
     {
         $user = $request->user();
+        $members = $this->userservice->getApprovedMembers($user);
        
-        $members = $user->approved_gyms->sortBy('updated_at');
-        foreach($members as $key => $member)
-        {
-            $o = $this->userservice->read($member->owner_id);
-            $member->owner = $o;
-        }
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
+
+      
+    /**
+     * Show student page
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */   
     public function studentDetails(Request $request)
     {
         $user = $request->user();
+        $members = $this->userservice->getApprovedMembers($user);
        
-        $members = $user->approved_gyms;
-        foreach($members as $key => $member)
-        {
-            $o = $this->userservice->read($member->owner_id);
-            $member->owner = $o;
-        }
         return view('studentaccountdetails', ['members'=> $members, 'user' => $user]);
     }
+
     /**
      * Update user page
      *
      * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */ 
-    public function updateUser($id, Request $request)
+    public function updateUser($id, UpdateUserRequest $request)
 	{
-        if (!empty($request->input('password'))){
-            $this->validate($request, [
-                'email'=>'required|string|email',
-                'password'=>'sometimes|string|min:6|confirmed'
-                
-            ]);
-            $user = $request->user();
-            $this->userservice->update($request, $id);
+        $user = $request->user();
+        $this->userservice->update($request, $id);
 
-            activity()
-                ->performedOn($user)
-                ->causedBy($user)
-                ->log('update_user');
+        activity()
+            ->performedOn($user)
+            ->causedBy($user)
+            ->log('update_user');
 
-            return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
-        }else{
-            $user = $request->user();
-            $this->userservice->update($request, $id);
-
-            activity()
-                ->performedOn($user)
-                ->causedBy($user)
-                ->log('update_user');
-
-            return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
-        }
-        
+        return redirect()->back()->with('success', 'My Account Details have been updated successfully!');
     }
   
             
@@ -142,57 +134,31 @@ class AccountController extends Controller
     {
         return view('gymlist');
     }
-
-    //member activity
+            
+    /**
+     * get member activities
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
     public function adminActivity()
     {   
         $activities = Activity::orderBy('created_at','desc')->get();
 
-        foreach($activities as $activity)
-        {
-            $causer = $activity->causer;
-            $subject = $activity->subject;
-            $action = $activity->description;
-        }
-
         return view('adminmemberactivity', ['activities'=>$activities]);
     }
 
-
-
+    /**
+     * Get gym activities
+     *
+     * @param Illuminate\Http\Request
+     * @return \Illuminate\Contracts\Support\Renderable
+     */ 
     public function gymActivity($gym_id, Request $request)
     {
-        $activities = Activity::orderBy('created_at','desc')->get();
         $user = auth()->user();
-        $activities = Activity::orderBy('created_at','desc')->get();
-
-        $nactivites = collect();
-        foreach($activities as $key =>$activity)
-        {
-            $causer = $activity->causer;
-            $subject = $activity->subject;
-
-            if ($causer->id == $user->id)
-            {
-                $nactivites->push($activity); 
-            }
-            else
-            {
-                if ($this->userservice->isGymMember($causer, $gym_id)){
-                    if ($subject instanceof Video && $subject->gym->id == $gym_id)
-                    {
-                        $nactivites->push($activity); 
-                    }
-                    else if ($subject instanceof Gym && $subject->id == $gym_id)
-                    {
-                        $nactivites->push($activity); 
-                    }
-                }
-               
-            }
-
-        }
+        $activities = $this->userservice->getGymActivities($gym_id, $user->id);
         $gym = $this->gymservice->read($gym_id);
+
         return view('gymmemberactivity', ['activities'=>$nactivites, 'gym'=>$gym]);
     }
 }

@@ -36,7 +36,7 @@ class GymService
 
         return $this->gymRepo->create($attributes);
 	}
-	    
+
 	public function read($id)
 	{
         return $this->gymRepo->find($id);
@@ -59,6 +59,8 @@ class GymService
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);
 		$gym->members()->attach($user_id, ['status' => 1]);
+
+		return $gym;
 	}
 
 
@@ -67,18 +69,23 @@ class GymService
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);
 		$gym->members()->attach($user_id, ['status' => 3]);
+
+		return $gym;
 	}
 
 	public function accessRequest($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->attach($user_id, ['status' => 2]);
+		return $gym;
 	}
 
 	public function cancelRequest($user_id, $gym_id)
 	{
 		$gym = $this->gymRepo->find($gym_id);
 		$gym->members()->detach($user_id);
+
+		return $gym;
 	}
 
 	public function getVideosIncludeFavorite($gym_id, $user)
@@ -105,5 +112,41 @@ class GymService
 	public function getPlaylist($id)
 	{
 		return $this->playlistRepo->find($id);
+	}
+
+	public function getAllGymWithDetail($user)
+	{
+        $all = $this->gymRepo->all();
+
+        $sub_gyms = $user->gyms;
+
+        $current = new DateTime();
+        foreach($all as $key=> $gym)
+        {
+            $sub = $sub_gyms->find($gym->id);
+            
+            if ($sub)
+            {
+                $gym->status = $sub->pivot->status;
+                if ($gym->status == 3)
+                {
+                    $last = $sub->pivot->updated_at->add(new DateInterval('P1D'));
+                    $diff = $current->diff($last);
+                    if ($diff->d < 1 && $diff->h < 24)
+                    {
+                        $gym->time = str_pad($diff->h, 2, '0', STR_PAD_LEFT).':'.str_pad($diff->i, 2, '0', STR_PAD_LEFT).':'.str_pad($diff->s, 2, '0', STR_PAD_LEFT).' wait time';
+                    }
+                    else
+                    {
+                        $this->gymservice->cancelRequest($user->id, $gym->id);
+                        $gym->status = 0;
+                    }
+                }
+            }
+
+            $gym->owner = $this->gymservice->getGymOwner($gym->owner_id);
+        }
+
+		return $all;
 	}
 }

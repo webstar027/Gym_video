@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Video;
 use App\Services\VideoService;
 use Alaouy\Youtube\Facades\Youtube;
+use App\Requests\VideoRequest;
 
 class VideoController extends Controller
 {
@@ -31,13 +32,12 @@ class VideoController extends Controller
     /**
      * Post video.
      *
-	 * @param Illuminate\Http\Request
+	 * @param App\Requests\VideoRequest
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function createVideo(Request $request)
+	public function createVideo(VideoRequest $request)
 	{	
 		$video = $this->videoservice->create($request);
-		$idd = $video ->gym_id;
 
 		$attributes = $request->all();
 		if (array_key_exists('playlist', $attributes) && $attributes['playlist'])
@@ -53,7 +53,7 @@ class VideoController extends Controller
 			->causedBy($user)
 			->log('create_video');
 
-		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+		return redirect('/account/gymowner/gym/myvideos/'.$video->gym_id);
 	}
 
     /**
@@ -82,11 +82,10 @@ class VideoController extends Controller
 	 * @param Illuminate\Http\Request
      * @return \Illuminate\Contracts\Support\Renderable
      */
-	public function updateVideoPost($id, Request $request)
+	public function updateVideoPost($id, VideoRequest $request)
 	{
 		$this->videoservice->update($request, $id);
 		$video = $this->videoservice->read($id);
-		$idd = $this->videoservice->getGymId($id);
 
 		$attributes = $request->all();
 	
@@ -99,7 +98,7 @@ class VideoController extends Controller
 			->log('update_video');
 
 
-		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+		return redirect('/account/gymowner/gym/myvideos/'.$video->gym_id);
 	}
 
     /**
@@ -111,7 +110,6 @@ class VideoController extends Controller
 	public function deleteVideo($id, Request $request)
 	{	
 		$video = $this->videoservice->read($id);
-		$idd = $this->videoservice->getGymId($id);
 		$this->videoservice->delete($id);
 		$user = $request->user;
 
@@ -120,7 +118,7 @@ class VideoController extends Controller
 			->causedBy($user)
 			->log('delete_video');
 
-		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+		return redirect('/account/gymowner/gym/myvideos/'.$video->gym_id);
 	}
 
 	/**
@@ -153,18 +151,15 @@ class VideoController extends Controller
      */
 	public function publishVideo($id, Request $request)
 	{
-		$this->videoservice->publish($id);
-		$idd = $this->videoservice->getGymId($id);
-
+		$video = $this->videoservice->publish($id);
 		$user = $request->user;
-		$video = $this->videoservice->read($id);
 
 		activity()
 			->performedOn($video)
 			->causedBy($user)
 			->log('publish_video');
 
-		return redirect('/account/gymowner/gym/myvideos/'.$idd);
+		return redirect('/account/gymowner/gym/myvideos/'.$video->gym_id);
 	}
 
 	/**
@@ -176,17 +171,7 @@ class VideoController extends Controller
 	public function watchGym($id, Request $request)
 	{
 		$user = $request->user();
-		$video = $this->videoservice->read($id);
-		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
-		$video->favorite_count = $video->favorites()->count();
-		foreach($video->comments as $key=>$comment){
-			$cuser = $comment->user;
-			$comment->avatar = $this->videoservice->getGravatar($cuser->email);
-			foreach($comment->replies as $key => $reply){
-				$ruser = $reply->user;
-				$reply->avatar = $this->videoservice->getGravatar($ruser->email);
-			}
-		}
+		$video = $this->videoservice->getVideoDetail($id, $user);
 
 		activity()
 			->performedOn($video)
@@ -195,20 +180,17 @@ class VideoController extends Controller
 
 		return view('watchvideogym', ['data' => $video]);
 	}
+
+	/**
+     * watch a video
+     *
+     * @param integer $video id
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
 	public function watch($id, Request $request)
 	{
 		$user = $request->user();
-		$video = $this->videoservice->read($id);
-		$video->favorite = $this->videoservice->hasFavorite($user->id, $id);
-		$video->favorite_count = $video->favorites()->count();
-		foreach($video->comments as $key=>$comment){
-			$cuser = $comment->user;
-			$comment->avatar = $this->videoservice->getGravatar($cuser->email);
-			foreach($comment->replies as $key => $reply){
-				$ruser = $reply->user;
-				$reply->avatar = $this->videoservice->getGravatar($ruser->email);
-			}
-		}
+		$video = $this->videoservice->getVideoDetail($id, $user);
 		
 		activity()
 			->performedOn($video)
@@ -228,10 +210,7 @@ class VideoController extends Controller
 	{
 		$video = Youtube::getVideoInfo($id);
 		$video = json_decode(json_encode($video), true);
-		//$data = ['title'=>$video->title];
-		// print_r('<pre>');
-		// print_r($video);
-		// print_r('</pre>');
+
 		$tag = "";
 		if (array_key_exists("tags", $video['snippet']))
 		{
