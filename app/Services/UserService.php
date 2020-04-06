@@ -139,7 +139,7 @@ class UserService
 		return nactivities;
 	}
 
-	public function getApprovedGyms($user)
+	public function getApprovedMembers($user)
 	{
 		$members = $user->approved_gyms->sortBy('updated_at');
         foreach($members as $key => $member)

@@ -84,7 +84,7 @@ class AccountController extends Controller
     public function student(Request $request)
     {
         $user = $request->user();
-        $members = $this->userservice->getApprovedMembers($user);
+        $members = $this->userservice->getApprovedGyms($user);
        
         return view('memberaccount', ['members'=> $members, 'user' => $user]);
     }
@@ -99,7 +99,7 @@ class AccountController extends Controller
     public function studentDetails(Request $request)
     {
         $user = $request->user();
-        $members = $this->userservice->getApprovedMembers($user);
+        $members = $this->userservice->getApprovedGyms($user);
        
         return view('studentaccountdetails', ['members'=> $members, 'user' => $user]);
     }
