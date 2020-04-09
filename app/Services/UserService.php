@@ -145,10 +145,17 @@ class UserService
 
 	public function getApprovedMembers($user)
 	{
-		$members = $user->approved_gyms->sortBy('updated_at');
+		$members = $user->approved_gyms;
         foreach($members as $key => $member)
         {
-            $o = $this->read($member->owner_id);
+			$o = $this->read($member->owner_id);
+			$member->posted_at = $member->updated_at;
+			if ($member->videos != null &&  $member->videos->count() > 0)
+			{
+				$lastvideo = $member->videos->sortByDesc("updated_at")->first();
+				$member->posted_at = $lastvideo->updated_at;
+			}
+
             $member->owner = $o;
 		}
 		

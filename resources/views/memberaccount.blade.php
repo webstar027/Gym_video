@@ -30,7 +30,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($members->sortByDesc('updated_at') as $key => $member)
+                                @foreach ($members->sortByDesc('posted_at') as $key => $member)
                                 <tr>
                                     <td scope="row">
                                         <span class="m-title">Gym Name: </span>
@@ -46,7 +46,7 @@
                                     </td>
                                     <td>
                                         <span class="m-title">Latest Entry: </span>
-                                        <span class="m-data">{{ $member -> updated_at->format('m/d/Y g:i A') }}</span>
+                                        <span class="m-data">{{ $member -> posted_at->format('m/d/Y g:i A') }}</span>
                                     </td>
                                     <td>
                                         <span class="m-title">Action: </span>

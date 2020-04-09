@@ -97,7 +97,7 @@ class GymController extends Controller
             ->causedBy($user)
             ->log('cancel_member');
 
-        return redirect('/account/student/gyms/search');
+        return redirect('/account/student');
     }
 
     /**
@@ -185,7 +185,7 @@ class GymController extends Controller
         {
             $gym = $this->gymservice->read($gym_id);
             $videos_all = $this->gymservice->getVideosIncludeFavorite($gym_id, $user);
-            $videos = $videos_all->where('status', 1);
+            $videos = $videos_all->where('status', 1)->sortByDesc("created_at");
             $video_count = $videos->count();
             $videos = $videos->forPage($page, 6);
             foreach($videos as $key => $video)
@@ -204,7 +204,7 @@ class GymController extends Controller
             $gym->total_video = $video_count;
             $gym->currentpage = $page;
 
-            $playlists = $gym->playlists;
+            $playlists = $gym->playlists->sortByDesc("updated_at");
             $nplaylists =  collect();
             foreach($playlists as $playlist)
             {
