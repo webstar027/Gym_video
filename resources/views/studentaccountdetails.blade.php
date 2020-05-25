@@ -10,6 +10,7 @@
                 <div class="gym-name-stats mb-3">
                     <nav class="nav nav-pills">
                         <a class="nav-link rounded-0 border border-primary"  href="{{ route('student_account') }}" aria-selected="true">Subscriptions</a>
+                        <a class="nav-link rounded-0 border border-primary"  href="{{ route('message') }}">Messages<span class="badge badge-danger ml-2 p-1">{{ $unread!=0?$unread:"" }}</span></a>
                         <a class="nav-link rounded-0 border border-primary active"  href="#account_details">Account Details</a>
                         <a class="nav-link rounded-0 border border-primary" href="#">Favorite Videos</a>
                     </nav>

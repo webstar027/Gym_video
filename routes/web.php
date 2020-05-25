@@ -85,4 +85,13 @@ Route::middleware(['verified', 'auth'])->group(function () {
     //Playlist
     Route::get('/palylistautocomplete/{gym_id}','PlaylistController@autoComplete')->name('Autocomplete');
     
+    // Message Page
+    Route::get('/message', "MessageController@index")->name("message");
+    Route::get('/message/search/{userId}/{key}', "MessageController@search");
+    Route::get('/message/get_history/{userId}/{clientId}', "MessageController@getHistory");
+    Route::post("/message/send", "MessageController@send")->name("send");
+    Route::get("/message/check_user/{clientId}", "MessageController@checkUser");
+    Route::post("/message/read_all", "MessageController@readAll");
+    Route::get("/message/get_all_realtime/{clientId}", "MessageController@getAllData");
+
 });

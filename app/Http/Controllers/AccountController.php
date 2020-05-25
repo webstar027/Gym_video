@@ -11,16 +11,18 @@ use App\Services\UserService;
 use App\Services\GymService;
 use Spatie\Activitylog\Models\Activity;
 use App\Requests\UpdateUserRequest;
+use App\Repositories\MessageRepository;
 
 class AccountController extends Controller
 {
     protected $userservice;
     protected $gymservice;
-
-	public function __construct(UserService $userservice, GymService $gymservice)
+    protected $msgRepo;
+	public function __construct(UserService $userservice, GymService $gymservice, MessageRepository $msgRepo)
 	{
         $this->userservice = $userservice;
         $this->gymservice = $gymservice;
+        $this->msgRepo = $msgRepo;
     }
 
     /**
@@ -86,8 +88,12 @@ class AccountController extends Controller
     {
         $user = $request->user();
         $members = $this->userservice->getApprovedMembers($user);
-       
-        return view('memberaccount', ['members'=> $members, 'user' => $user]);
+        $counts = $this->msgRepo->getUnreadCounts($user->id);
+        $totalCounts = 0;
+        foreach($counts as $count){
+            $totalCounts += $count['count'];
+        }
+        return view('memberaccount', ['members'=> $members, 'user' => $user, 'unread'=>$totalCounts]);
     }
 
       
@@ -101,8 +107,12 @@ class AccountController extends Controller
     {
         $user = $request->user();
         $members = $this->userservice->getApprovedMembers($user);
-       
-        return view('studentaccountdetails', ['members'=> $members, 'user' => $user]);
+        $counts = $this->msgRepo->getUnreadCounts($user->id);
+        $totalCounts = 0;
+        foreach($counts as $count){
+            $totalCounts += $count['count'];
+        }
+        return view('studentaccountdetails', ['members'=> $members, 'user' => $user, 'unread'=>$totalCounts]);
     }
 
     /**
